@@ -1,0 +1,44 @@
+.ternary
+  display: flex
+  flex-direction: column
+  justify-content: space-around
+  font-family: $heading-font-family
+  font-weight: 400
+  font-size: 20px
+
+.ternary__item
+  flex-basis: 25%
+  flex-grow: 0
+  text-align: center
+  background: white
+  padding: 30px 10px
+  border-radius: 5px
+  // +content-shadow
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: space-between
+  margin-bottom: $grid-gutter
+
+.ternary__image
+
+.ternary__title
+  font-weight: bold
+  
+.ternary__text
+  margin-bottom: $grid-gutter
+  font-size: 17px
+
+.ternary__video
+  width: 85%
+
+@media only screen and (min-width: 840px)
+  .ternary
+    flex-direction: row
+
+  .ternary__item
+    margin-bottom: $grid-gutter
+
+  .ternary__video
+    width: 240px
+    height: 100px

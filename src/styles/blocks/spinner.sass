@@ -1,0 +1,13 @@
+.spinner
+  @include spinner(18px, "border-color" $base-body-color)
+
+.spinner--big
+  @include spinner(80px, "border-color" $base-body-color)
+
+.progress
+  height: 100px
+  width: 100px
+  transform: rotate(-90deg)
+  stroke-dasharray: 251
+  stroke-dashoffset: 251
+  // animation: offsettozero 5s linear forwards

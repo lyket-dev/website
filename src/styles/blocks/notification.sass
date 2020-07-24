@@ -1,0 +1,87 @@
+$noty-primary-color: #333 !default
+$noty-default-width: 325px !default
+$noty-corner-space: 20px !default
+
+.noty
+  padding: 35px
+  color: $base-body-color
+  border-radius: 5px
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2)
+  animation-fill-mode: forwards
+  animation-delay: 3s
+  font-family: $heading-font-family
+  font-weight: 400
+  display: block
+  animation: noty_anim_out 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)
+
+.noty__notice
+  @extend .noty
+  background-color: $button-color
+
+.noty__alert
+  @extend .noty
+  background-color: $alert-color
+
+.noty__layout
+  position: fixed
+  margin: 0
+  z-index: 9999999
+  transform: translateZ(0) scale(1.0, 1.0)
+  backface-visibility: hidden
+  -webkit-font-smoothing: subpixel-antialiased
+  filter: blur(0)
+  -webkit-filter: blur(0)
+  max-width: 90%
+  font-size: 14px
+  opacity: 0
+  transform: translate(50%)
+  animation: noty_anim_in .5s cubic-bezier(0.68, -0.55, 0.265, 1.55)
+  animation-fill-mode: forwards
+
+#noty__layout__top
+  @extend .noty__layout
+  top: 0
+  left: 5%
+  width: 90%
+
+#noty__layout__topLeft
+  @extend .noty__layout
+  top: $noty-corner-space
+  left: $noty-corner-space
+  width: $noty-default-width
+
+#noty__layout__topCenter
+  @extend .noty__layout
+  top: 5%
+  left: 50%
+  width: $noty-default-width
+  transform: translate(calc(-50% - .5px)) translateZ(0) scale(1.0, 1.0)
+
+#noty__layout__topRight
+  @extend .noty__layout
+  top: $noty-corner-space
+  right: $noty-corner-space
+  width: $noty-default-width
+
+.noty_close_button
+  position: absolute
+  top: 2px
+  right: 2px
+  font-weight: bold
+  width: 20px
+  height: 20px
+  text-align: center
+  line-height: 20px
+  cursor: pointer
+  transition: all .2s ease-out
+
+@keyframes noty_anim_in
+  100%
+    transform: translate(0)
+    opacity: 1
+
+@keyframes noty_anim_out
+  100%
+    transform: translate(100%)
+    opacity: 0
+    display: none
