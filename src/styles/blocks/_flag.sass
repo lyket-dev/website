@@ -4,11 +4,35 @@
 
 .flag__title
   +heading-font-family
-    
+  font-size: 24px
+
 .flag__text
+  font-size: 18px
 
 .flag__image
   // max-width: 100%
+
+.flag__left--border
+  @extend .flag__left
+  padding: 60px
+  border: 2px dashed $base-body-color
+
+.flag__right--border
+  @extend .flag__right
+  padding: 60px
+  border: 2px dashed $base-body-color
+
+.flag__shadow
+  border-radius: 3px
+  box-shadow: 9px 9px 3px $raspberry
+  position: relative
+  video
+    display: block
+  &::before
+    content: ""
+    +position(absolute, 0 0 0 0)
+    box-shadow: -9px -9px 3px $green
+
 
 @media only screen and (min-width: 940px)
   .flag
@@ -20,15 +44,15 @@
     flex-grow: 0
 
   .flag__left
-    font-size: 20px
     flex-basis: 40%
     padding-right: 60px
     flex-grow: 0
-    padding-right: 60px
 
   .flag__right
-    font-size: 20px
     flex-basis: 40%
     padding-left: 60px
     flex-grow: 0
-    padding-left: 60px
+
+  .flag__video
+    width: 100%
+    box-shadow: 2px 14px 15px #ddd
