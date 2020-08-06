@@ -40,7 +40,7 @@ export default function Navbar({ loggedIn }) {
   return (
     <ul className="navbar">
       <li className="navbar__logo">
-        <Link to="/">LIKIT</Link>
+        <Link to="/">LAIKIT</Link>
       </li>
       <div className="navbar__container">
         <li className="navbar__item">
