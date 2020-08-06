@@ -53,7 +53,7 @@ export default function Home() {
                 reactions in your website and a customizable React component
                 with all the most famous like-button themes
               </p>
-              <Link to="documentation" className="section__link">
+              <Link to="docs" className="section__link">
                 Check out our docs {">>"}
               </Link>
             </div>
@@ -70,16 +70,23 @@ export default function Home() {
       )}
       <section className="section">
         <div className="section__container">
-          <p className="section__title">Let your users leave a mark</p>
-          <div className="flag">
-            <div className="flag__left--border">
-              <p className="flag__title">
+          <p className="section__title">
+            <Decorator
+              fulltext="Let your users leave a mark"
+              toDecorate="leave a mark"
+              image="https://www.notion.so/front/shared/illustrations/use-case-objects/product.png"
+            />
+          </p>
+          <div className="half">
+            <div className="half__line" />
+            <div className="half__left--border">
+              <p className="half__title">
                 Got some brand new content on your blog and you are wandering if
                 readers are liking it?
               </p>
             </div>
-            <div className="flag__right">
-              <p className="flag__text">
+            <div className="half__right">
+              <p className="half__text">
                 You don't have to post your content to Medium to see if it is
                 reaching out to someone. Likit is the ultimate tool for your
                 readers leave a token of appreciation and for you to see how
@@ -87,28 +94,30 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="flag">
-            <div className="flag__left">
-              <p className="flag__text">
+          <div className="half">
+            <div className="half__line" />
+            <div className="half__left">
+              <p className="half__text">
                 Likit provides the fastest way in the market to allow visitors
                 to leave an immediate feedback!
               </p>
             </div>
-            <div className="flag__right--border">
-              <p className="flag__title">
+            <div className="half__right--border">
+              <p className="half__title">
                 Your documentation has taken your team weeks to complete but you
                 don’t know if your users are really appreciating it?
               </p>
             </div>
           </div>
-          <div className="flag">
-            <div className="flag__left--border">
-              <p className="flag__title">
+          <div className="half">
+            <div className="half__line" />
+            <div className="half__left--border">
+              <p className="half__title">
                 You portfolio could use some Instagram style lovin’?
               </p>
             </div>
-            <div className="flag__right">
-              <p className="flag__text">
+            <div className="half__right">
+              <p className="half__text">
                 Likit lets you implement a love-sharing system for your website.
                 _love_
               </p>

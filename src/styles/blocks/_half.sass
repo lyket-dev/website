@@ -1,28 +1,29 @@
-.flag
+.half
   text-align: left
   +vertical-padding(2)
+  position: relative
 
-.flag__title
+.half__title
   +heading-font-family
   font-size: 24px
 
-.flag__text
+.half__text
   font-size: 18px
 
-.flag__image
+.half__image
   // max-width: 100%
 
-.flag__left--border
-  @extend .flag__left
+.half__left--border
+  @extend .half__left
   padding: 60px
   border: 2px dashed $base-body-color
 
-.flag__right--border
-  @extend .flag__right
+.half__right--border
+  @extend .half__right
   padding: 60px
   border: 2px dashed $base-body-color
 
-.flag__shadow
+.half__shadow
   border-radius: 3px
   box-shadow: 9px 9px 3px $raspberry
   position: relative
@@ -33,35 +34,44 @@
     +position(absolute, 0 0 0 0)
     box-shadow: -9px -9px 3px $green
 
-.flag__line
+.half__line
   width: 100px
   height: 2px
-  background: linear-gradient(90deg, rgba(87,79,223,1) 0%, rgba(9,118,121,1) 35%, rgba(0,212,255,1) 100%)
+  background-image: linear-gradient(90deg, rgba(87,79,223,1) 0%, rgba(9,118,121,1) 20%, rgba(0,212,255,1) 80%, rgba(87,79,223,1) 100%)
   position: absolute
   display: block
-  margin: 0 auto
-  text-align: center
-  left: 48%
+  +center
+  background-origin: content-box
+  background-size: 200%
+  animation-timing-function: linear
+  animation-name: colored
+  animation-duration: 2s
+  animation-iteration-count: infinite
+
+@keyframes colored
+  from
+    background-position: 0% 0%
+  to
+    background-position: 200% 0%
 
 @media only screen and (min-width: 940px)
-  .flag
+  .half
     display: flex
     align-items: center
+    flex-basis: 50%
 
-  .flag__image__container
+  .half__image__container
     flex-basis: 60%
     flex-grow: 0
 
-  .flag__left
-    flex-basis: 40%
+  .half__left
     padding-right: 60px
-    flex-grow: 0
+    width: 50%
 
-  .flag__right
-    flex-basis: 40%
+  .half__right
     padding-left: 60px
-    flex-grow: 0
+    width: 50%
 
-  .flag__video
+  .half__video
     width: 100%
     box-shadow: 2px 14px 15px #ddd
