@@ -1,17 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { Provider } from "react-redux";
+import { Provider as ReduxProvider } from "react-redux";
 import { createStore } from "redux";
 
 import App from "./App";
 import store from "./store";
+import { Provider as LaikitProvider } from "@laikit/react";
 
 const rootElement = document.getElementById("root");
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <ReduxProvider store={store}>
+    <LaikitProvider apiKey="Xkp5R0w+6uY+OftTTVEQ2BkiwUw=">
+      <App />
+    </LaikitProvider>
+  </ReduxProvider>,
   rootElement
 );

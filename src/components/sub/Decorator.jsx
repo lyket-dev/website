@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Decorator({ image, fulltext, toDecorate }) {
   const splitted = fulltext.split(toDecorate);
-  console.log(splitted);
+
   return (
     <>
       <span className="decorator__item">{splitted[0]}</span>

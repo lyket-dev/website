@@ -2,6 +2,7 @@ import React from "react";
 import Decorator from "./sub/Decorator";
 import Promo from "../assets/likitVideo.mp4";
 import { Link } from "react-router-dom";
+import { LikeButton, ClapButton, UpdownButton } from "@laikit/react";
 
 export default function Home() {
   return (
@@ -42,7 +43,7 @@ export default function Home() {
                 className="flag__video"
                 src={Promo}
                 autoPlay
-                playsinline
+                playsInline
                 loop
                 type="video/mp4"
               />
@@ -60,14 +61,16 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {false && (
-        <section className="section">
-          <div className="section__container">
-            <p className="section__title">Everybody clap now!</p>
-            <h2 className="section__title"> 👏 </h2>
-          </div>
-        </section>
-      )}
+      <section className="section">
+        <div className="section__container">
+          <p className="section__title">Everybody clap now!</p>
+          <ClapButton
+            namespace="homepage"
+            id="everybody-clap-now"
+            theme="medium"
+          />
+        </div>
+      </section>
       <section className="section">
         <div className="section__container">
           <p className="section__title">
@@ -88,10 +91,11 @@ export default function Home() {
             <div className="half__right">
               <p className="half__text">
                 You don't have to post your content to Medium to see if it is
-                reaching out to someone. Likit is the ultimate tool for your
+                reaching out to someone. Laikit is the ultimate tool for your
                 readers leave a token of appreciation and for you to see how
                 your work is perceived!
               </p>
+              <ClapButton id="blog" namespace="homepage" theme="medium" />
             </div>
           </div>
           <div className="half">
@@ -101,6 +105,7 @@ export default function Home() {
                 Likit provides the fastest way in the market to allow visitors
                 to leave an immediate feedback!
               </p>
+              <UpdownButton id="docs" namespace="homepage" theme="reddit" />
             </div>
             <div className="half__right--border">
               <p className="half__title">
@@ -119,8 +124,8 @@ export default function Home() {
             <div className="half__right">
               <p className="half__text">
                 Likit lets you implement a love-sharing system for your website.
-                _love_
               </p>
+              <LikeButton id="portfolio" namespace="homepage" theme="twitter" />
             </div>
           </div>
         </div>

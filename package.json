@@ -1,8 +1,9 @@
 {
-  "name": "likit-website",
+  "name": "laikit-website",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@laikit/react": "../component",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -15,7 +16,6 @@
     "eslint-plugin-react": "^7.20.3",
     "eslint-plugin-react-hooks": "^4.0.4",
     "formik": "^2.1.4",
-    "likit": "../../component",
     "node-sass": "^4.14.1",
     "object.omit": "^3.0.0",
     "prettier": "^2.0.5",
