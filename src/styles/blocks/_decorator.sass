@@ -2,28 +2,32 @@
 
 .decorator__chosen
   display: inline-block
+  position: relative
+  z-index: 0
+  &:before
+    content: ''
+    display: block
+    height: 40%
+    margin: 0 auto
+    position: absolute
+    left: -5px
+    right: -5px
+    bottom: 10px
+    transition: all .5s
+    z-index: -1
+    box-shadow: 2px 14px 15px #ddd
 
 .decorator__chosen--blue
-  display: inline-block
-  // background: linear-gradient(90deg, #7928CA, $raspberry)
-  // background: linear-gradient(#2dfdc1 43%, #1c9799 30%, #000 89%)
-  // background: linear-gradient(#000 50%, #1c9799 70%, $green 30%)
-  // background: linear-gradient(90deg, rgba(9,118,121,1) 20%, rgba(0,212,255,1) 80%, rgba(87,79,223,1) 100%)
-  background: linear-gradient(90deg, #2b4e99, $green)
-  -webkit-background-clip: text
-  -webkit-text-fill-color: transparent
-  // text-shadow: 4px 5px 2px #3332
+  @extend .decorator__chosen
+  &::before
+    background: $green
 
 .decorator__chosen--red
-  display: inline-block
-  // background: linear-gradient(#1c9799 40%, rgba(45,253,193,1) 30%)
-  background: linear-gradient(90deg, $raspberry, #FF0080)
-  -webkit-background-clip: text
-  -webkit-text-fill-color: transparent
+  @extend .decorator__chosen
+  &::before
+    background: $raspberry
 
 .decorator__chosen--yellow
-  display: inline-block
-  // background: linear-gradient(#1c9799 40%, rgba(45,253,193,1) 30%)
-  background: linear-gradient(90deg, orange, yellow)
-  -webkit-background-clip: text
-  -webkit-text-fill-color: transparent
+  @extend .decorator__chosen
+  &::before
+    background: $yellow

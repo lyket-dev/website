@@ -6,9 +6,7 @@ export default function Decorator({ image, fulltext, toDecorate, color }) {
   return (
     <>
       <span className="decorator__item">{splitted[0]}</span>
-      <span>
-        <p className={`decorator__chosen--${color}`}>{toDecorate}</p>
-      </span>
+      <span className={`decorator__chosen--${color}`}>{toDecorate}</span>
       <span className="decorator__item">{splitted[1]}</span>
     </>
   );

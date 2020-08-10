@@ -23,7 +23,7 @@
 .ternary__title
   font-weight: bold
   min-height: 50px
-  +margin-bottom(2)
+  +margin-bottom(1)
 
 .ternary__text
   margin-bottom: $grid-gutter
@@ -31,6 +31,27 @@
 
 .ternary__video
   width: 85%
+
+.ternary__line
+  text-align: center
+  +margin-bottom(3)
+  font-size: 7vh
+  line-height: 3px
+
+.ternary__line--pink
+  @extend .ternary__line
+  color: $raspberry
+  // text-shadow: 0 -3px 40px, 0 3px 40px #fc3df6
+
+.ternary__line--green
+  @extend .ternary__line
+  color: $green
+  // text-shadow: 0 -3px 40px, 0 3px 40px #2b4e99
+
+.ternary__line--yellow
+  @extend .ternary__line
+  color: $yellow
+  // text-shadow: 0 -3px 40px, 0 3px 40px #2b4e99
 
 @media only screen and (min-width: 840px)
   .ternary

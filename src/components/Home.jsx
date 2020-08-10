@@ -38,7 +38,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="section">
+      <section className="section--black">
         <div className="section__container">
           <div className="neon">
             <span>APPLAUSE</span>
@@ -88,7 +88,6 @@ export default function Home() {
               fulltext="Let your users leave a mark"
               toDecorate="leave a mark"
               color="red"
-              image="https://www.notion.so/front/shared/illustrations/use-case-objects/product.png"
             />
           </p>
           <div className="half">
@@ -154,10 +153,17 @@ export default function Home() {
       </section>
       <section className="section">
         <div className="section__container">
-          <h2 className="section__title">What makes it different?</h2>
+          <h2 className="section__title">
+            <Decorator
+              fulltext="  What makes it different?"
+              toDecorate="different"
+              color="yellow"
+            />
+          </h2>
           <div className="ternary">
             <div className="ternary__item">
               <p className="ternary__title">Fastest implementation</p>
+              <div className="ternary__line--green">—</div>
               <p className="ternary__text">
                 By using our React component you just need to choose a style and
                 provide an identifier for your button and you are done!
@@ -165,6 +171,7 @@ export default function Home() {
             </div>
             <div className="ternary__item">
               <p className="ternary__title">No bots allowed</p>
+              <div className="ternary__line--pink">—</div>
               <p className="ternary__text">
                 Laikit is integrated with Google reCAPTCHA v3 to provide
                 protection against malitious use, while never interrupting your
@@ -173,6 +180,7 @@ export default function Home() {
             </div>
             <div className="ternary__item">
               <p className="ternary__title">No signup</p>
+              <div className="ternary__line--yellow">—</div>
               <p className="ternary__text">
                 Most feedback services require visitors to sign up to leave a
                 feedback and that oftenly discourage them to interact. Laikit
