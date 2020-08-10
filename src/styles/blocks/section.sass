@@ -2,20 +2,21 @@
   text-align: center
   position: relative
   background-color: white
-  padding: 100px 0
+  padding: 50px 5px
+  +font-size(regular)
 
 .section__title
   font-weight: 700
-  margin-bottom: $grid-gutter
-  font-size: 35px
-  margin: 0 auto 60px auto
+  +font-size(alpha)
+  margin: 0 auto
+  +margin-bottom(1)
   max-width: 85%
   font-family: $heading-font-family
 
 .section__subtitle
-  margin-bottom: $grid-gutter
+  +margin-bottom(2)
   font-family: $heading-font-family
-  font-size: 20px
+  +font-size(gamma)
   font-weight: 400
 
 .section__link
@@ -76,10 +77,12 @@
 @media only screen and (min-width: 1000px)
   .section
     padding: 100px 0
+    +font-size(gamma)
 
   .section__container
     max-width: 950px
     padding: 0 $grid-gutter
 
   .section__title
-    font-size: 40px
+    +font-size(big)
+    +margin-bottom(3)

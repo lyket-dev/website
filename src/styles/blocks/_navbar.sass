@@ -1,18 +1,16 @@
 .navbar
-  padding: $grid-gutter-mobile
+  +padding(1.5)
   display: flex
   justify-content: space-between
   align-items: center
   max-width: 1000px
   margin: 0 auto
-  font-size: 16px
-  // +wrap
+  +font-size(smallprint)
 
 .navbar__logo
+  +font-size(alpha)
   text-decoration: none
   font-weight: bold
-  font-size: 50px
-  height: 70px
   background-image: linear-gradient(0deg, $base-body-color 61%, $green 60%, rgba($raspberry, 0.6) 80%)
   // linear-gradient(#2dfdc1 30%, #e84855 31%, yellow 40%, #333 30%)
   background-position: 0% 0%
@@ -57,4 +55,7 @@
 
 @media only screen and (min-width: 1000px)
   .navbar
-    padding: $grid-gutter
+    +padding(2)
+
+  .navbar__logo
+    +font-size(huge)

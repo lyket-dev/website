@@ -4,6 +4,7 @@
   position: relative
   display: flex
   flex-direction: column
+  +font-size(regular)
 
 .half:nth-of-type(2)
   @extend .half
@@ -14,7 +15,7 @@
   +font-size(beta)
 
 .half__text
-  +font-size(gamma)
+  +margin-bottom(1)
 
 .half__image
   // max-width: 100%
@@ -63,6 +64,7 @@
     flex-direction: row
     align-items: center
     flex-basis: 50%
+    +font-size(gamma)
 
   .half__title
     +font-size(alpha)
