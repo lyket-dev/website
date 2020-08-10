@@ -2,29 +2,30 @@
   text-align: center
   position: relative
   background-color: white
-  padding: 50px 5px
   +font-size(regular)
 
+.section__container
+  max-width: 840px
+  margin: 0 auto
+  padding: 50px 15px
+
 .section__title
-  font-weight: 700
-  +font-size(alpha)
+  max-width: 85%
   margin: 0 auto
   +margin-bottom(1)
-  max-width: 85%
-  font-family: $heading-font-family
+  +font-size(alpha)
+  font-weight: bold
 
-.section__subtitle
+.section__text
   +margin-bottom(2)
-  font-family: $heading-font-family
-  +font-size(gamma)
-  font-weight: 400
+  +font-size(regular)
+  font-weight: regular
 
 .section__link
+  +margin-top(1)
   display: inline-block
-  +padding-top(2)
   font-weight: bold
   font-family: $heading-font-family
-  +font-size(beta)
   position: relative
   text-decoration: none
   z-index: 0
@@ -47,17 +48,11 @@
     &:after
       width: 100%
 
-.section__container
-  max-width: 840px
-  margin: 0 auto
-  padding: 0 $grid-gutter-mobile
-
 .section__image
   max-width: 50%
 
 .section__portrait
   max-width: 50%
-  +margin-right(4)
   border-radius: 5px 50%
 
 .section--button
@@ -76,13 +71,21 @@
 
 @media only screen and (min-width: 1000px)
   .section
-    padding: 100px 0
     +font-size(gamma)
 
   .section__container
+    padding: 100px 0
     max-width: 950px
-    padding: 0 $grid-gutter
 
   .section__title
     +font-size(big)
+    +margin-bottom(3)
+
+  .section__link
+    +margin-top(2)
+
+  .section__text
+    max-width: 85%
+    margin: 0 auto
+    +font-size(gamma)
     +margin-bottom(3)

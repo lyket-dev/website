@@ -1,13 +1,14 @@
 .flag
   text-align: left
   +vertical-padding(2)
+  +font-size(regular)
 
 .flag__title
   +heading-font-family
   +font-size(beta)
+  +margin-bottom(1)
 
 .flag__text
-  +font-size(gamma)
 
 .flag__image
   // max-width: 100%
@@ -27,7 +28,7 @@
   left: 48%
 
 .flag__item, .flag__image__container
-  max-width: 70%
+  max-width: 90%
   margin: 0 auto
   text-align: center
   +margin-bottom(2)
@@ -43,10 +44,12 @@
   .flag
     display: flex
     align-items: center
+    +font-size(gamma)
 
   .flag__image__container
     flex-basis: 60%
     flex-grow: 0
+    margin-bottom: 0
 
   .flag__item
     flex-basis: 40%
@@ -60,3 +63,7 @@
 
   .flag__right
     padding-left: 60px
+
+  .flag__title
+    +margin-bottom(2)
+    +font-size(alpha)

@@ -1,10 +1,8 @@
 .header
   @extend .section
-  +wrap
 
 .header__container
   @extend .section__container
-  position: relative
 
 .header__title
   +heading-font-family
@@ -21,8 +19,8 @@
 
 @media only screen and (min-width: 1000px)
   .header__title
-    text-align: left
     +font-size(huge)
+    text-align: left
 
   .header__subtitle
     +font-size(beta)

@@ -10,29 +10,31 @@ export default function Home() {
   return (
     <>
       <section className="header">
-        <div className="half">
-          <div className="half__left">
-            <h2 className="header__title">
-              <Decorator
-                fulltext="Get some fresh feedback from your visitors"
-                toDecorate="fresh feedback"
-                color="blue"
-              />
-            </h2>
-          </div>
-          <div className="half__right half__border">
-            <p className="header__subtitle">
-              Laikit lets you implement a social-like feature in your static
-              website in just a few seconds!
-            </p>
-            <form action="/action_page.php" method="get" className="search">
-              <input type="text" name="email" />
-              <input type="submit" />
-            </form>
-            <div className="check">
-              <p className="check__text">1 minute setup</p>
-              <p className="check__text">Free forever plan</p>
-              <p className="check__text">Completely headless</p>
+        <div className="header__container">
+          <div className="half">
+            <div className="half__left">
+              <h2 className="header__title">
+                <Decorator
+                  fulltext="Get some fresh feedback from your visitors"
+                  toDecorate="fresh feedback"
+                  color="blue"
+                />
+              </h2>
+            </div>
+            <div className="half__right half__border">
+              <p className="header__subtitle">
+                Laikit lets you implement a social-like feature in your static
+                website in just a few seconds!
+              </p>
+              <form action="/action_page.php" method="get" className="search">
+                <input type="text" name="email" />
+                <input type="submit" />
+              </form>
+              <div className="check">
+                <p className="check__text">1 minute setup</p>
+                <p className="check__text">Free forever plan</p>
+                <p className="check__text">Completely headless</p>
+              </div>
             </div>
           </div>
         </div>
@@ -55,8 +57,8 @@ export default function Home() {
         </div>
       </section>
       <section className="section">
-        <h2 className="section__title">No brainer</h2>
         <div className="section__container">
+          <h2 className="section__title">No brainer</h2>
           <div className="flag">
             <div className="flag__image__container">
               <video
@@ -137,7 +139,7 @@ export default function Home() {
             <div className="half__right">
               <p className="half__text">
                 Laikit lets you implement a positive reinforcement system for
-                your website.
+                your collection!
               </p>
               <div className="half__reaction">
                 <LikeButton
@@ -182,9 +184,9 @@ export default function Home() {
               <p className="ternary__title">No signup</p>
               <div className="ternary__line--yellow">—</div>
               <p className="ternary__text">
-                Most feedback services require visitors to sign up to leave a
-                feedback and that oftenly discourage them to interact. Laikit
-                keeps track of interactions without requiring any further steps
+                Most feedback services require visitors to sign up and that
+                discourages them to interact. Laikit keeps track of interactions
+                without requiring any further steps
               </p>
             </div>
           </div>
@@ -201,9 +203,7 @@ export default function Home() {
                 “I cannot wait to see Laikit released. The suspance is killing
                 me”
               </p>
-              <p className="section__subtitle">
-                Leila, senior dev @Idontexist Agency
-              </p>
+              <p className="flag__text">Leila, senior dev @Idontexist Agency</p>
             </div>
           </div>
         </div>
@@ -212,7 +212,7 @@ export default function Home() {
         <section className="section">
           <div className="section__container">
             <h2 className="section__title">Pricing </h2>
-            <p className="section__subtitle">
+            <p className="section__text">
               No trial | free forever plan | pay as you grow
             </p>
             <div className="ternary">
@@ -241,7 +241,7 @@ export default function Home() {
               color="blue"
             />
           </h2>
-          <p className="section__subtitle">
+          <p className="section__text">
             Laikit is work in progress and, at the moment, we are only gathering
             feedback. If you like what you see or think you would use Laikit in
             one of your projects or simply you want to follow our progress, why
