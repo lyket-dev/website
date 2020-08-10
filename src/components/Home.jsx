@@ -4,6 +4,7 @@ import Promo from "../assets/likitVideo.mp4";
 import { Link } from "react-router-dom";
 import { LikeButton, ClapButton, UpdownButton } from "@laikit/react";
 import { ReactComponent as ClapIcon } from "../assets/clapping.svg";
+import Face from "../assets/karen.jpeg";
 
 export default function Home() {
   return (
@@ -39,11 +40,9 @@ export default function Home() {
       </section>
       <section className="section">
         <div className="section__container">
-          <p className="neon">
-            <b>
-              <span>APPLAUSE</span>
-            </b>
-          </p>
+          <div className="neon">
+            <span>APPLAUSE</span>
+          </div>
           <ClapButton namespace="homepage" id="everybody-clap-now">
             {({ counter, onClick, hasVoted }) => (
               <div className="social">
@@ -93,7 +92,7 @@ export default function Home() {
             />
           </p>
           <div className="half">
-            <div className="half__line" />
+            <div className="half__line--green">—</div>
             <div className="half__left--border">
               <p className="half__title">
                 Got some brand new content on your blog and you are wandering if
@@ -113,7 +112,7 @@ export default function Home() {
             </div>
           </div>
           <div className="half">
-            <div className="half__line" />
+            <div className="half__line--pink">—</div>
             <div className="half__left">
               <p className="half__text">
                 Laikit provides the fastest way in the market to allow visitors
@@ -131,7 +130,7 @@ export default function Home() {
             </div>
           </div>
           <div className="half">
-            <div className="half__line" />
+            <div className="half__line--yellow">—</div>
             <div className="half__left--border">
               <p className="half__title">
                 Your portfolio could use some Instagram style lovin’?
@@ -153,72 +152,54 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <section className="section">
+        <div className="section__container">
+          <h2 className="section__title">What makes it different?</h2>
+          <div className="ternary">
+            <div className="ternary__item">
+              <p className="ternary__title">Fastest implementation</p>
+              <p className="ternary__text">
+                By using our React component you just need to choose a style and
+                provide an identifier for your button and you are done!
+              </p>
+            </div>
+            <div className="ternary__item">
+              <p className="ternary__title">No bots allowed</p>
+              <p className="ternary__text">
+                Laikit is integrated with Google reCAPTCHA v3 to provide
+                protection against malitious use, while never interrupting your
+                users.
+              </p>
+            </div>
+            <div className="ternary__item">
+              <p className="ternary__title">No signup</p>
+              <p className="ternary__text">
+                Most feedback services require visitors to sign up to leave a
+                feedback and that oftenly discourage them to interact. Laikit
+                keeps track of interactions without requiring any further steps
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
       {false && (
-        <section className="section">
+        <section className="section--black">
           <div className="section__container">
-            <h2 className="section__title">
-              How is it so simple? Because we take care of everything for you!
-            </h2>
-            <div className="ternary">
-              <div className="ternary__item">
-                <img
-                  className="ternary__image"
-                  src="https://www.notion.so/front/shared/illustrations/use-case-objects/product.png"
-                />
-                <p className="ternary__title">Fastest integration</p>
-                <p className="ternary__text">
-                  Rapidly integrate Laikit in your website just by providing
-                  your API key and an ID. The API will then take count of your
-                  day-by-day reactions. The React component provides the most
-                  used feedback templates in the web and makes the calls for you
-                  and if you don’t like those, you can style it as you prefer!
+            <div className="flag">
+              <img className="section__image" src={Face} />
+              <div>
+                <p className="flag__title">
+                  “I cannot wait to see Laikit released. The suspance is killing
+                  me”
                 </p>
-              </div>
-              <div className="ternary__item">
-                <img
-                  className="ternary__image"
-                  src="https://www.notion.so/front/shared/illustrations/use-case-objects/engineering.png"
-                />
-                <p className="ternary__text">
-                  RapidAPI is the new cutting-edge technology for building a
-                  solid micro-service structure and it provides security for
-                  your API calls and payment
-                </p>
-              </div>
-              <div className="ternary__item">
-                <img
-                  className="ternary__image"
-                  src="https://www.notion.so/front/shared/illustrations/use-case-objects/product.png"
-                />
-                <p className="ternary__text">
-                  We save your data in total compliance with the GDPR
-                  regulation, and we provide all the statistics you need to make
-                  decisions about your website’s content.
+                <p className="section__subtitle">
+                  John Johnson, senior dev @ StillWaiting
                 </p>
               </div>
             </div>
           </div>
         </section>
       )}
-      <section className="section--black">
-        <div className="section__container">
-          <div className="flag">
-            <img
-              className="section__image"
-              src="https://www.notion.so/front/shared/illustrations/use-case-objects/sales.png"
-            />
-            <div>
-              <p className="flag__title">
-                “I cannot wait to see Laikit released. The suspance is killing
-                me”
-              </p>
-              <p className="section__subtitle">
-                John Johnson, senior dev @ StillWaiting
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
       {false && (
         <section className="section">
           <div className="section__container">
@@ -243,7 +224,6 @@ export default function Home() {
           </div>
         </section>
       )}
-
       <section className="section">
         <div className="section__container">
           <h2 className="section__title">Interested?</h2>

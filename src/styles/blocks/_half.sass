@@ -42,24 +42,37 @@
     box-shadow: -9px -9px 3px $green
 
 .half__line
-  width: 100px
-  height: 2px
-  background-image: linear-gradient(90deg, rgba(87,79,223,1) 0%, rgba(9,118,121,1) 20%, rgba(0,212,255,1) 80%, rgba(87,79,223,1) 100%)
-  position: absolute
-  display: block
   +center
-  background-origin: content-box
-  background-size: 200%
-  animation-timing-function: linear
-  animation-name: colored
-  animation-duration: 2s
-  animation-iteration-count: infinite
-  // &::after
-  //   content: ""
-  //   position: relative
-  //   width: 50px
-  //   height: 2px
-  //   background-image: linear-gradient(90deg, rgba(87,79,223,1) 0%, rgba(9,118,121,1) 20%, rgba(0,212,255,1) 80%, rgba(87,79,223,1) 100%)
+  text-align: center
+  +margin-bottom(2)
+  font-weight: 900
+  font-size: 7vh
+  // width: 100px
+  // height: 2px
+  // background-image: linear-gradient(90deg, #2b4e99, $green)
+  // position: absolute
+  // display: block
+  // background-origin: content-box
+  // background-size: 200%
+  // animation-timing-function: linear
+  // animation-name: colored
+  // animation-duration: 2s
+  // animation-iteration-count: infinite
+
+.half__line--pink
+  @extend .half__line
+  color: #FF0080
+  text-shadow: 0 -20px 60px, 0 0 2px, 0 0 1em #fc3df660, 0 0 0.5em #fc3df660, 0 0 32px #fc3df660, 0 10px 3px #fc3df630
+
+.half__line--green
+  @extend .half__line
+  color: #2dfdc1
+  text-shadow: 0 -20px 60px, 0 0 2px, 0 0 1em #2b4e9960, 0 0 0.5em #2b4e9960, 0 0 32px #2b4e9960, 0 10px 3px #2b4e9930
+
+.half__line--yellow
+  @extend .half__line
+  color: yellow
+  text-shadow: 0 -20px 60px, 0 0 2px, 0 0 1em #2b4e9960, 0 0 0.5em #2b4e9960, 0 0 32px #2b4e9960, 0 10px 3px #2b4e9930
 
 .half__reaction
   text-align: center
