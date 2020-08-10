@@ -2,10 +2,16 @@
   text-align: left
   +vertical-padding(2)
   position: relative
+  display: flex
+  flex-direction: column
+
+.half:nth-of-type(2)
+  @extend .half
+  flex-direction: column-reverse
 
 .half__title
   +heading-font-family
-  font-size: 24px
+  font-size: 20px
 
 .half__text
   font-size: 18px
@@ -13,39 +19,25 @@
 .half__image
   // max-width: 100%
 
-.half__left
+.half__item
   max-width: 700px
-  margin-left: 0 auto
+  margin: 0 auto
+  text-align: center
   +margin-bottom(2)
 
-.half__right
-  max-width: 700px
-  margin-left: 0 auto
+.half__right, .half__left
+  @extend .half__item
 
-.half__left--border
-  @extend .half__left
-  padding: 60px
+.half__border
+  padding: 40px
   border: 2px dashed $base-body-color
-
-.half__right--border
-  @extend .half__right
-  padding: 60px
-  border: 2px dashed $base-body-color
-
-.half__shadow
-  border-radius: 3px
-  box-shadow: 9px 9px 3px $raspberry
-  position: relative
-  &::before
-    content: ""
-    +position(absolute, 0 0 0 0)
-    box-shadow: -9px -9px 3px $green
+  max-width: 90%
 
 .half__line
-  +center
   text-align: center
   +margin-bottom(2)
   font-size: 7vh
+  transform: rotate(90deg)
   // width: 100px
   // height: 2px
   // background-image: linear-gradient(90deg, #2b4e99, $green)
@@ -79,28 +71,30 @@
 
 @media only screen and (min-width: 940px)
   .half
-    display: flex
+    flex-direction: row
     align-items: center
     flex-basis: 50%
 
-  .half__image__container
-    flex-basis: 60%
-    flex-grow: 0
+  .half__title
+    font-size: 24px
 
-  .half__left
+  .half__item
     width: 50%
     margin: 0
+    text-align: left
+
+  .half__left
     padding-right: 60px
 
   .half__right
-    width: 50%
-    margin: 0
     padding-left: 60px
 
-  .half__video
-    width: 100%
-    box-shadow: 2px 14px 15px #ddd
+  .half__border
+    padding: 60px
 
+  .half__line
+    +center
+    font-size: 60px
 
 @keyframes colored
   from

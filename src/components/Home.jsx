@@ -17,13 +17,12 @@ export default function Home() {
                 fulltext="Get some fresh feedback from your visitors"
                 toDecorate="fresh feedback"
                 color="blue"
-                image="https://www.notion.so/front/shared/illustrations/use-case-objects/product.png"
               />
             </h2>
           </div>
-          <div className="half__right--border">
+          <div className="half__right half__border">
             <p className="header__subtitle">
-              Laikit lets you implement a social-like feature for your static
+              Laikit lets you implement a social-like feature in your static
               website in just a few seconds!
             </p>
             <form action="/action_page.php" method="get" className="search">
@@ -56,6 +55,7 @@ export default function Home() {
         </div>
       </section>
       <section className="section">
+        <h2 className="section__title">No brainer</h2>
         <div className="section__container">
           <div className="flag">
             <div className="flag__image__container">
@@ -91,8 +91,7 @@ export default function Home() {
             />
           </p>
           <div className="half">
-            <div className="half__line--green">—</div>
-            <div className="half__left--border">
+            <div className="half__left half__border">
               <p className="half__title">
                 Got some brand new content on your blog and you are wandering if
                 readers are liking it?
@@ -109,6 +108,7 @@ export default function Home() {
                 <ClapButton id="blog" namespace="homepage" theme="medium" />
               </div>
             </div>
+            <div className="half__line--green">—</div>
           </div>
           <div className="half">
             <div className="half__line--pink">—</div>
@@ -121,7 +121,7 @@ export default function Home() {
                 <UpdownButton id="docs" namespace="homepage" theme="reddit" />
               </div>
             </div>
-            <div className="half__right--border">
+            <div className="half__right half__border">
               <p className="half__title">
                 Your documentation has taken your team weeks to complete but you
                 don’t know if your users are really appreciating it?
@@ -129,8 +129,7 @@ export default function Home() {
             </div>
           </div>
           <div className="half">
-            <div className="half__line--yellow">—</div>
-            <div className="half__left--border">
+            <div className="half__left half__border">
               <p className="half__title">
                 Your portfolio could use some Instagram style lovin’?
               </p>
@@ -148,6 +147,7 @@ export default function Home() {
                 />
               </div>
             </div>
+            <div className="half__line--yellow">—</div>
           </div>
         </div>
       </section>
@@ -190,24 +190,24 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {false && (
-        <section className="section--black">
-          <div className="section__container">
-            <div className="flag">
-              <img className="section__image" src={Face} />
-              <div>
-                <p className="flag__title">
-                  “I cannot wait to see Laikit released. The suspance is killing
-                  me”
-                </p>
-                <p className="section__subtitle">
-                  John Johnson, senior dev @ StillWaiting
-                </p>
-              </div>
+      <section className="section--black">
+        <div className="section__container">
+          <div className="flag">
+            <div className="flag__image__container">
+              <img className="section__portrait" src={Face} />
+            </div>
+            <div className="flag__right">
+              <p className="flag__title">
+                “I cannot wait to see Laikit released. The suspance is killing
+                me”
+              </p>
+              <p className="section__subtitle">
+                Leila, senior dev @Idontexist Agency
+              </p>
             </div>
           </div>
-        </section>
-      )}
+        </div>
+      </section>
       {false && (
         <section className="section">
           <div className="section__container">
@@ -234,7 +234,13 @@ export default function Home() {
       )}
       <section className="section">
         <div className="section__container">
-          <h2 className="section__title">Interested?</h2>
+          <h2 className="section__title">
+            <Decorator
+              fulltext="Interested?"
+              toDecorate="Interested?"
+              color="blue"
+            />
+          </h2>
           <p className="section__subtitle">
             Laikit is work in progress and, at the moment, we are only gathering
             feedback. If you like what you see or think you would use Laikit in
