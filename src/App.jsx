@@ -1,8 +1,7 @@
-import { hot } from "react-hot-loader";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { hot } from "react-hot-loader";
 import useAsyncEffect from "./utils/useAsyncEffect";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 import Home from "./components/Home";
 import { PrivateRoute, PublicRoute } from "./components/sub/Routes";
 import Dashboard from "./components/Dashboard";
@@ -12,13 +11,11 @@ import Signup from "./components/Signup";
 import Docs from "./components/Docs";
 import UserSettings from "./components/UserSettings";
 import "./styles/main.sass";
-import Buffer from "buffer";
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
 const App = () => {
   const loggedIn = sessionStorage.getItem("token");
-  const dispatch = useDispatch();
 
   useAsyncEffect(() => {
     if (loggedIn) {

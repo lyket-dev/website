@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import useAsyncEffect from "../utils/useAsyncEffect";
 // import { fetchDocs } from "../api";
 import SwaggerUI from "swagger-ui-react";

@@ -194,7 +194,7 @@ export default function Home() {
         <div className="section__container">
           <div className="flag">
             <div className="flag__image__container">
-              <img className="section__portrait" src={Face} />
+              <img className="section__portrait" src={Face} alt="Idontexist" />
             </div>
             <div className="flag__right">
               <p className="flag__title">

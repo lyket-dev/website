@@ -1,9 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
 import { Provider as ReduxProvider } from "react-redux";
-import { createStore } from "redux";
-
 import App from "./App";
 import store from "./store";
 import { Provider as LaikitProvider } from "@laikit/react";

@@ -1,4 +1,3 @@
-import React from "react";
 import useAsyncEffect from "../utils/useAsyncEffect";
 import { useHistory } from "react-router-dom";
 import { destroySession } from "../api";
@@ -13,7 +12,7 @@ export default function Logout() {
       if (destroyed) {
         sessionStorage.removeItem("token");
       } else {
-        throw "could not logout";
+        throw new Error("could not logout");
       }
 
       history.push("/");

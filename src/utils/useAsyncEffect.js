@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+/* eslint-disable react-hooks/exhaustive-deps */
+
 export default function useAsyncEffect(effect, deps) {
   const setState = useState()[1];
 
@@ -17,3 +19,4 @@ export default function useAsyncEffect(effect, deps) {
     safeRunner();
   }, deps);
 }
+/* eslint-enable react-hooks/exhaustive-deps */

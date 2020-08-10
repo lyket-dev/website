@@ -29,7 +29,7 @@ function mergeEntities(type, state, { payload }) {
   if (payload.force && payload.query && payload.query.include) {
     const included = payload.query.include
       .split(",")
-      .map((relationship) => relationship.replace(/(^[^\.]+\.|s$)/g, ""));
+      .map((relationship) => relationship.replace(/(^[^.]+.|s$)/g, ""));
 
     if (included.includes(type)) {
       return newState;
