@@ -1,6 +1,5 @@
 import { hot } from "react-hot-loader";
 import React from "react";
-// import { Provider } from "likit";
 import { useDispatch, useSelector } from "react-redux";
 import useAsyncEffect from "./utils/useAsyncEffect";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
