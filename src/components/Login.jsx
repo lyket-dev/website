@@ -26,22 +26,26 @@ const Login = () => {
 
   return (
     <div className="Page">
-      <h1>Sign in!</h1>
-      <Formik
-        initialValues={{ email: "", password: "" }}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-        validateOnBlur={true}
-      >
-        {(props) => (
-          <Form>
-            {props.errors.name && <div id="feedback">{props.errors.name}</div>}
-            <Field type="email" name="email" />
-            <Field type="password" name="password" />
-            <button type="submit">Submit</button>
-          </Form>
-        )}
-      </Formik>
+      <h1>Work in progres...</h1>
+      {false && (
+        <Formik
+          initialValues={{ email: "", password: "" }}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+          validateOnBlur={true}
+        >
+          {(props) => (
+            <Form>
+              {props.errors.name && (
+                <div id="feedback">{props.errors.name}</div>
+              )}
+              <Field type="email" name="email" />
+              <Field type="password" name="password" />
+              <button type="submit">Submit</button>
+            </Form>
+          )}
+        </Formik>
+      )}
     </div>
   );
 };

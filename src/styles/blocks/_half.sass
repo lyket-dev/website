@@ -11,10 +11,10 @@
 
 .half__title
   +heading-font-family
-  font-size: 20px
+  +font-size(beta)
 
 .half__text
-  font-size: 18px
+  +font-size(gamma)
 
 .half__image
   // max-width: 100%
@@ -38,17 +38,6 @@
   +margin-bottom(2)
   font-size: 7vh
   transform: rotate(90deg)
-  // width: 100px
-  // height: 2px
-  // background-image: linear-gradient(90deg, #2b4e99, $green)
-  // position: absolute
-  // display: block
-  // background-origin: content-box
-  // background-size: 200%
-  // animation-timing-function: linear
-  // animation-name: colored
-  // animation-duration: 2s
-  // animation-iteration-count: infinite
 
 .half__line--pink
   @extend .half__line
@@ -69,14 +58,14 @@
   text-align: center
   +margin-top(2)
 
-@media only screen and (min-width: 940px)
+@media only screen and (min-width: 1000px)
   .half
     flex-direction: row
     align-items: center
     flex-basis: 50%
 
   .half__title
-    font-size: 24px
+    +font-size(alpha)
 
   .half__item
     width: 50%

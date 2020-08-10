@@ -23,11 +23,13 @@ export default function Navbar({ loggedIn }) {
       </>
     ) : (
       <>
-        <li className="navbar__item">
-          <Link className="navbar__link" to="/signup">
-            Signup
-          </Link>
-        </li>
+        {false && (
+          <li className="navbar__item">
+            <Link className="navbar__link" to="/signup">
+              Signup
+            </Link>
+          </li>
+        )}
         <li className="navbar__item">
           <Link to="/login" className="button">
             Log in
