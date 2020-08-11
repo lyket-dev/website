@@ -28,7 +28,7 @@ export default function Home() {
               </p>
               <form action="/action_page.php" method="get" className="search">
                 <input type="text" name="email" />
-                <input type="submit" />
+                <button type="submit"> Submit </button>
               </form>
               <div className="check">
                 <p className="check__text">1 minute setup</p>
@@ -249,7 +249,7 @@ export default function Home() {
           </p>
           <form action="/action_page.php" method="get" className="search">
             <input type="text" name="email" />
-            <input type="submit" />
+            <button type="submit"> Submit </button>
           </form>
         </div>
       </section>
