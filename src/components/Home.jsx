@@ -23,8 +23,8 @@ export default function Home() {
             </div>
             <div className="half__right half__border">
               <p className="header__subtitle">
-                Laikit lets you implement a social-like feature in your static
-                website in just a few seconds!
+                Laikit lets you implement a <strong>social-like feature</strong>{" "}
+                in your static website in just a few seconds!
               </p>
               <form action="/action_page.php" method="get" className="search">
                 <input type="text" name="email" />
@@ -58,7 +58,13 @@ export default function Home() {
       </section>
       <section className="section">
         <div className="section__container">
-          <h2 className="section__title">No brainer</h2>
+          <h2 className="section__title">
+            <Decorator
+              fulltext="No-brainer"
+              toDecorate="No-brainer"
+              color="yellow"
+            />
+          </h2>
           <div className="flag">
             <div className="flag__image__container">
               <video
@@ -72,9 +78,12 @@ export default function Home() {
             </div>
             <div className="flag__right">
               <p className="flag__text">
-                Laikit is composed by a simple API that keeps track of reactions
-                and a customizable React component with all the most famous
-                social button themes
+                Laikit is composed by a <strong>simple API</strong> that keeps
+                track of reactions and a customizable{" "}
+                <strong>React component</strong> with all the most famous social
+                button themes. Is the ultimate tool for your visitors to leave a
+                token of appreciation and for you to see how your work is
+                perceived!
               </p>
               <Link to="docs" className="section__link">
                 Check out our docs {">>"}
@@ -87,8 +96,8 @@ export default function Home() {
         <div className="section__container">
           <p className="section__title">
             <Decorator
-              fulltext="Let your users leave a mark"
-              toDecorate="leave a mark"
+              fulltext="Bring your content to life!"
+              toDecorate="to life!"
               color="red"
             />
           </p>
@@ -101,10 +110,11 @@ export default function Home() {
             </div>
             <div className="half__right">
               <p className="half__text">
-                You don't have to post your content to Medium to see if it is
-                reaching out to someone. Laikit is the ultimate tool for your
-                readers leave a token of appreciation and for you to see how
-                your work is perceived!
+                Oftenly you don't have any idea on how readers are{" "}
+                <strong>reacting to your posts</strong> and at the same time the
+                lack of a feedback system can make your blog feel a little
+                aloof. But, while comments can lead to useless polemics, a
+                simple Medium-style clap button can immediately spice things up!
               </p>
               <div className="half__reaction">
                 <ClapButton id="blog" namespace="homepage" theme="medium" />
@@ -116,8 +126,9 @@ export default function Home() {
             <div className="half__line--pink">—</div>
             <div className="half__left">
               <p className="half__text">
-                Laikit provides the fastest way in the market to allow visitors
-                to leave an immediate feedback!
+                Sometimes you don't need only positive reinforcement. On the
+                contrary, <strong>critics can be even more crucial</strong> if
+                you are providing a service!
               </p>
               <div className="half__reaction">
                 <UpdownButton id="docs" namespace="homepage" theme="reddit" />
@@ -125,21 +136,23 @@ export default function Home() {
             </div>
             <div className="half__right half__border">
               <p className="half__title">
-                Your documentation has taken your team weeks to complete but you
-                don’t know if your users are really appreciating it?
+                Your documentation has taken weeks to complete but you don’t
+                know if users are really appreciating it?
               </p>
             </div>
           </div>
           <div className="half">
             <div className="half__left half__border">
               <p className="half__title">
-                Your portfolio could use some Instagram style lovin’?
+                Your portfolio could use some loving?
               </p>
             </div>
             <div className="half__right">
               <p className="half__text">
-                Laikit lets you implement a positive reinforcement system for
-                your collection!
+                Just like Twitter, Instagram and all social-networks alike are
+                tools to expose your work to the word and{" "}
+                <strong>receive appreciation</strong>, your website should{" "}
+                <strong>behave in the same way!</strong>
               </p>
               <div className="half__reaction">
                 <LikeButton
@@ -168,16 +181,17 @@ export default function Home() {
               <div className="ternary__line--green">—</div>
               <p className="ternary__text">
                 By using our React component you just need to choose a style and
-                provide an identifier for your button and you are done!
+                provide an identifier for your button and{" "}
+                <strong>you are done!</strong>
               </p>
             </div>
             <div className="ternary__item">
               <p className="ternary__title">No bots allowed</p>
               <div className="ternary__line--pink">—</div>
               <p className="ternary__text">
-                Laikit is integrated with Google reCAPTCHA v3 to provide
-                protection against malitious use, while never interrupting your
-                users.
+                Laikit is integrated with <strong>Google reCAPTCHA V3</strong>{" "}
+                to provide protection against malitious use, while never
+                interrupting your users.
               </p>
             </div>
             <div className="ternary__item">
@@ -185,8 +199,8 @@ export default function Home() {
               <div className="ternary__line--yellow">—</div>
               <p className="ternary__text">
                 Most feedback services require visitors to sign up and that
-                discourages them to interact. Laikit keeps track of interactions
-                without requiring any further steps
+                discourages interaction. Laikit keeps track of reactions{" "}
+                <strong>without any further steps.</strong>
               </p>
             </div>
           </div>
@@ -247,9 +261,27 @@ export default function Home() {
             one of your projects or simply you want to follow our progress, why
             not dropping a few lines? Only updates and no spam, of course :D
           </p>
-          <form action="/action_page.php" method="get" className="search">
-            <input type="text" name="email" />
-            <button type="submit"> Submit </button>
+          <form
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            className="form"
+          >
+            <label>
+              Your Name: <input type="text" name="name" required />
+            </label>
+            <label>
+              Your Email: <input type="email" name="email" required />
+            </label>
+            <label>
+              Your Role: <input type="text" name="name" />
+            </label>
+            <label>
+              Message: <textarea name="message"></textarea>
+            </label>
+            <button type="submit" className="button">
+              Send
+            </button>
           </form>
         </div>
       </section>
