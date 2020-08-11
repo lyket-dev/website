@@ -26,7 +26,13 @@ export default function Home() {
                 Laikit lets you implement a <strong>social-like feature</strong>{" "}
                 in your static website in just a few seconds!
               </p>
-              <form action="/action_page.php" method="get" className="search">
+              <form
+                name="login"
+                method="POST"
+                data-netlify="true"
+                className="search"
+              >
+                <input type="hidden" name="form-name" value="contact" />
                 <input type="text" name="email" />
                 <button type="submit"> Submit </button>
               </form>
@@ -267,6 +273,7 @@ export default function Home() {
             data-netlify="true"
             className="form"
           >
+            <input type="hidden" name="form-name" value="contact" />
             <label>
               Your Name: <input type="text" name="name" required />
             </label>
