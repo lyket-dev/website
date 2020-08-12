@@ -1391,8 +1391,10 @@
   dependencies:
     stream "^0.0.2"
 
-"@lyket/react@../component":
-  version "0.0.5"
+"@lyket/react@^0.0.1":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@lyket/react/-/react-0.0.2.tgz#49f52408f329a603ee45fe5a0e10489330ffb7e0"
+  integrity sha512-Mah/lNPens/zTsg1aDnWQOl0t9gLnmSYCc0uF7XFlmA5nSrH4sLj0MjIjRaMOrls/YpEqoPgyEblMs32/IXC2A==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
