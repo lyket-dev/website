@@ -13,7 +13,12 @@ export default function Docs() {
     <div className="Page">
       <section className="section">
         <div className="section__container">
-          <p className="section__title">Documentation</p>
+          <p className="section__title">React component Documentation</p>
+        </div>
+      </section>
+      <section className="section">
+        <div className="section__container">
+          <p className="section__title">API Documentation</p>
           <SwaggerUI url="http://localhost:3000/schema" />
         </div>
       </section>

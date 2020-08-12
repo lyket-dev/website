@@ -23,8 +23,9 @@ export default function Home() {
             </div>
             <div className="half__right half__border">
               <p className="header__subtitle">
-                Lyket lets you implement a <strong>social-like feature</strong>{" "}
-                in your static website in just a few seconds!
+                Lyket lets you add a <strong>like button</strong> in your static
+                website in just a few seconds. It's still WIP leave us your
+                email to be updated!
               </p>
               <form
                 name="login"
@@ -33,8 +34,8 @@ export default function Home() {
                 className="search"
               >
                 <input type="hidden" name="form-name" value="contact" />
-                <input type="text" name="email" />
-                <button type="submit"> Submit </button>
+                <input type="text" name="email" required />
+                <button type="submit">Yes, update me!</button>
               </form>
               <div className="check">
                 <p className="check__text">1 minute setup</p>
@@ -51,11 +52,13 @@ export default function Home() {
             <span>APPLAUSE</span>
           </div>
           <ClapButton namespace="homepage" id="everybody-clap-now">
-            {({ counter, onClick, hasVoted }) => (
+            {({ counter, pressUp, hasVoted }) => (
               <div className="social">
-                <button onClick={onClick} className="social__button">
-                  <ClapIcon />
-                </button>
+                <div className="social__container">
+                  <button onClick={pressUp} className="social__button">
+                    <ClapIcon />
+                  </button>
+                </div>
                 <span className="social__counter">{counter}</span>
               </div>
             )}
