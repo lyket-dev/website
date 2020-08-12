@@ -2,7 +2,7 @@ import React from "react";
 import Decorator from "./sub/Decorator";
 import Promo from "../assets/likitVideo.mp4";
 import { Link } from "react-router-dom";
-import { LikeButton, ClapButton, UpdownButton } from "@laikit/react";
+import { LikeButton, ClapButton, UpdownButton } from "@lyket/react";
 import { ReactComponent as ClapIcon } from "../assets/clapping.svg";
 import Face from "../assets/karen.jpeg";
 
@@ -23,7 +23,7 @@ export default function Home() {
             </div>
             <div className="half__right half__border">
               <p className="header__subtitle">
-                Laikit lets you implement a <strong>social-like feature</strong>{" "}
+                Lyket lets you implement a <strong>social-like feature</strong>{" "}
                 in your static website in just a few seconds!
               </p>
               <form
@@ -84,7 +84,7 @@ export default function Home() {
             </div>
             <div className="flag__right">
               <p className="flag__text">
-                Laikit is composed by a <strong>simple API</strong> that keeps
+                Lyket is composed by a <strong>simple API</strong> that keeps
                 track of reactions and a customizable{" "}
                 <strong>React component</strong> with all the most famous social
                 button themes. Is the ultimate tool for your visitors to leave a
@@ -195,8 +195,8 @@ export default function Home() {
               <p className="ternary__title">No bots allowed</p>
               <div className="ternary__line--pink">—</div>
               <p className="ternary__text">
-                Laikit is integrated with <strong>Google reCAPTCHA V3</strong>{" "}
-                to provide protection against malitious use, while never
+                Lyket is integrated with <strong>Google reCAPTCHA V3</strong> to
+                provide protection against malitious use, while never
                 interrupting your users.
               </p>
             </div>
@@ -205,7 +205,7 @@ export default function Home() {
               <div className="ternary__line--yellow">—</div>
               <p className="ternary__text">
                 Most feedback services require visitors to sign up and that
-                discourages interaction. Laikit keeps track of reactions{" "}
+                discourages interaction. Lyket keeps track of reactions{" "}
                 <strong>without any further steps.</strong>
               </p>
             </div>
@@ -220,7 +220,7 @@ export default function Home() {
             </div>
             <div className="flag__right">
               <p className="flag__title">
-                “I cannot wait to see Laikit released. The suspance is killing
+                “I cannot wait to see Lyket released. The suspance is killing
                 me”
               </p>
               <p className="flag__text">Leila, senior dev @Idontexist Agency</p>
@@ -262,8 +262,8 @@ export default function Home() {
             />
           </h2>
           <p className="section__text">
-            Laikit is work in progress and, at the moment, we are only gathering
-            feedback. If you like what you see or think you would use Laikit in
+            Lyket is work in progress and, at the moment, we are only gathering
+            feedback. If you like what you see or think you would use Lyket in
             one of your projects or simply you want to follow our progress, why
             not dropping a few lines? Only updates and no spam, of course :D
           </p>

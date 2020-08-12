@@ -1391,7 +1391,7 @@
   dependencies:
     stream "^0.0.2"
 
-"@laikit/react@../component":
+"@lyket/react@../component":
   version "0.0.5"
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
