@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import useAsyncEffect from "../utils/useAsyncEffect";
-// import { fetchDocs } from "../api";
 import SwaggerUI from "swagger-ui-react";
 import ReactMarkdown from "react-markdown";
 import "swagger-ui-react/swagger-ui.css";
@@ -19,13 +18,13 @@ export default function Docs() {
       <section className="section--left">
         <div className="section__container">
           <p className="section__title">React component Documentation</p>
+          <ReactMarkdown source={markdown} />
         </div>
-        <ReactMarkdown source={markdown} />
       </section>
       <section className="section">
         <div className="section__container">
           <p className="section__title">API Documentation</p>
-          <SwaggerUI url="http://localhost:3000/schema" />
+          <SwaggerUI url={`${process.env.REACT_APP_API_DOMAIN}/schema`} />
         </div>
       </section>
     </div>
