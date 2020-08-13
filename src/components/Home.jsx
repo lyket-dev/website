@@ -113,7 +113,7 @@ export default function Home() {
           <div className="half">
             <div className="half__left half__border">
               <p className="half__title">
-                Got some brand new content on your blog and you are wandering if
+                Got some brand new content on your blog and you are wondering if
                 readers are liking it?
               </p>
             </div>
