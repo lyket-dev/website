@@ -42,7 +42,12 @@ export default function Home() {
                 className="search"
               >
                 <input type="hidden" name="form-name" value="contact" />
-                <input type="text" name="email" required />
+                <input
+                  type="text"
+                  name="email"
+                  required
+                  placeholder="myemail@mail.com"
+                />
                 <button type="submit">Signup for updates!</button>
               </form>
               <div className="check">
