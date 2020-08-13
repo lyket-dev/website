@@ -14,7 +14,7 @@
     border-radius: 15px
     background-color: #fff
     padding: 0.7rem 1rem
-    width: 60%
+    width: 50%
 
   button[type=submit]
     border: none
@@ -28,3 +28,8 @@
     &:hover
       background-color: $raspberry
       transition: $transition
+
+@media only screen and (min-width: 1000px)
+  .search
+    input, select
+      width: 60%

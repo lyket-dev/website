@@ -4,7 +4,11 @@ import Promo from "../assets/likitVideo.mp4";
 import { Link } from "react-router-dom";
 import { LikeButton, ClapButton, UpdownButton } from "@lyket/react";
 import { ReactComponent as ClapIcon } from "../assets/clapping.svg";
+import { ReactComponent as Clap } from "../assets/clap.svg";
+import { ReactComponent as Heart } from "../assets/heart.svg";
+import { ReactComponent as Like } from "../assets/like.svg";
 import Face from "../assets/karen.jpeg";
+import Typist from "react-typist";
 
 export default function Home() {
   return (
@@ -24,9 +28,13 @@ export default function Home() {
             <div className="half__right half__border">
               <p className="header__subtitle">
                 Lyket lets you add a <strong>like button</strong> in your static
-                website in just a few seconds. It's still WIP leave us your
-                email to be updated!
+                website in just a few seconds!
               </p>
+              <div className="check">
+                <Clap className="check__icons" />
+                <Heart className="check__icons" />
+                <Like className="check__icons" />
+              </div>
               <form
                 name="login"
                 method="POST"
@@ -35,12 +43,12 @@ export default function Home() {
               >
                 <input type="hidden" name="form-name" value="contact" />
                 <input type="text" name="email" required />
-                <button type="submit">Yes, update me!</button>
+                <button type="submit">Signup for updates!</button>
               </form>
               <div className="check">
                 <p className="check__text">1 minute setup</p>
                 <p className="check__text">Free forever plan</p>
-                <p className="check__text">Completely headless</p>
+                <p className="check__text">Headless</p>
               </div>
             </div>
           </div>
@@ -48,21 +56,39 @@ export default function Home() {
       </section>
       <section className="section--black">
         <div className="section__container">
-          <div className="neon">
-            <span>APPLAUSE</span>
-          </div>
-          <ClapButton namespace="homepage" id="everybody-clap-now">
-            {({ counter, pressUp, hasVoted }) => (
-              <div className="social">
-                <div className="social__container">
-                  <button onClick={pressUp} className="social__button">
-                    <ClapIcon />
-                  </button>
-                </div>
-                <span className="social__counter">{counter}</span>
+          <div className="flag">
+            <div className="flag__left">
+              <Typist className="typist">
+                {'import { ClapButton } from "@lyket/react";'}
+                <br />
+                <br />
+                {"<ClapButton"}
+                <br />
+                &nbsp;&nbsp;&nbsp;&nbsp;{'namespace="homepage"'}
+                <br />
+                &nbsp;&nbsp;&nbsp;&nbsp;{'id="everybody-clap-now"'}
+                <br />
+                {"/>"}
+              </Typist>
+            </div>
+            <div className="flag__right">
+              <div className="neon">
+                <span>APPLAUSE</span>
               </div>
-            )}
-          </ClapButton>
+              <ClapButton namespace="homepage" id="everybody-clap-now">
+                {({ counter, pressUp, hasVoted }) => (
+                  <div className="social">
+                    <div className="social__container">
+                      <button onClick={pressUp} className="social__button">
+                        <ClapIcon />
+                      </button>
+                    </div>
+                    <span className="social__counter">{counter}</span>
+                  </div>
+                )}
+              </ClapButton>
+            </div>
+          </div>
         </div>
       </section>
       <section className="section">

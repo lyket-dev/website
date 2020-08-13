@@ -2,7 +2,10 @@
   @extend .section
 
 .header__container
-  @extend .section__container
+  max-width: 840px
+  margin: 0 auto
+  padding: 50px 15px
+  padding-top: 20px
 
 .header__title
   +heading-font-family
@@ -12,13 +15,18 @@
 
 .header__subtitle
   text-align: center
-  +font-size(gamma)
-  +margin-bottom(2)
+  +font-size(regular)
+  +margin-bottom(1)
 
 .header__image
   display: none
 
 @media only screen and (min-width: 1000px)
+  .header__container
+    padding: 100px 0
+    max-width: 950px
+    padding-top: 50px
+
   .header__title
     +font-size(huge)
     text-align: left
