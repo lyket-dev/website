@@ -139,17 +139,14 @@ export default function Home() {
           <div className="half">
             <div className="half__left half__border">
               <p className="half__title">
-                Got some brand new content on your blog and you are wondering if
-                readers are liking it?
+                Do you wonder if your readers are liking the latest blog post?
               </p>
             </div>
             <div className="half__right">
               <p className="half__text">
-                Oftenly you don't have any idea on how readers are{" "}
-                <strong>reacting to your posts</strong> and at the same time the
-                lack of a feedback system can make your blog feel a little
-                aloof. But, while comments can lead to useless polemics, a
-                simple Medium-style clap button can immediately spice things up!
+                While comments can lead to useless polemics, a{" "}
+                <strong>simple reaction button</strong> can immediately make
+                your blog feel a little less aloof!
               </p>
               <div className="half__reaction">
                 <ClapButton id="blog" namespace="homepage" theme="medium" />
@@ -161,9 +158,9 @@ export default function Home() {
             <div className="half__line--pink">—</div>
             <div className="half__left">
               <p className="half__text">
-                Sometimes you don't need only positive reinforcement. On the
-                contrary, <strong>critics can be even more crucial</strong> if
-                you are providing a service!
+                Sometimes you don't need only positive reinforcement. If you are
+                providing a service,{" "}
+                <strong>critics can be even more crucial</strong>!
               </p>
               <div className="half__reaction">
                 <UpdownButton id="docs" namespace="homepage" theme="reddit" />
@@ -172,22 +169,21 @@ export default function Home() {
             <div className="half__right half__border">
               <p className="half__title">
                 Your documentation has taken weeks to complete but you don’t
-                know if users are really appreciating it?
+                know if users are appreciating it?
               </p>
             </div>
           </div>
           <div className="half">
             <div className="half__left half__border">
               <p className="half__title">
-                Your portfolio could use some loving?
+                Your portfolio could use some lovin'?
               </p>
             </div>
             <div className="half__right">
               <p className="half__text">
                 Just like Twitter, Instagram and all social-networks alike are
-                tools to expose your work to the word and{" "}
-                <strong>receive appreciation</strong>, your website should{" "}
-                <strong>behave in the same way!</strong>
+                tools to <strong>expose your work to the word</strong>, your
+                website should <strong>behave in the same way!</strong>
               </p>
               <div className="half__reaction">
                 <LikeButton

@@ -9,6 +9,10 @@
 .half:nth-of-type(2)
   @extend .half
   flex-direction: column-reverse
+  .half__left
+    margin-bottom: 0
+  .half__right
+    +margin-bottom(1)
 
 .half__title
   +heading-font-family
@@ -17,17 +21,17 @@
 .half__text
   +margin-bottom(1)
 
-.half__image
-  // max-width: 100%
-
 .half__item
   max-width: 700px
   margin: 0 auto
   text-align: center
-  +margin-bottom(2)
 
-.half__right, .half__left
+.half__right,
   @extend .half__item
+
+.half__left
+  @extend .half__item
+  +margin-bottom(2)
 
 .half__border
   padding: 20px
@@ -36,7 +40,7 @@
 
 .half__line
   text-align: center
-  +margin-bottom(2)
+  +vertical-margin(2)
   font-size: 7vh
   line-height: 10px
 
@@ -66,6 +70,9 @@
     flex-basis: 50%
     +font-size(gamma)
 
+  .half:nth-of-type(2)
+    flex-direction: row
+
   .half__title
     +font-size(alpha)
 
@@ -86,9 +93,4 @@
   .half__line
     +center
     font-size: 60px
-
-@keyframes colored
-  from
-    background-position: 0% 0%
-  to
-    background-position: 200% 0%
+    margin: 0
