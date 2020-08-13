@@ -15,15 +15,13 @@ export default function Docs() {
 
   return (
     <div className="Page">
-      <section className="section--left">
-        <div className="section__container">
-          <p className="section__title">React component Documentation</p>
-          <ReactMarkdown source={markdown} />
-        </div>
+      <section className="docs">
+        <p className="docs__title">React component docs</p>
+        <ReactMarkdown source={markdown} />
       </section>
       <section className="section">
         <div className="section__container">
-          <p className="section__title">API Documentation</p>
+          <p className="section__title">API docs</p>
           <SwaggerUI url={`${process.env.REACT_APP_API_DOMAIN}/schema`} />
         </div>
       </section>

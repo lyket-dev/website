@@ -1,0 +1,106 @@
+.docs
+  position: relative
+  +font-size(regular)
+  h2, h3
+    +font-size(gamma)
+    font-weight: 500
+    +margin-bottom(1)
+
+  h1
+    font-weight: bold
+    +font-size(alpha)
+    +margin-bottom(2)
+
+  p
+    +margin-bottom(2)
+
+  pre
+    +margin-bottom(2)
+    background-color: $light-bg-color
+    +padding(2)
+
+  ul, ol, blockquote
+    padding-left: 40px
+    +margin-bottom(2)
+
+  li
+    list-style-type: disc
+
+.docs__title
+  text-align: center
+  +margin-bottom(1)
+  +font-size(alpha)
+  font-weight: 900
+
+.docs__text
+  +font-size(regular)
+  font-weight: regular
+
+.docs__link
+  +margin-top(1)
+  display: inline-block
+  font-weight: bold
+  font-family: $heading-font-family
+  position: relative
+  text-decoration: none
+  z-index: 0
+  &:after
+    content: ''
+    display: block
+    background-color: $green
+    height: 30%
+    margin: 0 auto
+    position: absolute
+    left: 0
+    right: 0
+    bottom: 20%
+    z-index: -1
+    transform: skewX(10deg)
+    transition: $transition
+    width: 0%
+
+  &:hover
+    &:after
+      width: 100%
+
+.docs__image
+  max-width: 50%
+
+.docs__portrait
+  max-width: 50%
+  border-radius: 3px 50%
+
+.docs--button
+  @extend .docs
+  background-color: $button-color
+
+.docs--primary
+  @extend .docs
+  background-color: $primary-color
+  color: white
+
+.docs--black
+  @extend .docs
+  background-color: $base-body-color
+  color: white
+
+@media only screen and (min-width: 1000px)
+  .docs
+    +font-size(gamma)
+
+  .docs__container
+    padding: 100px 0
+    max-width: 950px
+
+  .docs__title
+    +font-size(big)
+    +margin-bottom(4)
+
+  .docs__link
+    +margin-top(2)
+
+  .docs__text
+    max-width: 85%
+    margin: 0 auto
+    +font-size(gamma)
+    +margin-bottom(3)
