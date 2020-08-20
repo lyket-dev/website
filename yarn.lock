@@ -1391,10 +1391,19 @@
   dependencies:
     stream "^0.0.2"
 
-"@lyket/react@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@lyket/react/-/react-0.0.2.tgz#49f52408f329a603ee45fe5a0e10489330ffb7e0"
-  integrity sha512-Mah/lNPens/zTsg1aDnWQOl0t9gLnmSYCc0uF7XFlmA5nSrH4sLj0MjIjRaMOrls/YpEqoPgyEblMs32/IXC2A==
+"@lyket/react@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@lyket/react/-/react-0.0.5.tgz#fee69c2d37bdd57c3b865dee9bd7e67eee7aa02e"
+  integrity sha512-GtcbGU9tQ/ztnAkze4gPBxmkgKZ+AYakB7K4PD+EwTuBcWIqzkVx5DgD7oDWzRZOsxngV0e3z4kv0XrNhFrgjg==
+  dependencies:
+    "@mojs/core" "^0.288.2"
+
+"@mojs/core@^0.288.2":
+  version "0.288.2"
+  resolved "https://registry.yarnpkg.com/@mojs/core/-/core-0.288.2.tgz#3011145672a01c694fbd247b90f4a4a2b216905b"
+  integrity sha512-WBkiwvn14GcHfMyUuLJ0irJlTjv/Lc3jha67npYw04bG6AxATRR+Uyb9x5TkTlJAwCFLhfhLLLe5EeZoiaqiZw==
+  dependencies:
+    babel-runtime "^6.5.0"
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -3195,7 +3204,7 @@ babel-preset-react-app@^9.1.2:
     babel-plugin-macros "2.8.0"
     babel-plugin-transform-react-remove-prop-types "0.4.24"
 
-babel-runtime@^6.26.0:
+babel-runtime@^6.26.0, babel-runtime@^6.5.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   integrity sha1-llxwWGaOgrVde/4E/yM3vItWR/4=

@@ -154,7 +154,11 @@ export default function Home() {
                 your blog feel a little less aloof!
               </p>
               <div className="half__reaction">
-                <ClapButton id="blog" namespace="homepage" theme="medium" />
+                <ClapButton
+                  id="blog"
+                  namespace="homepage"
+                  theme={ClapButton.themes.Medium}
+                />
               </div>
             </div>
             <div className="half__line--green">—</div>
@@ -168,7 +172,7 @@ export default function Home() {
                 <strong>critics can be even more crucial</strong>!
               </p>
               <div className="half__reaction">
-                <UpdownButton id="docs" namespace="homepage" theme="reddit" />
+                <UpdownButton id="docs" namespace="homepage" />
               </div>
             </div>
             <div className="half__right half__border">
@@ -194,7 +198,7 @@ export default function Home() {
                 <LikeButton
                   id="portfolio"
                   namespace="homepage"
-                  theme="twitter"
+                  theme={LikeButton.themes.Twitter}
                 />
               </div>
             </div>
