@@ -98,42 +98,6 @@ export default function Home() {
       </section>
       <section className="section">
         <div className="section__container">
-          <h2 className="section__title">
-            <Decorator
-              fulltext="No-brainer"
-              toDecorate="No-brainer"
-              color="yellow"
-            />
-          </h2>
-          <div className="flag">
-            <div className="flag__image__container">
-              <video
-                className="flag__video"
-                src={Promo}
-                autoPlay
-                playsInline
-                loop
-                type="video/mp4"
-              />
-            </div>
-            <div className="flag__right">
-              <p className="flag__text">
-                Lyket is composed by a <strong>simple API</strong> that keeps
-                track of reactions and a customizable{" "}
-                <strong>React component</strong> with all the most famous social
-                button themes. Is the ultimate tool for your visitors to leave a
-                token of appreciation and for you to see how your work is
-                perceived!
-              </p>
-              <Link to="docs" className="section__link">
-                Check out our docs {">>"}
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="section">
-        <div className="section__container">
           <p className="section__title">
             <Decorator
               fulltext="Bring your content to life!"
@@ -203,6 +167,102 @@ export default function Home() {
               </div>
             </div>
             <div className="half__line--yellow">—</div>
+          </div>
+        </div>
+      </section>
+      <section className="section">
+        <div className="section__container">
+          <h2 className="section__title">
+            <Decorator
+              fulltext="No-brainer"
+              toDecorate="No-brainer"
+              color="yellow"
+            />
+          </h2>
+          <div className="ternary">
+            <div className="ternary__item">
+              <p className="ternary__title">Register on Lyket >></p>
+              <div className="ternary__line--green">—</div>
+              <div className="typist--white">
+                <div className="typist--animated">Signup</div>
+                <Typist
+                  cursor={{ show: false }}
+                  startDelay={1500}
+                  avgTypingDelay={50}
+                >
+                  {"{"}
+                  <br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;{"YOUR-API-KEY = xxx"}
+                  <br />
+                  {"}"}
+                  <br />
+                  <br />
+                </Typist>
+              </div>
+            </div>
+            <div className="ternary__item">
+              <p className="ternary__title">Configure the provider >></p>
+              <div className="ternary__line--pink">—</div>
+
+              <Typist
+                className="typist--white"
+                startDelay={3500}
+                avgTypingDelay={50}
+              >
+                {'import { Provider } from "@lyket/react";'}
+                <br />
+                <br />
+                {"<Provider apiKey='xxx'/>"}
+                <br />
+                &nbsp;&nbsp;&nbsp;&nbsp;{"<App />"}
+                <br />
+                {"</Provider>"}
+              </Typist>
+            </div>
+            <div className="ternary__item">
+              <p className="ternary__title">Choose a button >></p>
+              <div className="ternary__line--yellow">—</div>
+
+              <Typist
+                className="typist--white"
+                startDelay={8000}
+                avgTypingDelay={50}
+              >
+                {'import { LikeButton } from "@lyket/react";'}
+                <br />
+                <br />
+                {"<LikeButton"}
+                <br />
+                &nbsp;&nbsp;&nbsp;&nbsp;{'id="my-button"'}
+                <br />
+                {"/>"}
+              </Typist>
+            </div>
+          </div>
+          <div className="flag">
+            <div className="flag__image__container">
+              <video
+                className="flag__video"
+                src={Promo}
+                autoPlay
+                playsInline
+                loop
+                type="video/mp4"
+              />
+            </div>
+            <div className="flag__right">
+              <p className="flag__text">
+                Lyket is composed by a <strong>simple API</strong> that keeps
+                track of reactions and a customizable{" "}
+                <strong>React component</strong> with all the most famous social
+                button themes. Is the ultimate tool for your visitors to leave a
+                token of appreciation and for you to see how your work is
+                perceived!
+              </p>
+              <Link to="docs" className="section__link">
+                Check out our docs {">>"}
+              </Link>
+            </div>
           </div>
         </div>
       </section>

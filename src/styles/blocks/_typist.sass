@@ -10,6 +10,32 @@
   margin: 0 auto
   text-align: left
 
+.typist--white
+  @extend .typist
+  background-color: #9991
+  color: $base-body-color
+
 @media only screen and (min-width: 1000px)
   .typist
     width: 300px
+
+.typist--animated
+  font-family: $heading-font-family
+  background-color: $base-body-color
+  padding: 10px 20px
+  border-radius: 3px
+  color: white
+  margin: 0 auto
+  +margin-bottom(2)
+  animation: click linear 1s
+  animation-delay: 1s
+  text-align: center
+  
+@keyframes click
+  25%
+    transition: $transition
+    background-color: rgba($raspberry, 30)
+  54%
+    background-color: rgba($raspberry, 30)
+  57%
+    background-color: $base-body-color
