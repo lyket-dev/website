@@ -1391,10 +1391,10 @@
   dependencies:
     stream "^0.0.2"
 
-"@lyket/react@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@lyket/react/-/react-0.0.5.tgz#fee69c2d37bdd57c3b865dee9bd7e67eee7aa02e"
-  integrity sha512-GtcbGU9tQ/ztnAkze4gPBxmkgKZ+AYakB7K4PD+EwTuBcWIqzkVx5DgD7oDWzRZOsxngV0e3z4kv0XrNhFrgjg==
+"@lyket/react@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@lyket/react/-/react-0.0.7.tgz#3a0dddeba40cf5be7d6b0bdcfadaecf98ee3d643"
+  integrity sha512-l+TT9nsUBr0234mmQ0hzZkwhEATqpHmH7r+/s9EXk1hf3mGcuGYb0IHvQ6p5knqzOpAd0u1nJIquTYYOltzEPg==
   dependencies:
     "@mojs/core" "^0.288.2"
 
