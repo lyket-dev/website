@@ -1,4 +1,6 @@
 .docs
+
+.docs__markdown
   position: relative
   +font-size(regular)
   h2, h3
@@ -27,8 +29,8 @@
     list-style-type: disc
 
 .docs__title
+  +margin-bottom(3)
   text-align: center
-  +margin-bottom(1)
   +font-size(alpha)
   font-weight: 900
 
@@ -83,6 +85,15 @@
   @extend .docs
   background-color: $base-body-color
   color: white
+
+.swagger-ui
+  .wrapper
+    padding: 0
+  .info
+    margin: 0
+  a.nostyle
+    +font-size(gamma)
+    font-weight: bold
 
 @media only screen and (min-width: 1000px)
   .docs
