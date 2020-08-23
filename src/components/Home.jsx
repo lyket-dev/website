@@ -27,8 +27,8 @@ export default function Home() {
             </div>
             <div className="half__right half__border">
               <p className="header__subtitle">
-                Lyket lets you add a <strong>like button</strong> in your static
-                website in just a few seconds!
+                Lyket lets you add a <strong>like/clap/vote button</strong> in
+                your static website in just a few seconds!
               </p>
               <div className="check">
                 <Clap className="check__icons" />
@@ -48,7 +48,7 @@ export default function Home() {
                   required
                   placeholder="myemail@mail.com"
                 />
-                <button type="submit">Signup for updates!</button>
+                <button type="submit">Receive an API key!</button>
               </form>
               <div className="check">
                 <p className="check__text">1 minute setup</p>

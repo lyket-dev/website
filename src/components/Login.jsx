@@ -25,8 +25,12 @@ const Login = () => {
   });
 
   return (
-    <div className="Page">
-      <h1>Work in progres...</h1>
+    <div className="page">
+      <h1>Work in progress...</h1>
+      <p>
+        When logged in you will be able to see statistics and manage your user
+        settings and API keys
+      </p>
       {false && (
         <Formik
           initialValues={{ email: "", password: "" }}
