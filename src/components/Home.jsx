@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Decorator from "./sub/Decorator";
 import Promo from "../assets/likitVideo.mp4";
 import { Link } from "react-router-dom";
@@ -11,6 +11,24 @@ import Face from "../assets/karen.jpeg";
 import Typist from "react-typist";
 
 export default function Home() {
+  const [email, emailSet] = useState(null);
+  const myRef = useRef(null);
+
+  useEffect(() => {});
+
+  const handleChange = (e) => {
+    emailSet(e.target.value);
+    console.log(e.target.value);
+  };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    myRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   return (
     <>
       <section className="header">
@@ -35,20 +53,18 @@ export default function Home() {
                 <Heart className="check__icons" />
                 <Like className="check__icons" />
               </div>
-              <form
-                name="login"
-                method="POST"
-                data-netlify="true"
-                className="search"
-              >
+              <form name="login" className="search">
                 <input type="hidden" name="form-name" value="contact" />
                 <input
                   type="text"
                   name="email"
                   required
                   placeholder="myemail@mail.com"
+                  onChange={handleChange}
                 />
-                <button type="submit">Receive an API key!</button>
+                <button type="submit" onClick={handleClick}>
+                  Receive an API key!
+                </button>
               </form>
               <div className="check">
                 <p className="check__text">1 minute setup</p>
@@ -356,34 +372,36 @@ export default function Home() {
             />
           </h2>
           <p className="section__text">
-            Lyket is work in progress and, at the moment, we are only gathering
-            feedback. If you like what you see or think you would use Lyket in
-            one of your projects or simply you want to follow our progress, why
-            not dropping a few lines? Only updates and no spam, of course :D
+            Lyket is in beta stage and we are offering free API keys to try and
+            evaluate the service. Request one using this form! And why not
+            dropping a few lines? :D
           </p>
-          <form
-            name="contact"
-            method="POST"
-            data-netlify="true"
-            className="form"
-          >
-            <input type="hidden" name="form-name" value="contact" />
-            <label>
-              Your Name: <input type="text" name="name" required />
-            </label>
-            <label>
-              Your Email: <input type="email" name="email" required />
-            </label>
-            <label>
-              Your Role: <input type="text" name="name" />
-            </label>
-            <label>
-              Message: <textarea name="message"></textarea>
-            </label>
-            <button type="submit" className="button">
-              Send
-            </button>
-          </form>
+          <div ref={myRef}>
+            <form
+              name="contact"
+              method="POST"
+              data-netlify="true"
+              className="form"
+            >
+              <input type="hidden" name="form-name" value="contact" />
+              <label>
+                *Email :{" "}
+                <input type="email" name="email" required value={email} />
+              </label>
+              <label>
+                *Name: <input type="text" name="name" required />
+              </label>
+              <label>
+                *Role: <input type="text" name="name" />
+              </label>
+              <label>
+                Message: <textarea name="message"></textarea>
+              </label>
+              <button type="submit" className="button">
+                Send
+              </button>
+            </form>
+          </div>
         </div>
       </section>
     </>

@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import { PrivateRoute, PublicRoute } from "./components/sub/Routes";
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
+import Privacy from "./components/Privacy";
 import Logout from "./components/Logout";
 import Signup from "./components/Signup";
 import Docs from "./components/Docs";
@@ -37,6 +38,12 @@ const App = () => {
         </PublicRoute>
         <PublicRoute path="/docs">
           <Docs />
+        </PublicRoute>
+        <PublicRoute path="/demos">
+          <Login />
+        </PublicRoute>
+        <PublicRoute path="/privacy">
+          <Privacy />
         </PublicRoute>
         <PrivateRoute path="/dashboard">
           <Dashboard />

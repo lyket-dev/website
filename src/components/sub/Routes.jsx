@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 export function PrivateRoute({ children, ...rest }) {
   const loggedIn = sessionStorage.getItem("token");
@@ -32,6 +33,7 @@ export function PublicRoute({ children, ...rest }) {
     <Route {...rest}>
       <Navbar />
       {children}
+      <Footer />
     </Route>
   );
 }
