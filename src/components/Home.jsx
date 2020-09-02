@@ -385,14 +385,14 @@ export default function Home() {
             >
               <input type="hidden" name="form-name" value="contact" />
               <label>
-                *Email :{" "}
+                *Email:
                 <input type="email" name="email" required value={email} />
               </label>
               <label>
                 *Name: <input type="text" name="name" required />
               </label>
               <label>
-                *Role: <input type="text" name="name" />
+                *Role: <input type="text" name="role" required />
               </label>
               <label>
                 Message: <textarea name="message"></textarea>
