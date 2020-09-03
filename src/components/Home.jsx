@@ -42,6 +42,21 @@ export default function Home() {
                   color="blue"
                 />
               </h2>
+              {false && (
+                <a
+                  href="https://www.producthunt.com/posts/lyket?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-lyket"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    style={{ width: "200px" }}
+                    src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=249624&theme=light"
+                    alt="Lyket - Engage your audience with fresh out of the box like buttons | Product Hunt Embed"
+                    width="250"
+                    height="54"
+                  />
+                </a>
+              )}
             </div>
             <div className="half__right half__border">
               <p className="header__subtitle">
@@ -383,16 +398,36 @@ export default function Home() {
               data-netlify="true"
               className="form"
             >
-              <input type="hidden" name="form-name" value="contact" />
+              <input type="hidden" name="contact" value="contact" />
               <label>
-                *Email:
-                <input type="email" name="email" required value={email} />
+                <span>*Email:</span>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  value={email}
+                  placeholder="myemail@mail.com"
+                />
               </label>
               <label>
-                *Name: <input type="text" name="name" required />
+                <span>*Technology:</span>
+                <select type="text" name="tech" required>
+                  <option value="">Choose one</option>
+                  <option value="react">ReactJS</option>
+                  <option value="next">Next.js</option>
+                  <option value="gatsby">Gatsby</option>
+                  <option value="reactStatic">React Static</option>
+                  <option value="other">Other - can you specify?</option>
+                  <option value="idk">I don't know :)</option>
+                </select>
               </label>
               <label>
-                *Role: <input type="text" name="role" required />
+                <span>Website: </span>
+                <input
+                  type="text"
+                  name="website"
+                  placeholder="https://myawesomewebsite.com"
+                />
               </label>
               <label>
                 Message: <textarea name="message"></textarea>
