@@ -4,17 +4,19 @@
   margin-bottom: $grid-gutter
   font-family: $heading-font-family
   font-weight: 400
-  padding: 30px
+  padding: 20px
   max-width: 500px
   margin: 0 auto
+  +font-size(regular)
 
   label
     display: block
     +margin-bottom(2)
-    text-align: left
     span
+      text-align: left
+      font-weight: bold
       width: 23%
-      display: inline-block
+      display: block
 
   input, select
     position: relative
@@ -22,12 +24,22 @@
     border-radius: 0
     background-color: #fff
     padding: 0.7rem 0
-    width: 60%
+    width: 100%
 
   input
     border-bottom: 1px dashed $base-body-color
 
   textarea
     border: 1px solid $light-body-color
-    +margin-bottom(2)
+    +vertical-margin(2)
     border-radius: 3px
+
+@media only screen and (min-width: 500px)
+  .form
+    padding: 30px
+    label
+      span
+        display: inline-block
+
+    input, select
+      width: 60%

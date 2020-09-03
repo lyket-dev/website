@@ -410,7 +410,7 @@ export default function Home() {
                 />
               </label>
               <label>
-                <span>*Technology:</span>
+                <span>*Tech:</span>
                 <select type="text" name="tech" required>
                   <option value="">Choose one</option>
                   <option value="react">ReactJS</option>
@@ -430,10 +430,10 @@ export default function Home() {
                 />
               </label>
               <label>
-                Message: <textarea name="message"></textarea>
+                <span>Message:</span> <textarea name="message" />
               </label>
               <button type="submit" className="button">
-                Send
+                {email ? "Give me this key, already! :D" : "Receive an API key"}
               </button>
             </form>
           </div>
