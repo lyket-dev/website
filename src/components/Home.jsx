@@ -398,7 +398,7 @@ export default function Home() {
               data-netlify="true"
               className="form"
             >
-              <input type="hidden" name="contact" value="contact" />
+              <input type="hidden" name="form-name" value="contact" />
               <label>
                 <span>*Email:</span>
                 <input
