@@ -1,0 +1,22 @@
+.list
+  font-family: $heading-font-family
+  line-height: 1
+  position: relative
+  margin-bottom: 1rem
+  text-align: left
+  &.active
+    background-color: $button-color
+
+.list__item__title
+  font-family: $body-font-family
+  +vertical-padding(1)
+  font-size: 18px
+  background-color: white
+  &::before
+    content: "✓"
+    +horizontal-margin(0.5)
+
+.list__item__action
+  padding: 20px
+  font-family: $heading-font-family
+  cursor: pointer

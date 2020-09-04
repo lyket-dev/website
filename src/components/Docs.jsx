@@ -16,7 +16,7 @@ export default function Docs() {
 
   return (
     <div className="page">
-      <div className="page__menu">
+      <div className="menu">
         <button className="navbar__link" onClick={() => showApiSet(false)}>
           Component
         </button>

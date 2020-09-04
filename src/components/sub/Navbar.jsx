@@ -41,13 +41,20 @@ export default function Navbar({ loggedIn }) {
 
   return (
     <ul className="navbar">
-      <li className="navbar__logo">
-        <Link to="/">LYKET</Link>
+      <li>
+        <Link className="navbar__logo" to="/">
+          LYKET
+        </Link>
       </li>
       <div className="navbar__container">
         <li className="navbar__item">
           <Link to="/docs" className="navbar__link">
             Docs
+          </Link>
+        </li>
+        <li className="navbar__item">
+          <Link to="/pricing" className="navbar__link">
+            Pricing
           </Link>
         </li>
         {renderLoggedMenuItems()}

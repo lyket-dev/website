@@ -7,18 +7,15 @@
   font-size: 20px
 
 .ternary__item
-  flex-basis: 25%
   flex-grow: 0
   text-align: center
   background: white
-  padding: 30px 10px
+  +padding(2)
   border-radius: 3px
   display: flex
   flex-direction: column
   align-items: center
-  margin-bottom: $grid-gutter
-
-.ternary__image
+  +margin-bottom(2)
 
 .ternary__title
   font-weight: bold
@@ -41,23 +38,25 @@
 .ternary__line--pink
   @extend .ternary__line
   color: $raspberry
-  // text-shadow: 0 -3px 40px, 0 3px 40px #fc3df6
 
 .ternary__line--green
   @extend .ternary__line
   color: $green
-  // text-shadow: 0 -3px 40px, 0 3px 40px #2b4e99
 
 .ternary__line--yellow
   @extend .ternary__line
   color: $yellow
-  // text-shadow: 0 -3px 40px, 0 3px 40px #2b4e99
 
-@media only screen and (min-width: 840px)
+.ternary__huge
+  +font-size(alpha)
+  font-weight: 700
+
+@media only screen and (min-width: 900px)
   .ternary
     flex-direction: row
 
   .ternary__item
+    flex-basis: 33%
     margin-bottom: $grid-gutter
 
   .ternary__video

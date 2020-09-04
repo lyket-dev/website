@@ -1,16 +1,41 @@
 .page
-  +wrap
-  +vertical-padding(2)
+  text-align: center
+  position: relative
+  background-color: white
+  +font-size(regular)
 
-.page__menu
-  display: flex
-  justify-content: center
-  align-items: center
-  font-weight: bold
+.page__container
+  max-width: 840px
+  margin: 0 auto
+  +vertical-margin(2)
+  padding: 30px 15px 0 15px
+
+.page__title
+  max-width: 85%
+  margin: 0 auto
+  +margin-bottom(1)
+  +font-size(alpha)
+  font-weight: 900
+
+.page__text
   +margin-bottom(2)
-  span
-    +horizontal-margin(2)
+  +font-size(regular)
+  font-weight: regular
 
 @media only screen and (min-width: 1000px)
-  .page__menu
+  .page
+    +font-size(gamma)
+    +vertical-margin(2)
+
+  .page__container
+    max-width: 950px
+
+  .page__title
+    +font-size(big)
     +margin-bottom(4)
+
+  .page__text
+    max-width: 85%
+    margin: 0 auto
+    +font-size(gamma)
+    +margin-bottom(3)
