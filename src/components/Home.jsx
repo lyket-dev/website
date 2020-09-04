@@ -162,8 +162,8 @@ export default function Home() {
             <div className="half__line--pink">—</div>
             <div className="half__left">
               <p className="half__text">
-                Sometimes you don't need only positive reinforcement. If you are
-                providing a service,{" "}
+                Sometimes you don't need only positive reinforcement. When
+                providing a service{" "}
                 <strong>critics can be even more crucial</strong>!
               </p>
               <div className="half__reaction">
