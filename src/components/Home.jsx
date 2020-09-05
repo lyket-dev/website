@@ -42,21 +42,19 @@ export default function Home() {
                   color="blue"
                 />
               </h2>
-              {false && (
-                <a
-                  href="https://www.producthunt.com/posts/lyket?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-lyket"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img
-                    style={{ width: "200px" }}
-                    src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=249624&theme=light"
-                    alt="Lyket - Engage your audience with fresh out of the box like buttons | Product Hunt Embed"
-                    width="250"
-                    height="54"
-                  />
-                </a>
-              )}
+              <a
+                href="https://www.producthunt.com/posts/lyket?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-lyket"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  style={{ width: "200px" }}
+                  src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=249624&theme=light"
+                  alt="Lyket - Engage your audience with fresh out of the box like buttons | Product Hunt Embed"
+                  width="250"
+                  height="54"
+                />
+              </a>
             </div>
             <div className="half__right half__border">
               <p className="header__subtitle">
