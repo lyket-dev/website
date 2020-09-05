@@ -184,7 +184,7 @@ export default function Home() {
             <div className="half__right">
               <p className="half__text">
                 Just like Twitter, Instagram and all social-networks alike are
-                tools to <strong>expose your work to the word</strong>, your
+                tools to <strong>expose your work to the world</strong>, your
                 website should <strong>behave in the same way!</strong>
               </p>
               <div className="half__reaction">
@@ -343,7 +343,7 @@ export default function Home() {
             </div>
             <div className="flag__right">
               <p className="flag__title">
-                “I cannot wait to see Lyket released. The suspance is killing
+                “I cannot wait to see Lyket released. The suspense is killing
                 me”
               </p>
               <p className="flag__text">Leila, senior dev @Idontexist Agency</p>
