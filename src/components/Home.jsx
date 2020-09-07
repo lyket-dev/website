@@ -110,14 +110,14 @@ export default function Home() {
                 <span>APPLAUSE</span>
               </div>
               <ClapButton namespace="homepage" id="everybody-clap-now">
-                {({ counter, pressUp, hasVoted }) => (
+                {({ totalClaps, onClick }) => (
                   <div className="social">
                     <div className="social__container">
-                      <button onClick={pressUp} className="social__button">
+                      <button onClick={onClick} className="social__button">
                         <ClapIcon />
                       </button>
                     </div>
-                    <span className="social__counter">{counter}</span>
+                    <span className="social__counter">{totalClaps}</span>
                   </div>
                 )}
               </ClapButton>
