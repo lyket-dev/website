@@ -9,7 +9,10 @@ const rootElement = document.getElementById("root");
 
 ReactDOM.render(
   <ReduxProvider store={store}>
-    <LyketProvider apiKey="Xkp5R0w+6uY+OftTTVEQ2BkiwUw=">
+    <LyketProvider
+      apiKey="Xkp5R0w+6uY+OftTTVEQ2BkiwUw=" recaptchaSiteKey={`${process.env.REACT_APP_RECAPTCHA_PUBLIC}`}
+      baseUrl="http://localhost:3000"
+    >
       <App />
     </LyketProvider>
   </ReduxProvider>,

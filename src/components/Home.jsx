@@ -150,7 +150,7 @@ export default function Home() {
                 <ClapButton
                   id="blog"
                   namespace="homepage"
-                  theme={ClapButton.themes.Medium}
+                  component={ClapButton.themes.Medium}
                 />
               </div>
             </div>
@@ -191,7 +191,7 @@ export default function Home() {
                 <LikeButton
                   id="portfolio"
                   namespace="homepage"
-                  theme={LikeButton.themes.Twitter}
+                  component={LikeButton.themes.Twitter}
                 />
               </div>
             </div>
