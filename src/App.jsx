@@ -1,16 +1,17 @@
 import React from "react";
 import { hot } from "react-hot-loader";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
-import { PrivateRoute, PublicRoute } from "./components/sub/Routes";
-import Dashboard from "./components/Dashboard";
-import Login from "./components/Login";
-import Privacy from "./components/Privacy";
-import Signup from "./components/Signup";
-import UserSettings from "./components/UserSettings";
-import "./styles/main.sass";
+import { PrivateRoute, PublicRoute } from "components/sub/Routes";
+import Dashboard from "components/Dashboard";
+import Login from "components/Login";
+import Privacy from "components/Privacy";
+import Signup from "components/Signup";
+import UserSettings from "components/UserSettings";
+import MagicLink from "components/MagicLink";
+import "styles/main.sass";
 import { useDispatch } from "react-redux";
-import useAsyncEffect from "./utils/useAsyncEffect";
-import { fetchCurrentSession } from "./ducks/session";
+import useAsyncEffect from "utils/useAsyncEffect";
+import { fetchCurrentSession } from "ducks/session";
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
@@ -36,6 +37,9 @@ const App = () => {
         </PublicRoute>
         <PublicRoute path="/signup">
           <Signup />
+        </PublicRoute>
+        <PublicRoute path="/magic-link">
+          <MagicLink />
         </PublicRoute>
         <PublicRoute path="/privacy">
           <Privacy />

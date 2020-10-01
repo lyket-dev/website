@@ -54,8 +54,16 @@ export function updateCurrentUser({ payload }) {
   return put("/current-user", payload);
 }
 
+export function loginRequest(payload) {
+  return post("/request-login", payload);
+}
+
+export function signupRequest(payload) {
+  return post("/signup", payload);
+}
+
 export function createSession(payload) {
-  return post("/login", payload);
+  return post("/create-session", payload);
 }
 
 export function fetchSession() {
