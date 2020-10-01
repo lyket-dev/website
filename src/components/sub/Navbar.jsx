@@ -1,7 +1,10 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { destroySession } from "../../ducks/session";
 
 export default function Navbar({ loggedIn }) {
+  const dispatch = useDispatch();
   const renderLoggedMenuItems = () => {
     return loggedIn ? (
       <>
@@ -16,20 +19,18 @@ export default function Navbar({ loggedIn }) {
           </Link>
         </li>
         <li className="navbar__item">
-          <Link to="/logout" className="button">
+          <button onClick={() => dispatch(destroySession())} className="button">
             Log out
-          </Link>
+          </button>
         </li>
       </>
     ) : (
       <>
-        {false && (
-          <li className="navbar__item">
-            <Link className="navbar__link" to="/signup">
-              Signup
-            </Link>
-          </li>
-        )}
+        <li className="navbar__item">
+          <Link className="navbar__link" to="/signup">
+            Signup
+          </Link>
+        </li>
         <li className="navbar__item">
           <Link to="/login" className="button">
             Log in
@@ -46,19 +47,7 @@ export default function Navbar({ loggedIn }) {
           LYKET
         </Link>
       </li>
-      <div className="navbar__container">
-        <li className="navbar__item">
-          <Link to="/docs" className="navbar__link">
-            Docs
-          </Link>
-        </li>
-        <li className="navbar__item">
-          <Link to="/pricing" className="navbar__link">
-            Pricing
-          </Link>
-        </li>
-        {renderLoggedMenuItems()}
-      </div>
+      <div className="navbar__container">{renderLoggedMenuItems()}</div>
     </ul>
   );
 }

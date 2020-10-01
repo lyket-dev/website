@@ -13,14 +13,15 @@ function siteDomain() {
   );
 }
 
-const wrapRequest = function wrapRequest(fn) {
-  return function wrappedRequest(path, ...args) {
+const wrapRequest = (fn) => {
+  return (path, ...args) => {
     const lastArg = args.length >= 1 && args[args.length - 1];
     const sessionId = lastArg && lastArg.sessionId;
     const requestArgs = sessionId ? args.slice(0, -1) : args;
     const jwtToken = sessionStorage.getItem("token");
 
     const options = {
+      credentials: "include",
       headers: {
         Authorization: `Bearer ${jwtToken}`,
         "X-Site-Domain": siteDomain(),
@@ -55,6 +56,10 @@ export function updateCurrentUser({ payload }) {
 
 export function createSession(payload) {
   return post("/login", payload);
+}
+
+export function fetchSession() {
+  return get("/current-session");
 }
 
 export function destroySession() {

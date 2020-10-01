@@ -1,17 +1,31 @@
 import createAsyncAction from "../utils/createAsyncAction";
-import createEntityReducer from "../utils/createEntityReducer";
+import { createReducer } from "redux-act";
 
-import { createSession as create } from "../api";
+import {
+  createSession as create,
+  destroySession as destroy,
+  fetchSession,
+} from "../api";
 
-const addTokenAndSaveSession = async (params) => {
-  const response = await create(params);
-  sessionStorage.setItem("token", response.data.attributes.auth_token);
-  return response;
-};
-
-export const createSession = createAsyncAction(
-  "session/create",
-  addTokenAndSaveSession
+export const createSession = createAsyncAction("session/create", create);
+export const destroySession = createAsyncAction("session/destroy", destroy);
+export const fetchCurrentSession = createAsyncAction(
+  "session/fetch",
+  fetchSession
 );
 
-export default createEntityReducer("session");
+const reducer = createReducer({}, null);
+
+reducer.on(destroySession.receive, (_state) => {
+  return null;
+});
+
+reducer.on(createSession.receive, (_state, { response }) => {
+  return response["data"]["attributes"];
+});
+
+reducer.on(fetchCurrentSession.receive, (_state, { response }) => {
+  return response["data"]["attributes"];
+});
+
+export default reducer;

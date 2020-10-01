@@ -3,11 +3,11 @@
   background-color: white
   +font-size(regular)
 
-.page__container
+.page__section
   max-width: 840px
   margin: 0 auto
-  +vertical-margin(2)
-  padding: 30px 15px 0 15px
+  +vertical-padding(2)
+  +horizontal-padding(2)
 
 .page__title
   text-align: center
@@ -16,6 +16,14 @@
   +margin-bottom(1)
   +font-size(alpha)
   font-weight: 900
+
+.page__subtitle
+  text-align: center
+  max-width: 85%
+  margin: 0 auto
+  +margin-bottom(3)
+  +font-size(alpha)
+  font-weight: 500
 
 .page__text
   +margin-bottom(2)
@@ -27,7 +35,8 @@
     +font-size(gamma)
     +vertical-margin(2)
 
-  .page__container
+  .page__section
+    +horizontal-padding(0)
     max-width: 950px
 
   .page__title

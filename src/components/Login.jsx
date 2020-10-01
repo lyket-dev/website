@@ -1,5 +1,5 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
@@ -8,13 +8,20 @@ import { createSession } from "../ducks/session";
 const Login = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const session = useSelector((state) => state.session);
+
+  useEffect(() => {
+    if (session) {
+      history.push("/user-settings");
+    }
+  }, [session]);
 
   const handleSubmit = async (values) => {
     try {
       await dispatch(createSession(values));
-      history.push("/dashboard");
+      history.push("/user-settings");
     } catch (error) {
-      console.log(error);
+      console.error(error);
       throw error;
     }
   };
@@ -26,12 +33,7 @@ const Login = () => {
 
   return (
     <div className="page">
-      <h1>Work in progress...</h1>
-      <p>
-        When logged in you will be able to see statistics and manage your user
-        settings and API keys
-      </p>
-      {false && (
+      <section className="page__section">
         <Formik
           initialValues={{ email: "", password: "" }}
           validationSchema={validationSchema}
@@ -49,7 +51,7 @@ const Login = () => {
             </Form>
           )}
         </Formik>
-      )}
+      </section>
     </div>
   );
 };

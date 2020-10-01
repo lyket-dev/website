@@ -1,9 +1,8 @@
 import React from "react";
-import Form from "./sub/Form";
-import { Field } from "formik";
+import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 
-const Login = () => {
+const SignUp = () => {
   const handleSubmit = (values) => {
     console.log("submit", values);
   };
@@ -22,22 +21,34 @@ const Login = () => {
   const initialValues = { email: "", password: "", name: "", company: "" };
 
   return (
-    <div className="Page">
-      <h1>Sign up!</h1>
-      <Form
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-        validateOnBlur={true}
-        className="Form"
-      >
-        <Field type="text" name="name" />
-        <Field type="text" name="company" />
-        <Field type="email" name="email" placeholder="admin@example.com" />
-        <Field type="password" name="password" />
-      </Form>
+    <div className="page">
+      <section className="page__section">
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+          validateOnBlur={true}
+          className="Signup"
+        >
+          {(props) => (
+            <Form>
+              {props.errors.name && (
+                <div id="feedback">{props.errors.name}</div>
+              )}
+              <Field type="text" name="company" />
+              <Field
+                type="email"
+                name="email"
+                placeholder="admin@example.com"
+              />
+              <Field type="password" name="password" />
+              <button type="submit">Submit</button>
+            </Form>
+          )}
+        </Formik>
+      </section>
     </div>
   );
 };
 
-export default Login;
+export default SignUp;

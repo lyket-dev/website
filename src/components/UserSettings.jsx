@@ -26,31 +26,35 @@ export default function UserSettings() {
     try {
       await dispatch(updateUser(values));
     } catch (error) {
-      console.log(error);
+      console.error(error);
       throw error;
     }
   };
 
   if (!currentUser) {
-    return <div className="Page">Non trovo lo user </div>;
+    return <div className="page">Non trovo lo user </div>;
   }
 
   return (
-    <div className="Page">
-      {currentUser.attributes.email}
-      <Formik
-        initialValues={{ recaptchaToken: "" }}
-        onSubmit={handleSubmit}
-        validateOnBlur={true}
-      >
-        {(props) => (
-          <Form>
-            {props.errors.name && <div id="feedback">{props.errors.name}</div>}
-            <Field type="text" name="recaptchaToken" />
-            <button type="submit">Submit</button>
-          </Form>
-        )}
-      </Formik>
+    <div className="page">
+      <section className="page__section">
+        {currentUser.attributes.email}
+        <Formik
+          initialValues={{ recaptchaToken: "" }}
+          onSubmit={handleSubmit}
+          validateOnBlur={true}
+        >
+          {(props) => (
+            <Form>
+              {props.errors.name && (
+                <div id="feedback">{props.errors.name}</div>
+              )}
+              <Field type="text" name="recaptchaToken" />
+              <button type="submit">Submit</button>
+            </Form>
+          )}
+        </Formik>
+      </section>
     </div>
   );
 }

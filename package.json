@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@lyket/react": "^1.0.3",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -37,7 +36,7 @@
     "yup": "^0.29.1"
   },
   "scripts": {
-    "start": "export PORT=5000 && react-scripts start",
+    "start": "GENERATE_SOURCEMAP=true export PORT=5000 && react-scripts start",
     "build": "react-scripts build",
     "deploy": "yarn build && netlify deploy --prod",
     "preview": "yarn build && netlify deploy",
