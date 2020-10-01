@@ -12,6 +12,7 @@ import "styles/main.sass";
 import { useDispatch } from "react-redux";
 import useAsyncEffect from "utils/useAsyncEffect";
 import { fetchCurrentSession } from "ducks/session";
+import ReactNotification from "react-notifications-component";
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
@@ -27,31 +28,34 @@ const App = () => {
   }, []);
 
   return (
-    <Router>
-      <Switch>
-        <PublicRoute exact path="/">
-          <Login />
-        </PublicRoute>
-        <PublicRoute path="/login">
-          <Login />
-        </PublicRoute>
-        <PublicRoute path="/signup">
-          <Signup />
-        </PublicRoute>
-        <PublicRoute path="/magic-link">
-          <MagicLink />
-        </PublicRoute>
-        <PublicRoute path="/privacy">
-          <Privacy />
-        </PublicRoute>
-        <PrivateRoute path="/dashboard">
-          <Dashboard />
-        </PrivateRoute>
-        <PrivateRoute path="/user-settings">
-          <UserSettings />
-        </PrivateRoute>
-      </Switch>
-    </Router>
+    <div>
+      <ReactNotification />
+      <Router>
+        <Switch>
+          <PublicRoute exact path="/">
+            <Login />
+          </PublicRoute>
+          <PublicRoute path="/login">
+            <Login />
+          </PublicRoute>
+          <PublicRoute path="/signup">
+            <Signup />
+          </PublicRoute>
+          <PublicRoute path="/magic-link">
+            <MagicLink />
+          </PublicRoute>
+          <PublicRoute path="/privacy">
+            <Privacy />
+          </PublicRoute>
+          <PrivateRoute path="/dashboard">
+            <Dashboard />
+          </PrivateRoute>
+          <PrivateRoute path="/user-settings">
+            <UserSettings />
+          </PrivateRoute>
+        </Switch>
+      </Router>
+    </div>
   );
 };
 

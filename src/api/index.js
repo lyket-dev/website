@@ -59,7 +59,7 @@ export function loginRequest(payload) {
 }
 
 export function signupRequest(payload) {
-  return post("/signup", payload);
+  return post("/sign-up", payload);
 }
 
 export function createSession(payload) {

@@ -6,7 +6,7 @@
   font-family: $heading-font-family
   font-weight: 400
   padding: 20px
-  max-width: 500px
+  max-width: 600px
   margin: 0 auto
   +font-size(regular)
 
@@ -34,15 +34,21 @@
     border: 1px solid $light-body-color
     +vertical-margin(2)
     border-radius: 3px
-    
+
   button
     display: block
     margin: 0 auto
 
+.form__errors
+  +font-size(smallprint)
+  color: red
+
+.form__wrapper
+  +vertical-margin(4)
 
 @media only screen and (min-width: 500px)
   .form
-    padding: 30px
+    padding: 60px
     label
       span
         display: inline-block

@@ -2,9 +2,10 @@ import React, { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { useFormik } from "formik";
+import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import { signupRequest } from "../api";
+import { notice, alert } from "utils/notifications";
 
 export default function Signup() {
   const history = useHistory();
@@ -18,87 +19,105 @@ export default function Signup() {
 
   const [emailSent, setEmailSent] = useState(false);
 
-  const handleSubmit = useCallback(async (values) => {
-    try {
-      await signupRequest(values);
-      setEmailSent(true);
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  }, []);
-
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      company: "",
-      email: "",
+  const handleSubmit = useCallback(
+    async (values) => {
+      try {
+        await signupRequest(values);
+        setEmailSent(true);
+        notice({ message: "Check your inbox to login!" });
+      } catch (error) {
+        if (
+          error &&
+          error.errors &&
+          error.errors.some((e) => e.code === "USER_REGISTERED")
+        ) {
+          history.push("/login");
+        } else {
+          alert({ message: error.errors[0] && error.errors[0].message });
+          throw error;
+        }
+      }
     },
-    validationSchema: Yup.object({
-      name: Yup.string().required("Required"),
-      company: Yup.string()
-        .max(20, "Must be 20 characters or less")
-        .required("Required"),
-      email: Yup.string().email("Invalid email address").required("Required"),
-    }),
-    onSubmit: handleSubmit,
+    [history]
+  );
+
+  const initialValues = {
+    name: "",
+    company: "",
+    email: "",
+  };
+
+  const validationSchema = Yup.object({
+    name: Yup.string().required("Required"),
+    company: Yup.string()
+      .max(20, "Must be 20 characters or less")
+      .required("Required"),
+    email: Yup.string().email("Invalid email address").required("Required"),
   });
 
   return (
     <div className="page">
       <section className="page__section">
-        <form onSubmit={formik.handleSubmit} className="form">
-          <label htmlFor="email">
-            <span>Email*: </span>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.email}
-            />
-            {formik.touched.email && formik.errors.email ? (
-              <div>{formik.errors.email}</div>
-            ) : null}
-          </label>
-          <label htmlFor="name">
-            <span>Name*: </span>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.name}
-            />
-            {formik.touched.name && formik.errors.name ? (
-              <div>{formik.errors.name}</div>
-            ) : null}
-          </label>
-          <label htmlFor="company">
-            <span>Company*: </span>
-            <input
-              id="company"
-              name="company"
-              type="text"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.company}
-            />
+        <div className="form__wrapper">
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+            validateOnBlur={true}
+            className="form"
+          >
+            {(props) => (
+              <Form className="form">
+                {props.errors.name && (
+                  <div id="feedback">{props.errors.name}</div>
+                )}
+                <label htmlFor="email">
+                  <span>Email*: </span>
+                  <Field
+                    id="email"
+                    name="email"
+                    type="email"
+                    disabled={emailSent}
+                    onBlur={props.handleBlur}
+                  />
+                  {props.touched.email && props.errors.email && (
+                    <div className="form__errors">{props.errors.email}</div>
+                  )}
+                </label>
+                <label htmlFor="name">
+                  <span>Name*: </span>
+                  <Field
+                    id="name"
+                    name="name"
+                    type="text"
+                    disabled={emailSent}
+                    onBlur={props.handleBlur}
+                  />
+                  {props.touched.name && props.errors.name && (
+                    <div className="form__errors">{props.errors.name}</div>
+                  )}
+                </label>
+                <label htmlFor="company">
+                  <span>Company*: </span>
+                  <Field
+                    id="company"
+                    name="company"
+                    type="text"
+                    onBlur={props.handleBlur}
+                    disabled={emailSent}
+                  />
 
-            {formik.touched.company && formik.errors.company ? (
-              <div>{formik.errors.company}</div>
-            ) : null}
-          </label>
-          <button type="submit" className="button">
-            Submit
-          </button>
-          <div className="space--bottom-2" />
-          <span>Do you already have an account? Go to </span>
-          <Link to="/login">login</Link>
-        </form>
-        {emailSent && <div>Great, check your inbox to login!</div>}
+                  {props.touched.company && props.errors.company && (
+                    <div className="form__errors">{props.errors.company}</div>
+                  )}
+                </label>
+                <button type="submit" className="button" disabled={emailSent}>
+                  Submit
+                </button>
+              </Form>
+            )}
+          </Formik>
+        </div>
       </section>
     </div>
   );
