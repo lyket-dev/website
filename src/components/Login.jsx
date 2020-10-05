@@ -45,39 +45,37 @@ const Login = () => {
 
   return (
     <div className="page">
-      <section className="page__section">
-        <div className="form__wrapper">
-          <Formik
-            initialValues={{ email: "" }}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-            validateOnBlur={true}
-          >
-            {(props) => (
-              <Form className="form">
-                {props.errors.name && (
-                  <div id="feedback">{props.errors.name}</div>
+      <section className="page__section__center">
+        <Formik
+          initialValues={{ email: "" }}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+          validateOnBlur={true}
+        >
+          {(props) => (
+            <Form className="form">
+              {props.errors.name && (
+                <div id="feedback">{props.errors.name}</div>
+              )}
+              <label htmlFor="email">
+                <span>Email*: </span>
+                <Field
+                  id="email"
+                  name="email"
+                  type="email"
+                  disabled={emailSent}
+                  onBlur={props.handleBlur}
+                />
+                {props.touched.email && props.errors.email && (
+                  <div className="form__errors">{props.errors.email}</div>
                 )}
-                <label htmlFor="email">
-                  <span>Email*: </span>
-                  <Field
-                    id="email"
-                    name="email"
-                    type="email"
-                    disabled={emailSent}
-                    onBlur={props.handleBlur}
-                  />
-                  {props.touched.email && props.errors.email && (
-                    <div className="form__errors">{props.errors.email}</div>
-                  )}
-                </label>
-                <button type="submit" disabled={emailSent} className="button">
-                  Submit
-                </button>
-              </Form>
-            )}
-          </Formik>
-        </div>
+              </label>
+              <button type="submit" disabled={emailSent} className="button">
+                Submit
+              </button>
+            </Form>
+          )}
+        </Formik>
       </section>
     </div>
   );

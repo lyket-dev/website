@@ -1,11 +1,8 @@
 import React from "react";
 import useAsyncEffect from "../utils/useAsyncEffect";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetch as fetchCurrentUser,
-  update as updateUser,
-} from "../ducks/currentUser";
-import { Formik, Field, Form } from "formik";
+import { fetch as fetchCurrentUser } from "../ducks/currentUser";
+// import { Formik, Field, Form } from "formik";
 
 export default function UserSettings() {
   const dispatch = useDispatch();
@@ -22,14 +19,14 @@ export default function UserSettings() {
     await dispatch(fetchCurrentUser());
   }, []);
 
-  const handleSubmit = async (values) => {
-    try {
-      await dispatch(updateUser(values));
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  };
+  // const handleSubmit = async (values) => {
+  //   try {
+  //     await dispatch(updateUser(values));
+  //   } catch (error) {
+  //     console.error(error);
+  //     throw error;
+  //   }
+  // };
 
   if (!currentUser) {
     return <div className="page">Non trovo lo user </div>;
@@ -37,23 +34,26 @@ export default function UserSettings() {
 
   return (
     <div className="page">
-      <section className="page__section">
-        {currentUser.attributes.email}
-        <Formik
-          initialValues={{ recaptchaToken: "" }}
-          onSubmit={handleSubmit}
-          validateOnBlur={true}
-        >
-          {(props) => (
-            <Form>
-              {props.errors.name && (
-                <div id="feedback">{props.errors.name}</div>
-              )}
-              <Field type="text" name="recaptchaToken" />
-              <button type="submit">Submit</button>
-            </Form>
-          )}
-        </Formik>
+      <section className="page__section__center">
+        <h3 className="page__title">User settings</h3>
+        <div className="form">
+          <label>
+            <span>Email </span>
+            {currentUser.attributes.email}
+          </label>
+          <label>
+            <span>API token </span>
+            {currentUser.attributes.public_token}
+          </label>
+          <label>
+            <span>Allowed websites</span>
+            {currentUser.attributes.allow_list.join(", ")}
+          </label>
+          <label>
+            <span>ReCAPTCHA active</span>
+            {currentUser.attributes.recaptcha_active ? "true" : "false"}
+          </label>
+        </div>
       </section>
     </div>
   );

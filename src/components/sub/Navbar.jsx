@@ -8,16 +8,20 @@ export default function Navbar({ loggedIn }) {
   const renderLoggedMenuItems = () => {
     return loggedIn ? (
       <>
-        <li className="navbar__item">
-          <Link className="navbar__link" to="/dashboard">
-            Dashboard
-          </Link>
-        </li>
-        <li className="navbar__item">
-          <Link className="navbar__link" to="/user-settings">
-            Settings
-          </Link>
-        </li>
+        {false && (
+          <>
+            <li className="navbar__item">
+              <Link className="navbar__link" to="/user-settings">
+                Settings
+              </Link>
+            </li>
+            <li className="navbar__item">
+              <Link className="navbar__link" to="/dashboard">
+                Dashboard
+              </Link>
+            </li>
+          </>
+        )}
         <li className="navbar__item">
           <button onClick={() => dispatch(destroySession())} className="button">
             Log out

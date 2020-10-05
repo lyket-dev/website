@@ -2,6 +2,7 @@
   position: relative
   background-color: white
   +font-size(regular)
+  min-height: 70vh
 
 .page__section
   max-width: 840px
@@ -9,15 +10,11 @@
   +vertical-padding(2)
   +horizontal-padding(2)
 
-.page__section--center
-  @extend .page__section
-  text-align: center
-
 .page__title
   text-align: center
   max-width: 85%
   margin: 0 auto
-  +margin-bottom(1)
+  +margin-bottom(2)
   +font-size(alpha)
   font-weight: 900
 
@@ -33,6 +30,14 @@
   +margin-bottom(2)
   +font-size(regular)
   font-weight: regular
+
+.hynEYh
+  +center
+
+.page__section__center
+  +center
+  width: 90%
+  max-width: 600px
 
 @media only screen and (min-width: 1000px)
   .page

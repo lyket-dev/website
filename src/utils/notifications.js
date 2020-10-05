@@ -21,7 +21,7 @@ export function alert({ title, message }) {
   store.addNotification({
     title: title || "Operation failed",
     message,
-    type: "warning",
+    type: "danger",
     insert: "top",
     container: "top-right",
     animationIn: ["animate__animated", "animate__fadeIn"],
