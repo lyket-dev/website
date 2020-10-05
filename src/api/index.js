@@ -3,8 +3,8 @@ import {
   get as getRequest,
   put as putRequest,
   destroy as destroyRequest,
-} from "../utils/request";
-import config from "../config";
+} from "utils/request";
+import config from "config";
 
 function siteDomain() {
   return (
@@ -35,7 +35,7 @@ const wrapRequest = (fn) => {
       options.headers["X-Session-Id"] = sessionId;
     }
 
-    const baseUrl = config.apiBaseUrl || "http://localhost:3000";
+    const baseUrl = config.apiBaseUrl;
 
     return fn(baseUrl + path, ...requestArgs, options);
   };
