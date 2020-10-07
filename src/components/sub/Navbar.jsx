@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { destroySession } from "../../ducks/session";
+import { notice, alert } from "utils/notifications";
 
 export default function Navbar({ loggedIn }) {
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const handleDestroySession = useCallback(async () => {
+    try {
+      await dispatch(destroySession());
+      notice({ message: "You have successfully logged out!" });
+      history.push("/");
+    } catch (e) {
+      alert({ message: "Could not log out :(" });
+    }
+  }, [dispatch, history]);
+
   const renderLoggedMenuItems = () => {
     return loggedIn ? (
       <>
@@ -23,7 +37,7 @@ export default function Navbar({ loggedIn }) {
           </>
         )}
         <li className="navbar__item">
-          <button onClick={() => dispatch(destroySession())} className="button">
+          <button onClick={handleDestroySession} className="button">
             Log out
           </button>
         </li>

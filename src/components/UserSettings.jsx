@@ -29,7 +29,7 @@ export default function UserSettings() {
   // };
 
   if (!currentUser) {
-    return <div className="page">Non trovo lo user </div>;
+    return null;
   }
 
   return (
