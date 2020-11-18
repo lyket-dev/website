@@ -2,6 +2,7 @@ import React from "react";
 import useAsyncEffect from "../utils/useAsyncEffect";
 import { useDispatch, useSelector } from "react-redux";
 import { fetch as fetchCurrentUser } from "../ducks/currentUser";
+import { Page } from "components/sub/Page";
 // import { Formik, Field, Form } from "formik";
 
 export default function UserSettings() {
@@ -33,7 +34,7 @@ export default function UserSettings() {
   }
 
   return (
-    <div className="page">
+    <Page>
       <section className="page__section__center">
         <h3 className="page__title">User settings</h3>
         <div className="form">
@@ -55,6 +56,6 @@ export default function UserSettings() {
           </label>
         </div>
       </section>
-    </div>
+    </Page>
   );
 }

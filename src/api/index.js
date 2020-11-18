@@ -79,7 +79,7 @@ export function getButton(id) {
 }
 
 export function getButtons() {
-  return get("/buttons");
+  return get("/buttons/all");
 }
 
 export function updateButton(id, data) {

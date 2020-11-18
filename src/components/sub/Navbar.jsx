@@ -22,20 +22,16 @@ export default function Navbar({ loggedIn }) {
   const renderLoggedMenuItems = () => {
     return loggedIn ? (
       <>
-        {false && (
-          <>
-            <li className="navbar__item">
-              <Link className="navbar__link" to="/user-settings">
-                Settings
-              </Link>
-            </li>
-            <li className="navbar__item">
-              <Link className="navbar__link" to="/dashboard">
-                Dashboard
-              </Link>
-            </li>
-          </>
-        )}
+        <li className="navbar__item">
+          <Link className="navbar__link" to="/user-settings">
+            Settings
+          </Link>
+        </li>
+        <li className="navbar__item">
+          <Link className="navbar__link" to="/dashboard">
+            Dashboard
+          </Link>
+        </li>
         <li className="navbar__item">
           <button onClick={handleDestroySession} className="button">
             Log out
