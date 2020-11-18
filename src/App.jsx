@@ -43,6 +43,9 @@ const App = () => {
           <PublicRoute path="/privacy">
             <Privacy />
           </PublicRoute>
+          <PrivateRoute exact path="/user-settings">
+            <UserSettings />
+          </PrivateRoute>
           <Switch>
             <PrivateRoute exact path="/dashboard">
               <Dashboard />
@@ -51,10 +54,6 @@ const App = () => {
               <Dashboard />
             </PrivateRoute>
           </Switch>
-
-          <PrivateRoute exact path="/user-settings">
-            <UserSettings />
-          </PrivateRoute>
         </Switch>
       </Router>
     </div>
