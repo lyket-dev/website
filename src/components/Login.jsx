@@ -13,7 +13,7 @@ const Login = () => {
 
   useEffect(() => {
     if (session) {
-      history.push("/user-settings");
+      history.push("/dashboard");
     }
   }, [session, history]);
 

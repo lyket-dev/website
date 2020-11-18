@@ -20,11 +20,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   useAsyncEffect(async () => {
-    try {
-      await dispatch(fetchCurrentSession());
-    } catch (e) {
-      console.error(e);
-    }
+    await dispatch(fetchCurrentSession());
   }, []);
 
   return (
@@ -47,10 +43,16 @@ const App = () => {
           <PublicRoute path="/privacy">
             <Privacy />
           </PublicRoute>
-          <PrivateRoute path="/dashboard">
-            <Dashboard />
-          </PrivateRoute>
-          <PrivateRoute path="/user-settings">
+          <Switch>
+            <PrivateRoute exact path="/dashboard">
+              <Dashboard />
+            </PrivateRoute>
+            <PrivateRoute path="/dashboard/:namespace">
+              <Dashboard />
+            </PrivateRoute>
+          </Switch>
+
+          <PrivateRoute exact path="/user-settings">
             <UserSettings />
           </PrivateRoute>
         </Switch>
