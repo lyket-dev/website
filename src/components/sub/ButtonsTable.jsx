@@ -46,6 +46,11 @@ export default function ButtonsTable() {
         onSortColumn={handleSort}
       >
         <Column flexGrow={1}>
+          <HeaderCell>Type</HeaderCell>
+          <Cell dataKey="type" />
+        </Column>
+
+        <Column flexGrow={1}>
           <HeaderCell>Name</HeaderCell>
           <Cell dataKey="name" />
         </Column>
