@@ -20,7 +20,12 @@ const App = () => {
   const dispatch = useDispatch();
 
   useAsyncEffect(async () => {
-    await dispatch(fetchCurrentSession());
+    try {
+      await dispatch(fetchCurrentSession());
+    } catch (e) {
+      // ingoia l'errore se non autorizzato
+      console.error(e);
+    }
   }, []);
 
   return (
