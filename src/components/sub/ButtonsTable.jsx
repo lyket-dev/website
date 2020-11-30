@@ -39,9 +39,9 @@ export default function ButtonsTable() {
     <div>
       <h2 className="pane__title">{namespace || "All buttons"}</h2>
       <Table
-        data={sortByKey(buttons, "counter")}
+        data={sortByKey(buttons, "score")}
         autoHeight
-        sortColumn="counter"
+        sortColumn="score"
         defaultSortType="desc"
         onSortColumn={handleSort}
       >
@@ -57,7 +57,7 @@ export default function ButtonsTable() {
 
         <Column sortable flexGrow={1}>
           <HeaderCell>Counter</HeaderCell>
-          <Cell dataKey="counter" />
+          <Cell dataKey="score" />
         </Column>
       </Table>
     </div>
