@@ -9,9 +9,7 @@
   text-align: left
 
 .section__container
-  max-width: 840px
-  margin: 0 auto
-  padding: 50px 15px
+  +wrap
 
 .section__title
   max-width: 85%
@@ -76,10 +74,6 @@
 @media only screen and (min-width: 1000px)
   .section
     +font-size(gamma)
-
-  .section__container
-    padding: 100px 0
-    max-width: 950px
 
   .section__title
     +font-size(big)

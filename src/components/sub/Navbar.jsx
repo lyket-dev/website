@@ -55,13 +55,13 @@ export default function Navbar({ loggedIn }) {
   };
 
   return (
-    <ul className="navbar">
-      <li>
+    <div className="navbar">
+      <div>
         <Link className="navbar__logo" to="/">
           LYKET
         </Link>
-      </li>
-      <div className="navbar__container">{renderLoggedMenuItems()}</div>
-    </ul>
+      </div>
+      <ul className="navbar__container">{renderLoggedMenuItems()}</ul>
+    </div>
   );
 }

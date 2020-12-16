@@ -5,10 +5,8 @@
   min-height: 70vh
 
 .page__section
-  max-width: 840px
-  margin: 0 auto
+  +wrap
   +vertical-padding(2)
-  +horizontal-padding(2)
 
 .page__title
   text-align: center
@@ -31,23 +29,11 @@
   +font-size(regular)
   font-weight: regular
 
-.hynEYh
-  +center
-
-.page__section__center
-  +center
-  width: 90%
-  max-width: 600px
-
 @media only screen and (min-width: 1000px)
   .page
     +font-size(gamma)
     +vertical-margin(2)
-
-  .page__section
-    +horizontal-padding(0)
-    max-width: 950px
-
+      
   .page__title
     +font-size(big)
     +margin-bottom(4)

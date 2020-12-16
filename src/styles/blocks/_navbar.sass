@@ -1,11 +1,10 @@
 .navbar
-  +padding(1.5)
+  +wrap
   display: flex
   justify-content: space-between
   align-items: center
-  max-width: 950px
-  margin: 0 auto
   +font-size(smallprint)
+  +vertical-padding(.5)
 
 .navbar__logo
   font-size: 0
@@ -38,19 +37,13 @@
     transform: skewX(10deg)
     transition: $transition
     width: 0%
-
   &:hover
     &:after
       width: 100%
 
-@media only screen and (min-width: 1000px)
-  .navbar
-    +padding(2)
-    +font-size(regular)
-
 @media only screen and (min-width: 800px)
   .navbar__logo
-    +font-size(huge)
+    +font-size(alpha)
     width: auto
     height: auto
     text-decoration: none
