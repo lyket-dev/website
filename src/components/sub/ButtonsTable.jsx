@@ -31,28 +31,31 @@ export default function ButtonsTable() {
     }
   });
 
+  console.log(buttons);
+
   const handleSort = (key, sortType) => {
     return sortByKey(buttons, key, sortType);
   };
+
+  const NameCell = ({ rowData, ...props }) => (
+    <Cell {...props}>
+      {rowData.type}:{rowData.namespace}:{rowData.name}
+    </Cell>
+  );
 
   return (
     <div>
       <h2 className="pane__title">{namespace || "All buttons"}</h2>
       <Table
-        data={sortByKey(buttons, "score")}
+        data={buttons}
         autoHeight
         sortColumn="score"
         defaultSortType="desc"
         onSortColumn={handleSort}
       >
-        <Column flexGrow={1}>
-          <HeaderCell>Type</HeaderCell>
-          <Cell dataKey="type" />
-        </Column>
-
-        <Column flexGrow={1}>
+        <Column flexGrow={2}>
           <HeaderCell>Name</HeaderCell>
-          <Cell dataKey="name" />
+          <NameCell />
         </Column>
 
         <Column sortable flexGrow={1}>
