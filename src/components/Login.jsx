@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
+import { Page } from "components/sub/Page";
 import { useHistory } from "react-router-dom";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
@@ -44,40 +45,49 @@ const Login = () => {
   });
 
   return (
-    <div className="page">
-      <section className="page__section__center">
-        <Formik
-          initialValues={{ email: "" }}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-          validateOnBlur={true}
-        >
-          {(props) => (
-            <Form className="form">
-              {props.errors.name && (
-                <div id="feedback">{props.errors.name}</div>
+    <Page>
+      <section className="section">
+        <h3 className="section__title">Lyket Login</h3>
+        <div className="section__subtitle">
+          To login to Lyket please click on the Magic Link you received in your
+          inbox!
+        </div>
+        <div className="cards--center">
+          <div className="card">
+            <Formik
+              initialValues={{ email: "" }}
+              validationSchema={validationSchema}
+              onSubmit={handleSubmit}
+              validateOnBlur={true}
+            >
+              {(props) => (
+                <Form className="form">
+                  {props.errors.name && (
+                    <div id="feedback">{props.errors.name}</div>
+                  )}
+                  <label htmlFor="email">
+                    <span>Email*: </span>
+                    <Field
+                      id="email"
+                      name="email"
+                      type="email"
+                      disabled={emailSent}
+                      onBlur={props.handleBlur}
+                    />
+                    {props.touched.email && props.errors.email && (
+                      <div className="form__errors">{props.errors.email}</div>
+                    )}
+                  </label>
+                  <button type="submit" disabled={emailSent} className="button">
+                    Submit
+                  </button>
+                </Form>
               )}
-              <label htmlFor="email">
-                <span>Email*: </span>
-                <Field
-                  id="email"
-                  name="email"
-                  type="email"
-                  disabled={emailSent}
-                  onBlur={props.handleBlur}
-                />
-                {props.touched.email && props.errors.email && (
-                  <div className="form__errors">{props.errors.email}</div>
-                )}
-              </label>
-              <button type="submit" disabled={emailSent} className="button">
-                Submit
-              </button>
-            </Form>
-          )}
-        </Formik>
+            </Formik>
+          </div>
+        </div>
       </section>
-    </div>
+    </Page>
   );
 };
 

@@ -5,5 +5,5 @@ export function Page({ children }) {
 }
 
 export function Section({ children }) {
-  return <section className="page__section">{children}</section>;
+  return <section className="section">{children}</section>;
 }

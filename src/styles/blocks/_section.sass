@@ -1,75 +1,19 @@
 .section
   text-align: center
   position: relative
-  background-color: white
-  +font-size(regular)
-
-.section--left
-  @extend .section
-  text-align: left
-
-.section__container
   +wrap
 
 .section__title
+  +font-size(big)
+  font-weight: bold
+  +margin-bottom(4)
   max-width: 85%
   margin: 0 auto
-  +margin-bottom(1)
-  +font-size(alpha)
-  font-weight: 900
 
-.section__text
-  +margin-bottom(2)
-  +font-size(regular)
-  font-weight: regular
-
-.section__link
-  +margin-top(1)
-  display: inline-block
-  font-weight: bold
-  font-family: $heading-font-family
-  position: relative
-  text-decoration: none
-  z-index: 0
-  &:after
-    content: ''
-    display: block
-    background-color: $green
-    height: 30%
-    margin: 0 auto
-    position: absolute
-    left: 0
-    right: 0
-    bottom: 20%
-    z-index: -1
-    transform: skewX(10deg)
-    transition: $transition
-    width: 0%
-
-  &:hover
-    &:after
-      width: 100%
-
-.section__image
-  max-width: 50%
-
-.section__portrait
-  max-width: 50%
-  border-radius: 3px 50%
-
-.section--button
-  @extend .section
-  background-color: $button-color
-
-.section--primary
-  @extend .section
-  background-color: $primary-color
-  color: white
-
-.section--black
-  @extend .section
-  background-color: $base-body-color
-  color: white
+.section__subtitle
+  max-width: 85%
+  margin: 0 auto
+  +margin-bottom(4)
 
 @media only screen and (min-width: 1000px)
   .section

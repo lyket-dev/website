@@ -33,24 +33,33 @@ export default function Dashboard() {
         <Panes minSize={50}>
           <Menu>
             <>
-              <ul className="menu">
+              <p className="space__bottom-2 menu__item__label">Namespace</p>
+
+              <ul className="menu space__bottom-4">
                 <li className="menu__item">
                   <Folder />
-                  <Link to={`/dashboard`}>All</Link>
+                  <Link className="menu__item__label" to={`/dashboard`}>
+                    All
+                  </Link>
                 </li>
                 {namespaces.map((namespace) => {
                   const slug = namespace ? namespace : "no-namespace";
                   return (
                     <li key={slug} className="menu__item">
                       <Folder />
-                      <Link to={`/dashboard/${slug}`}>{slug}</Link>
+                      <Link
+                        className="menu__item__label"
+                        to={`/dashboard/${slug}`}
+                      >
+                        {slug}
+                      </Link>
                     </li>
                   );
                 })}
               </ul>
               <button className="menu__item" onClick={handleClick}>
                 <Refresh />
-                <p>Refresh buttons!</p>
+                <span className="menu__item__label">Refresh buttons!</span>
               </button>
             </>
           </Menu>

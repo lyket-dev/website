@@ -2,8 +2,12 @@ import React from "react";
 import useAsyncEffect from "../utils/useAsyncEffect";
 import { useDispatch, useSelector } from "react-redux";
 import { fetch as fetchCurrentUser } from "../ducks/currentUser";
+import { Link } from "react-router-dom";
 import { Page } from "components/sub/Page";
-// import { Formik, Field, Form } from "formik";
+import { ReactComponent as Key } from "assets/icons/outline/key.svg";
+import { ReactComponent as Mail } from "assets/icons/outline/mail.svg";
+import { ReactComponent as Shield } from "assets/icons/outline/shield-check.svg";
+import { ReactComponent as Check } from "assets/icons/outline/check.svg";
 
 export default function UserSettings() {
   const dispatch = useDispatch();
@@ -33,28 +37,61 @@ export default function UserSettings() {
     return null;
   }
 
+  const {
+    email,
+    public_token: publicToken,
+    recaptcha_active: recaptcha,
+    allow_list: allow,
+  } = currentUser.attributes;
+
+  const allowList =
+    allow.length > 0 ? allow.join(", ") : "All websites allowed";
+
   return (
     <Page>
-      <section className="page__section__center">
-        <h3 className="page__title">User settings</h3>
-        <div className="form">
-          <label>
-            <span>Email </span>
-            {currentUser.attributes.email}
-          </label>
-          <label>
-            <span>API token </span>
-            {currentUser.attributes.public_token}
-          </label>
-          <label>
-            <span>Allowed websites</span>
-            {currentUser.attributes.allow_list.join(", ")}
-          </label>
-          <label>
-            <span>ReCAPTCHA active</span>
-            {currentUser.attributes.recaptcha_active ? "true" : "false"}
-          </label>
+      <section className="section">
+        <h3 className="section__title">User settings</h3>
+        <div className="cards--center">
+          <div className="card">
+            <div className="card__label">{email}</div>
+            <ul className="menu">
+              <li className="menu__item space__bottom-2">
+                <Mail />
+                <span className="menu__item__label">Email: </span>
+                <span>{email}</span>
+              </li>
+              <li className="menu__item space__bottom-2">
+                <Key />
+                <span className="menu__item__label">API token: </span>
+                <span>{publicToken}</span>
+                <button
+                  className="menu__item__label"
+                  onClick={(e) => {
+                    e.preventDefault();
+
+                    navigator.clipboard.writeText(publicToken);
+                  }}
+                >
+                  Copy
+                </button>
+              </li>
+              <li className="menu__item space__bottom-2">
+                <Check />
+                <span className="menu__item__label">Allowed websites: </span>
+                <span>{allowList}</span>
+              </li>
+              <li className="menu__item">
+                <Shield />
+                <span className="menu__item__label">ReCAPTCHA active: </span>
+                <span>{recaptcha ? "true" : "false"}</span>
+              </li>
+            </ul>
+          </div>
         </div>
+        <div className="space__bottom-4" />
+        <Link className="button" to={`/dashboard`}>
+          Go to dashboard
+        </Link>
       </section>
     </Page>
   );

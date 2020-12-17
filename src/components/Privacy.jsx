@@ -3,7 +3,7 @@ import React from "react";
 export default function Privacy() {
   return (
     <div className="page">
-      <section className="page__section">
+      <section className="section">
         <div className="docs__markdown">
           <h1>Privacy Policy</h1>
           <p>
