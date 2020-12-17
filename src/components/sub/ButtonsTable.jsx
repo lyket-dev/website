@@ -5,7 +5,7 @@ import "rsuite-table/dist/css/rsuite-table.css";
 import { useParams } from "react-router-dom";
 import Cards from "components/sub/Cards";
 import humanizeString from "humanize-string";
-import { ReactComponent as Clap } from "assets/icons/outline/plus-circle.svg";
+import { ReactComponent as Clap } from "assets/icons/outline/hand.svg";
 import { ReactComponent as Heart } from "assets/icons/outline/heart.svg";
 import { ReactComponent as Thumb } from "assets/icons/outline/thumb-up.svg";
 
@@ -57,7 +57,8 @@ export default function ButtonsTable() {
 
   const NameCell = ({ rowData, ...props }) => (
     <Cell {...props}>
-      {rowData.type}:{rowData.namespace}:{rowData.name}
+      {rowData.namespace ? `${rowData.namespace}:` : ""}
+      {rowData.name}
     </Cell>
   );
 
@@ -74,12 +75,12 @@ export default function ButtonsTable() {
         defaultSortType="desc"
         onSortColumn={handleSort}
       >
-        <Column flexGrow={1}>
+        <Column flexGrow={0.3} minWidth={120}>
           <HeaderCell>Type</HeaderCell>
           <IconCell />
         </Column>
 
-        <Column flexGrow={2}>
+        <Column flexGrow={2} minWidth={400}>
           <HeaderCell>Name</HeaderCell>
           <NameCell />
         </Column>

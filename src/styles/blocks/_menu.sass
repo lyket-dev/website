@@ -1,12 +1,17 @@
 .menu
-  display: flex
-  justify-content: center
-  align-items: center
-  font-weight: bold
-  +margin-bottom(2)
-  span
-    +horizontal-margin(2)
+  +margin-bottom(4)
 
-@media only screen and (min-width: 1000px)
-  .menu
-    +margin-bottom(4)
+.menu__item
+  font-weight: 500
+  +font-size(regular)
+  display: flex
+  align-items: center
+  +margin-bottom(.5)
+  list-style: disc
+  svg
+    width: 24px
+    +margin-right(.5)
+  a, p
+    text-decoration: none
+    &:hover
+      text-decoration: underline

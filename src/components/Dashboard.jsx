@@ -7,6 +7,8 @@ import { Page, Section } from "components/sub/Page";
 import { Panes, Pane, Menu } from "components/sub/Panes";
 import ButtonsTable from "components/sub/ButtonsTable";
 import "rsuite-table/dist/css/rsuite-table.css";
+import { ReactComponent as Folder } from "assets/icons/outline/folder-open.svg";
+import { ReactComponent as Refresh } from "assets/icons/outline/refresh.svg";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
@@ -30,21 +32,27 @@ export default function Dashboard() {
       <Section>
         <Panes minSize={50}>
           <Menu>
-            <li>
-              <Link to={`/dashboard`}>All</Link>
-            </li>
-            {namespaces.map((namespace) => {
-              const slug = namespace ? namespace : "no-namespace";
-              return (
-                <li key={slug}>
-                  <Link to={`/dashboard/${slug}`}>{slug}</Link>
+            <>
+              <ul className="menu">
+                <li className="menu__item">
+                  <Folder />
+                  <Link to={`/dashboard`}>All</Link>
                 </li>
-              );
-            })}
-            <div className="space__bottom" />
-            <button className="button" onClick={handleClick}>
-              Refresh buttons!
-            </button>
+                {namespaces.map((namespace) => {
+                  const slug = namespace ? namespace : "no-namespace";
+                  return (
+                    <li key={slug} className="menu__item">
+                      <Folder />
+                      <Link to={`/dashboard/${slug}`}>{slug}</Link>
+                    </li>
+                  );
+                })}
+              </ul>
+              <button className="menu__item" onClick={handleClick}>
+                <Refresh />
+                <p>Refresh buttons!</p>
+              </button>
+            </>
           </Menu>
           <Pane>
             <ButtonsTable />
