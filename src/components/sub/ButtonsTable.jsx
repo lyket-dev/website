@@ -3,6 +3,17 @@ import { useSelector } from "react-redux";
 import { Table, Column, HeaderCell, Cell } from "rsuite-table";
 import "rsuite-table/dist/css/rsuite-table.css";
 import { useParams } from "react-router-dom";
+import Cards from "components/sub/Cards";
+import humanizeString from "humanize-string";
+import { ReactComponent as Clap } from "assets/icons/outline/plus-circle.svg";
+import { ReactComponent as Heart } from "assets/icons/outline/heart.svg";
+import { ReactComponent as Thumb } from "assets/icons/outline/thumb-up.svg";
+
+const icons = {
+  clap: <Clap className="card__icon" />,
+  like: <Heart className="card__icon" />,
+  updown: <Thumb className="card__icon" />,
+};
 
 const sortByKey = (items, key, type) => {
   if (type === "asc") {
@@ -31,11 +42,18 @@ export default function ButtonsTable() {
     }
   });
 
-  console.log(buttons);
-
   const handleSort = (key, sortType) => {
     return sortByKey(buttons, key, sortType);
   };
+
+  const IconCell = ({ rowData, ...props }) => (
+    <Cell {...props}>
+      <div className="flex">
+        {icons[rowData.type]}
+        <div>{rowData.type}</div>
+      </div>
+    </Cell>
+  );
 
   const NameCell = ({ rowData, ...props }) => (
     <Cell {...props}>
@@ -45,7 +63,10 @@ export default function ButtonsTable() {
 
   return (
     <div>
-      <h2 className="pane__title">{namespace || "All buttons"}</h2>
+      <h2 className="pane__title">
+        {namespace ? humanizeString(namespace) : "All buttons"}
+      </h2>
+      <Cards buttons={buttons} />
       <Table
         data={buttons}
         autoHeight
@@ -53,12 +74,22 @@ export default function ButtonsTable() {
         defaultSortType="desc"
         onSortColumn={handleSort}
       >
+        <Column flexGrow={1}>
+          <HeaderCell>Type</HeaderCell>
+          <IconCell />
+        </Column>
+
         <Column flexGrow={2}>
           <HeaderCell>Name</HeaderCell>
           <NameCell />
         </Column>
 
-        <Column sortable flexGrow={1}>
+        <Column>
+          <HeaderCell>Total Votes</HeaderCell>
+          <Cell dataKey="total_votes" />
+        </Column>
+
+        <Column sortable>
           <HeaderCell>Counter</HeaderCell>
           <Cell dataKey="score" />
         </Column>

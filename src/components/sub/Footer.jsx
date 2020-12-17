@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ReactComponent as Twitter } from "../../assets/twitter.svg";
+import { ReactComponent as Twitter } from "../../assets/icons/twitter.svg";
 
 export default function Footer() {
   return (
