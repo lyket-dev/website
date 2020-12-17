@@ -33,7 +33,7 @@ export default function Dashboard() {
         <Panes minSize={50}>
           <Menu>
             <>
-              <p className="space__bottom-2 menu__item__label">Namespace</p>
+              <p className="space__bottom-2 menu__item__label">Dashboard</p>
 
               <ul className="menu space__bottom-4">
                 <li className="menu__item">

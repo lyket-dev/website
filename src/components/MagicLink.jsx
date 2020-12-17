@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useHistory } from "react-router-dom";
+import { Page, Section } from "components/sub/Page";
 import { RingSpinner } from "react-spinners-kit";
 import { createSession } from "ducks/session";
 import useAsyncEffect from "utils/useAsyncEffect";
@@ -30,9 +31,11 @@ const MagicLink = () => {
   }, []);
 
   return (
-    <div className="page">
-      <RingSpinner size={100} color="#201335" />
-    </div>
+    <Page>
+      <Section center>
+        <RingSpinner size={100} color="#201335" />
+      </Section>
+    </Page>
   );
 };
 

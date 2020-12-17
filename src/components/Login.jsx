@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
-import { Page } from "components/sub/Page";
+import { Page, Section } from "components/sub/Page";
 import { useHistory } from "react-router-dom";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
@@ -46,11 +46,11 @@ const Login = () => {
 
   return (
     <Page>
-      <section className="section">
+      <Section>
         <h3 className="section__title">Lyket Login</h3>
         <div className="section__subtitle">
-          To login to Lyket please click on the Magic Link you received in your
-          inbox!
+          Once you hit submit Lyket will send a Magic Link to your inbox, click
+          on it to login!
         </div>
         <div className="cards--center">
           <div className="card">
@@ -86,7 +86,7 @@ const Login = () => {
             </Formik>
           </div>
         </div>
-      </section>
+      </Section>
     </Page>
   );
 };

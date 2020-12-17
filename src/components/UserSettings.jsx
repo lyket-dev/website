@@ -2,12 +2,12 @@ import React from "react";
 import useAsyncEffect from "../utils/useAsyncEffect";
 import { useDispatch, useSelector } from "react-redux";
 import { fetch as fetchCurrentUser } from "../ducks/currentUser";
-import { Link } from "react-router-dom";
-import { Page } from "components/sub/Page";
+import { Page, Section } from "components/sub/Page";
 import { ReactComponent as Key } from "assets/icons/outline/key.svg";
 import { ReactComponent as Mail } from "assets/icons/outline/mail.svg";
 import { ReactComponent as Shield } from "assets/icons/outline/shield-check.svg";
 import { ReactComponent as Check } from "assets/icons/outline/check.svg";
+import { ReactComponent as Copy } from "assets/icons/outline/duplicate.svg";
 
 export default function UserSettings() {
   const dispatch = useDispatch();
@@ -49,7 +49,7 @@ export default function UserSettings() {
 
   return (
     <Page>
-      <section className="section">
+      <Section>
         <h3 className="section__title">User settings</h3>
         <div className="cards--center">
           <div className="card">
@@ -72,7 +72,7 @@ export default function UserSettings() {
                     navigator.clipboard.writeText(publicToken);
                   }}
                 >
-                  Copy
+                  <Copy />
                 </button>
               </li>
               <li className="menu__item space__bottom-2">
@@ -88,11 +88,7 @@ export default function UserSettings() {
             </ul>
           </div>
         </div>
-        <div className="space__bottom-4" />
-        <Link className="button" to={`/dashboard`}>
-          Go to dashboard
-        </Link>
-      </section>
+      </Section>
     </Page>
   );
 }

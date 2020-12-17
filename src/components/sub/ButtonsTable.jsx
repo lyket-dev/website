@@ -63,7 +63,7 @@ export default function ButtonsTable() {
   );
 
   return (
-    <div>
+    <>
       <h2 className="pane__title">
         {namespace ? humanizeString(namespace) : "All buttons"}
       </h2>
@@ -80,7 +80,7 @@ export default function ButtonsTable() {
           <IconCell />
         </Column>
 
-        <Column flexGrow={2} minWidth={400}>
+        <Column flexGrow={2} minWidth={300}>
           <HeaderCell>Name</HeaderCell>
           <NameCell />
         </Column>
@@ -95,6 +95,6 @@ export default function ButtonsTable() {
           <Cell dataKey="score" />
         </Column>
       </Table>
-    </div>
+    </>
   );
 }
