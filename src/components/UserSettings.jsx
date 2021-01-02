@@ -89,6 +89,67 @@ export default function UserSettings() {
           </div>
         </div>
       </Section>
+      <Section>
+        <h3 className="section__title">What to do now?</h3>
+        <div className="cards--multi">
+          <div className="card">
+            <div className="card__label">React</div>
+            <p className="card__text">
+              If you use React you can install our library
+            </p>
+            <code>
+              <pre>npm install @lyket/react</pre>
+            </code>
+            <code>
+              <pre>yarn add @lyket/react</pre>
+            </code>
+            <p className="card__text">
+              Copy your API key to configure the Provider top-level
+            </p>
+            <code>
+              <pre>{`import { Provider } from '@lyket/react';
+
+ReactDOM.render(
+  <Provider apiKey="${publicToken}">
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);`}</pre>
+            </code>
+            <span>Follow the </span>
+            <a
+              href="https://lyket.dev/docs/react"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              official React documentation
+            </a>
+            <span> to start creating buttons</span>
+          </div>
+          <div className="card">
+            <div className="card__label">HTML</div>
+            <p className="card__text">
+              If you want to use our HTML embeddable widget you can do it by
+              importing Lyket top-level providing your API key
+            </p>
+            <code>
+              <pre>{`<script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=${publicToken}"></script>
+`}</pre>
+            </code>
+            <div className="card__text">
+              <span>Follow the </span>
+              <a
+                href="https://lyket.dev/docs/widget"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                official Widget documentation
+              </a>
+              <span> to start creating buttons</span>
+            </div>
+          </div>
+        </div>
+      </Section>
     </Page>
   );
 }

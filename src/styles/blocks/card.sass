@@ -10,8 +10,19 @@
   @extend .cards
   justify-content: center
   height: auto
+
+.cards--multi
+  @extend .cards
+  height: auto
+  align-items: baseline
   .card
-    +padding(6)
+    flex: 1
+    +horizontal-margin(2)
+    &first-child
+      +margin-right(0)
+    &last-child
+      +margin-left(0)
+
 
 .card__container
   +center
@@ -34,6 +45,7 @@
   height: 100%
   box-shadow: $shadow
   max-width: 60%
+  +font-size(regular)
 
 .card__bigtext
   +font-size(huge)
@@ -41,6 +53,11 @@
   text-align: center
 
 .card__text
+  +font-size(regular)
+  +margin-bottom(1)
+
+pre
+  +margin-bottom(1)
   +font-size(smallprint)
 
 .card__bullet
@@ -69,6 +86,10 @@
     display: block
     height: auto
 
+  .cards--multi
+    .card
+      +horizontal-margin(0)
+        
   .card
     min-height: 200px
     width: 100%
