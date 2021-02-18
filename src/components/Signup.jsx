@@ -48,7 +48,7 @@ export default function Signup() {
     name: "",
     company: "",
     tech: "",
-    website: "",
+    allow_list: "",
   };
 
   const validationSchema = Yup.object({
@@ -56,7 +56,7 @@ export default function Signup() {
     name: Yup.string().required("Required"),
     company: Yup.string().max(20, "Must be 20 characters or less"),
     tech: Yup.string().required("Required"),
-    website: Yup.string().url("Must be a valid url"),
+    allow_list: Yup.string().url("Must be a valid url"),
   });
 
   return (
@@ -128,21 +128,21 @@ export default function Signup() {
                   <div className="form__errors">{props.errors.company}</div>
                 )}
                 <div className="form__row">
-                  <label htmlFor="website">Website: </label>
+                  <label htmlFor="allow_list">Allowed websites: </label>
                   <Field
-                    id="website"
-                    name="website"
+                    id="allow_list"
+                    name="allow_list"
                     type="text"
                     placeholder="https://example.com"
                     onBlur={props.handleBlur}
                     disabled={emailSent}
                   />
                 </div>
-                {props.touched.website && props.errors.website && (
-                  <div className="form__errors">{props.errors.website}</div>
+                {props.touched.allow_list && props.errors.allow_list && (
+                  <div className="form__errors">{props.errors.allow_list}</div>
                 )}
                 <div className="form__row">
-                  <label htmlFor="tech">Tech *:</label>
+                  <label htmlFor="tech">Tech*:</label>
                   <Field
                     type="text"
                     name="tech"

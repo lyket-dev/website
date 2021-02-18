@@ -45,7 +45,7 @@ export default function SettingsForm({ onClose }) {
       .required("Required")
       .max(25, "Must be 25 characters or less"),
     company: Yup.string().max(20, "Must be 20 characters or less"),
-    recaptcha_secret: Yup.string().required("Required"),
+    recaptcha_secret: Yup.string(),
     allow_list: Yup.string(),
   });
 
