@@ -1,0 +1,54 @@
+.window
+  margin: 0 auto
+
+.window__container
+  +center
+
+.window__label
+  +center-horizontally
+  font-size: 12px
+  background-color: rgba($raspberry, 0.6)
+  border-radius: 20px
+  font-weight: bold
+  +vertical-padding(.2)
+  +horizontal-padding(1)
+  top: -12px
+
+.window
+  position: relative
+  min-width: 40%
+  border-radius: 5px
+  +padding(6)
+  box-shadow: $shadow
+  max-width: 60%
+  +font-size(regular)
+
+.window__bigtext
+  +font-size(huge)
+  font-weight: bold
+  text-align: center
+
+.window__text
+  +font-size(regular)
+  +margin-bottom(4)
+  font-weight: 500
+
+.window__icon
+  +margin-right(.5)
+  width: 24px
+  border-radius: 20px
+
+.window__mini
+  font-size: 10px
+
+
+@media only screen and (max-width: 700px)
+  .window
+    min-height: 200px
+    width: 100%
+    +margin-bottom(4)
+    +padding(4)
+    max-width: none
+
+  .window
+    +padding(4)

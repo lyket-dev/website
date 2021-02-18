@@ -63,106 +63,103 @@ export default function Signup() {
     <Page>
       <section className="section">
         <h3 className="section__title">Signup to Lyket</h3>
-        <div className="cards--center">
-          <div className="card">
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={handleSubmit}
-              validateOnBlur={true}
-              className="form"
-            >
-              {(props) => (
-                <Form className="form">
-                  <label htmlFor="email">
-                    <span>Email*: </span>
-                    <Field
-                      id="email"
-                      name="email"
-                      type="email"
-                      placeholder="myemail@example.com"
-                      disabled={emailSent}
-                      onBlur={props.handleBlur}
-                    />
-                    {props.touched.email && props.errors.email && (
-                      <div className="form__errors">{props.errors.email}</div>
-                    )}
-                  </label>
-                  <label htmlFor="name">
-                    <span>Name*: </span>
-                    <Field
-                      id="name"
-                      name="name"
-                      type="text"
-                      disabled={emailSent}
-                      onBlur={props.handleBlur}
-                    />
-                    {props.touched.name && props.errors.name && (
-                      <div className="form__errors">{props.errors.name}</div>
-                    )}
-                  </label>
-                  <label htmlFor="company">
-                    <span>Company: </span>
-                    <Field
-                      id="company"
-                      name="company"
-                      type="text"
-                      onBlur={props.handleBlur}
-                      disabled={emailSent}
-                    />
-
-                    {props.touched.company && props.errors.company && (
-                      <div className="form__errors">{props.errors.company}</div>
-                    )}
-                  </label>
-                  <label htmlFor="website">
-                    <span>Website: </span>
-                    <Field
-                      id="website"
-                      name="website"
-                      type="text"
-                      placeholder="https://example.com"
-                      onBlur={props.handleBlur}
-                      disabled={emailSent}
-                    />
-                    {props.touched.website && props.errors.website && (
-                      <div className="form__errors">{props.errors.website}</div>
-                    )}
-                  </label>
-                  <label htmlFor="tech">
-                    <span>Tech*:</span>
-                    <Field
-                      type="text"
-                      name="tech"
-                      id="tech"
-                      as="select"
-                      onBlur={props.handleBlur}
-                      disabled={emailSent}
-                    >
-                      <option value="">Choose one</option>
-                      <option value="react">ReactJS</option>
-                      <option value="next">Next.js</option>
-                      <option value="gatsby">Gatsby</option>
-                      <option value="reactStatic">React Static</option>
-                      <option value="html">Simple HTML</option>
-                      <option value="wordpress">Wordpress</option>
-                      <option value="builder">
-                        Website Builder (Webflow, Carrd, Wix, Strikingly...)
-                      </option>
-                      <option value="VueJS">VueJS</option>
-                      <option value="vanilla">Vanilla JS</option>
-                      <option value="hexo">Hexo JS</option>
-                      <option value="idk">I don't know :)</option>
-                      <option value="other">Other</option>
-                    </Field>
-                  </label>
-                  <button type="submit" className="button" disabled={emailSent}>
-                    Submit
-                  </button>
-                </Form>
-              )}
-            </Formik>
-          </div>
+        <div className="window">
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+            validateOnBlur={true}
+            className="form"
+          >
+            {(props) => (
+              <Form className="form">
+                <div className="form__row">
+                  <label htmlFor="email">Email*:</label>
+                  <Field
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="myemail@example.com"
+                    disabled={emailSent}
+                    onBlur={props.handleBlur}
+                  />
+                </div>
+                {props.touched.email && props.errors.email && (
+                  <div className="form__errors">{props.errors.email}</div>
+                )}
+                <div className="form__row">
+                  <label htmlFor="name">Name*: </label>
+                  <Field
+                    id="name"
+                    name="name"
+                    type="text"
+                    disabled={emailSent}
+                    onBlur={props.handleBlur}
+                  />
+                </div>
+                {props.touched.name && props.errors.name && (
+                  <div className="form__errors">{props.errors.name}</div>
+                )}
+                <div className="form__row">
+                  <label htmlFor="company">Company: </label>
+                  <Field
+                    id="company"
+                    name="company"
+                    type="text"
+                    onBlur={props.handleBlur}
+                    disabled={emailSent}
+                  />
+                </div>
+                {props.touched.company && props.errors.company && (
+                  <div className="form__errors">{props.errors.company}</div>
+                )}
+                <div className="form__row">
+                  <label htmlFor="website">Website: </label>
+                  <Field
+                    id="website"
+                    name="website"
+                    type="text"
+                    placeholder="https://example.com"
+                    onBlur={props.handleBlur}
+                    disabled={emailSent}
+                  />
+                </div>
+                {props.touched.website && props.errors.website && (
+                  <div className="form__errors">{props.errors.website}</div>
+                )}
+                <div className="form__row">
+                  <label htmlFor="tech">Tech *:</label>
+                  <Field
+                    type="text"
+                    name="tech"
+                    id="tech"
+                    as="select"
+                    onBlur={props.handleBlur}
+                    disabled={emailSent}
+                  >
+                    <option value="">Choose one</option>
+                    <option value="react">ReactJS</option>
+                    <option value="next">Next.js</option>
+                    <option value="gatsby">Gatsby</option>
+                    <option value="reactStatic">React Static</option>
+                    <option value="html">Simple HTML</option>
+                    <option value="wordpress">Wordpress</option>
+                    <option value="builder">
+                      Website Builder (Webflow, Carrd, Wix, Strikingly...)
+                    </option>
+                    <option value="VueJS">VueJS</option>
+                    <option value="vanilla">Vanilla JS</option>
+                    <option value="hexo">Hexo JS</option>
+                    <option value="idk">I don't know :)</option>
+                    <option value="other">Other</option>
+                  </Field>
+                </div>
+                <button type="submit" className="button" disabled={emailSent}>
+                  Submit
+                </button>
+              </Form>
+            )}
+          </Formik>
         </div>
       </section>
     </Page>

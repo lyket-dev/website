@@ -48,43 +48,38 @@ const Login = () => {
     <Page>
       <Section>
         <h3 className="section__title">Lyket Login</h3>
-        <div className="section__subtitle">
-          Once you hit submit Lyket will send a Magic Link to your inbox, click
-          on it to login!
-        </div>
-        <div className="cards--center">
-          <div className="card">
-            <Formik
-              initialValues={{ email: "" }}
-              validationSchema={validationSchema}
-              onSubmit={handleSubmit}
-              validateOnBlur={true}
-            >
-              {(props) => (
-                <Form className="form">
-                  {props.errors.name && (
-                    <div id="feedback">{props.errors.name}</div>
-                  )}
-                  <label htmlFor="email">
-                    <span>Email*: </span>
-                    <Field
-                      id="email"
-                      name="email"
-                      type="email"
-                      disabled={emailSent}
-                      onBlur={props.handleBlur}
-                    />
-                    {props.touched.email && props.errors.email && (
-                      <div className="form__errors">{props.errors.email}</div>
-                    )}
-                  </label>
-                  <button type="submit" disabled={emailSent} className="button">
-                    Submit
-                  </button>
-                </Form>
-              )}
-            </Formik>
+        <div className="window">
+          <div className="window__text">
+            Enter your email and we will send you a Magic Link to your inbox.
+            Click on it to login!
           </div>
+          <Formik
+            initialValues={{ email: "" }}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+            validateOnBlur={true}
+          >
+            {(props) => (
+              <Form className="form">
+                <div className="form__row">
+                  <label htmlFor="email">Email*: </label>
+                  <Field
+                    id="email"
+                    name="email"
+                    type="email"
+                    disabled={emailSent}
+                    onBlur={props.handleBlur}
+                  />
+                </div>
+                {props.touched.email && props.errors.email && (
+                  <div className="form__errors">{props.errors.email}</div>
+                )}
+                <button type="submit" disabled={emailSent} className="button">
+                  Submit
+                </button>
+              </Form>
+            )}
+          </Formik>
         </div>
       </Section>
     </Page>

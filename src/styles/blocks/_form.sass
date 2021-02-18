@@ -6,19 +6,17 @@
 
   label
     display: block
-    +margin-bottom(2)
-    span
-      text-align: left
-      font-weight: bold
-      width: 23%
-      display: block
+    text-align: left
+    font-weight: bold
+    flex: 1
+    display: block
 
   input, select
     position: relative
     border: none
     border-radius: 0
     background-color: #fff
-    padding: 0.7rem 0
+    padding: 0.4rem 0
     width: 100%
 
   input
@@ -32,10 +30,18 @@
   button
     display: block
     margin: 0 auto
+    +margin-top(4)
 
 .form__errors
   +font-size(smallprint)
   color: red
+  font-weight: normal
+  text-align: end
+
+.form__row
+  display: flex
+  align-items: flex-end
+  +margin-bottom(2)
 
 @media only screen and (min-width: 500px)
   .form
@@ -44,4 +50,4 @@
         display: inline-block
 
     input, select
-      width: 60%
+      width: 70%
