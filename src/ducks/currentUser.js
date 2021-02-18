@@ -9,7 +9,8 @@ export const update = createAsyncAction("user/update", updateCurrentUser);
 
 export default createReducer(
   {
-    [fetch.receive]: (state, { response }) => response.data,
+    [fetch.receive]: (_state, { response }) => response.data,
+    [update.receive]: (_state, { response }) => response.data,
   },
   null
 );

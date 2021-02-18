@@ -50,7 +50,7 @@ export function fetchCurrentUser() {
   return get("/current-user");
 }
 
-export function updateCurrentUser({ payload }) {
+export function updateCurrentUser(payload) {
   return put("/current-user", payload);
 }
 

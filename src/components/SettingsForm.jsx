@@ -14,10 +14,18 @@ export default function SettingsForm({ onClose }) {
 
   const handleSubmit = async (values) => {
     try {
-      await dispatch(updateUser(values));
+      const newValues = {
+        ...values,
+        allow_list:
+          values.allow_list &&
+          values.allow_list.split(",").map((e) => e.trim()),
+      };
+
+      await dispatch(updateUser(newValues));
+
       notice({ message: "User updated successfully!" });
+      onClose();
     } catch (error) {
-      console.error(error);
       alert({
         message: error && error.errors[0] && error.errors[0].message,
       });
@@ -28,8 +36,8 @@ export default function SettingsForm({ onClose }) {
   const initialValues = {
     name: currentUser.name,
     company: currentUser.company,
-    website: currentUser.allow_list,
-    recaptchaToken: "",
+    allow_list: currentUser.allow_list.join(", "),
+    recaptcha_secret: currentUser.recaptcha_secret,
   };
 
   const validationSchema = Yup.object({
@@ -37,8 +45,8 @@ export default function SettingsForm({ onClose }) {
       .required("Required")
       .max(25, "Must be 25 characters or less"),
     company: Yup.string().max(20, "Must be 20 characters or less"),
-    recaptchaToken: Yup.string().required("Required"),
-    website: Yup.string().url("Must be a valid url"),
+    recaptcha_secret: Yup.string().required("Required"),
+    allow_list: Yup.string(),
   });
 
   return (
@@ -47,7 +55,6 @@ export default function SettingsForm({ onClose }) {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
       validateOnBlur={true}
-      className="form"
     >
       {(props) => (
         <Form className="form">
@@ -66,30 +73,34 @@ export default function SettingsForm({ onClose }) {
             <div className="form__errors">{props.errors.company}</div>
           )}
           <div className="form__row">
-            <label htmlFor="website">Website:</label>
+            <label htmlFor="allow_list">Allowed websites:</label>
             <Field
-              id="website"
-              name="website"
+              id="allow_list"
+              name="allow_list"
               type="text"
-              placeholder="https://example.com"
+              placeholder="https://example.com, https://another.com"
             />
           </div>
-          {props.touched.website && props.errors.website && (
-            <div className="form__errors">{props.errors.website}</div>
+          {props.touched.allow_list && props.errors.allow_list && (
+            <div className="form__errors">{props.errors.allow_list}</div>
           )}
           <div className="form__row">
-            <label htmlFor="recaptchaToken">Recaptcha secret token:</label>
+            <label htmlFor="recaptcha_secret">reCAPTCHA secret token:</label>
             <Field
-              id="recaptchaToken"
-              name="recaptchaToken"
+              id="recaptcha_secret"
+              name="recaptcha_secret"
               type="text"
             ></Field>
           </div>
-          <div className="flex">
+          <div className="flex space__top-4">
             <button className="button" onClick={onClose}>
               Cancel
             </button>
-            <button type="submit" className="button">
+            <button
+              type="submit"
+              className="button--cta"
+              disabled={!props.dirty}
+            >
               Submit
             </button>
           </div>

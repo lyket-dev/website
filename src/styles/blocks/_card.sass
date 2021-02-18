@@ -6,11 +6,6 @@
   height: 200px
   position: relative
 
-.cards--center
-  @extend .cards
-  justify-content: center
-  height: auto
-
 .cards--multi
   @extend .cards
   height: auto
@@ -56,6 +51,12 @@
   +font-size(regular)
   +margin-bottom(1)
 
+.card__title
+  +font-size(regular)
+  font-weight: bold
+  +margin-bottom(.5)
+
+
 pre
   +margin-bottom(1)
   +font-size(smallprint)
@@ -89,7 +90,7 @@ pre
   .cards--multi
     .card
       +horizontal-margin(0)
-        
+
   .card
     min-height: 200px
     width: 100%
@@ -102,7 +103,3 @@ pre
     min-width: none
     text-align: center
     +margin-bottom(4)
-
-  .cards--center
-    .card
-      +padding(4)

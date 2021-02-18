@@ -9,6 +9,8 @@ import { ReactComponent as Mail } from "assets/icons/outline/mail.svg";
 import { ReactComponent as Shield } from "assets/icons/outline/shield-check.svg";
 import { ReactComponent as Check } from "assets/icons/outline/check.svg";
 import { ReactComponent as Copy } from "assets/icons/outline/duplicate.svg";
+import { ReactComponent as User } from "assets/icons/outline/user.svg";
+import { ReactComponent as Building } from "assets/icons/outline/office-building.svg";
 
 export default function UserSettings() {
   const dispatch = useDispatch();
@@ -32,6 +34,8 @@ export default function UserSettings() {
 
   const {
     email,
+    name,
+    company,
     public_token: publicToken,
     recaptcha_active: recaptcha,
     allow_list: allow,
@@ -43,6 +47,16 @@ export default function UserSettings() {
   const renderMenu = () => {
     return (
       <ul className="menu">
+        <li className="menu__item space__bottom-2">
+          <User />
+          <span className="menu__item__label">Name: </span>
+          <span>{name}</span>
+        </li>
+        <li className="menu__item space__bottom-2">
+          <Building />
+          <span className="menu__item__label">Company: </span>
+          <span>{company}</span>
+        </li>
         <li className="menu__item space__bottom-2">
           <Mail />
           <span className="menu__item__label">Email: </span>
@@ -73,6 +87,11 @@ export default function UserSettings() {
           <span className="menu__item__label">ReCAPTCHA active: </span>
           <span>{recaptcha ? "true" : "false"}</span>
         </li>
+        <div className="center space__top-4">
+          <button className="button" onClick={() => setEditMode(true)}>
+            Edit settings
+          </button>
+        </div>
       </ul>
     );
   };
@@ -80,11 +99,18 @@ export default function UserSettings() {
   return (
     <Page>
       <Section>
-        <h3 className="section__title">User settings</h3>
+        <h1 className="section__title">User settings</h1>
         <div className="window space__bottom-6">
           <div className="window__label">{email}</div>
           {!editMode && renderMenu()}
-          {editMode && <SettingsForm onClose={() => setEditMode(false)} />}
+          {editMode && (
+            <SettingsForm
+              onClose={(e) => {
+                e && e.preventDefault();
+                setEditMode(false);
+              }}
+            />
+          )}
         </div>
       </Section>
       <Section>
