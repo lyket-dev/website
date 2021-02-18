@@ -33,7 +33,9 @@ const MagicLink = () => {
   return (
     <Page>
       <Section center>
-        <RingSpinner size={100} color="#201335" />
+        <div className="window">
+          <RingSpinner size={100} color="#201335" />
+        </div>
       </Section>
     </Page>
   );

@@ -62,7 +62,21 @@ export default function Signup() {
   return (
     <Page>
       <section className="section">
-        <h3 className="section__title">Signup to Lyket</h3>
+        <p className="card__bigtext">
+          Signup{" "}
+          <span aria-label="like" role="img">
+            👍
+          </span>
+          <span aria-label="clap" role="img">
+            👏
+          </span>
+          <span aria-label="Soon" role="img">
+            🔜
+          </span>
+          <span aria-label="Laptop" role="img">
+            💻
+          </span>
+        </p>
         <div className="window">
           <Formik
             initialValues={initialValues}
@@ -154,9 +168,11 @@ export default function Signup() {
                     <option value="other">Other</option>
                   </Field>
                 </div>
-                <button type="submit" className="button" disabled={emailSent}>
-                  Submit
-                </button>
+                <div className="center space__top-4">
+                  <button type="submit" className="button" disabled={emailSent}>
+                    Signup to Lyket!
+                  </button>
+                </div>
               </Form>
             )}
           </Formik>

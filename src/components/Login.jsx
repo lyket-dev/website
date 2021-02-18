@@ -47,11 +47,17 @@ const Login = () => {
   return (
     <Page>
       <Section>
-        <h3 className="section__title">Lyket Login</h3>
+        <p className="card__bigtext">
+          Welcome back!{" "}
+          <span aria-label="Hi!" role="img">
+            🙌
+          </span>
+        </p>
         <div className="window">
           <div className="window__text">
-            Enter your email and we will send you a Magic Link to your inbox.
-            Click on it to login!
+            To login enter your email and we will send you a Magic Link to your
+            inbox. Click on it to login! If you cannot find the email, check in
+            the promotions tab.
           </div>
           <Formik
             initialValues={{ email: "" }}
@@ -74,9 +80,11 @@ const Login = () => {
                 {props.touched.email && props.errors.email && (
                   <div className="form__errors">{props.errors.email}</div>
                 )}
-                <button type="submit" disabled={emailSent} className="button">
-                  Submit
-                </button>
+                <div className="center space__top-4">
+                  <button type="submit" disabled={emailSent} className="button">
+                    Send me magic link!
+                  </button>
+                </div>
               </Form>
             )}
           </Formik>
