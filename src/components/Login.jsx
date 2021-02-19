@@ -55,9 +55,9 @@ const Login = () => {
         </p>
         <div className="window">
           <div className="window__text">
-            To login enter your email and we will send you a Magic Link to your
-            inbox. Click on it to login! If you cannot find the email, check in
-            the promotions tab.
+            To login enter your email and if you are already registered we will
+            send a Magic Link to your inbox. Just click on it to login! If you
+            cannot find the email, check in the promotions tab.
           </div>
           <Formik
             initialValues={{ email: "" }}
