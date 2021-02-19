@@ -4,6 +4,7 @@ import { update as updateUser } from "../ducks/currentUser";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import { notice, alert } from "utils/notifications";
+import omit from "object.omit";
 
 export default function SettingsForm({ onClose }) {
   const dispatch = useDispatch();
@@ -20,9 +21,13 @@ export default function SettingsForm({ onClose }) {
         allow_list: values.allow_list
           ? values.allow_list.split(",").map((e) => e.trim())
           : [],
+        max_sessions_per_ip: values.enable_max_sessions
+          ? values.max_sessions_per_ip
+          : null,
+        recaptcha_secret: values.recaptcha_secret || null,
       };
 
-      await dispatch(updateUser(newValues));
+      await dispatch(updateUser(omit(newValues, "enable_max_sessions")));
 
       notice({ message: "User updated successfully!" });
       onClose();
@@ -30,7 +35,6 @@ export default function SettingsForm({ onClose }) {
       alert({
         message: error && error.errors[0] && error.errors[0].message,
       });
-      throw error;
     }
   };
 
@@ -39,6 +43,8 @@ export default function SettingsForm({ onClose }) {
     company: currentUser.company || "",
     allow_list: currentUser.allow_list.join(", "),
     recaptcha_secret: currentUser.recaptcha_secret || "",
+    max_sessions_per_ip: currentUser.max_sessions_per_ip || "",
+    enable_max_sessions: !!currentUser.max_sessions_per_ip,
   };
 
   const validationSchema = Yup.object({
@@ -48,6 +54,14 @@ export default function SettingsForm({ onClose }) {
     company: Yup.string().max(20, "Must be 20 characters or less"),
     recaptcha_secret: Yup.string(),
     allow_list: Yup.string(),
+    enable_max_sessions: Yup.boolean(),
+    max_sessions_per_ip: Yup.number().when("enable_max_sessions", {
+      is: (value) => value === true,
+      then: Yup.number()
+        .required("If enabled this field is required")
+        .min(1, "Must be at least 1"),
+      otherwise: Yup.number(),
+    }),
   });
 
   return (
@@ -93,6 +107,28 @@ export default function SettingsForm({ onClose }) {
               type="text"
             ></Field>
           </div>
+          <div className="form__row">
+            <label htmlFor="max_sessions_per_ip">Max sessions per IP:</label>
+            <div className="form__row">
+              <Field
+                id="enable_max_sessions"
+                name="enable_max_sessions"
+                type="checkbox"
+              />
+              <Field
+                id="max_sessions_per_ip"
+                name="max_sessions_per_ip"
+                type="number"
+                disabled={!props.values.enable_max_sessions && "disabled"}
+              />
+            </div>
+          </div>
+          {props.touched.max_sessions_per_ip &&
+            props.errors.max_sessions_per_ip && (
+              <div className="form__errors">
+                {props.errors.max_sessions_per_ip}
+              </div>
+            )}
           <div className="flex space__top-4">
             <button className="button" onClick={onClose}>
               Cancel

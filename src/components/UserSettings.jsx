@@ -7,10 +7,11 @@ import { Page, Section } from "components/sub/Page";
 import { ReactComponent as Key } from "assets/icons/outline/key.svg";
 import { ReactComponent as Mail } from "assets/icons/outline/mail.svg";
 import { ReactComponent as Shield } from "assets/icons/outline/shield-check.svg";
-import { ReactComponent as Check } from "assets/icons/outline/check.svg";
+import { ReactComponent as Check } from "assets/icons/outline/badge-check.svg";
 import { ReactComponent as Copy } from "assets/icons/outline/duplicate.svg";
-import { ReactComponent as User } from "assets/icons/outline/user.svg";
+import { ReactComponent as User } from "assets/icons/outline/identification.svg";
 import { ReactComponent as Building } from "assets/icons/outline/office-building.svg";
+import { ReactComponent as Max } from "assets/icons/outline/lock-closed.svg";
 
 export default function UserSettings() {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ export default function UserSettings() {
     public_token: publicToken,
     recaptcha_active: recaptcha,
     allow_list: allow,
+    max_sessions_per_ip,
   } = currentUser.attributes;
 
   const allowList =
@@ -86,6 +88,15 @@ export default function UserSettings() {
           <Shield />
           <span className="menu__item__label">ReCAPTCHA active: </span>
           <span>{recaptcha ? "true" : "false"}</span>
+        </li>
+        <li className="menu__item space__bottom-2">
+          <Max />
+          <span className="menu__item__label">
+            Max number of sessions per IP:{" "}
+          </span>
+          <span>
+            {max_sessions_per_ip || "None, session IDS are not stored"}
+          </span>
         </li>
         <div className="center space__top-4">
           <button className="button" onClick={() => setEditMode(true)}>
