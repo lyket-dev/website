@@ -16,9 +16,10 @@ export default function SettingsForm({ onClose }) {
     try {
       const newValues = {
         ...values,
-        allow_list:
-          values.allow_list &&
-          values.allow_list.split(",").map((e) => e.trim()),
+        company: values.company || null,
+        allow_list: values.allow_list
+          ? values.allow_list.split(",").map((e) => e.trim())
+          : [],
       };
 
       await dispatch(updateUser(newValues));
@@ -35,9 +36,9 @@ export default function SettingsForm({ onClose }) {
 
   const initialValues = {
     name: currentUser.name,
-    company: currentUser.company,
+    company: currentUser.company || "",
     allow_list: currentUser.allow_list.join(", "),
-    recaptcha_secret: currentUser.recaptcha_secret,
+    recaptcha_secret: currentUser.recaptcha_secret || "",
   };
 
   const validationSchema = Yup.object({

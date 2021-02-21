@@ -22,7 +22,14 @@ export default function Signup() {
   const handleSubmit = useCallback(
     async (values) => {
       try {
-        await signupRequest(values);
+        const newValues = {
+          ...values,
+          allow_list: values.allow_list
+            ? values.allow_list.split(",").map((e) => e.trim())
+            : [],
+        };
+
+        await signupRequest(newValues);
         setEmailSent(true);
         notice({ message: "Check your inbox to login!" });
       } catch (error) {
@@ -56,7 +63,7 @@ export default function Signup() {
     name: Yup.string().required("Required"),
     company: Yup.string().max(20, "Must be 20 characters or less"),
     tech: Yup.string().required("Required"),
-    allow_list: Yup.string().url("Must be a valid url"),
+    allow_list: Yup.string(),
   });
 
   return (
