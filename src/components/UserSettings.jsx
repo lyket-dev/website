@@ -95,7 +95,8 @@ export default function UserSettings() {
             Max number of sessions per IP:{" "}
           </span>
           <span>
-            {max_sessions_per_ip || "None, session IDS are not stored"}
+            {max_sessions_per_ip ||
+              "None, accept an infinite number of sessions per IP"}
           </span>
         </li>
         <div className="center space__top-4">
