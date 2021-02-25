@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { update as updateUser } from "../ducks/currentUser";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
+import Tooltip from "./sub/Tooltip";
 import { notice, alert } from "utils/notifications";
-import omit from "object.omit";
 
 export default function SettingsForm({ onClose }) {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ export default function SettingsForm({ onClose }) {
         recaptcha_secret: values.recaptcha_secret || null,
       };
 
-      await dispatch(updateUser(omit(newValues, "enable_max_sessions")));
+      await dispatch(updateUser(newValues));
 
       notice({ message: "User updated successfully!" });
       onClose();
@@ -68,6 +68,7 @@ export default function SettingsForm({ onClose }) {
           <div className="form__row">
             <label htmlFor="name">Name*: </label>
             <Field id="name" name="name" type="text" />
+            <Tooltip id="name" message="How you want to be addressed :D" />
           </div>
           {props.touched.name && props.errors.name && (
             <div className="form__errors">{props.errors.name}</div>
@@ -75,6 +76,7 @@ export default function SettingsForm({ onClose }) {
           <div className="form__row">
             <label htmlFor="company">Company: </label>
             <Field id="company" name="company" type="text" />
+            <Tooltip id="company" message="The name of your business" />
           </div>
           {props.touched.company && props.errors.company && (
             <div className="form__errors">{props.errors.company}</div>
@@ -87,6 +89,10 @@ export default function SettingsForm({ onClose }) {
               type="text"
               placeholder="https://example.com, https://another.com"
             />
+            <Tooltip
+              id="allow-list"
+              message="Accept only requests coming from these domains. Separate domains using a comma"
+            />
           </div>
           {props.touched.allow_list && props.errors.allow_list && (
             <div className="form__errors">{props.errors.allow_list}</div>
@@ -98,6 +104,10 @@ export default function SettingsForm({ onClose }) {
               name="recaptcha_secret"
               type="text"
             ></Field>
+            <Tooltip
+              id="recaptcha"
+              message="To enable ReCAPTCHA insert your secret key here and configure Lyket's Provider in your buttons/script using the ReCAPTCHA site key"
+            />
           </div>
           <div className="form__row">
             <label htmlFor="max_sessions_per_ip">Max sessions per IP*:</label>
@@ -106,6 +116,10 @@ export default function SettingsForm({ onClose }) {
               name="max_sessions_per_ip"
               type="number"
               placeholder="3"
+            />
+            <Tooltip
+              id="form-max-sessions"
+              message="Every visitor gets an unique session ID assigned. To avoid misuse we enforce a maximum number of session IDs coming from the same IP."
             />
           </div>
           {props.touched.max_sessions_per_ip &&

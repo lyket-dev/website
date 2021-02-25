@@ -3,6 +3,7 @@ import useAsyncEffect from "../utils/useAsyncEffect";
 import { useDispatch, useSelector } from "react-redux";
 import { fetch as fetchCurrentUser } from "../ducks/currentUser";
 import SettingsForm from "./SettingsForm";
+import Tooltip from "./sub/Tooltip";
 import { Page, Section } from "components/sub/Page";
 import { ReactComponent as Key } from "assets/icons/outline/key.svg";
 import { ReactComponent as Mail } from "assets/icons/outline/mail.svg";
@@ -83,11 +84,19 @@ export default function UserSettings() {
           <Check />
           <span className="menu__item__label">Allowed websites: </span>
           <span>{allowList}</span>
+          <Tooltip
+            id="allow-list"
+            message="Accept only requests coming from these domains. If left blank, accept requests from all domains"
+          />
         </li>
         <li className="menu__item space__bottom-2">
           <Shield />
           <span className="menu__item__label">ReCAPTCHA active: </span>
           <span>{recaptcha ? "true" : "false"}</span>
+          <Tooltip
+            id="recaptcha"
+            message="To enable ReCAPTCHA insert your secret key here and configure Lyket's Provider in your buttons/script using the ReCAPTCHA site key"
+          />
         </li>
         <li className="menu__item space__bottom-2">
           <Max />
@@ -98,6 +107,10 @@ export default function UserSettings() {
             {max_sessions_per_ip ||
               "None, accept an infinite number of sessions per IP"}
           </span>
+          <Tooltip
+            id="max-sessions"
+            message="Every visitor gets an unique session ID assigned. To avoid misuse we enforce a maximum number of session IDs coming from the same IP."
+          />
         </li>
         <div className="center space__top-4">
           <button className="button" onClick={() => setEditMode(true)}>
