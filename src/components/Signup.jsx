@@ -24,6 +24,7 @@ export default function Signup() {
       try {
         const newValues = {
           ...values,
+          company: values.company || null,
           allow_list: values.allow_list
             ? values.allow_list.split(",").map((e) => e.trim())
             : [],
@@ -62,8 +63,8 @@ export default function Signup() {
     email: Yup.string().email("Invalid email address").required("Required"),
     name: Yup.string().required("Required"),
     company: Yup.string().max(20, "Must be 20 characters or less"),
-    tech: Yup.string().required("Required"),
     allow_list: Yup.string(),
+    tech: Yup.string().required("Required"),
   });
 
   return (
@@ -175,6 +176,9 @@ export default function Signup() {
                     <option value="other">Other</option>
                   </Field>
                 </div>
+                {props.touched.tech && props.errors.tech && (
+                  <div className="form__errors">{props.errors.tech}</div>
+                )}
                 <div className="center space__top-4">
                   <button type="submit" className="button" disabled={emailSent}>
                     Signup to Lyket!
