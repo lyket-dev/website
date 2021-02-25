@@ -39,6 +39,7 @@ export default function Signup() {
           error.errors &&
           error.errors.some((e) => e.code === "USER_REGISTERED")
         ) {
+          notice({ message: "User already registered!" });
           history.push("/login");
         } else {
           alert({
