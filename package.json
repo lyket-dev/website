@@ -33,6 +33,7 @@
     "react-scripts": "3.4.1",
     "react-spinners-kit": "^1.9.1",
     "react-split-pane": "^0.1.92",
+    "react-tooltip": "^4.2.14",
     "react-typist": "^2.0.5",
     "redux": "^4.0.5",
     "redux-act": "^1.8.0",

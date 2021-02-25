@@ -10,6 +10,8 @@
     font-weight: bold
     flex: 1
     display: block
+    padding-bottom: 0.4rem
+    +margin-right(.5)
 
   input, select
     position: relative
@@ -21,6 +23,8 @@
 
   input
     border-bottom: 1px dashed $base-body-color
+    &:disabled
+      color: $disabled-color
 
   textarea
     border: 1px solid $light-body-color
