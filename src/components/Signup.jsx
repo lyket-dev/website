@@ -49,7 +49,7 @@ export default function Signup() {
         }
       }
     },
-    [history]
+    [history, setEmailSent]
   );
 
   const initialValues = {
