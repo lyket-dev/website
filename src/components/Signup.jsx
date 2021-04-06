@@ -164,15 +164,18 @@ export default function Signup() {
                     <option value="react">ReactJS</option>
                     <option value="next">Next.js</option>
                     <option value="gatsby">Gatsby</option>
-                    <option value="reactStatic">React Static</option>
-                    <option value="html">Simple HTML</option>
+                    <option value="notion">Notion</option>
+                    <option value="html">HTML + JS</option>
+                    <option value="blogger">Blogger</option>
                     <option value="wordpress">Wordpress</option>
-                    <option value="builder">
-                      Website Builder (Webflow, Carrd, Wix, Strikingly...)
-                    </option>
+                    <option value="webflow">Webflow</option>
                     <option value="VueJS">VueJS</option>
-                    <option value="vanilla">Vanilla JS</option>
-                    <option value="hexo">Hexo JS</option>
+                    <option value="other_ssg">
+                      Other static site generator
+                    </option>
+                    <option value="ssaf">
+                      Server side application framework
+                    </option>
                     <option value="idk">I don't know :)</option>
                     <option value="other">Other</option>
                   </Field>
