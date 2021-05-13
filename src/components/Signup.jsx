@@ -6,6 +6,7 @@ import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import { signupRequest } from "../api";
 import { notice, alert } from "utils/notifications";
+import Tooltip from "./sub/Tooltip";
 
 export default function Signup() {
   const history = useHistory();
@@ -138,11 +139,15 @@ export default function Signup() {
                 )}
                 <div className="form__row">
                   <label htmlFor="allow_list">Allowed websites: </label>
+                  <Tooltip
+                    id="allow-list"
+                    message="Accept only requests coming from these domains. If left blank, accept requests from all domains. Separate domains with a comma"
+                  />
                   <Field
                     id="allow_list"
                     name="allow_list"
                     type="text"
-                    placeholder="https://example.com"
+                    placeholder="https://hello.com, https://hello.it"
                     onBlur={props.handleBlur}
                     disabled={emailSent}
                   />
