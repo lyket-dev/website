@@ -26,8 +26,8 @@ const Top = ({ three }) => {
           className="card__bullet"
           key={`${button.type}${button.namespace}${button.name}`}
         >
-          <span className="card__bullet__num">{index + 1}. </span>
-          <span>{button.name}</span>
+          <div className="card__bullet__num">{index + 1}. </div>
+          <span>{`${button.type}-buttons/${button.namespace}/${button.name}`}</span>
         </div>
       ))}
     </div>

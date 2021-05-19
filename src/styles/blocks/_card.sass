@@ -34,12 +34,12 @@
 
 .card
   position: relative
-  min-width: 30%
+  width: 32%
   border-radius: 5px
-  +padding(4)
+  +vertical-padding(4)
+  +horizontal-padding(2)
   height: 100%
   box-shadow: $shadow
-  max-width: 60%
   +font-size(regular)
 
 .card__bigtext
@@ -65,8 +65,12 @@ pre
 .card__bullet
   display: flex
   align-items: center
-  width: 100%
+  max-width: 100%
+  word-wrap: break-word
   +margin-bottom(1)
+  +font-size(smallprint)
+  line-height: 1.2
+
   &:last-child
     +margin-bottom(0)
 
