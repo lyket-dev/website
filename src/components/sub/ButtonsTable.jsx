@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Table, Column, HeaderCell, Cell } from "rsuite-table";
 import "rsuite-table/dist/css/rsuite-table.css";
@@ -25,21 +25,22 @@ const sortByKey = (items, key, type) => {
 
 export default function ButtonsTable() {
   let { namespace } = useParams();
+  const [currentType, setCurrentType] = useState("like");
 
   const buttons = useSelector((state) => {
+    let selected = [...Object.values(state.buttons).map((b) => b.attributes)];
+
     if (namespace) {
-      return Object.values(state.buttons)
-        .map((b) => b.attributes)
-        .filter((b) => {
-          if (namespace === "no-namespace") {
-            return b.namespace === null;
-          } else {
-            return b.namespace === namespace;
-          }
-        });
-    } else {
-      return Object.values(state.buttons).map((b) => b.attributes);
+      selected = selected.filter((b) => {
+        if (namespace === "no-namespace") {
+          return b.namespace === null;
+        } else {
+          return b.namespace === namespace;
+        }
+      });
     }
+
+    return selected.filter((b) => b.type === currentType);
   });
 
   const handleSort = (key, sortType) => {
@@ -62,11 +63,52 @@ export default function ButtonsTable() {
     </Cell>
   );
 
+  const handleChangeType = (type) => (event) => {
+    event.preventDefault();
+    setCurrentType(type);
+  };
+
+  const renderTypeMenu = () => {
+    return (
+      <div className="type-menu">
+        <a
+          onClick={handleChangeType("like")}
+          href="/#"
+          className="type-menu__link"
+        >
+          {icons["like"]}
+          Like Buttons
+        </a>
+        <span>|</span>
+        <a
+          onClick={handleChangeType("updown")}
+          href="/#"
+          className="type-menu__link"
+        >
+          {icons["updown"]}
+          Like/Dislike Buttons
+        </a>
+        <span>|</span>
+        <a
+          onClick={handleChangeType("clap")}
+          href="/#"
+          className="type-menu__link"
+        >
+          {icons["clap"]}
+          Clap Buttons
+        </a>
+      </div>
+    );
+  };
+
   return (
     <>
       <h2 className="pane__title">
-        {namespace ? humanizeString(namespace) : "All buttons"}
+        {namespace
+          ? humanizeString(`${namespace} ${currentType} buttons`)
+          : `All ${currentType} buttons`}
       </h2>
+      {renderTypeMenu()}
       <Cards buttons={buttons} />
       <Table
         data={buttons}

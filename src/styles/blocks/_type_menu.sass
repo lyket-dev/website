@@ -1,0 +1,48 @@
+.type-menu
+  display: flex
+  justify-content: center
+  align-items: center
+  +margin-bottom(6)
+  span
+    +horizontal-margin(2)
+
+.type-menu__link
+  position: relative
+  z-index: 0
+  text-decoration: none
+  text-transform: uppercase
+  display: flex
+  &:after
+    content: ''
+    display: block
+    background-color: $base-body-color
+    height: 1px
+    margin: 0 auto
+    position: absolute
+    left: 0
+    right: 0
+    bottom: 0
+    z-index: -1
+    transition: $transition
+    width: 0%
+
+  &:hover, .type-menu__link.active
+    text-decoration: none
+    &:after
+      width: 100%
+
+.type-menu__link.active
+  &:after
+    width: 100%
+
+@media only screen and (max-width: 1000px)
+  .type-menu
+    +font-size(smallprint)
+    span
+      +horizontal-margin(0.5)
+
+@media only screen and (max-width: 350px)
+  .type-menu
+    +font-size(milli)
+    span
+      +horizontal-margin(0.2)
