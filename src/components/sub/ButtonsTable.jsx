@@ -40,7 +40,9 @@ export default function ButtonsTable() {
       });
     }
 
-    return selected.filter((b) => b.type === currentType);
+    selected = selected.filter((b) => b.type === currentType);
+
+    return sortByKey(selected, "score", "desc");
   });
 
   const handleSort = (key, sortType) => {
@@ -55,7 +57,7 @@ export default function ButtonsTable() {
 
   const NameCell = ({ rowData, ...props }) => (
     <Cell {...props}>
-      {rowData.namespace ? `${rowData.namespace}:` : ""}
+      {rowData.namespace ? `${rowData.namespace}/` : ""}
       {rowData.name}
     </Cell>
   );
@@ -129,8 +131,8 @@ export default function ButtonsTable() {
           <Cell dataKey="total_votes" />
         </Column>
 
-        <Column flexGrow={0.2} sortable>
-          <HeaderCell>Counter</HeaderCell>
+        <Column flexGrow={0.25} sortable>
+          <HeaderCell>Score</HeaderCell>
           <Cell dataKey="score" />
         </Column>
       </Table>
