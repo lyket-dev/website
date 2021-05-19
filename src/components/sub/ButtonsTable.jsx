@@ -49,10 +49,7 @@ export default function ButtonsTable() {
 
   const IconCell = ({ rowData, ...props }) => (
     <Cell {...props}>
-      <div className="flex">
-        {icons[rowData.type]}
-        <div>{rowData.type}</div>
-      </div>
+      <div className="flex">{icons[rowData.type]}</div>
     </Cell>
   );
 
@@ -117,22 +114,22 @@ export default function ButtonsTable() {
         defaultSortType="desc"
         onSortColumn={handleSort}
       >
-        <Column flexGrow={0.3} minWidth={120}>
+        <Column flexGrow={0.15} minWidth={50}>
           <HeaderCell>Type</HeaderCell>
           <IconCell />
         </Column>
 
-        <Column flexGrow={2} minWidth={300}>
+        <Column flexGrow={2}>
           <HeaderCell>Name</HeaderCell>
           <NameCell />
         </Column>
 
-        <Column>
+        <Column flexGrow={0.2}>
           <HeaderCell>Total Votes</HeaderCell>
           <Cell dataKey="total_votes" />
         </Column>
 
-        <Column sortable>
+        <Column flexGrow={0.2} sortable>
           <HeaderCell>Counter</HeaderCell>
           <Cell dataKey="score" />
         </Column>
