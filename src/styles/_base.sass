@@ -75,6 +75,8 @@ button, input[type="submit"]
 button
   background-color: transparent
   border: none
+  margin: 0
+  padding: 0
 
 #{$all-text-inputs-hover}, textarea:hover
   border-color: darken($border-color, 10%)
@@ -156,3 +158,10 @@ div
   button, div, p
     margin: 0 auto
     text-align: center
+
+.absolute_center
+  +center
+
+.fixed_center
+  +center
+  position: fixed

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { RingSpinner } from "react-spinners-kit";
 import { Link } from "react-router-dom";
 import { fetchAll } from "../ducks/buttons";
 import useAsyncEffect from "../utils/useAsyncEffect";
@@ -12,9 +13,12 @@ import { ReactComponent as Refresh } from "assets/icons/outline/refresh.svg";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
+    setLoading(true);
     await dispatch(fetchAll());
+    setLoading(false);
   };
 
   const buttons = useSelector((state) => {
@@ -89,7 +93,12 @@ export default function Dashboard() {
   return (
     <Page>
       <Section>
-        {hasButtons ? (
+        {loading && (
+          <div className="fixed_center">
+            <RingSpinner size={100} color="#201335" />
+          </div>
+        )}
+        {hasButtons && !loading && (
           <Panes minSize={50}>
             <Menu>
               <>
@@ -125,9 +134,8 @@ export default function Dashboard() {
               <ButtonsTable />
             </Pane>
           </Panes>
-        ) : (
-          renderBlankSlate()
         )}
+        {!hasButtons && !loading && renderBlankSlate()}
       </Section>
     </Page>
   );
