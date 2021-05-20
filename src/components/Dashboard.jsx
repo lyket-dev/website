@@ -7,19 +7,22 @@ import useAsyncEffect from "../utils/useAsyncEffect";
 import { Page, Section } from "components/sub/Page";
 import { Panes, Pane, Menu } from "components/sub/Panes";
 import ButtonsTable from "components/sub/ButtonsTable";
+import ButtonsImporter from "components/sub/ButtonsImporter";
 import "rsuite-table/dist/css/rsuite-table.css";
 import { ReactComponent as Folder } from "assets/icons/outline/folder-open.svg";
 import { ReactComponent as Refresh } from "assets/icons/outline/refresh.svg";
+import { ReactComponent as Upload } from "assets/icons/outline/cloud-upload.svg";
+import Tooltip from "./sub/Tooltip";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true);
     await dispatch(fetchAll());
     setLoading(false);
-  };
+  }, [setLoading, dispatch]);
 
   const buttons = useSelector((state) => {
     return Object.values(state.buttons);
@@ -128,6 +131,17 @@ export default function Dashboard() {
                   <Refresh />
                   <span className="menu__item__label">Refresh buttons!</span>
                 </button>
+                <div className="menu__item">
+                  <Upload />
+                  <span className="menu__item__label">
+                    Import buttons & votes
+                  </span>
+                  <Tooltip
+                    id="csv"
+                    message="Import multiple buttons at once by uploading a CSV file. The CSV must have the following headers: path and amount. It will accept only valid Lyket urls, ie. [button_type]-buttons/[namespace]/[id]"
+                  />
+                </div>
+                <ButtonsImporter onFinishImporting={fetchData} />
               </>
             </Menu>
             <Pane>

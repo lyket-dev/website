@@ -74,7 +74,6 @@ const Login = () => {
                     name="email"
                     type="email"
                     disabled={emailSent}
-                    onBlur={props.handleBlur}
                   />
                 </div>
                 {props.touched.email && props.errors.email && (

@@ -9,9 +9,10 @@ export default function Tooltip({ message, id }) {
         <Info />
       </span>
       <ReactTooltip
+        id={id}
         place="top"
         effect="float"
-        id={id}
+        multiline={true}
         backgroundColor="#1f1630"
       >
         <span className="tooltip">{message}</span>

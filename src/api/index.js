@@ -93,3 +93,7 @@ export function destroyButton(id) {
 export function createButton(data) {
   return post("/buttons", { data });
 }
+
+export function bulkUploadButtons(data) {
+  return post("/buttons/bulk-import", { data });
+}
