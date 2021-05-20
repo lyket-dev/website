@@ -23,6 +23,7 @@
     "object.omit": "^3.0.0",
     "prettier": "^2.0.5",
     "react": "^16.13.1",
+    "react-csv-reader": "^3.3.0",
     "react-dom": "^16.13.1",
     "react-hot-loader": "^4.12.21",
     "react-markdown": "^4.3.1",

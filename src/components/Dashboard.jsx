@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RingSpinner } from "react-spinners-kit";
 import { Link } from "react-router-dom";
 import { fetchAll } from "../ducks/buttons";
+import { bulkUploadButtons } from "../api";
 import useAsyncEffect from "../utils/useAsyncEffect";
 import { Page, Section } from "components/sub/Page";
 import { Panes, Pane, Menu } from "components/sub/Panes";
@@ -10,20 +11,61 @@ import ButtonsTable from "components/sub/ButtonsTable";
 import "rsuite-table/dist/css/rsuite-table.css";
 import { ReactComponent as Folder } from "assets/icons/outline/folder-open.svg";
 import { ReactComponent as Refresh } from "assets/icons/outline/refresh.svg";
+import { ReactComponent as Upload } from "assets/icons/outline/cloud-upload.svg";
+import { notice, alert } from "utils/notifications";
+import CSVReader from "react-csv-reader";
+import Tooltip from "./sub/Tooltip";
+
+const papaparseOptions = {
+  header: true,
+  dynamicTyping: true,
+  skipEmptyLines: true,
+  transformHeader: (header) => {
+    console.log(header);
+    if (!["path", "amount"].includes(header)) {
+      alert({ message: `Invalid header: ${header}` });
+
+      throw new Error(`Invalid header: ${header}`);
+    }
+
+    return header.toLowerCase().replace(/\W/g, "");
+  },
+};
 
 export default function Dashboard() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true);
     await dispatch(fetchAll());
     setLoading(false);
-  };
+  }, [setLoading, dispatch]);
 
   const buttons = useSelector((state) => {
     return Object.values(state.buttons);
   });
+
+  const handleSubmitFile = useCallback(
+    async (data, fileInfo) => {
+      try {
+        setUploading(true);
+
+        await bulkUploadButtons(data);
+        await fetchData();
+
+        notice({ message: "File uploaded successfully" });
+        setUploading(false);
+      } catch (error) {
+        alert({ message: "Couldn't upload buttons" });
+        console.error(error);
+        setUploading(false);
+        throw error;
+      }
+    },
+    [fetchData]
+  );
 
   const namespaces = buttons
     .map((b) => b.attributes.namespace)
@@ -128,6 +170,20 @@ export default function Dashboard() {
                   <Refresh />
                   <span className="menu__item__label">Refresh buttons!</span>
                 </button>
+                <div className="menu__item">
+                  <Upload />
+                  <span className="menu__item__label">Import votes</span>
+                  <Tooltip
+                    id="csv"
+                    message="Import multiple buttons at once by uploading a CSV file. The CSV must have the following headers: path and amount. It will accept only valid Lyket urls, ie. [button_type]-buttons/[namespace]/[id]"
+                  />
+                </div>
+                <CSVReader
+                  accept=".csv"
+                  onFileLoaded={handleSubmitFile}
+                  parserOptions={papaparseOptions}
+                />
+                {uploading && <RingSpinner size={20} color="#201335" />}
               </>
             </Menu>
             <Pane>
