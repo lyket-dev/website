@@ -5,8 +5,12 @@ import { ReactComponent as Info } from "assets/icons/outline/information-circle.
 export default function Tooltip({ message, id, children }) {
   return (
     <>
-      <span data-tip="React-tooltip" data-for={id} className="tooltip__link">
-        {children || <Info />}
+      <span data-tip="React-tooltip" data-for={id}>
+        {children || (
+          <span className="tooltip__link">
+            <Info />
+          </span>
+        )}
       </span>
       <ReactTooltip
         id={id}
@@ -14,6 +18,7 @@ export default function Tooltip({ message, id, children }) {
         effect="float"
         multiline={true}
         backgroundColor="#1f1630"
+        textColor="#ffffff"
       >
         <span className="tooltip">{message}</span>
       </ReactTooltip>

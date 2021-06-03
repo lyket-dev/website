@@ -18,6 +18,7 @@ body
   color: $base-body-color
   text-rendering: optimizeLegibility
   font-weight: 400
+  font-size: 22px
 
 a
   color: $base-body-color
@@ -114,6 +115,7 @@ hr
 
 th, td
   text-align: left
+  +body-font-family
 
 img
   max-width: 100%
@@ -154,8 +156,10 @@ div
   align-items: center
   justify-content: space-around
 
-.center
-  button, div, p
+.center > button,
+.center > div,
+.center > input,
+.center > p
     margin: 0 auto
     text-align: center
 

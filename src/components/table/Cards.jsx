@@ -54,7 +54,7 @@ const ChartCard = ({ buttons }) => {
 
   return (
     <div className="card">
-      <div className="card__label">Votes chart</div>
+      <div className="card__label">Score chart</div>
       {toShow.length === 0 ? (
         <div className="card__container">
           <p className="card__bigtext">-</p>

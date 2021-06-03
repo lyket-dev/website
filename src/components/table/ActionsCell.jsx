@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Cell } from "rsuite-table";
+import TableCell from "@material-ui/core/TableCell";
 import {
   destroy as destroyButton,
   reset as resetButton,
@@ -11,12 +11,12 @@ import { ReactComponent as Reset } from "assets/icons/outline/refresh.svg";
 import Tooltip from "components/Tooltip";
 import { notice, alert } from "utils/notifications";
 
-export default function ActionsCell({ rowData, ...props }) {
+export default function ActionsCell({ buttonId }) {
   const dispatch = useDispatch();
 
-  const handleDestroyButton = async (id) => {
+  const handleDestroyButton = async () => {
     try {
-      await dispatch(destroyButton(id));
+      await dispatch(destroyButton(buttonId));
       notice({ message: "Button destroyed successfully" });
     } catch (error) {
       alert({
@@ -27,27 +27,24 @@ export default function ActionsCell({ rowData, ...props }) {
     }
   };
 
-  const handleResetButton = (id) => {
-    return dispatch(resetButton(id)).then(() => dispatch(fetchAll()));
+  const handleResetButton = () => {
+    return dispatch(resetButton(buttonId)).then(() => dispatch(fetchAll()));
   };
 
   return (
-    <Cell {...props}>
+    <TableCell align="right" className="table__cell">
       <div className="flex">
-        <button className="flex" onClick={() => handleResetButton(rowData.id)}>
+        <button className="flex" onClick={handleResetButton}>
           <Tooltip message="Reset counter" id="reset">
             <Reset className="card__icon" />
           </Tooltip>
         </button>
-        <button
-          className="flex"
-          onClick={() => handleDestroyButton(rowData.id)}
-        >
+        <button className="flex" onClick={handleDestroyButton}>
           <Tooltip message="Destroy button" id="destroy">
             <Destroy className="card__icon red" />
           </Tooltip>
         </button>
       </div>
-    </Cell>
+    </TableCell>
   );
 }

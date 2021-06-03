@@ -6,13 +6,12 @@ import { fetchAll } from "ducks/buttons";
 import useAsyncEffect from "utils/useAsyncEffect";
 import { Page, Section } from "components/Page";
 import { Panes, Pane, Menu } from "components/Panes";
-import ButtonsTable from "components/ButtonsTable";
 import ButtonsImporter from "components/ButtonsImporter";
-import "rsuite-table/dist/css/rsuite-table.css";
 import { ReactComponent as Folder } from "assets/icons/outline/folder-open.svg";
 import { ReactComponent as Refresh } from "assets/icons/outline/refresh.svg";
 import { ReactComponent as Upload } from "assets/icons/outline/cloud-upload.svg";
 import Tooltip from "components/Tooltip";
+import Table from "components/Table";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
@@ -83,12 +82,22 @@ export default function Dashboard() {
           If you just created a button but you cannot see it, hit the refresh
           button!
         </p>
-        <div className="center">
-          <button className="menu__item" onClick={handleClick}>
-            <Refresh />
-            <span className="menu__item__label">Refresh buttons!</span>
-          </button>
-        </div>
+        <button className="menu__item" onClick={handleClick}>
+          <Refresh />
+          <span className="menu__item__label">Refresh buttons!</span>
+        </button>
+        <p className="card__text">
+          If you want to import buttons in bulk upload a CSV file!
+        </p>
+        <p className="menu__item">
+          <Upload />
+          <span className="menu__item__label">Import buttons & votes</span>
+          <Tooltip
+            id="csv"
+            message="Import multiple buttons at once by uploading a CSV file. The CSV must have the following headers: path and amount. It will accept only valid Lyket urls, ie. [button_type]-buttons/[namespace]/[id]"
+          />
+        </p>
+        <ButtonsImporter onFinishImporting={fetchData} />
       </div>
     );
   };
@@ -145,7 +154,7 @@ export default function Dashboard() {
               </>
             </Menu>
             <Pane>
-              <ButtonsTable />
+              <Table />
             </Pane>
           </Panes>
         )}
