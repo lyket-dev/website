@@ -1,6 +1,7 @@
 import React from "react";
 import { PieChart } from "react-minimal-pie-chart";
 import palette from "utils/palette";
+import { sort } from "utils/sort";
 
 const Chart = ({ buttons }) => {
   const colors = [...palette];
@@ -73,7 +74,7 @@ const ChartCard = ({ buttons }) => {
 export default function Cards({ buttons }) {
   return (
     <div className="cards">
-      <Top three={buttons.slice(0, 3)} />
+      <Top three={sort(buttons, "desc", "score").slice(0, 3)} />
       <Total buttons={buttons} />
       <ChartCard buttons={buttons} />
     </div>

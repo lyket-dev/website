@@ -12,6 +12,7 @@ import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Header from "./Header";
 import Cards from "./Cards";
+import { sort } from "utils/sort";
 import { ReactComponent as Clap } from "assets/icons/outline/hand.svg";
 import { ReactComponent as Heart } from "assets/icons/outline/heart.svg";
 import { ReactComponent as Thumb } from "assets/icons/outline/thumb-up.svg";
@@ -22,32 +23,6 @@ const icons = {
   like: <Heart className="card__icon" />,
   updown: <Thumb className="card__icon" />,
 };
-
-function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
-
-function getComparator(order, orderBy) {
-  return order === "desc"
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
-}
-
-function stableSort(array, comparator) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
-  return stabilizedThis.map((el) => el[0]);
-}
 
 const headCells = [
   {
@@ -134,7 +109,7 @@ export default function EnhancedTable() {
   const [order, setOrder] = React.useState("desc");
   const [orderBy, setOrderBy] = React.useState("score");
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [currentType, setCurrentType] = useState("like");
 
   const rows = useSelector((state) => {
@@ -195,7 +170,7 @@ export default function EnhancedTable() {
             onRequestSort={handleRequestSort}
           />
           <TableBody>
-            {stableSort(rows, getComparator(order, orderBy))
+            {sort(rows, order, orderBy)
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, index) => {
                 return (
@@ -220,17 +195,16 @@ export default function EnhancedTable() {
           </TableBody>
         </Table>
       </TableContainer>
-      {false && (
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
-      )}
+      <TablePagination
+        className="table__cell"
+        rowsPerPageOptions={[10, 25, 50]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+      />
     </div>
   );
 }
