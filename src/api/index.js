@@ -18,12 +18,10 @@ const wrapRequest = (fn) => {
     const lastArg = args.length >= 1 && args[args.length - 1];
     const sessionId = lastArg && lastArg.sessionId;
     const requestArgs = sessionId ? args.slice(0, -1) : args;
-    const jwtToken = sessionStorage.getItem("token");
 
     const options = {
       credentials: "include",
       headers: {
-        Authorization: `Bearer ${jwtToken}`,
         "X-Site-Domain": siteDomain(),
         "Content-Type": "application/json",
         Accept: "application/vnd.api+json",
@@ -88,6 +86,10 @@ export function updateButton(id, data) {
 
 export function destroyButton(id) {
   return destroy(`/buttons/${id}`);
+}
+
+export function resetButton(id) {
+  return put(`/buttons/${id}/reset`, { data: {} });
 }
 
 export function createButton(data) {

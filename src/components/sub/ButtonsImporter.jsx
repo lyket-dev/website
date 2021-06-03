@@ -35,7 +35,6 @@ export default function ButtonsImporter({ onFinishImporting }) {
           message: `${attributes.successful.length} buttons imported successfully, ${attributes.failed.length} not imported`,
         });
 
-        console.log({ failedButtonsPaths: attributes.failed });
         setUploading(false);
       } catch (error) {
         alert({ message: "Couldn't import buttons" });

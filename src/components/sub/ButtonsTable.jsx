@@ -8,6 +8,7 @@ import humanizeString from "humanize-string";
 import { ReactComponent as Clap } from "assets/icons/outline/hand.svg";
 import { ReactComponent as Heart } from "assets/icons/outline/heart.svg";
 import { ReactComponent as Thumb } from "assets/icons/outline/thumb-up.svg";
+import ActionsCell from "./table/ActionsCell";
 
 const icons = {
   clap: <Clap className="card__icon" />,
@@ -134,6 +135,11 @@ export default function ButtonsTable() {
         <Column flexGrow={0.25} sortable>
           <HeaderCell>Score</HeaderCell>
           <Cell dataKey="score" />
+        </Column>
+
+        <Column flexGrow={0.25}>
+          <HeaderCell>Actions</HeaderCell>
+          <ActionsCell />
         </Column>
       </Table>
     </>

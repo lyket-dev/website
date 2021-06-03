@@ -2,11 +2,11 @@ import React from "react";
 import ReactTooltip from "react-tooltip";
 import { ReactComponent as Info } from "assets/icons/outline/information-circle.svg";
 
-export default function Tooltip({ message, id }) {
+export default function Tooltip({ message, id, children }) {
   return (
     <>
       <span data-tip="React-tooltip" data-for={id} className="tooltip__link">
-        <Info />
+        {children || <Info />}
       </span>
       <ReactTooltip
         id={id}
