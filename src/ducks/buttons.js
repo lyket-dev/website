@@ -1,5 +1,5 @@
-import createAsyncAction from "../utils/createAsyncAction";
-import createEntityReducer from "../utils/createEntityReducer";
+import createAsyncAction from "utils/createAsyncAction";
+import createEntityReducer from "utils/createEntityReducer";
 
 import {
   getButtons,

@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useHistory } from "react-router-dom";
-import { Page, Section } from "components/sub/Page";
+import { Page, Section } from "components/Page";
 import { RingSpinner } from "react-spinners-kit";
 import { createSession } from "ducks/session";
 import useAsyncEffect from "utils/useAsyncEffect";

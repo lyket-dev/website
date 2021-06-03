@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Table, Column, HeaderCell, Cell } from "rsuite-table";
 import "rsuite-table/dist/css/rsuite-table.css";
 import { useParams } from "react-router-dom";
-import Cards from "components/sub/Cards";
+import Cards from "components/Cards";
 import humanizeString from "humanize-string";
 import { ReactComponent as Clap } from "assets/icons/outline/hand.svg";
 import { ReactComponent as Heart } from "assets/icons/outline/heart.svg";

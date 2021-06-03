@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { update as updateUser } from "../ducks/currentUser";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
-import Tooltip from "./sub/Tooltip";
+import Tooltip from "components/Tooltip";
 import { notice, alert } from "utils/notifications";
 
 export default function SettingsForm({ onClose }) {

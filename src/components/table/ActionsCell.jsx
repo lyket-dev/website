@@ -8,7 +8,7 @@ import {
 } from "ducks/buttons";
 import { ReactComponent as Destroy } from "assets/icons/outline/trash.svg";
 import { ReactComponent as Reset } from "assets/icons/outline/refresh.svg";
-import Tooltip from "components/sub/Tooltip";
+import Tooltip from "components/Tooltip";
 import { notice, alert } from "utils/notifications";
 
 export default function ActionsCell({ rowData, ...props }) {

@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { RingSpinner } from "react-spinners-kit";
-import { bulkUploadButtons } from "../../api";
+import { bulkUploadButtons } from "api";
 import CSVReader from "react-csv-reader";
 import { notice, alert } from "utils/notifications";
 
