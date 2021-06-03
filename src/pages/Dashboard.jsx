@@ -11,7 +11,7 @@ import { ReactComponent as Folder } from "assets/icons/outline/folder-open.svg";
 import { ReactComponent as Refresh } from "assets/icons/outline/refresh.svg";
 import { ReactComponent as Upload } from "assets/icons/outline/cloud-upload.svg";
 import Tooltip from "components/Tooltip";
-import Table from "components/Table";
+import Table from "components/table";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
