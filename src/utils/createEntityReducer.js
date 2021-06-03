@@ -44,7 +44,7 @@ function mergeEntities(type, state, { payload }) {
 
 function manageDestroyAction(actionCreator, state, action) {
   if (actionCreator.toString() === action.type) {
-    return omit(state, [action.payload.id]);
+    return omit(state, [action.payload.response.data.id]);
   }
 
   return state;
@@ -54,9 +54,11 @@ export default function (type, destroyActionCreator = null) {
   const initialState = {};
   return (state = initialState, action) => {
     let newState = mergeEntities(type, state, action);
+
     if (destroyActionCreator) {
       newState = manageDestroyAction(destroyActionCreator, newState, action);
     }
+
     return newState;
   };
 }

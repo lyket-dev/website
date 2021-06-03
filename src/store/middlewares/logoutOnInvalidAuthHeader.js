@@ -1,7 +1,7 @@
 // import destroy from 'ducks/session/destroy';
 // import { rawSwitchEnvironment } from 'ducks/session';
 // import { getUser, getRoles, getEnvironments } from 'api/dato';
-// import { getAccessibleEnvironments } from 'components/sub/EnvironmentsPane';
+// import { getAccessibleEnvironments } from 'components/EnvironmentsPane';
 // // TODO
 // export default function logoutOnInvalidAuthHeader() {
 //   return next => action => {

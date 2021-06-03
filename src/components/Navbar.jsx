@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { destroySession } from "../../ducks/session";
+import { destroySession } from "ducks/session";
 import { notice, alert } from "utils/notifications";
 
 export default function Navbar({ loggedIn }) {

@@ -2,17 +2,17 @@ import React, { useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RingSpinner } from "react-spinners-kit";
 import { Link } from "react-router-dom";
-import { fetchAll } from "../ducks/buttons";
-import useAsyncEffect from "../utils/useAsyncEffect";
-import { Page, Section } from "components/sub/Page";
-import { Panes, Pane, Menu } from "components/sub/Panes";
-import ButtonsTable from "components/sub/ButtonsTable";
-import ButtonsImporter from "components/sub/ButtonsImporter";
+import { fetchAll } from "ducks/buttons";
+import useAsyncEffect from "utils/useAsyncEffect";
+import { Page, Section } from "components/Page";
+import { Panes, Pane, Menu } from "components/Panes";
+import ButtonsTable from "components/ButtonsTable";
+import ButtonsImporter from "components/ButtonsImporter";
 import "rsuite-table/dist/css/rsuite-table.css";
 import { ReactComponent as Folder } from "assets/icons/outline/folder-open.svg";
 import { ReactComponent as Refresh } from "assets/icons/outline/refresh.svg";
 import { ReactComponent as Upload } from "assets/icons/outline/cloud-upload.svg";
-import Tooltip from "./sub/Tooltip";
+import Tooltip from "components/Tooltip";
 
 export default function Dashboard() {
   const dispatch = useDispatch();

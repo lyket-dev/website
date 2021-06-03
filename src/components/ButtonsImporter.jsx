@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { RingSpinner } from "react-spinners-kit";
-import { bulkUploadButtons } from "../../api";
+import { bulkUploadButtons } from "api";
 import CSVReader from "react-csv-reader";
 import { notice, alert } from "utils/notifications";
 
@@ -35,7 +35,6 @@ export default function ButtonsImporter({ onFinishImporting }) {
           message: `${attributes.successful.length} buttons imported successfully, ${attributes.failed.length} not imported`,
         });
 
-        console.log({ failedButtonsPaths: attributes.failed });
         setUploading(false);
       } catch (error) {
         alert({ message: "Couldn't import buttons" });

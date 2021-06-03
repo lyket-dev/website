@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import useAsyncEffect from "../utils/useAsyncEffect";
+import useAsyncEffect from "utils/useAsyncEffect";
 import { useDispatch, useSelector } from "react-redux";
-import { fetch as fetchCurrentUser } from "../ducks/currentUser";
-import SettingsForm from "./SettingsForm";
-import Tooltip from "./sub/Tooltip";
-import { Page, Section } from "components/sub/Page";
+import { fetch as fetchCurrentUser } from "ducks/currentUser";
+import SettingsForm from "components/SettingsForm";
+import Tooltip from "components/Tooltip";
+import { Page, Section } from "components/Page";
 import { ReactComponent as Key } from "assets/icons/outline/key.svg";
 import { ReactComponent as Mail } from "assets/icons/outline/mail.svg";
 import { ReactComponent as Shield } from "assets/icons/outline/shield-check.svg";

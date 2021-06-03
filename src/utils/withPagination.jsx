@@ -1,4 +1,4 @@
-import Connect from 'components/sub/Connect';
+import Connect from 'components/Connect';
 import PropTypes from 'prop-types';
 import qs from 'qs';
 import React from 'react';

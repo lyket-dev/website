@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Page } from "components/sub/Page";
+import { Page } from "components/Page";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
-import { signupRequest } from "../api";
+import { signupRequest } from "api";
 import { notice, alert } from "utils/notifications";
-import Tooltip from "./sub/Tooltip";
+import Tooltip from "components/Tooltip";
 
 export default function Signup() {
   const history = useHistory();
