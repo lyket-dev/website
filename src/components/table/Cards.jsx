@@ -6,7 +6,11 @@ const Chart = ({ buttons }) => {
   const colors = [...palette];
 
   const values = buttons.map((button) => {
-    const color = colors.pop([Math.floor(Math.random() * palette.length)]);
+    const color =
+      colors.length > 0
+        ? colors.pop([Math.floor(Math.random() * palette.length)])
+        : { hex: "#fffca1" };
+
     return {
       title: button.name,
       value: button.score,
