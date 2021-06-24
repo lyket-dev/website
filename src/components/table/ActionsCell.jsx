@@ -7,7 +7,7 @@ import {
   fetchAll,
 } from "ducks/buttons";
 import { ReactComponent as Destroy } from "assets/icons/outline/trash.svg";
-import { ReactComponent as Reset } from "assets/icons/outline/refresh.svg";
+import { ReactComponent as Reset } from "assets/icons/outline/rewind.svg";
 import Tooltip from "components/Tooltip";
 import { notice, alert } from "utils/notifications";
 
