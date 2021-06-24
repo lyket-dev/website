@@ -28,27 +28,29 @@ const headCells = [
   {
     id: "type",
     alignRight: false,
-    disablePadding: false,
     label: "Type",
   },
   {
     id: "name",
     alignRight: false,
-    disablePadding: false,
     label: "Name",
+    sortable: true,
+  },
+  {
+    id: "tags",
+    label: "Tags",
+    alignRight: false,
     sortable: true,
   },
   {
     id: "total_votes",
     alignRight: true,
-    disablePadding: false,
     label: "Total Votes",
     sortable: true,
   },
   {
     id: "score",
     alignRight: true,
-    disablePadding: false,
     label: "Score",
     sortable: true,
   },
@@ -181,6 +183,9 @@ export default function EnhancedTable() {
                     <TableCell className="table__cell">
                       {row.namespace ? `${row.namespace}/` : ""}
                       {row.name}
+                    </TableCell>
+                    <TableCell className="table__cell">
+                      {row.tags.join(", ")}
                     </TableCell>
                     <TableCell className="table__cell" align="right">
                       {row.total_votes}
