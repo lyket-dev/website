@@ -5,7 +5,7 @@ import { ReactComponent as Info } from "assets/icons/outline/information-circle.
 export default function Tooltip({ message, id, children }) {
   return (
     <>
-      <span data-tip="React-tooltip" data-for={id}>
+      <span data-tip="React-tooltip" data-for={id} className="tooltip__icon">
         {children || (
           <span className="tooltip__link">
             <Info />

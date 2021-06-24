@@ -12,11 +12,15 @@ import { ReactComponent as Check } from "assets/icons/outline/badge-check.svg";
 import { ReactComponent as Copy } from "assets/icons/outline/duplicate.svg";
 import { ReactComponent as User } from "assets/icons/outline/identification.svg";
 import { ReactComponent as Building } from "assets/icons/outline/office-building.svg";
-import { ReactComponent as Max } from "assets/icons/outline/lock-closed.svg";
+import { ReactComponent as Finger } from "assets/icons/outline/finger-print.svg";
+import { ReactComponent as Eye } from "assets/icons/outline/eye.svg";
+import { ReactComponent as EyeClosed } from "assets/icons/outline/eye-off.svg";
+import { ReactComponent as Users } from "assets/icons/outline/users.svg";
 
 export default function UserSettings() {
   const dispatch = useDispatch();
   const [editMode, setEditMode] = useState(false);
+  const [showSecret, setShowSecret] = useState(false);
 
   const currentUser = useSelector((state) => {
     return state.currentUser;
@@ -39,6 +43,7 @@ export default function UserSettings() {
     name,
     company,
     public_token: publicToken,
+    secret_token: secretToken,
     recaptcha_active: recaptcha,
     allow_list: allow,
     max_sessions_per_ip,
@@ -67,10 +72,10 @@ export default function UserSettings() {
         </li>
         <li className="menu__item space__bottom-2">
           <Key />
-          <span className="menu__item__label">API token: </span>
+          <span className="menu__item__label">Public API token: </span>
           <span>{publicToken}</span>
           <button
-            className="menu__item__label"
+            className="menu__item__icon"
             onClick={(e) => {
               e.preventDefault();
 
@@ -79,6 +84,27 @@ export default function UserSettings() {
           >
             <Copy />
           </button>
+          <Tooltip
+            id="public-token"
+            message="You can use this token in your website to make requests that do not require admin privileges, such as getting buttons info or pressing buttons"
+          />
+        </li>
+        <li className="menu__item space__bottom-2">
+          <Finger />
+          <span className="menu__item__label">Secret API token: </span>
+          <span>
+            {showSecret ? secretToken : "*".repeat(secretToken.length)}
+          </span>
+          <button
+            className="menu__item__icon"
+            onClick={() => setShowSecret(!showSecret)}
+          >
+            {showSecret ? <Eye /> : <EyeClosed />}
+          </button>
+          <Tooltip
+            id="secret-token"
+            message="This is a secret token to be used only for API requests that require admin privileges, such as 'add-tags', and only coming from a private origin"
+          />
         </li>
         <li className="menu__item space__bottom-2">
           <Check />
@@ -99,7 +125,7 @@ export default function UserSettings() {
           />
         </li>
         <li className="menu__item space__bottom-2">
-          <Max />
+          <Users />
           <span className="menu__item__label">
             Max number of sessions per IP:{" "}
           </span>
@@ -109,7 +135,7 @@ export default function UserSettings() {
           </span>
           <Tooltip
             id="max-sessions"
-            message="Every visitor gets an unique session ID assigned. To avoid misuse we enforce a maximum number of session IDs coming from the same IP."
+            message="Lyket assigns an unique session ID to every visitor that presses a button. To avoid misuse we enforce a maximum number of session IDs coming from the same IP. Change this number to allow more or less users per IP"
           />
         </li>
         <div className="center space__top-4">

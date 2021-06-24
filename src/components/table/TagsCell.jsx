@@ -24,11 +24,11 @@ export default function TagsCell({ buttonId }) {
   });
 
   const suggestions = useSelector((state) => {
-    return Object.values(state.buttons)
-      .reduce((acc, button) => {
-        return [...acc, ...button.attributes.tags];
-      }, [])
-      .map((t) => ({ id: t, text: t }));
+    const sugg = Object.values(state.buttons).reduce((acc, button) => {
+      return [...acc, ...button.attributes.tags];
+    }, []);
+
+    return [...new Set(sugg)].map((t) => ({ id: t, text: t }));
   });
 
   const handleDelete = (i) => {

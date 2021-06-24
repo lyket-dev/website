@@ -70,13 +70,13 @@ export default function ActionsCell({ buttonId }) {
 
   return (
     <TableCell align="right" className="table__cell">
-      <div className="flex">
-        <button className="flex" onClick={handleResetButton}>
+      <div className="table__cell__actions">
+        <button onClick={handleResetButton}>
           <Tooltip message="Reset counter" id="reset">
             <Reset className="card__icon" />
           </Tooltip>
         </button>
-        <button className="flex" onClick={handleDestroyButton}>
+        <button onClick={handleDestroyButton}>
           <Tooltip message="Destroy button" id="destroy">
             <Destroy className="card__icon red" />
           </Tooltip>
