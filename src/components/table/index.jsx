@@ -34,7 +34,7 @@ const headCells = [
   {
     id: "name",
     alignRight: false,
-    label: "Name",
+    label: "ID",
     sortable: true,
   },
   {
@@ -182,7 +182,7 @@ export default function EnhancedTable() {
                       {icons[row.type]}
                     </TableCell>
                     <TableCell className="table__cell">
-                      {row.namespace ? `${row.namespace}/` : ""}
+                      {!namespace && row.namespace ? `${row.namespace}/` : ""}
                       {row.name}
                     </TableCell>
                     <TableCell className="table__cell">
