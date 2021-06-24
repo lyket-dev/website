@@ -159,7 +159,7 @@ export default function EnhancedTable() {
         onChangeType={handleChangeType}
         icons={icons}
       />
-      <Cards buttons={rows} />
+      <Cards buttons={rows} currentNamespace={namespace} />
       <TableContainer>
         <Table
           className="table"

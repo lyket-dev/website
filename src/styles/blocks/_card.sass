@@ -31,13 +31,13 @@
   +vertical-padding(.2)
   +horizontal-padding(1)
   top: -12px
+  +font-size(regular)
 
 .card
   position: relative
   width: 32%
   border-radius: 5px
-  +vertical-padding(4)
-  +horizontal-padding(2)
+  +padding(4)
   height: 100%
   box-shadow: $shadow
   +font-size(regular)
@@ -46,7 +46,6 @@
   +font-size(huge)
   font-weight: bold
   text-align: center
-  +margin-bottom(2)
 
 .card__text
   +font-size(regular)
@@ -57,10 +56,12 @@
   font-weight: bold
   +margin-bottom(.5)
 
-
 pre
   +margin-bottom(1)
   +font-size(smallprint)
+
+.card__bullet__container
+  +center-vertically
 
 .card__bullet
   display: flex
@@ -68,7 +69,7 @@ pre
   max-width: 100%
   word-wrap: break-word
   +margin-bottom(1)
-  +font-size(smallprint)
+  +font-size(normal)
   line-height: 1.2
   overflow: auto
 

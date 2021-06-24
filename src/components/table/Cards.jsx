@@ -22,19 +22,27 @@ const Chart = ({ buttons }) => {
   return <PieChart data={values} animate labelPosition={0} />;
 };
 
-const Top = ({ three }) => {
+const Top = ({ three, currentNamespace }) => {
   return (
     <div className="card">
       <div className="card__label">Top 3</div>
-      {three.map((button, index) => (
-        <div
-          className="card__bullet"
-          key={`${button.type}${button.namespace}${button.name}`}
-        >
-          <div className="card__bullet__num">{index + 1}. </div>
-          <span>{`${button.type}-buttons/${button.namespace}/${button.name}`}</span>
-        </div>
-      ))}
+      <div className="card__bullet__container">
+        {three.map((button, index) => {
+          const name = currentNamespace
+            ? `${button.name}`
+            : `${button.namespace}/${button.name}`;
+
+          return (
+            <div
+              className="card__bullet"
+              key={`${button.type}${button.namespace}${button.name}`}
+            >
+              <div className="card__bullet__num">{index + 1}. </div>
+              <span>{name}</span>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
@@ -71,10 +79,13 @@ const ChartCard = ({ buttons }) => {
   );
 };
 
-export default function Cards({ buttons }) {
+export default function Cards({ buttons, currentNamespace }) {
   return (
     <div className="cards">
-      <Top three={sort(buttons, "desc", "score").slice(0, 3)} />
+      <Top
+        three={sort(buttons, "desc", "score").slice(0, 3)}
+        currentNamespace={currentNamespace}
+      />
       <Total buttons={buttons} />
       <ChartCard buttons={buttons} />
     </div>
