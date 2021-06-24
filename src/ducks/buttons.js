@@ -9,6 +9,7 @@ import {
   destroyButton,
   resetButton,
   bulkUploadButtons,
+  tagButton,
 } from "../api";
 
 export const fetchAll = createAsyncAction("button/fetchAll", getButtons);
@@ -20,6 +21,8 @@ export const update = createAsyncAction("button/update", updateButton);
 export const create = createAsyncAction("button/create", createButton);
 
 export const reset = createAsyncAction("button/reset", resetButton);
+
+export const tag = createAsyncAction("button/tag", tagButton);
 
 export const bulkUpload = createAsyncAction(
   "button/bulkUpload",
