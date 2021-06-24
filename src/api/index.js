@@ -99,3 +99,7 @@ export function createButton(data) {
 export function bulkUploadButtons(data) {
   return post("/buttons/bulk-import", { data });
 }
+
+export function tagButton(id, data) {
+  return put(`/buttons/${id}/tag`, data);
+}

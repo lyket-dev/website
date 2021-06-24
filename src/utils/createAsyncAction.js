@@ -5,7 +5,7 @@ export default function createAsyncAction(prefix, promiseFactory, cacheHit) {
   const receive = createAction(`[${prefix}] RECEIVE`);
   const fail = createAction(`[${prefix}] FAIL`);
 
-  function asyncActionCreator(params = {}) {
+  function asyncActionCreator(...params) {
     return async (dispatch, getState) => {
       try {
         if (cacheHit && !params.force) {
@@ -15,9 +15,9 @@ export default function createAsyncAction(prefix, promiseFactory, cacheHit) {
           }
         }
 
-        dispatch(request(params));
+        dispatch(request(...params));
 
-        const response = await promiseFactory(params);
+        const response = await promiseFactory(...params);
 
         dispatch(
           receive({

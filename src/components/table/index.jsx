@@ -17,6 +17,7 @@ import { ReactComponent as Clap } from "assets/icons/outline/hand.svg";
 import { ReactComponent as Heart } from "assets/icons/outline/heart.svg";
 import { ReactComponent as Thumb } from "assets/icons/outline/thumb-up.svg";
 import ActionsCell from "./ActionsCell";
+import TagsCell from "./TagsCell";
 
 const icons = {
   clap: <Clap className="card__icon" />,
@@ -158,7 +159,7 @@ export default function EnhancedTable() {
         onChangeType={handleChangeType}
         icons={icons}
       />
-      <Cards buttons={rows} />
+      <Cards buttons={rows} currentNamespace={namespace} />
       <TableContainer>
         <Table
           className="table"
@@ -176,7 +177,7 @@ export default function EnhancedTable() {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, index) => {
                 return (
-                  <TableRow hover>
+                  <TableRow hover key={`tableRow${index}`}>
                     <TableCell className="table__cell">
                       {icons[row.type]}
                     </TableCell>
@@ -185,7 +186,7 @@ export default function EnhancedTable() {
                       {row.name}
                     </TableCell>
                     <TableCell className="table__cell">
-                      {row.tags.join(", ")}
+                      <TagsCell currentTags={row.tags} buttonId={row.id} />
                     </TableCell>
                     <TableCell className="table__cell" align="right">
                       {row.total_votes}
