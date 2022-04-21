@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -108,12 +108,11 @@ EnhancedTableHead.propTypes = {
 };
 
 export default function EnhancedTable() {
-  const { namespace } = useParams();
+  const { namespace, type } = useParams();
   const [order, setOrder] = React.useState("desc");
   const [orderBy, setOrderBy] = React.useState("score");
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [currentType, setCurrentType] = useState("like");
 
   const rows = useSelector((state) => {
     let selected = [...Object.values(state.buttons).map((b) => b.attributes)];
@@ -128,18 +127,13 @@ export default function EnhancedTable() {
       });
     }
 
-    return selected.filter((b) => b.type === currentType);
+    return selected.filter((b) => b.type === type);
   });
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
-  };
-
-  const handleChangeType = (type) => (event) => {
-    event.preventDefault();
-    setCurrentType(type);
   };
 
   const handleChangePage = (event, newPage) => {
@@ -153,12 +147,7 @@ export default function EnhancedTable() {
 
   return (
     <div>
-      <Header
-        namespace={namespace}
-        currentType={currentType}
-        onChangeType={handleChangeType}
-        icons={icons}
-      />
+      <Header namespace={namespace} currentType={type} icons={icons} />
       <Cards buttons={rows} currentNamespace={namespace} />
       <TableContainer>
         <Table

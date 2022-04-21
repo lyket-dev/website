@@ -1,33 +1,25 @@
 import React from "react";
 import humanizeString from "humanize-string";
+import { Link } from "react-router-dom";
 
-export default function Header({
-  namespace,
-  currentType,
-  onChangeType,
-  icons,
-}) {
+export default function Header({ namespace, currentType, icons }) {
   const renderTypeMenu = () => {
     return (
       <div className="type-menu">
-        <a onClick={onChangeType("like")} href="/#" className="type-menu__link">
+        <Link to="/dashboard/like" className="type-menu__link">
           {icons["like"]}
           Like Buttons
-        </a>
+        </Link>
         <span>|</span>
-        <a
-          onClick={onChangeType("updown")}
-          href="/#"
-          className="type-menu__link"
-        >
+        <Link to="/dashboard/updown" className="type-menu__link">
           {icons["updown"]}
           Like/Dislike Buttons
-        </a>
+        </Link>
         <span>|</span>
-        <a onClick={onChangeType("clap")} href="/#" className="type-menu__link">
+        <Link to="/dashboard/clap" className="type-menu__link">
           {icons["clap"]}
           Clap Buttons
-        </a>
+        </Link>
       </div>
     );
   };

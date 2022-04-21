@@ -80,6 +80,18 @@ export function getButtons() {
   return get("/buttons/all");
 }
 
+export function getLikeButtons() {
+  return get("/buttons/all-like-buttons");
+}
+
+export function getClapButtons() {
+  return get("/buttons/all-clap-buttons");
+}
+
+export function getUpdownButtons() {
+  return get("/buttons/all-updown-buttons");
+}
+
 export function updateButton(id, data) {
   return put(`/buttons/${id}`, { data });
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { hot } from "react-hot-loader";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
 import { PrivateRoute, PublicRoute } from "components/Routes";
 import Dashboard from "pages/Dashboard";
 import Login from "pages/Login";
@@ -53,9 +53,12 @@ const App = () => {
           </PrivateRoute>
           <Switch>
             <PrivateRoute exact path="/dashboard">
+              <Redirect from="/dashboard" to="/dashboard/like" />
+            </PrivateRoute>
+            <PrivateRoute path="/dashboard/:type/:namespace">
               <Dashboard />
             </PrivateRoute>
-            <PrivateRoute path="/dashboard/:namespace">
+            <PrivateRoute path="/dashboard/:type">
               <Dashboard />
             </PrivateRoute>
           </Switch>

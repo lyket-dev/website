@@ -1,8 +1,12 @@
 import React, { useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RingSpinner } from "react-spinners-kit";
-import { Link } from "react-router-dom";
-import { fetchAll } from "ducks/buttons";
+import { Link, useParams } from "react-router-dom";
+import {
+  fetchAllClapButtons,
+  fetchAllLikeButtons,
+  fetchAllUpdownButtons,
+} from "ducks/buttons";
 import useAsyncEffect from "utils/useAsyncEffect";
 import { Page, Section } from "components/Page";
 import { Panes, Pane, Menu } from "components/Panes";
@@ -13,15 +17,24 @@ import { ReactComponent as Upload } from "assets/icons/outline/cloud-upload.svg"
 import Tooltip from "components/Tooltip";
 import Table from "components/table";
 
+const fetchMap = {
+  like: fetchAllLikeButtons,
+  clap: fetchAllClapButtons,
+  updown: fetchAllUpdownButtons,
+};
+
 export default function Dashboard() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const { type } = useParams();
+
+  console.log(fetchMap[type]);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
-    await dispatch(fetchAll());
+    await dispatch(fetchMap[type]());
     setLoading(false);
-  }, [setLoading, dispatch]);
+  }, [setLoading, dispatch, type]);
 
   const buttons = useSelector((state) => {
     return Object.values(state.buttons);
@@ -31,9 +44,9 @@ export default function Dashboard() {
     .map((b) => b.attributes.namespace)
     .filter((value, index, self) => self.indexOf(value) === index);
 
-  useAsyncEffect(fetchData, []);
+  useAsyncEffect(fetchData, [type]);
 
-  const handleClick = () => fetchData();
+  const handleRefreshButtons = () => fetchData();
   const hasButtons = buttons.length > 0;
 
   const renderBlankSlate = () => {
@@ -82,21 +95,21 @@ export default function Dashboard() {
           If you just created a button but you cannot see it, hit the refresh
           button!
         </p>
-        <button className="menu__item" onClick={handleClick}>
+        <button className="menu__item" onClick={handleRefreshButtons}>
           <Refresh />
           <span className="menu__item__label">Refresh buttons!</span>
         </button>
         <p className="card__text">
           If you want to import buttons in bulk upload a CSV file!
         </p>
-        <p className="menu__item">
+        <div className="menu__item">
           <Upload />
           <span className="menu__item__label">Import buttons & votes</span>
           <Tooltip
             id="csv"
             message="Import multiple buttons at once by uploading a CSV file. The CSV must have the following headers: path and amount. It will accept only valid Lyket urls, ie. [button_type]-buttons/[namespace]/[id]"
           />
-        </p>
+        </div>
         <ButtonsImporter onFinishImporting={fetchData} />
       </div>
     );
@@ -117,26 +130,29 @@ export default function Dashboard() {
                 <ul className="menu space__bottom-4">
                   <li className="menu__item">
                     <Folder />
-                    <Link className="menu__item__label" to={`/dashboard`}>
+                    <Link
+                      className="menu__item__label"
+                      to={`/dashboard/${type}`}
+                    >
                       All
                     </Link>
                   </li>
-                  {namespaces.map((namespace) => {
-                    const slug = namespace ? namespace : "no-namespace";
+                  {namespaces.map((n) => {
+                    const namespace = n ? n : "no-namespace";
                     return (
-                      <li key={slug} className="menu__item">
+                      <li key={namespace} className="menu__item">
                         <Folder />
                         <Link
                           className="menu__item__label"
-                          to={`/dashboard/${slug}`}
+                          to={`/dashboard/${type}/${namespace}`}
                         >
-                          {slug}
+                          {namespace}
                         </Link>
                       </li>
                     );
                   })}
                 </ul>
-                <button className="menu__item" onClick={handleClick}>
+                <button className="menu__item" onClick={handleRefreshButtons}>
                   <Refresh />
                   <span className="menu__item__label">Refresh buttons!</span>
                 </button>

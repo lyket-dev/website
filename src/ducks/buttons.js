@@ -10,9 +10,25 @@ import {
   resetButton,
   bulkUploadButtons,
   tagButton,
+  getLikeButtons,
+  getClapButtons,
+  getUpdownButtons,
 } from "../api";
 
 export const fetchAll = createAsyncAction("button/fetchAll", getButtons);
+
+export const fetchAllLikeButtons = createAsyncAction(
+  "button/fetchAllLikeButtons",
+  getLikeButtons
+);
+export const fetchAllClapButtons = createAsyncAction(
+  "button/fetchAllClapButtons",
+  getClapButtons
+);
+export const fetchAllUpdownButtons = createAsyncAction(
+  "button/fetchAllUpdownButtons",
+  getUpdownButtons
+);
 
 export const fetch = createAsyncAction("button/fetch", getButton);
 
