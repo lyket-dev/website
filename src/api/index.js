@@ -76,6 +76,10 @@ export function getButton(id) {
   return get(`/buttons/${id}`);
 }
 
+export function getButtonsTotal() {
+  return get("/buttons/total");
+}
+
 export function getButtons() {
   return get("/buttons/all");
 }

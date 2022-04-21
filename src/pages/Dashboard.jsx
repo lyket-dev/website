@@ -28,8 +28,6 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(false);
   const { type } = useParams();
 
-  console.log(fetchMap[type]);
-
   const fetchData = useCallback(async () => {
     setLoading(true);
     await dispatch(fetchMap[type]());
@@ -123,7 +121,7 @@ export default function Dashboard() {
             <RingSpinner size={100} color="#201335" />
           </div>
         )}
-        {hasButtons && !loading && (
+        {!loading && (
           <Panes minSize={50}>
             <Menu>
               <>
