@@ -53,7 +53,7 @@ const headCells = [
     id: "score",
     alignRight: true,
     label: "Score",
-    sortable: true,
+    // sortable: true,
   },
   { id: "actions", alignRight: true, disablePadding: false, label: "Actions" },
 ];
