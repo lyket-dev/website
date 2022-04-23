@@ -26,13 +26,18 @@ const fetchMap = {
 export default function Dashboard() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const [totalCount, setTotalCount] = useState(null);
   const { type } = useParams();
 
-  const fetchData = useCallback(async () => {
-    setLoading(true);
-    await dispatch(fetchMap[type]());
-    setLoading(false);
-  }, [setLoading, dispatch, type]);
+  const fetchData = useCallback(
+    async ({ page = 0, limit = 10 } = {}) => {
+      setLoading(true);
+      const buttons = await dispatch(fetchMap[type]({ page, limit }));
+      setTotalCount(buttons.meta.total);
+      setLoading(false);
+    },
+    [setLoading, dispatch, type]
+  );
 
   const buttons = useSelector((state) => {
     return Object.values(state.buttons);
@@ -44,7 +49,6 @@ export default function Dashboard() {
 
   useAsyncEffect(fetchData, [type]);
 
-  const handleRefreshButtons = () => fetchData();
   const hasButtons = buttons.length > 0;
 
   const renderBlankSlate = () => {
@@ -93,7 +97,7 @@ export default function Dashboard() {
           If you just created a button but you cannot see it, hit the refresh
           button!
         </p>
-        <button className="menu__item" onClick={handleRefreshButtons}>
+        <button className="menu__item" onClick={fetchData}>
           <Refresh />
           <span className="menu__item__label">Refresh buttons!</span>
         </button>
@@ -116,12 +120,12 @@ export default function Dashboard() {
   return (
     <Page>
       <Section>
-        {loading && (
+        {loading && !hasButtons && (
           <div className="fixed_center">
             <RingSpinner size={100} color="#201335" />
           </div>
         )}
-        {!loading && (
+        {(!loading || hasButtons) && (
           <Panes minSize={50}>
             <Menu>
               <>
@@ -150,7 +154,7 @@ export default function Dashboard() {
                     );
                   })}
                 </ul>
-                <button className="menu__item" onClick={handleRefreshButtons}>
+                <button className="menu__item" onClick={fetchData}>
                   <Refresh />
                   <span className="menu__item__label">Refresh buttons!</span>
                 </button>
@@ -168,7 +172,7 @@ export default function Dashboard() {
               </>
             </Menu>
             <Pane>
-              <Table />
+              <Table onPaginate={fetchData} totalCount={totalCount} />
             </Pane>
           </Panes>
         )}

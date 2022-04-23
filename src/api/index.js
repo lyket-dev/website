@@ -84,16 +84,19 @@ export function getButtons() {
   return get("/buttons/all");
 }
 
-export function getLikeButtons() {
-  return get("/buttons/all-like-buttons");
+export function getLikeButtons(query) {
+  let searchParams = new URLSearchParams(query);
+  return get(`/buttons/all-like-buttons?${searchParams.toString()}`);
 }
 
-export function getClapButtons() {
-  return get("/buttons/all-clap-buttons");
+export function getClapButtons(query) {
+  let searchParams = new URLSearchParams(query);
+  return get(`/buttons/all-clap-buttons?${searchParams.toString()}`);
 }
 
-export function getUpdownButtons() {
-  return get("/buttons/all-updown-buttons");
+export function getUpdownButtons(query) {
+  let searchParams = new URLSearchParams(query);
+  return get(`/buttons/all-updown-buttons?${searchParams.toString()}`);
 }
 
 export function updateButton(id, data) {

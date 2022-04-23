@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -53,11 +53,10 @@ const headCells = [
     id: "score",
     alignRight: true,
     label: "Score",
-    // sortable: true,
+    sortable: true,
   },
   { id: "actions", alignRight: true, disablePadding: false, label: "Actions" },
 ];
-
 function EnhancedTableHead(props) {
   const { order, orderBy, onRequestSort } = props;
 
@@ -107,12 +106,12 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
 };
 
-export default function EnhancedTable() {
+export default function EnhancedTable({ onPaginate, totalCount }) {
   const { namespace, type } = useParams();
-  const [order, setOrder] = React.useState("desc");
-  const [orderBy, setOrderBy] = React.useState("score");
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [order, setOrder] = useState("desc");
+  const [orderBy, setOrderBy] = useState("score");
+  const [currentPage, setCurrentPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const rows = useSelector((state) => {
     let selected = [...Object.values(state.buttons).map((b) => b.attributes)];
@@ -130,19 +129,24 @@ export default function EnhancedTable() {
     return selected.filter((b) => b.type === type);
   });
 
-  const handleRequestSort = (event, property) => {
+  const handleRequestSort = (_event, property) => {
     const isAsc = orderBy === property && order === "asc";
+    // fetchPaginatedResult
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+  const handleChangePage = async (event, newPage) => {
+    await onPaginate({ page: newPage, limit: rowsPerPage });
+    setCurrentPage(newPage);
+    setRowsPerPage(rowsPerPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+  const handleChangeRowsPerPage = async (event) => {
+    const newPageLimit = parseInt(event.target.value, 10);
+    await onPaginate({ limit: newPageLimit, page: 0 });
+    setRowsPerPage(newPageLimit);
+    setCurrentPage(0);
   };
 
   return (
@@ -163,7 +167,10 @@ export default function EnhancedTable() {
           />
           <TableBody>
             {sort(rows, order, orderBy)
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .slice(
+                currentPage * rowsPerPage,
+                currentPage * rowsPerPage + rowsPerPage
+              )
               .map((row, index) => {
                 return (
                   <TableRow hover key={`tableRow${index}`}>
@@ -192,11 +199,11 @@ export default function EnhancedTable() {
       </TableContainer>
       <TablePagination
         className="table__cell"
-        rowsPerPageOptions={[10, 25, 50]}
+        rowsPerPageOptions={[10, 25, 50, 100]}
         component="div"
-        count={rows.length}
+        count={totalCount}
         rowsPerPage={rowsPerPage}
-        page={page}
+        page={currentPage}
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
