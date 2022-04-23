@@ -129,10 +129,16 @@ export default function EnhancedTable({ onPaginate, totalCount }) {
     return selected.filter((b) => b.type === type);
   });
 
-  const handleRequestSort = (_event, property) => {
+  const handleRequestSort = async (_event, property) => {
     const isAsc = orderBy === property && order === "asc";
-    // fetchPaginatedResult
-    setOrder(isAsc ? "desc" : "asc");
+    const selectedOrder = isAsc ? "desc" : "asc";
+
+    await onPaginate({
+      page: currentPage,
+      limit: rowsPerPage,
+      sort: selectedOrder,
+    });
+    setOrder(selectedOrder);
     setOrderBy(property);
   };
 

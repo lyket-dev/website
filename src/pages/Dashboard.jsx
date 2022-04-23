@@ -30,9 +30,9 @@ export default function Dashboard() {
   const { type } = useParams();
 
   const fetchData = useCallback(
-    async ({ page = 0, limit = 10 } = {}) => {
+    async ({ page = 0, limit = 10, sort = "desc" } = {}) => {
       setLoading(true);
-      const buttons = await dispatch(fetchMap[type]({ page, limit }));
+      const buttons = await dispatch(fetchMap[type]({ page, limit, sort }));
       setTotalCount(buttons.meta.total);
       setLoading(false);
     },
