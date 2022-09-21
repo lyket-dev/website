@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import humanizeString from "humanize-string";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Panes, Pane, Menu } from "components/Panes";
