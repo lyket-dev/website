@@ -47,13 +47,13 @@ export default function ButtonsImporter({ onFinishImporting }) {
   );
 
   return (
-    <>
+    <span className="menu__item">
       <CSVReader
         accept=".csv"
         onFileLoaded={handleSubmitFile}
         parserOptions={papaparseOptions}
       />
       {uploading && <RingSpinner size={20} color="#201335" />}
-    </>
+    </span>
   );
 }

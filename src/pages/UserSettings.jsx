@@ -139,7 +139,7 @@ export default function UserSettings() {
           renderChangePlan()
         ) : (
           <div className="menu__item__label space__bottom-2">
-            To change your plan please contact support at{" "}
+            To change your plan, please contact our support team at{" "}
             <a href="mailto:write@lyket.dev">write@lyket.dev</a>
           </div>
         )}

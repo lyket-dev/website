@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RingSpinner } from "react-spinners-kit";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   fetchAllClapButtons,
   fetchAllLikeButtons,
@@ -9,9 +9,7 @@ import {
 } from "ducks/buttons";
 import useAsyncEffect from "utils/useAsyncEffect";
 import { Page, Section } from "components/Page";
-import { Panes, Pane, Menu } from "components/Panes";
 import ButtonsImporter from "components/ButtonsImporter";
-import { ReactComponent as Folder } from "assets/icons/outline/folder-open.svg";
 import { ReactComponent as Refresh } from "assets/icons/outline/refresh.svg";
 import { ReactComponent as Upload } from "assets/icons/outline/cloud-upload.svg";
 import Tooltip from "components/Tooltip";
@@ -126,55 +124,12 @@ export default function Dashboard() {
           </div>
         )}
         {(!loading || hasButtons) && (
-          <Panes minSize={50}>
-            <Menu>
-              <>
-                <ul className="menu space__bottom-4">
-                  <li className="menu__item">
-                    <Folder />
-                    <Link
-                      className="menu__item__label"
-                      to={`/dashboard/${type}`}
-                    >
-                      All
-                    </Link>
-                  </li>
-                  {namespaces.map((n) => {
-                    const namespace = n ? n : "no-namespace";
-                    return (
-                      <li key={namespace} className="menu__item">
-                        <Folder />
-                        <Link
-                          className="menu__item__label"
-                          to={`/dashboard/${type}/${namespace}`}
-                        >
-                          {namespace}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-                <button className="menu__item" onClick={fetchData}>
-                  <Refresh />
-                  <span className="menu__item__label">Refresh buttons!</span>
-                </button>
-                <div className="menu__item">
-                  <Upload />
-                  <span className="menu__item__label">
-                    Import buttons & votes
-                  </span>
-                  <Tooltip
-                    id="csv"
-                    message="Import multiple buttons at once by uploading a CSV file. The CSV must have the following headers: path and amount. It will accept only valid Lyket urls, ie. [button_type]-buttons/[namespace]/[id]"
-                  />
-                </div>
-                <ButtonsImporter onFinishImporting={fetchData} />
-              </>
-            </Menu>
-            <Pane>
-              <Table onPaginate={fetchData} totalCount={totalCount} />
-            </Pane>
-          </Panes>
+          <Table
+            onPaginate={fetchData}
+            totalCount={totalCount}
+            onFetchData={fetchData}
+            namespaces={namespaces}
+          />
         )}
         {!hasButtons && !loading && renderBlankSlate()}
       </Section>
