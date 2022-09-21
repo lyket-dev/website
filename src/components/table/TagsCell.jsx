@@ -59,24 +59,27 @@ export default function TagsCell({ buttonId }) {
 
   return (
     <div className="ReactTags__container">
-      <ReactTags
-        tags={tags}
-        readOnly={readOnly}
-        suggestions={suggestions}
-        handleDelete={handleDelete}
-        allowDragDrop={false}
-        handleAddition={handleAddition}
-        delimiters={delimiters}
-      />
-      <button
-        className="flex"
-        onClick={(e) => {
-          e.preventDefault();
-          setReadOnly(!readOnly);
-        }}
-      >
-        <Pencil className="ReactTags__icon" />
-      </button>
+      {tags.length > 0 ? (
+        <ReactTags
+          tags={tags}
+          readOnly={readOnly}
+          suggestions={suggestions}
+          handleDelete={handleDelete}
+          allowDragDrop={false}
+          handleAddition={handleAddition}
+          delimiters={delimiters}
+        />
+      ) : (
+        <button
+          className="flex"
+          onClick={(e) => {
+            e.preventDefault();
+            setReadOnly(!readOnly);
+          }}
+        >
+          <Pencil className="ReactTags__icon" />
+        </button>
+      )}
     </div>
   );
 }

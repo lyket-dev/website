@@ -1,0 +1,38 @@
+.outline
+  font-family: $heading-font-family
+  line-height: 1
+  position: relative
+  white-space: nowrap
+  text-decoration: none
+  cursor: pointer
+  color: $base-body-color
+  border: 2px solid $base-body-color
+  border-radius: 3px
+  text-align: center
+  width: 100%
+  +vertical-padding(4)
+  &.is-active
+    border: 2px solid $button-color
+  &:hover
+    border: 2px solid $button-color
+    transition: $transition
+    text-decoration: none !important
+
+.outline__title
+  font-weight: bold
+  +margin-bottom(1)
+
+.outline__button
+  background: $base-body-color
+  color: white
+  +margin-top(1)
+  padding: 5px 10px
+  line-height: 1
+  position: relative
+  white-space: nowrap
+  text-decoration: none
+  cursor: pointer
+  border-radius: 3px
+  text-align: center
+  font-weight: bold
+  +font-size(smallprint)

@@ -17,6 +17,13 @@ import { ReactComponent as Eye } from "assets/icons/outline/eye.svg";
 import { ReactComponent as EyeClosed } from "assets/icons/outline/eye-off.svg";
 import { ReactComponent as Users } from "assets/icons/outline/users.svg";
 
+const planCodes = {
+  free: "Free",
+  basic_plan_v2_yearly: "Basic plan",
+  business_plan_v1_yearly: "Business plan yearly",
+  business_plan_v1_monthly: "Business plan monthly",
+};
+
 export default function UserSettings() {
   const dispatch = useDispatch();
   const [editMode, setEditMode] = useState(false);
@@ -42,6 +49,7 @@ export default function UserSettings() {
     email,
     name,
     company,
+    subscription,
     public_token: publicToken,
     secret_token: secretToken,
     recaptcha_active: recaptcha,
@@ -52,28 +60,108 @@ export default function UserSettings() {
   const allowList =
     allow.length > 0 ? allow.join(", ") : "All websites allowed";
 
+  const isSubscribedTo = (s) => s === subscription;
+
+  const renderChangePlan = () => {
+    return (
+      <>
+        <div className="menu__item__label space__bottom-1">Change plan:</div>
+        <ul className="ternary">
+          <li className="ternary__item">
+            <a
+              href={`https://buy.stripe.com/3cs9Es0ro3sR60obIJ?prefilled_email=${email}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`outline ${
+                isSubscribedTo("basic_plan_v2_yearly") && "is-active"
+              }`}
+            >
+              <p className="outline__title">Basic</p>
+              <p>€48/year</p>
+              <button className="outline__button">
+                {!isSubscribedTo("basic_plan_v2_yearly")
+                  ? "Subscribe"
+                  : "Current plan"}
+              </button>
+            </a>
+          </li>
+          <li className="ternary__item">
+            <a
+              href={`https://buy.stripe.com/fZedUI6PMbZn60o5km?prefilled_email=${email}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`outline ${
+                isSubscribedTo("business_plan_v1_monthly") && "is-active"
+              }`}
+            >
+              <p className="outline__title">Business monthly</p>
+              <p>€10/month</p>
+              <button className="outline__button">
+                {!isSubscribedTo("business_plan_v1_monthly")
+                  ? "Subscribe"
+                  : "Current plan"}
+              </button>
+            </a>
+          </li>
+          <li className="ternary__item">
+            <a
+              href={`https://buy.stripe.com/00g5ocfmi8Nb2OccMM?prefilled_email=${email}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`outline ${
+                isSubscribedTo("business_plan_v1_yearly") && "is-active"
+              }`}
+            >
+              <p className="outline__title">Business yearly</p>
+              <p>€100/year</p>
+              <button className="outline__button">
+                {!isSubscribedTo("business_plan_v1_yearly")
+                  ? "Subscribe"
+                  : "Current plan"}
+              </button>
+            </a>
+          </li>
+        </ul>
+      </>
+    );
+  };
+
   const renderMenu = () => {
     return (
       <ul className="menu">
+        <li className="card__title">
+          <span className="menu__item__label">Current plan: </span>
+          <span className="menu__item__info">
+            {planCodes[subscription] || subscription}
+          </span>
+        </li>
+        {subscription === "free" ? (
+          renderChangePlan()
+        ) : (
+          <div className="menu__item__label space__bottom-2">
+            To change your plan please contact support at{" "}
+            <a href="mailto:write@lyket.dev">write@lyket.dev</a>
+          </div>
+        )}
+        <li className="menu__item space__bottom-2">
+          <Mail />
+          <span className="menu__item__label">Email: </span>
+          <span className="menu__item__info">{email}</span>
+        </li>
         <li className="menu__item space__bottom-2">
           <User />
           <span className="menu__item__label">Name: </span>
-          <span>{name}</span>
+          <span className="menu__item__info">{name}</span>
         </li>
         <li className="menu__item space__bottom-2">
           <Building />
           <span className="menu__item__label">Company: </span>
-          <span>{company}</span>
-        </li>
-        <li className="menu__item space__bottom-2">
-          <Mail />
-          <span className="menu__item__label">Email: </span>
-          <span>{email}</span>
+          <span className="menu__item__info">{company}</span>
         </li>
         <li className="menu__item space__bottom-2">
           <Key />
           <span className="menu__item__label">Public API token: </span>
-          <span>{publicToken}</span>
+          <span className="menu__item__info">{publicToken}</span>
           <button
             className="menu__item__icon"
             onClick={(e) => {
@@ -92,7 +180,7 @@ export default function UserSettings() {
         <li className="menu__item space__bottom-2">
           <Finger />
           <span className="menu__item__label">Secret API token: </span>
-          <span>
+          <span className="menu__item__info">
             {showSecret ? secretToken : "*".repeat(secretToken.length)}
           </span>
           <button
@@ -109,7 +197,7 @@ export default function UserSettings() {
         <li className="menu__item space__bottom-2">
           <Check />
           <span className="menu__item__label">Allowed websites: </span>
-          <span>{allowList}</span>
+          <span className="menu__item__info">{allowList}</span>
           <Tooltip
             id="allow-list"
             message="Accept only requests coming from these domains. If left blank, accept requests from all domains"
@@ -118,7 +206,9 @@ export default function UserSettings() {
         <li className="menu__item space__bottom-2">
           <Shield />
           <span className="menu__item__label">ReCAPTCHA active: </span>
-          <span>{recaptcha ? "true" : "false"}</span>
+          <span className="menu__item__info">
+            {recaptcha ? "true" : "false"}
+          </span>
           <Tooltip
             id="recaptcha"
             message="To enable ReCAPTCHA insert your secret key here and configure Lyket's Provider in your buttons/script using the ReCAPTCHA site key"
@@ -129,7 +219,7 @@ export default function UserSettings() {
           <span className="menu__item__label">
             Max number of sessions per IP:{" "}
           </span>
-          <span>
+          <span className="menu__item__info">
             {max_sessions_per_ip ||
               "None, accept an infinite number of sessions per IP"}
           </span>
@@ -191,7 +281,7 @@ ReactDOM.render(
   document.getElementById('root')
 );`}</pre>
             </code>
-            <span>Follow the </span>
+            <span className="menu__item__info">Follow the </span>
             <a
               href="https://lyket.dev/docs/react"
               target="_blank"
@@ -199,7 +289,7 @@ ReactDOM.render(
             >
               official React documentation
             </a>
-            <span> to start creating buttons</span>
+            <span className="menu__item__info"> to start creating buttons</span>
           </div>
           <div className="card">
             <div className="card__label">HTML</div>
@@ -212,7 +302,7 @@ ReactDOM.render(
 `}</pre>
             </code>
             <div className="card__text">
-              <span>Follow the </span>
+              <span className="menu__item__info">Follow the </span>
               <a
                 href="https://lyket.dev/docs/widget"
                 target="_blank"
@@ -220,7 +310,10 @@ ReactDOM.render(
               >
                 official Widget documentation
               </a>
-              <span> to start creating buttons</span>
+              <span className="menu__item__info">
+                {" "}
+                to start creating buttons
+              </span>
             </div>
           </div>
         </div>

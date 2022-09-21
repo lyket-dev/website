@@ -1,27 +1,26 @@
 .window
   margin: 0 auto
+  position: relative
+  min-width: 40%
+  border-radius: 5px
+  +padding(6)
+  box-shadow: $shadow
+  max-width: 900px
+  +font-size(regular)
 
 .window__container
   +center
 
 .window__label
   +center-horizontally
-  font-size: 12px
-  background-color: rgba($raspberry, 0.6)
+  font-size: 18px
+  background: $gradient
   border-radius: 20px
   font-weight: bold
   +vertical-padding(.2)
   +horizontal-padding(1)
   top: -12px
-
-.window
-  position: relative
-  min-width: 40%
-  border-radius: 5px
-  +padding(6)
-  box-shadow: $shadow
-  max-width: 700px
-  +font-size(regular)
+  text-align: center
 
 .window__bigtext
   +font-size(huge)
@@ -40,7 +39,6 @@
 
 .window__mini
   font-size: 10px
-
 
 @media only screen and (max-width: 960px)
   .window

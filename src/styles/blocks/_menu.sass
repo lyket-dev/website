@@ -15,9 +15,17 @@
     &:hover
       text-decoration: underline
 
+.menu__item--justify
+  @extend .menu__item
+  justify-content: space-between
+
 .menu__item__label
   font-weight: 500
   +margin-right(.5)
+
+.menu__item__info
+  max-width: 50%
+  overflow: scroll
 
 .menu__item__icon
   +margin-left(.5)

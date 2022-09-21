@@ -12,6 +12,7 @@
   border-radius: 3px
   cursor: pointer
   font-size: inherit
+  font-weight: bold
 
   &:hover
     transition: $transition
@@ -21,7 +22,6 @@
 .button[disabled]
   background-color: $disabled-color
   cursor: no-drop
-
   &:hover
     opacity: 1
     background-color: $disabled-color
@@ -38,6 +38,18 @@
 .button--cta
   @extend .button
   background-color: $button-color
+  &:hover
+    transition: $transition
+    background-color: $base-body-color
+
+.button--gradient
+  @extend .button
+  background: $gradient
+  color: $base-body-color
+
+.button--inline
+  @extend .button
+  background: $gradient
   &:hover
     transition: $transition
     background-color: $base-body-color
