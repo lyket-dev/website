@@ -19,6 +19,11 @@ import { ReactComponent as Users } from "assets/icons/outline/users.svg";
 
 const planCodes = {
   free: "Free",
+  deactivating:
+    "Free - you reached the free plan limit, your account will be deactivated by the end of the month",
+  warned:
+    "Free - you reached the free plan limit, your account will be deactivated by the end of the month",
+  deactivated: "Your plan is currently deactivated",
   basic_plan_v2_yearly: "Basic plan",
   business_plan_v1_yearly: "Business plan yearly",
   business_plan_v1_monthly: "Business plan monthly",
@@ -135,7 +140,9 @@ export default function UserSettings() {
             {planCodes[subscription] || subscription}
           </span>
         </li>
-        {subscription === "free" ? (
+        {["free", "deactivated", "deactivating", "warned"].includes(
+          subscription
+        ) ? (
           renderChangePlan()
         ) : (
           <div className="menu__item__label space__bottom-2">
