@@ -47,7 +47,7 @@ const Login = () => {
   return (
     <Page>
       <Section>
-        <p className="card__bigtext">
+        <p className="header__title">
           Welcome back!{" "}
           <span aria-label="Hi!" role="img">
             🙌
@@ -55,9 +55,9 @@ const Login = () => {
         </p>
         <div className="window">
           <div className="window__text">
-            To login enter your email and if you are already registered we will
-            send a Magic Link to your inbox. Just click on it to login! If you
-            cannot find the email, check in the promotions tab.
+            Enter your email and, if you are already registered, we will email
+            you a Magic Link. Click on it to login! If you cannot find the
+            email, check in the promotions tab or spam.
           </div>
           <Formik
             initialValues={{ email: "" }}

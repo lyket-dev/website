@@ -29,7 +29,7 @@ const App = () => {
   }, []);
 
   return (
-    <div>
+    <>
       <ReactNotification />
       <Router>
         <Switch>
@@ -64,7 +64,7 @@ const App = () => {
           </Switch>
         </Switch>
       </Router>
-    </div>
+    </>
   );
 };
 

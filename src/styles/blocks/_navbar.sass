@@ -3,16 +3,16 @@
   display: flex
   justify-content: space-between
   align-items: center
-  +font-size(smallprint)
-  +vertical-padding(.5)
+  +font-size(regular)
+  +vertical-padding(1)
+  background: transparent
 
 .navbar__logo
   font-size: 0
   width: 42px
   height: 42px
   display: block
-  background-size: contain
-  background-image: url("/logo192.png")
+  text-shadow: $shadow
 
 .navbar__item
   display: inline-block
@@ -42,15 +42,8 @@
 
 @media only screen and (min-width: 800px)
   .navbar__logo
-    +font-size(alpha)
+    +font-size(big)
     width: auto
     height: auto
     text-decoration: none
     font-weight: bold
-    background-image: linear-gradient(0deg, $base-body-color 61%, $green 60%)
-    background-position: 0% 0%
-    background-size: 200%
-    background-origin: content-box
-    -webkit-background-clip: text
-    -webkit-text-fill-color: transparent
-    text-decoration: none

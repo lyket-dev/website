@@ -72,22 +72,28 @@ export default function Signup() {
   return (
     <Page>
       <section className="section">
-        <p className="card__bigtext">
-          Signup{" "}
-          <span aria-label="like" role="img">
-            👍
-          </span>
-          <span aria-label="clap" role="img">
-            👏
-          </span>
-          <span aria-label="Soon" role="img">
-            🔜
-          </span>
-          <span aria-label="Laptop" role="img">
-            💻
-          </span>
+        <p className="header__title">
+          Register for free{" "}
+          <div>
+            <span className="space__right-1" aria-label="like" role="img">
+              👍
+            </span>
+            <span className="space__right-1" aria-label="clap" role="img">
+              👏
+            </span>
+            <span className="space__right-1" aria-label="Soon" role="img">
+              🔜
+            </span>
+            <span className="space__right-1" aria-label="Laptop" role="img">
+              💻
+            </span>
+          </div>
         </p>
         <div className="window">
+          <div className="window__text">
+            We will email you a Magic Link. Click on it to login! If you cannot
+            find the login email, check in the promotions tab or spam.
+          </div>
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -190,7 +196,7 @@ export default function Signup() {
                 )}
                 <div className="center space__top-4">
                   <button type="submit" className="button" disabled={emailSent}>
-                    Signup to Lyket!
+                    Register!
                   </button>
                 </div>
               </Form>
