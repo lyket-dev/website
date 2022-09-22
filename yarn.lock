@@ -4158,7 +4158,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.6, classnames@~2.2.6:
+classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
@@ -10105,11 +10105,6 @@ lodash@^4.0.0, lodash@^4.17.12, lodash@^4.17.19, lodash@~4.17.10:
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
   integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
 
-lodash@~4.17.12:
-  version "4.17.21"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
-  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
-
 log-process-errors@^5.1.2:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/log-process-errors/-/log-process-errors-5.1.2.tgz#5d0f195309d9c725a010587527ade00db1fe1646"
@@ -13486,14 +13481,10 @@ react-syntax-highlighter@=12.2.1:
     prismjs "^1.8.4"
     refractor "^2.4.1"
 
-react-tag-input@^6.7.0:
-  version "6.7.0"
-  resolved "https://registry.yarnpkg.com/react-tag-input/-/react-tag-input-6.7.0.tgz#e19f1d17364fbb47c0a4c9d2a0e66c0bcf86ff6a"
-  integrity sha512-wnBzAmDECWhYxWQzWXCvk/M/GZdYrf+mL2FPBAlI69rjEI9Z+azvVlDG6PEhUF5zGLcSDkNF4zov0CS9McKHcw==
-  dependencies:
-    classnames "~2.2.6"
-    lodash "~4.17.12"
-    prop-types "^15.7.2"
+react-tag-autocomplete@^6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/react-tag-autocomplete/-/react-tag-autocomplete-6.3.0.tgz#ce064bbab77b4daf7706be1c08413e7d0335ff4d"
+  integrity sha512-MUBVUFh5eOqshUm5NM20qp7zXk8TzSiKO4GoktlFzBLIOLs356npaMKtL02bm0nFV2f1zInUrXn1fq6+i5YX0w==
 
 react-tooltip@^4.2.14:
   version "4.2.14"

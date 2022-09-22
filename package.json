@@ -38,7 +38,7 @@
     "react-scripts": "3.4.1",
     "react-spinners-kit": "^1.9.1",
     "react-split-pane": "^0.1.92",
-    "react-tag-input": "^6.7.0",
+    "react-tag-autocomplete": "^6.3.0",
     "react-tooltip": "^4.2.14",
     "react-typist": "^2.0.5",
     "redux": "^4.0.5",

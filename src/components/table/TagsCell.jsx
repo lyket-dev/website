@@ -1,26 +1,18 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { WithContext as ReactTags } from "react-tag-input";
-import { tag as tagButton } from "ducks/buttons";
-import { ReactComponent as Pencil } from "assets/icons/outline/tag.svg";
+import { tag, tag as tagButton } from "ducks/buttons";
+import { ReactComponent as TagIcon } from "assets/icons/outline/tag.svg";
+import ReactTags from "react-tag-autocomplete";
 
-const KeyCodes = {
-  comma: 188,
-  enter: 13,
-};
-
-const delimiters = [KeyCodes.comma, KeyCodes.enter];
+const delimiters = ["Enter", "Tab"];
 
 export default function TagsCell({ buttonId }) {
   const dispatch = useDispatch();
 
-  const [readOnly, setReadOnly] = useState(true);
+  const [editTags, setEditTags] = useState(false);
 
   const tags = useSelector((state) => {
-    return (
-      state.buttons[buttonId] &&
-      state.buttons[buttonId].attributes.tags.map((t) => ({ id: t, text: t }))
-    );
+    return state.buttons[buttonId] && state.buttons[buttonId].attributes.tags;
   });
 
   const suggestions = useSelector((state) => {
@@ -28,7 +20,7 @@ export default function TagsCell({ buttonId }) {
       return [...acc, ...button.attributes.tags];
     }, []);
 
-    return [...new Set(sugg)].map((t) => ({ id: t, text: t }));
+    return [...new Set(sugg)].map((t) => ({ id: t, name: t }));
   });
 
   const handleDelete = (i) => {
@@ -36,7 +28,7 @@ export default function TagsCell({ buttonId }) {
       tagButton(buttonId, {
         data: {
           attributes: {
-            tags: tags.filter((tag, index) => index !== i).map((t) => t.text),
+            tags: tags.filter((_tag, index) => index !== i),
           },
         },
       })
@@ -44,7 +36,7 @@ export default function TagsCell({ buttonId }) {
   };
 
   const handleAddition = (tag) => {
-    const newTags = [...tags, tag].map((t) => t.text);
+    const newTags = [...tags, tag.name];
 
     dispatch(
       tagButton(buttonId, {
@@ -57,29 +49,40 @@ export default function TagsCell({ buttonId }) {
     );
   };
 
-  return (
+  return editTags ? (
     <div className="ReactTags__container">
-      {tags.length > 0 ? (
-        <ReactTags
-          tags={tags}
-          readOnly={readOnly}
-          suggestions={suggestions}
-          handleDelete={handleDelete}
-          allowDragDrop={false}
-          handleAddition={handleAddition}
-          delimiters={delimiters}
-        />
-      ) : (
-        <button
-          className="flex"
-          onClick={(e) => {
-            e.preventDefault();
-            setReadOnly(!readOnly);
-          }}
-        >
-          <Pencil className="ReactTags__icon" />
-        </button>
-      )}
+      <ReactTags
+        tags={tags.map((tag) => ({ id: tag, name: tag }))}
+        allowNew
+        delimiters={delimiters}
+        onAddition={handleAddition}
+        onDelete={handleDelete}
+        placeholderText="Add tag"
+        suggestions={suggestions}
+      />
+      <button
+        className="react-tags__close"
+        onClick={(e) => {
+          e.preventDefault();
+          setEditTags(false);
+        }}
+      >
+        x
+      </button>
+    </div>
+  ) : (
+    <div
+      className="ReactTags__container"
+      onClick={(e) => {
+        e.preventDefault();
+        setEditTags(true);
+      }}
+    >
+      <>
+        {tags.map((tag) => {
+          return <button className="react-tags__tag">{tag}</button>;
+        })}
+      </>
     </div>
   );
 }
