@@ -247,7 +247,7 @@ export default function UserSettings() {
   return (
     <Page>
       <Section>
-        <h1 className="section__title">User settings</h1>
+        <h1 className="header__title">User settings</h1>
         <div className="window space__bottom-6">
           <div className="window__label">{email}</div>
           {!editMode && renderMenu()}
@@ -262,7 +262,7 @@ export default function UserSettings() {
         </div>
       </Section>
       <Section>
-        <h3 className="section__title">What to do now?</h3>
+        <h3 className="section__title">Get started</h3>
         <div className="cards--multi">
           <div className="card">
             <div className="card__label">React</div>
