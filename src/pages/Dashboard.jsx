@@ -60,11 +60,13 @@ export default function Dashboard() {
         <h4 className="card__title">Welcome!</h4>
         <p className="card__text">
           This Lyket's dashboard, where you can see all statistics related to
-          your buttons. Anyway, it seems that you have no buttons at the moment!
+          your buttons. However, it seems that you have no buttons at the
+          moment!
         </p>
 
         <p className="card__text">
-          You can start creating buttons using HTML, or our React Library.
+          You can start creating buttons using HTML, our React Library, or our
+          API.
         </p>
         <h4 className="card__title">HTML</h4>
         <p className="card__text">
@@ -72,7 +74,7 @@ export default function Dashboard() {
             You can learn how to create buttons using HTML by reading the{" "}
           </span>
           <a
-            href="https://lyket.dev/docs/widget"
+            href="https://lyket.dev/docs/html"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -91,26 +93,30 @@ export default function Dashboard() {
           </a>
           <span> to start creating buttons using React.</span>
         </p>
-        <p className="card__text">
-          If you just created a button but you cannot see it, hit the refresh
-          button!
-        </p>
-        <button className="menu__item" onClick={fetchData}>
-          <Refresh />
-          <span className="menu__item__label">Refresh buttons!</span>
-        </button>
-        <p className="card__text">
-          If you want to import buttons in bulk upload a CSV file!
-        </p>
-        <div className="menu__item">
-          <Upload />
-          <span className="menu__item__label">Import buttons & votes</span>
+        <div className="flex--start">
+          <span className="card__title">Bulk import</span>
           <Tooltip
-            id="csv"
+            id="csv-no-buttons"
             message="Import multiple buttons at once by uploading a CSV file. The CSV must have the following headers: path and amount. It will accept only valid Lyket urls, ie. [button_type]-buttons/[namespace]/[id]"
           />
         </div>
+        <p className="card__text">
+          If you want to import buttons in bulk, upload a CSV file! The CSV must
+          have a <code>path</code> and <code>amount</code> header.{" "}
+          <a href="/test-import.csv" download>
+            Download an example csv
+          </a>
+        </p>
         <ButtonsImporter onFinishImporting={fetchData} />
+        <div className="space__bottom-1"> </div>
+        <p className="card__text ">
+          If you already created some buttons but you cannot see them in the
+          dashboard yet, hit the refresh button!
+        </p>
+        <button className="menu__item space__bottom--2" onClick={fetchData}>
+          <Refresh />
+          <span className="menu__item__label">Refresh buttons!</span>
+        </button>
       </div>
     );
   };

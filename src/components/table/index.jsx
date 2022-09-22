@@ -204,6 +204,9 @@ export default function EnhancedTable({
           <div className="menu__item">
             <Upload />
             <span className="menu__item__label">Import buttons & votes</span>
+            <a href="/test-import.csv" download>
+              Download an example csv
+            </a>
             <Tooltip
               id="csv"
               message="Import multiple buttons at once by uploading a CSV file. The CSV must have the following headers: path and amount. It will accept only valid Lyket urls, ie. [button_type]-buttons/[namespace]/[id]"
