@@ -81,7 +81,7 @@ const Login = () => {
                 )}
                 <div className="center space__top-4">
                   <button type="submit" disabled={emailSent} className="button">
-                    Send me magic link!
+                    Email me the magic link!
                   </button>
                 </div>
               </Form>
