@@ -51,7 +51,7 @@ export default function Dashboard() {
 
   const renderBlankSlate = () => {
     return (
-      <div className="window">
+      <div className="window blank">
         <p className="card__bigtext">
           <span aria-label="Hi!" role="img">
             👋
@@ -117,13 +117,14 @@ export default function Dashboard() {
 
   return (
     <Page>
-      <Section>
+      {!hasButtons && !loading && renderBlankSlate()}
+      <Section className={!hasButtons && "blurred"}>
         {loading && !hasButtons && (
           <div className="fixed_center">
             <RingSpinner size={100} color="#201335" />
           </div>
         )}
-        {(!loading || hasButtons) && (
+        {!loading && (
           <Table
             onPaginate={fetchData}
             totalCount={totalCount}
@@ -131,7 +132,6 @@ export default function Dashboard() {
             namespaces={namespaces}
           />
         )}
-        {!hasButtons && !loading && renderBlankSlate()}
       </Section>
     </Page>
   );

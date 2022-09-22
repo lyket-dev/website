@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import Header from "./Header";
 import Cards from "./Cards";
 import { sort } from "utils/sort";
+import fake from "utils/fake";
 import ActionsCell from "./ActionsCell";
 import TagsCell from "./TagsCell";
 import { ReactComponent as Clap } from "assets/icons/outline/hand.svg";
@@ -167,6 +168,8 @@ export default function EnhancedTable({
     setCurrentPage(0);
   };
 
+  const tableButtons = rows.length === 0 ? fake : rows;
+
   return (
     <>
       <Header icons={icons} namespace={namespace} currentType={type} />
@@ -210,7 +213,7 @@ export default function EnhancedTable({
         </Menu>
         <Pane>
           <div>
-            <Cards buttons={rows} currentNamespace={namespace} />
+            <Cards buttons={tableButtons} currentNamespace={namespace} />
             <TableContainer>
               <Table
                 className="table"
@@ -224,7 +227,7 @@ export default function EnhancedTable({
                   onRequestSort={handleRequestSort}
                 />
                 <TableBody>
-                  {sort(rows, order, orderBy)
+                  {sort(tableButtons, order, orderBy)
                     .slice(
                       currentPage * rowsPerPage,
                       currentPage * rowsPerPage + rowsPerPage

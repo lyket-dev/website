@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { tag, tag as tagButton } from "ducks/buttons";
-import { ReactComponent as TagIcon } from "assets/icons/outline/tag.svg";
+import { tag as tagButton } from "ducks/buttons";
 import ReactTags from "react-tag-autocomplete";
 
 const delimiters = ["Enter", "Tab"];
@@ -12,7 +11,9 @@ export default function TagsCell({ buttonId }) {
   const [editTags, setEditTags] = useState(false);
 
   const tags = useSelector((state) => {
-    return state.buttons[buttonId] && state.buttons[buttonId].attributes.tags;
+    return (
+      (state.buttons[buttonId] && state.buttons[buttonId].attributes.tags) || []
+    );
   });
 
   const suggestions = useSelector((state) => {
