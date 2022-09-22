@@ -58,7 +58,8 @@ export default function Navbar({ loggedIn }) {
     <div className="navbar">
       <div>
         <Link className="navbar__logo" to="/">
-          LYKET
+          <div className="navbar__logo--mobile"></div>
+          <div className="navbar__logo--desk">LYKET</div>
         </Link>
       </div>
       <ul className="navbar__container">{renderLoggedMenuItems()}</ul>

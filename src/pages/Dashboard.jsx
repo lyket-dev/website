@@ -11,7 +11,6 @@ import useAsyncEffect from "utils/useAsyncEffect";
 import { Page, Section } from "components/Page";
 import ButtonsImporter from "components/ButtonsImporter";
 import { ReactComponent as Refresh } from "assets/icons/outline/refresh.svg";
-import { ReactComponent as Upload } from "assets/icons/outline/cloud-upload.svg";
 import Tooltip from "components/Tooltip";
 import Table from "components/table";
 
