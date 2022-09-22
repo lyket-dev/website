@@ -1,4 +1,4 @@
-import unique from 'array-unique';
+import unique from "array-unique";
 
 function chunk(originalArray, size) {
   const chunked = [];
@@ -25,9 +25,9 @@ export default function debouncedFetchById(fetchById, toFetch) {
       setTimeout(() => later(dispatch, getState), WAIT - last);
     } else if (ids.length > 0) {
       const state = getState();
-      const idsToFetch = unique((ids || []).filter(id => toFetch(state, id)));
+      const idsToFetch = unique((ids || []).filter((id) => toFetch(state, id)));
 
-      chunk(idsToFetch, MAX_IDS).forEach(idsChunk => {
+      chunk(idsToFetch, MAX_IDS).forEach((idsChunk) => {
         dispatch(fetchById({ ids: idsChunk }));
       });
 
@@ -35,9 +35,10 @@ export default function debouncedFetchById(fetchById, toFetch) {
     }
   }
 
-  return ({ ids: newIds }) => (...args) => {
-    ids = ids.concat(newIds);
-    timestamp = Date.now();
-    setTimeout(() => later(...args), WAIT);
-  };
+  return ({ ids: newIds }) =>
+    (...args) => {
+      ids = ids.concat(newIds);
+      timestamp = Date.now();
+      setTimeout(() => later(...args), WAIT);
+    };
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 // Our hook
 export default function useDebounce(value, delay) {
@@ -27,7 +27,7 @@ export default function useDebounce(value, delay) {
     // Only re-call effect if value changes
     // You could also add the "delay" var to inputs array if you ...
     // ... need to be able to change that dynamically.
-    [value],
+    [value]
   );
 
   return debouncedValue;

@@ -1,7 +1,7 @@
-import { withProps } from 'recompose';
-import qs from 'qs';
+import { withProps } from "recompose";
+import qs from "qs";
 
-export default withProps(props => {
+export default withProps((props) => {
   return {
     location: {
       ...props.location,

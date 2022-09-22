@@ -1,5 +1,5 @@
-import queryString from 'qs';
-import store from 'store';
+import queryString from "qs";
+import store from "store";
 
 // imageishThing can be:
 // * upload JSON API
@@ -23,7 +23,7 @@ function getUrl(imageishThing) {
     };
   }
 
-  const path = payload.path.startsWith('/')
+  const path = payload.path.startsWith("/")
     ? payload.path.slice(1)
     : payload.path;
 
@@ -34,13 +34,13 @@ function getUrl(imageishThing) {
 }
 
 const formatsWithTransformations = [
-  'gif',
-  'jpeg',
-  'jpg',
-  'png',
-  'ai',
-  'tif',
-  'tiff',
+  "gif",
+  "jpeg",
+  "jpg",
+  "png",
+  "ai",
+  "tif",
+  "tiff",
 ];
 
 export function supportsTransformations(imageishThing) {
@@ -56,7 +56,7 @@ export function supportsTransformations(imageishThing) {
   );
 }
 
-const imageFormats = ['gif', 'jpeg', 'jpg', 'png', 'svg'];
+const imageFormats = ["gif", "jpeg", "jpg", "png", "svg"];
 
 export function isImageFormat(imageishThing) {
   if (!imageishThing) {

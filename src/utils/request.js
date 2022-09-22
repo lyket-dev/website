@@ -5,8 +5,8 @@ const underMaintenanceError = {
   type: "api_error",
   attributes: {
     code: "UNDER_MAINTENANCE",
-    details: {}
-  }
+    details: {},
+  },
 };
 
 const rawRequest = async function request(url, options = {}, retryCount = 1) {
@@ -31,12 +31,12 @@ const rawRequest = async function request(url, options = {}, retryCount = 1) {
   const reqResMeta = {
     request: {
       url,
-      ...options
+      ...options,
     },
     response: {
       status: res.status,
-      headers: Object.fromEntries([...res.headers])
-    }
+      headers: Object.fromEntries([...res.headers]),
+    },
   };
 
   let body;
@@ -68,7 +68,7 @@ export const request = (url, options = {}) => {
     error = e;
   }
 
-  return rawRequest(url, options).catch(e => {
+  return rawRequest(url, options).catch((e) => {
     e.error = error;
     throw e;
   });
@@ -83,7 +83,7 @@ export const post = function post(url, body, options = {}) {
     method: "POST",
     mode: "cors",
     body: JSON.stringify(body),
-    ...options
+    ...options,
   });
 };
 
@@ -92,7 +92,7 @@ export const put = function put(url, body, options = {}) {
     method: "PUT",
     mode: "cors",
     body: JSON.stringify(body),
-    ...options
+    ...options,
   });
 };
 
@@ -100,6 +100,6 @@ export const destroy = function destroy(url, options = {}) {
   return request(url, {
     method: "DELETE",
     mode: "cors",
-    ...options
+    ...options,
   });
 };

@@ -1,5 +1,5 @@
 export default function getPreferredLanguage() {
-  const customLocale = localStorage.getItem('forceLocale');
+  const customLocale = localStorage.getItem("forceLocale");
 
   if (customLocale) {
     return customLocale;
@@ -10,7 +10,7 @@ export default function getPreferredLanguage() {
     : navigator.language || navigator.userLanguage;
 
   if (!code) {
-    return 'en';
+    return "en";
   }
 
   return code.split(/[-_]/)[0];

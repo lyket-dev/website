@@ -1,10 +1,10 @@
-import speakingurl from 'speakingurl';
+import speakingurl from "speakingurl";
 
 export default function slugify(text) {
   return speakingurl(text)
     .toLowerCase()
-    .replace(/[^a-z0-9\-_]+/, '-')
-    .replace(/\-{2,}/, '-')
+    .replace(/[^a-z0-9\-_]+/, "-")
+    .replace(/\-{2,}/, "-")
     .substr(0, 81)
-    .replace(/^\-|\-$/, '');
+    .replace(/^\-|\-$/, "");
 }

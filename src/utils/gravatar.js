@@ -1,16 +1,16 @@
-import md5 from 'min-md5';
-import queryString from 'qs';
-import generateColorMapper from 'utils/generateColorMapper';
+import md5 from "min-md5";
+import queryString from "qs";
+import generateColorMapper from "utils/generateColorMapper";
 
 const colorForName = generateColorMapper([
-  'F5C012',
-  '83DD87',
-  '00C7B7',
-  '7E9DF2',
-  '587CCC',
-  'FF9750',
-  'FC876D',
-  'AB7ECE',
+  "F5C012",
+  "83DD87",
+  "00C7B7",
+  "7E9DF2",
+  "587CCC",
+  "FF9750",
+  "FC876D",
+  "AB7ECE",
 ]);
 
 const uriAvatar = ({
@@ -20,9 +20,9 @@ const uriAvatar = ({
   color,
   length = 2,
   fontSize = 0.5,
-  rounded = 'false',
-  uppercase = 'true',
-  bold = 'true',
+  rounded = "false",
+  uppercase = "true",
+  bold = "true",
 }) => {
   return `https://ui-avatars.com/api/${[
     name,
@@ -34,7 +34,7 @@ const uriAvatar = ({
     rounded,
     uppercase,
     bold,
-  ].join('/')}`;
+  ].join("/")}`;
 };
 
 export default function gravatar(email, s, name = null) {
@@ -44,7 +44,7 @@ export default function gravatar(email, s, name = null) {
     name
       .trim()
       .split(/ +/)
-      .reduce((acc, w) => acc + w[0].toUpperCase(), '')
+      .reduce((acc, w) => acc + w[0].toUpperCase(), "")
       .slice(0, 2);
 
   const d = name
@@ -53,12 +53,12 @@ export default function gravatar(email, s, name = null) {
         fontSize: s < 40 ? 0.4 : 0.3,
         name: initials,
         background: colorHash,
-        color: 'ffffff',
+        color: "ffffff",
       })
-    : 'blank';
+    : "blank";
 
   const url = `https://secure.gravatar.com/avatar/${md5(
-    email,
+    email
   )}?${queryString.stringify({ s: s * 2, d })}`;
 
   return url;

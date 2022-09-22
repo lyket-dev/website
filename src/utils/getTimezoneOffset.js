@@ -1,22 +1,22 @@
 // Thank you https://github.com/mobz/get-timezone-offset/
 
-const locale = 'en-US';
+const locale = "en-US";
 const usRegExp = /(\d+).(\d+).(\d+),?\s+(\d+).(\d+)(.(\d+))?/;
 
 const formatOptions = {
-  timeZone: 'UTC',
+  timeZone: "UTC",
   hour12: false,
-  year: 'numeric',
-  month: 'numeric',
-  day: 'numeric',
-  hour: 'numeric',
-  minute: 'numeric',
+  year: "numeric",
+  month: "numeric",
+  day: "numeric",
+  hour: "numeric",
+  minute: "numeric",
 };
 
 const utcF = new Intl.DateTimeFormat(locale, formatOptions);
 
 function parseDate(dateStr) {
-  const dateStrTemp = dateStr.replace(/[\u200E\u200F]/g, '');
+  const dateStrTemp = dateStr.replace(/[\u200E\u200F]/g, "");
   const dateA = usRegExp.exec(dateStrTemp);
   return [].slice.call(dateA, 1).map(Math.floor);
 }
@@ -45,6 +45,6 @@ module.exports = function getTimezoneOffset(tzStr, date) {
 
   return diffMinutes(
     parseDate(utcF.format(date)),
-    parseDate(locF.format(date)),
+    parseDate(locF.format(date))
   );
 };

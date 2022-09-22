@@ -1,22 +1,22 @@
-import Chartist from 'chartist';
+import Chartist from "chartist";
 
 /* eslint-disable */
 
 var defaultOptions = {
   threshold: 0,
   classNames: {
-    aboveThreshold: 'ct-threshold-above',
-    belowThreshold: 'ct-threshold-below',
+    aboveThreshold: "ct-threshold-above",
+    belowThreshold: "ct-threshold-below",
   },
   maskNames: {
-    aboveThreshold: 'ct-threshold-mask-above',
-    belowThreshold: 'ct-threshold-mask-below',
+    aboveThreshold: "ct-threshold-mask-above",
+    belowThreshold: "ct-threshold-mask-below",
   },
 };
 
 function createMasks(data, options) {
   // Select the defs element within the chart or create a new one
-  var defs = data.svg.querySelector('defs') || data.svg.elem('defs');
+  var defs = data.svg.querySelector("defs") || data.svg.elem("defs");
   // Project the threshold value on the chart Y axis
   var projectedThreshold =
     data.chartRect.height() -
@@ -27,76 +27,72 @@ function createMasks(data, options) {
 
   // Create mask for upper part above threshold
   defs
-    .elem('mask', {
+    .elem("mask", {
       x: 0,
       y: 0,
       width: width,
       height: height,
-      maskUnits: 'userSpaceOnUse',
+      maskUnits: "userSpaceOnUse",
       id: options.maskNames.aboveThresholdID,
     })
-    .elem('rect', {
+    .elem("rect", {
       x: 0,
       y: 0,
       width: width,
       height: projectedThreshold,
-      fill: 'white',
+      fill: "white",
     });
 
   // Create mask for lower part below threshold
   defs
-    .elem('mask', {
+    .elem("mask", {
       x: 0,
       y: 0,
       width: width,
       height: height,
-      maskUnits: 'userSpaceOnUse',
+      maskUnits: "userSpaceOnUse",
       id: options.maskNames.belowThresholdID,
     })
-    .elem('rect', {
+    .elem("rect", {
       x: 0,
       y: projectedThreshold,
       width: width,
       height: height - projectedThreshold,
-      fill: 'white',
+      fill: "white",
     });
 
   return defs;
 }
 
 Chartist.plugins = Chartist.plugins || {};
-Chartist.plugins.ctThreshold = function(options) {
+Chartist.plugins.ctThreshold = function (options) {
   options = Chartist.extend({}, defaultOptions, options);
 
   // Ensure mask names are unique
   options.maskNames.aboveThresholdID =
     options.maskNames.aboveThreshold +
-    '-' +
-    Math.random()
-      .toString(36)
-      .substr(2, 9);
+    "-" +
+    Math.random().toString(36).substr(2, 9);
   options.maskNames.belowThresholdID =
     options.maskNames.belowThreshold +
-    '-' +
-    Math.random()
-      .toString(36)
-      .substr(2, 9);
+    "-" +
+    Math.random().toString(36).substr(2, 9);
 
   return function ctThreshold(chart) {
     if (chart instanceof Chartist.Line || chart instanceof Chartist.Bar) {
-      chart.on('draw', function(data) {
-        if (data.type === 'point') {
+      chart.on("draw", function (data) {
+        if (data.type === "point") {
           // For points we can just use the data value and compare against the threshold in order to determine
           // the appropriate class
           data.element.addClass(
             data.value.y >= options.threshold
               ? options.classNames.aboveThreshold
-              : options.classNames.belowThreshold,
+              : options.classNames.belowThreshold
           );
         } else if (
-          data.type === 'line' ||
-          data.type === 'bar' ||
-          data.type === 'area'
+          data.type === "line" ||
+          data.type === "bar" ||
+          data.type === "area"
         ) {
           // Cloning the original line path, mask it with the upper mask rect above the threshold and add the
           // class for above threshold
@@ -104,7 +100,7 @@ Chartist.plugins.ctThreshold = function(options) {
             .parent()
             .elem(data.element._node.cloneNode(true))
             .attr({
-              mask: 'url(#' + options.maskNames.aboveThresholdID + ')',
+              mask: "url(#" + options.maskNames.aboveThresholdID + ")",
             })
             .addClass(options.classNames.aboveThreshold);
 
@@ -112,14 +108,14 @@ Chartist.plugins.ctThreshold = function(options) {
           // for blow threshold
           data.element
             .attr({
-              mask: 'url(#' + options.maskNames.belowThresholdID + ')',
+              mask: "url(#" + options.maskNames.belowThresholdID + ")",
             })
             .addClass(options.classNames.belowThreshold);
         }
       });
 
       // On the created event, create the two mask definitions used to mask the line graphs
-      chart.on('created', function(data) {
+      chart.on("created", function (data) {
         createMasks(data, options);
       });
     }

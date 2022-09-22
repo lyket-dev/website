@@ -1,7 +1,7 @@
-import { createReducer, createAction } from 'redux-act';
-import debouncedFetchById from 'utils/debouncedFetchById';
-import omit from 'object.omit';
-import { rawSwitchEnvironment, destroy as logout } from 'ducks/session';
+import { createReducer, createAction } from "redux-act";
+import debouncedFetchById from "utils/debouncedFetchById";
+import omit from "object.omit";
+import { rawSwitchEnvironment, destroy as logout } from "ducks/session";
 
 export default function createCollectionReducer({
   name,
@@ -9,7 +9,7 @@ export default function createCollectionReducer({
   rawFetchPage,
 }) {
   function generateCollectionKey({ query = {}, ...other }) {
-    return JSON.stringify({ ...other, query: omit(query, ['page']) });
+    return JSON.stringify({ ...other, query: omit(query, ["page"]) });
   }
 
   function generatePageKey({ query = {} }) {
@@ -41,7 +41,9 @@ export default function createCollectionReducer({
     }
 
     return {
-      items: pageData.ids.map(id => state[entityStoreLeaf][id]).filter(x => x),
+      items: pageData.ids
+        .map((id) => state[entityStoreLeaf][id])
+        .filter((x) => x),
       isStale: pageData.isStale,
       totalEntries,
       isFetching: pageData.isFetching,
@@ -50,10 +52,10 @@ export default function createCollectionReducer({
 
   const invalidate = createAction(`${name}/invalidate`);
 
-  const fetchPage = request => (dispatch, getState) => {
+  const fetchPage = (request) => (dispatch, getState) => {
     const { isFetching, isStale } = getResultsForPageRequest(
       getState(),
-      request,
+      request
     );
 
     if (isFetching) {
@@ -67,37 +69,39 @@ export default function createCollectionReducer({
     return dispatch(rawFetchPage(request));
   };
 
-  const nonDebouncedFetchById = ({ ids }) => (dispatch, getState) => {
-    const state = getState();
-    const idsToFetch = (ids || [])
-      .filter(id => !state[entityStoreLeaf][id])
-      .filter(x => x);
+  const nonDebouncedFetchById =
+    ({ ids }) =>
+    (dispatch, getState) => {
+      const state = getState();
+      const idsToFetch = (ids || [])
+        .filter((id) => !state[entityStoreLeaf][id])
+        .filter((x) => x);
 
-    if (idsToFetch.length === 0) {
-      return Promise.resolve();
-    }
+      if (idsToFetch.length === 0) {
+        return Promise.resolve();
+      }
 
-    const request = {
-      query: { 'filter[ids]': idsToFetch.join(','), 'page[limit]': 500 },
+      const request = {
+        query: { "filter[ids]": idsToFetch.join(","), "page[limit]": 500 },
+      };
+      const key = generatePageKey(request);
+      const data = state[name][key];
+
+      if (data) {
+        return Promise.resolve();
+      }
+
+      return dispatch(rawFetchPage(request));
     };
-    const key = generatePageKey(request);
-    const data = state[name][key];
-
-    if (data) {
-      return Promise.resolve();
-    }
-
-    return dispatch(rawFetchPage(request));
-  };
 
   const fetchById = debouncedFetchById(
     nonDebouncedFetchById,
-    (state, id) => !state[entityStoreLeaf][id],
+    (state, id) => !state[entityStoreLeaf][id]
   );
 
   const pageReducer = createReducer(
     {
-      [rawFetchPage.request]: state => {
+      [rawFetchPage.request]: (state) => {
         return { ...state, isFetching: true, isFailed: false };
       },
       [rawFetchPage.receive]: (state, { response }) => {
@@ -107,13 +111,13 @@ export default function createCollectionReducer({
           ...state,
           isFetching: false,
           isStale: false,
-          ids: data.map(r => r.id),
+          ids: data.map((r) => r.id),
         };
       },
-      [invalidate]: state => {
+      [invalidate]: (state) => {
         return { ...state, isStale: true };
       },
-      [rawFetchPage.fail]: state => {
+      [rawFetchPage.fail]: (state) => {
         return { ...state, isFetching: true, isFailed: true };
       },
     },
@@ -123,7 +127,7 @@ export default function createCollectionReducer({
       ids: [],
       totalEntries: null,
       isFailed: false,
-    },
+    }
   );
 
   const initialCollectionState = {
@@ -167,7 +171,7 @@ export default function createCollectionReducer({
                   ...acc,
                   [key]: pageReducer(state.pages[key], action),
                 }),
-                state.pages,
+                state.pages
               ),
             };
       }
@@ -182,7 +186,7 @@ export default function createCollectionReducer({
       case rawFetchPage.receive.toString():
       case rawFetchPage.fail.toString(): {
         const key = generateCollectionKey(
-          omit(action.payload, ['response', 'error']),
+          omit(action.payload, ["response", "error"])
         );
         return { ...state, [key]: collectionReducer(state[key], action) };
       }
@@ -197,7 +201,7 @@ export default function createCollectionReducer({
               ? collectionReducer(state[key], action)
               : state[key],
           }),
-          state,
+          state
         );
       }
       case logout.toString():

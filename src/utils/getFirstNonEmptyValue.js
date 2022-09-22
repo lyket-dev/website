@@ -1,7 +1,7 @@
 export default function getFirstNonEmptyValue(item, fields) {
   const { attributes } = item;
 
-  const firstNonEmptyField = fields.find(f => {
+  const firstNonEmptyField = fields.find((f) => {
     const val = attributes[f.attributes.api_key];
     return Array.isArray(val) ? val.length > 0 : !!val;
   });
@@ -14,8 +14,8 @@ export default function getFirstNonEmptyValue(item, fields) {
 
   if (firstNonEmptyField.attributes.localized) {
     imageValue = Object.values(
-      attributes[firstNonEmptyField.attributes.api_key],
-    ).find(l => !!l);
+      attributes[firstNonEmptyField.attributes.api_key]
+    ).find((l) => !!l);
   } else {
     imageValue = attributes[firstNonEmptyField.attributes.api_key];
   }

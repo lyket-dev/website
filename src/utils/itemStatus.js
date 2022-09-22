@@ -1,14 +1,14 @@
-export default function(item) {
+export default function (item) {
   if (!item) {
-    return 'new';
+    return "new";
   }
 
   if (!item.id) {
-    return 'new';
+    return "new";
   }
 
   if (!item.meta.status) {
-    return 'published';
+    return "published";
   }
 
   return item.meta.status;

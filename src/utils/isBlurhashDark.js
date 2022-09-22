@@ -1,9 +1,9 @@
 /* eslint-disable no-restricted-properties */
 
 const digitCharacters =
-  '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#$%*+,-.:;=?@[]^_{|}~';
+  "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#$%*+,-.:;=?@[]^_{|}~";
 
-const decode83 = str => {
+const decode83 = (str) => {
   let value = 0;
 
   for (let i = 0; i < str.length; i += 1) {
@@ -15,7 +15,7 @@ const decode83 = str => {
   return value;
 };
 
-const linearTosRGB = value => {
+const linearTosRGB = (value) => {
   const v = Math.max(0, Math.min(1, value));
   if (v <= 0.0031308) {
     return Math.round(v * 12.92 * 255 + 0.5);
@@ -24,7 +24,7 @@ const linearTosRGB = value => {
   return Math.round((1.055 * Math.pow(v, 1 / 2.4) - 0.055) * 255 + 0.5);
 };
 
-export const sRGBToLinear = value => {
+export const sRGBToLinear = (value) => {
   const v = value / 255;
   if (v <= 0.04045) {
     return v / 12.92;
@@ -32,14 +32,14 @@ export const sRGBToLinear = value => {
   return Math.pow((v + 0.055) / 1.055, 2.4);
 };
 
-const decodeDC = value => {
+const decodeDC = (value) => {
   const intR = value >> 16;
   const intG = (value >> 8) & 255;
   const intB = value & 255;
   return [sRGBToLinear(intR), sRGBToLinear(intG), sRGBToLinear(intB)];
 };
 
-const sign = n => (n < 0 ? -1 : 1);
+const sign = (n) => (n < 0 ? -1 : 1);
 
 const signPow = (val, exp) => sign(val) * Math.pow(Math.abs(val), exp);
 
@@ -97,7 +97,7 @@ export default function isBlurhashDark(blurhash) {
 
   // HSP (Highly Sensitive Poo) equation from http://alienryderflex.com/hsp.html
   const hsp = Math.sqrt(
-    0.299 * (intR * intR) + 0.587 * (intG * intG) + 0.114 * (intB * intB),
+    0.299 * (intR * intR) + 0.587 * (intG * intG) + 0.114 * (intB * intB)
   );
 
   // Using the HSP value, determine whether the color is light or dark

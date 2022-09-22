@@ -1,7 +1,7 @@
-export function getNewPosition(list, pendingMovement, attribute = 'position') {
+export function getNewPosition(list, pendingMovement, attribute = "position") {
   let position = 0;
 
-  if ('index' in pendingMovement.destination) {
+  if ("index" in pendingMovement.destination) {
     const hover = list[pendingMovement.destination.index];
 
     if (hover) {

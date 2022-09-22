@@ -1,21 +1,21 @@
-import Connect from 'components/Connect';
-import PropTypes from 'prop-types';
-import qs from 'qs';
-import React from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import withLocationQuery from 'utils/withLocationQuery';
-import pickBy from 'lodash-es/pickBy';
+import Connect from "components/Connect";
+import PropTypes from "prop-types";
+import qs from "qs";
+import React from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import withLocationQuery from "utils/withLocationQuery";
+import pickBy from "lodash-es/pickBy";
 
 export default function withPagination({
   initialResultsPerPage = 50,
-  augmentRequest = x => x,
+  augmentRequest = (x) => x,
   fetchPage,
   getResultsForPageRequest,
   embedded: forceEmbedded,
 }) {
-  return WrappedComponent => {
-    @connect(reduxState => ({ reduxState }))
+  return (WrappedComponent) => {
+    @connect((reduxState) => ({ reduxState }))
     @withRouter
     @withLocationQuery
     class WithPagination extends React.Component {
@@ -98,7 +98,7 @@ export default function withPagination({
           ...locationQuery,
           filter:
             filter && Object.keys(filter).length > 0
-              ? pickBy(filter, x => x)
+              ? pickBy(filter, (x) => x)
               : undefined,
           page: undefined,
         });
@@ -171,7 +171,7 @@ export default function withPagination({
             },
           },
           reduxState,
-          this.props,
+          this.props
         );
       }
 
@@ -187,12 +187,8 @@ export default function withPagination({
             mapStateToProps={(state, props) => {
               const { fetchRequest } = props;
 
-              const {
-                items,
-                isFetching,
-                isStale,
-                totalEntries,
-              } = getResultsForPageRequest(state, fetchRequest);
+              const { items, isFetching, isStale, totalEntries } =
+                getResultsForPageRequest(state, fetchRequest);
 
               return {
                 results: {

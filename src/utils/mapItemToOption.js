@@ -1,7 +1,7 @@
-import buildTitleFromValue from 'utils/buildTitleFromValue';
-import getFieldValue from 'utils/getFieldValue';
-import itemStatus from 'utils/itemStatus';
-import { getTitleFieldForItemType } from 'utils/storeQueries';
+import buildTitleFromValue from "utils/buildTitleFromValue";
+import getFieldValue from "utils/getFieldValue";
+import itemStatus from "utils/itemStatus";
+import { getTitleFieldForItemType } from "utils/storeQueries";
 
 export default function mapItemToOption(item, state) {
   const itemTypeId = item.relationships.item_type.data.id;

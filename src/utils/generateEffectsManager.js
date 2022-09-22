@@ -7,7 +7,7 @@ export default function generateListenersManager() {
       listeners[event].push(callback);
     },
     function emit(event, ...args) {
-      (listeners[event] || []).forEach(cb => cb(...args));
+      (listeners[event] || []).forEach((cb) => cb(...args));
     },
   ];
 }

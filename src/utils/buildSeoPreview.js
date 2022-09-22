@@ -1,5 +1,5 @@
-import { getFieldsForItemType } from 'utils/storeQueries';
-import joinUrl from 'url-join';
+import { getFieldsForItemType } from "utils/storeQueries";
+import joinUrl from "url-join";
 
 function getTitleField(state, itemType) {
   const fields = getFieldsForItemType(state, itemType);
@@ -7,33 +7,33 @@ function getTitleField(state, itemType) {
   if (itemType.relationships.title_field.data) {
     const { id } = itemType.relationships.title_field.data;
 
-    return fields.find(f => f.id === id);
+    return fields.find((f) => f.id === id);
   }
 
   return null;
 }
 
 function getImageFields(state, itemType) {
-  return getFieldsForItemType(state, itemType).filter(field =>
-    ['gallery', 'file'].includes(field.attributes.field_type),
+  return getFieldsForItemType(state, itemType).filter((field) =>
+    ["gallery", "file"].includes(field.attributes.field_type)
   );
 }
 
 function getSlugField(state, itemType) {
   return getFieldsForItemType(state, itemType).find(
-    field => field.attributes.field_type === 'slug',
+    (field) => field.attributes.field_type === "slug"
   );
 }
 
 function getNonEmptyValues(values, fields, locale) {
   return fields
-    .filter(x => !!x)
-    .map(f =>
+    .filter((x) => !!x)
+    .map((f) =>
       f.attributes.localized
         ? values[f.attributes.api_key] && values[f.attributes.api_key][locale]
-        : values[f.attributes.api_key],
+        : values[f.attributes.api_key]
     )
-    .filter(x => !!x);
+    .filter((x) => !!x);
 }
 
 function getFirstNonEmptyValue(values, fields, locale) {
@@ -59,18 +59,18 @@ function buildUrl({ reduxState, itemTypeId, itemValues, locale }) {
 
   if (!urlPrefix) {
     const frontendUrl = envs
-      .map(env => env.attributes.frontend_url)
-      .find(x => !!x);
+      .map((env) => env.attributes.frontend_url)
+      .find((x) => !!x);
     if (frontendUrl) {
-      urlPrefix = joinUrl(frontendUrl, '/.../');
+      urlPrefix = joinUrl(frontendUrl, "/.../");
     }
   }
 
   if (!urlPrefix) {
-    urlPrefix = 'http://www.mywebsite.com/.../';
+    urlPrefix = "http://www.mywebsite.com/.../";
   }
 
-  return joinUrl(urlPrefix, slugValue || '');
+  return joinUrl(urlPrefix, slugValue || "");
 }
 
 function buildTitle({
@@ -107,7 +107,7 @@ function buildDescription({ seoFieldValue, reduxState, locale }) {
   const globalDescription = fallbackSeo && fallbackSeo.description;
   const seoDescription = seoFieldValue && seoFieldValue.description;
 
-  return seoDescription || globalDescription || 'No description available';
+  return seoDescription || globalDescription || "No description available";
 }
 
 function buildTwitterCard({ seoFieldValue, reduxState, locale }) {
@@ -121,7 +121,7 @@ function buildTwitterCard({ seoFieldValue, reduxState, locale }) {
   const globalTwitterCard = fallbackSeo && fallbackSeo.twitter_card;
   const seoTwitterCard = seoFieldValue && seoFieldValue.twitter_card;
 
-  return seoTwitterCard || globalTwitterCard || 'summary';
+  return seoTwitterCard || globalTwitterCard || "summary";
 }
 
 function buildTitleWithSuffix(options) {
@@ -164,13 +164,13 @@ function buildImageId({
   const globalImageId = fallbackSeo && fallbackSeo.image;
 
   const fallbackImage = getNonEmptyValues(itemValues, imageFields, locale)
-    .map(x => (x.constructor === Array ? x : [x]))
+    .map((x) => (x.constructor === Array ? x : [x]))
     .flat()
-    .map(id => reduxState.uploads[id])
-    .filter(x => !!x)
+    .map((id) => reduxState.uploads[id])
+    .filter((x) => !!x)
     .filter(
-      upload =>
-        upload.attributes.width >= 200 && upload.attributes.height >= 200,
+      (upload) =>
+        upload.attributes.width >= 200 && upload.attributes.height >= 200
     )[0];
 
   const fallbackImageId = fallbackImage && fallbackImage.id;

@@ -1,11 +1,11 @@
-import randToken from 'rand-token';
-import config from 'config';
+import randToken from "rand-token";
+import config from "config";
 
 export function generateEmptyAccessToken() {
   return {
-    type: 'access_token',
+    type: "access_token",
     attributes: {
-      name: '',
+      name: "",
       can_access_cda: true,
       can_access_cda_preview: true,
       can_access_cma: true,
@@ -21,16 +21,16 @@ export function generateEmptyAccessToken() {
 export function generateEmptyField(fieldType) {
   const validators = {};
 
-  if (fieldType === 'slug') {
+  if (fieldType === "slug") {
     validators.unique = {};
   }
 
   return {
-    type: 'field',
+    type: "field",
     attributes: {
-      label: '',
-      api_key: '',
-      hint: '',
+      label: "",
+      api_key: "",
+      hint: "",
       field_type: fieldType,
       validators,
       localized: false,
@@ -43,7 +43,7 @@ export function generateEmptyItem(
   locales,
   fields,
   itemType,
-  modularBlock = false,
+  modularBlock = false
 ) {
   const attributes = fields.reduce((acc, field) => {
     let value;
@@ -68,7 +68,7 @@ export function generateEmptyItem(
   }
 
   return {
-    type: 'item',
+    type: "item",
     attributes,
     locales:
       !modularBlock && itemType.attributes.all_locales_required
@@ -76,7 +76,7 @@ export function generateEmptyItem(
         : [locales[0]],
     relationships: {
       item_type: {
-        data: { type: 'item_type', id: itemType.id },
+        data: { type: "item_type", id: itemType.id },
       },
     },
   };
@@ -84,10 +84,10 @@ export function generateEmptyItem(
 
 export function generateEmptyItemType(modularBlock = false) {
   return {
-    type: 'item_type',
+    type: "item_type",
     attributes: {
-      name: '',
-      api_key: '',
+      name: "",
+      api_key: "",
       sortable: false,
       tree: false,
       singleton: false,
@@ -95,7 +95,7 @@ export function generateEmptyItemType(modularBlock = false) {
       draft_mode_active: false,
       ordering_direction: null,
       all_locales_required: true,
-      collection_appearance: 'table',
+      collection_appearance: "table",
     },
     relationships: {
       ordering_field: {
@@ -110,9 +110,9 @@ export function generateEmptyItemType(modularBlock = false) {
 
 export function generateEmptyMenuItem() {
   return {
-    type: 'menu_item',
+    type: "menu_item",
     attributes: {
-      label: '',
+      label: "",
       position: 0,
       external_url: null,
       open_in_new_tab: true,
@@ -130,7 +130,7 @@ export function generateEmptyMenuItem() {
 
 export function generateEmptyRole(primaryEnvironmentId) {
   return {
-    type: 'role',
+    type: "role",
     attributes: {
       name: null,
       can_edit_schema: false,
@@ -145,13 +145,13 @@ export function generateEmptyRole(primaryEnvironmentId) {
       can_edit_environment: false,
       can_manage_environments: false,
       can_manage_shared_filters: false,
-      environments_access: 'primary_only',
+      environments_access: "primary_only",
       positive_item_type_permissions: [
         {
           environment: primaryEnvironmentId,
           item_type: null,
-          action: 'all',
-          on_creator: 'anyone',
+          action: "all",
+          on_creator: "anyone",
         },
       ],
       negative_item_type_permissions: [],
@@ -163,19 +163,19 @@ export function generateEmptyRole(primaryEnvironmentId) {
 
 export function generateEmptyPlugin() {
   return {
-    type: 'plugin',
+    type: "plugin",
     attributes: {
-      name: '',
-      url: '',
-      plugin_type: 'field_editor',
+      name: "",
+      url: "",
+      plugin_type: "field_editor",
       field_types: [],
       parameter_definitions: {
         global: [
           {
-            id: 'developmentMode',
-            label: 'Development mode?',
-            type: 'boolean',
-            hint: 'Enable development logs on the console',
+            id: "developmentMode",
+            label: "Development mode?",
+            type: "boolean",
+            hint: "Enable development logs on the console",
           },
         ],
         instance: [],
@@ -186,14 +186,14 @@ export function generateEmptyPlugin() {
 
 export function generateEmptyInvitation() {
   return {
-    type: 'site_invitation',
+    type: "site_invitation",
     attributes: {
-      email: '',
+      email: "",
     },
     relationships: {
       role: {
         data: {
-          type: 'role',
+          type: "role",
           id: null,
         },
       },
@@ -203,19 +203,19 @@ export function generateEmptyInvitation() {
 
 export function generateEmptyBuildTrigger(adapter) {
   const token = randToken.generate(10);
-  const domain = config.webhooksApiDomain || 'https://webhooks.datocms.com';
+  const domain = config.webhooksApiDomain || "https://webhooks.datocms.com";
   const webhookUrl =
-    adapter === 'zeit'
+    adapter === "zeit"
       ? `${domain}/zeit-deploy-results`
       : `${domain}/${token}/deploy-results`;
 
   return {
-    type: 'build_trigger',
+    type: "build_trigger",
     attributes: {
-      name: '',
+      name: "",
       indexing_enabled: false,
       autotrigger_on_scheduled_publications: false,
-      frontend_url: '',
+      frontend_url: "",
       adapter: null,
       adapter_settings: null,
       webhook_token: token,
@@ -226,9 +226,9 @@ export function generateEmptyBuildTrigger(adapter) {
 
 export function generateEmptyItemTypeFilter(itemTypeId, filter) {
   return {
-    type: 'item_type_filter',
+    type: "item_type_filter",
     attributes: {
-      name: '',
+      name: "",
       filter,
       shared: false,
     },
@@ -236,7 +236,7 @@ export function generateEmptyItemTypeFilter(itemTypeId, filter) {
       item_type: {
         data: {
           id: itemTypeId,
-          type: 'item_type',
+          type: "item_type",
         },
       },
     },
@@ -245,9 +245,9 @@ export function generateEmptyItemTypeFilter(itemTypeId, filter) {
 
 export function generateEmptyUploadFilter(filter) {
   return {
-    type: 'upload_filter',
+    type: "upload_filter",
     attributes: {
-      name: '',
+      name: "",
       filter,
       shared: false,
     },
@@ -256,14 +256,14 @@ export function generateEmptyUploadFilter(filter) {
 
 export function generateEmptyWebhook() {
   return {
-    type: 'webhook',
+    type: "webhook",
     attributes: {
-      name: '',
-      url: '',
+      name: "",
+      url: "",
       headers: [],
       events: [],
-      http_basic_user: '',
-      http_basic_password: '',
+      http_basic_user: "",
+      http_basic_password: "",
     },
   };
 }

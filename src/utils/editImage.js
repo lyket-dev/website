@@ -1,48 +1,48 @@
 export default async (src, { messages }) => {
   await import(
     /* webpackChunkName: "dokastyle" */
-    'react-doka/style.css'
+    "react-doka/style.css"
   );
 
   const Doka = await import(
     /* webpackChunkName: "doka" */
-    'react-doka'
+    "react-doka"
   );
 
   const dokaMessages = Object.entries(messages)
-    .filter(entry => entry[0].startsWith('imageEditor'))
+    .filter((entry) => entry[0].startsWith("imageEditor"))
     .reduce(
       (acc, [key, value]) => ({
         ...acc,
-        [key.replace(/^imageEditor\./, '')]: value,
+        [key.replace(/^imageEditor\./, "")]: value,
       }),
-      {},
+      {}
     );
 
   Doka.setOptions(dokaMessages);
 
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const doka = Doka.create({
       src,
-      outputType: 'image/png',
+      outputType: "image/png",
       outputQuality: 94,
       cropZoomTimeout: 2000,
       cropShowSize: true,
       cropAspectRatioOptions: [
         {
-          label: 'Free',
+          label: "Free",
           value: null,
         },
         {
-          label: 'Portrait',
+          label: "Portrait",
           value: 1.5,
         },
         {
-          label: 'Square',
-          value: '1:1',
+          label: "Square",
+          value: "1:1",
         },
         {
-          label: 'Landscape',
+          label: "Landscape",
           value: 0.75,
         },
       ],
@@ -54,7 +54,7 @@ export default async (src, { messages }) => {
         Doka.destroy(doka);
         resolve(null);
       },
-      onconfirm: output => {
+      onconfirm: (output) => {
         Doka.destroy(doka);
         resolve(output.file);
       },

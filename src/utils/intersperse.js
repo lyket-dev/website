@@ -7,6 +7,6 @@ export default function intersperse(arr, sep, endSep = sep) {
     (xs, x, i) => {
       return xs.concat([i === arr.length - 2 ? endSep : sep, x]);
     },
-    [arr[0]],
+    [arr[0]]
   );
 }

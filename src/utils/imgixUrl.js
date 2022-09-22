@@ -1,5 +1,5 @@
-import store from 'store';
-import queryString from 'qs';
+import store from "store";
+import queryString from "qs";
 
 export default function imgixUrl(upload, params) {
   const payload = upload.attributes || upload;
@@ -8,7 +8,7 @@ export default function imgixUrl(upload, params) {
     return payload.url;
   }
 
-  const path = payload.path.startsWith('/')
+  const path = payload.path.startsWith("/")
     ? payload.path.slice(1)
     : payload.path;
 

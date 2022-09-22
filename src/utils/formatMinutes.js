@@ -1,12 +1,12 @@
-const units = ['h', 'k h', 'M h'];
+const units = ["h", "k h", "M h"];
 
 export default function formatMinutes(seconds) {
   if (isNaN(parseFloat(seconds)) || !isFinite(seconds)) {
-    return '-';
+    return "-";
   }
 
   if (seconds < 1) {
-    return '0';
+    return "0";
   }
 
   if (seconds < 60) {

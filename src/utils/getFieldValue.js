@@ -7,8 +7,8 @@ export default function getFieldValue(item, field, locales) {
     return (
       item.attributes[field.attributes.api_key] &&
       locales
-        .map(locale => item.attributes[field.attributes.api_key][locale])
-        .find(value => !!value)
+        .map((locale) => item.attributes[field.attributes.api_key][locale])
+        .find((value) => !!value)
     );
   }
 
