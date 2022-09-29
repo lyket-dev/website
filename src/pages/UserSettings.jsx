@@ -16,18 +16,7 @@ import { ReactComponent as Finger } from "assets/icons/outline/finger-print.svg"
 import { ReactComponent as Eye } from "assets/icons/outline/eye.svg";
 import { ReactComponent as EyeClosed } from "assets/icons/outline/eye-off.svg";
 import { ReactComponent as Users } from "assets/icons/outline/users.svg";
-
-const planCodes = {
-  free: "Free",
-  deactivating:
-    "Free - you reached the free plan limit, your account will be deactivated by the end of the month",
-  warned:
-    "Free - you reached the free plan limit, your account will be deactivated by the end of the month",
-  deactivated: "Your plan is currently deactivated",
-  basic_plan_v2_yearly: "Basic plan",
-  business_plan_v1_yearly: "Business plan yearly",
-  business_plan_v1_monthly: "Business plan monthly",
-};
+import { Subscriptions } from "components/Subscriptions";
 
 export default function UserSettings() {
   const dispatch = useDispatch();
@@ -65,91 +54,14 @@ export default function UserSettings() {
   const allowList =
     allow.length > 0 ? allow.join(", ") : "All websites allowed";
 
-  const isSubscribedTo = (s) => s === subscription;
-
-  const renderChangePlan = () => {
-    return (
-      <>
-        <div className="menu__item__label space__bottom-1">Change plan:</div>
-        <ul className="ternary">
-          <li className="ternary__item">
-            <a
-              href={`https://buy.stripe.com/3cs9Es0ro3sR60obIJ?prefilled_email=${email}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`outline ${
-                isSubscribedTo("basic_plan_v2_yearly") && "is-active"
-              }`}
-            >
-              <p className="outline__title">Basic</p>
-              <p>€48/year</p>
-              <button className="outline__button">
-                {!isSubscribedTo("basic_plan_v2_yearly")
-                  ? "Subscribe"
-                  : "Current plan"}
-              </button>
-            </a>
-          </li>
-          <li className="ternary__item">
-            <a
-              href={`https://buy.stripe.com/fZedUI6PMbZn60o5km?prefilled_email=${email}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`outline ${
-                isSubscribedTo("business_plan_v1_monthly") && "is-active"
-              }`}
-            >
-              <p className="outline__title">Business monthly</p>
-              <p>€10/month</p>
-              <button className="outline__button">
-                {!isSubscribedTo("business_plan_v1_monthly")
-                  ? "Subscribe"
-                  : "Current plan"}
-              </button>
-            </a>
-          </li>
-          <li className="ternary__item">
-            <a
-              href={`https://buy.stripe.com/00g5ocfmi8Nb2OccMM?prefilled_email=${email}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`outline ${
-                isSubscribedTo("business_plan_v1_yearly") && "is-active"
-              }`}
-            >
-              <p className="outline__title">Business yearly</p>
-              <p>€100/year</p>
-              <button className="outline__button">
-                {!isSubscribedTo("business_plan_v1_yearly")
-                  ? "Subscribe"
-                  : "Current plan"}
-              </button>
-            </a>
-          </li>
-        </ul>
-      </>
-    );
-  };
-
   const renderMenu = () => {
     return (
       <ul className="menu">
-        <li className="card__title">
-          <span className="menu__item__label">Current plan: </span>
-          <span className="menu__item__info">
-            {planCodes[subscription] || subscription}
-          </span>
+        <li className="">
+          <Subscriptions curentSubscription={subscription} email={email} />
         </li>
-        {["free", "deactivated", "deactivating", "warned"].includes(
-          subscription
-        ) ? (
-          renderChangePlan()
-        ) : (
-          <div className="menu__item__label space__bottom-2">
-            To change your plan, please contact our support team at{" "}
-            <a href="mailto:write@lyket.dev">write@lyket.dev</a>
-          </div>
-        )}
+        <p className="card__title">User info</p>
+
         <li className="menu__item space__bottom-2">
           <Mail />
           <span className="menu__item__label">Email: </span>
