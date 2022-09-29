@@ -102,9 +102,6 @@ export default function Dashboard() {
           />
         </div>
         <p className="card__text">
-          <code>path: "like-buttons/namespace/id"</code>
-        </p>
-        <p className="card__text">
           If you want to import buttons in bulk or set a specific number for the
           counter, you can upload buttons trough a CSV file. The CSV must have a{" "}
           <code>path</code> and <code>amount</code> header and contain the
