@@ -14,7 +14,11 @@ const Login = () => {
 
   useEffect(() => {
     if (session) {
-      history.push("/dashboard");
+      if (session.subscription === "deactivated") {
+        history.push("/user-settings");
+      } else {
+        history.push("/dashboard");
+      }
     }
   }, [session, history]);
 

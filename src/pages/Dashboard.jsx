@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RingSpinner } from "react-spinners-kit";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   fetchAllClapButtons,
   fetchAllLikeButtons,
@@ -24,14 +24,26 @@ export default function Dashboard() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [totalCount, setTotalCount] = useState(null);
+  const [deactivated, setDeactivated] = useState(false);
   const { type } = useParams();
 
   const fetchData = useCallback(
     async ({ page = 0, limit = 10, sort = "desc" } = {}) => {
-      setLoading(true);
-      const buttons = await dispatch(fetchMap[type]({ page, limit, sort }));
-      setTotalCount(buttons.meta.total);
-      setLoading(false);
+      try {
+        setLoading(true);
+        const buttons = await dispatch(fetchMap[type]({ page, limit, sort }));
+        setTotalCount(buttons.meta.total);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+        if (error.errors[0].code === "DEACTIVATED_ACCOUNT") {
+          console.log(error);
+          setDeactivated(true);
+        } else {
+          throw error;
+        }
+      }
     },
     [setLoading, dispatch, type]
   );
@@ -47,6 +59,32 @@ export default function Dashboard() {
   useAsyncEffect(fetchData, [type]);
 
   const hasButtons = buttons.length > 0;
+
+  const renderDeactivated = () => {
+    return (
+      <div className="fixed_center">
+        <div className="window">
+          <p className="card__bigtext">
+            <span aria-label="Hi!" role="img">
+              🥶
+            </span>
+          </p>
+          <h4 className="card__title">Your account has been deactivated!</h4>
+          <p className="card__text">
+            Unfortunately, it seems that your account has been deactivated. This
+            probably happened because you reached the maximum allowed pageviews
+            for your current plan, or your current subscription has expired.
+          </p>
+          <p className="card__text">
+            Please navigate to the{" "}
+            <Link to="/user-settings">user settings page</Link> to upgrade to
+            another plan or{" "}
+            <a href="mailto:write@lyket.dev">contact our support team!</a>
+          </p>
+        </div>
+      </div>
+    );
+  };
 
   const renderBlankSlate = () => {
     return (
@@ -135,13 +173,12 @@ export default function Dashboard() {
 
   return (
     <Page>
-      {!hasButtons && !loading && renderBlankSlate()}
-      <Section className={!hasButtons && "blurred"}>
-        {loading && !hasButtons && (
-          <div className="fixed_center">
-            <RingSpinner size={100} color="#201335" />
-          </div>
-        )}
+      {loading && !hasButtons && !deactivated && (
+        <div className="fixed_center">
+          <RingSpinner size={100} color="#201335" />
+        </div>
+      )}
+      <Section className={(!hasButtons || deactivated) && "blurred"}>
         {!loading && (
           <Table
             onPaginate={fetchData}
@@ -151,6 +188,8 @@ export default function Dashboard() {
           />
         )}
       </Section>
+      {!hasButtons && !loading && !deactivated && renderBlankSlate()}
+      {deactivated && renderDeactivated()}
     </Page>
   );
 }

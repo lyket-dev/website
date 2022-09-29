@@ -4,11 +4,12 @@ import { Section } from "./Page";
 const planCodes = {
   free: "Free - up to 500 pageviews",
   deactivating:
-    "Free - you reached the free plan limit, your account will be deactivated by the end of the month",
+    "Free - you reached the free plan limit of 500 pageviews/month, your account will be deactivated by the end of the month",
   warned:
-    "Free - you reached the free plan limit, your account will be deactivated by the end of the month",
-  deactivated: "Your plan is currently deactivated",
-  basic_plan_v2_yearly: "Basic plan",
+    "Free - you reached the free plan limitof 500 pageviews/month, your account will be deactivated by the end of the month",
+  deactivated:
+    "Your account is currently deactivated, please upgrade to another plan or contact support",
+  basic_plan_v2_yearly: "Basic plan yearly",
   business_plan_v1_yearly: "Business plan yearly",
   business_plan_v1_monthly: "Business plan monthly",
 };

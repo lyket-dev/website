@@ -22,9 +22,13 @@ const App = () => {
   useAsyncEffect(async () => {
     try {
       await dispatch(fetchCurrentSession());
-    } catch (e) {
-      // ingoia l'errore se non autorizzato
-      console.error(e);
+    } catch (error) {
+      console.log(error);
+      if (error.errors[0].code === "DEACTIVATED_ACCOUNT") {
+        console.log(error);
+      } else {
+        throw error;
+      }
     }
   }, []);
 
