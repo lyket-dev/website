@@ -1,4 +1,5 @@
 import React from "react";
+import { Section } from "./Page";
 
 const planCodes = {
   free: "Free - up to 500 pageviews",
@@ -83,39 +84,43 @@ export function Subscriptions({ curentSubscription, email }) {
   };
 
   return (
-    <>
-      <p className="card__title">Subscription</p>
-      <p className="card__text">
-        Here you can upgrade your subscription to get more pageviews. Read more
-        about our pricing options,{" "}
-        <a
-          href="https://lyket.dev/pricing"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          here
-        </a>
-      </p>
-      <p className="card__text">
-        <span className="menu__item__label">Current plan: </span>
-        <span className="menu__item__info">
-          {planCodes[curentSubscription] || curentSubscription}
-        </span>
-      </p>
-      {["free", "deactivated", "deactivating", "warned"].includes(
-        curentSubscription
-      ) ? (
-        renderChangePlan()
-      ) : (
-        <div className="menu__item__label space__bottom-2">
-          To change your plan, please contact our support team at{" "}
-          <a href="mailto:write@lyket.dev">write@lyket.dev</a>
-        </div>
-      )}
-      <p className="card__text">
-        Need more pageviews? Contact{" "}
-        <a href="mailto:write@lyket.dev">our support team</a>
-      </p>
-    </>
+    <Section>
+      <h1 className="section__title">Subscription</h1>
+      <div className="window space__bottom-6">
+        <div className="window__label">{email}</div>
+        <p className="window__title"></p>
+        <p className="card__text">
+          Here you can upgrade your subscription to get more pageviews. Read
+          more about our pricing options,{" "}
+          <a
+            href="https://lyket.dev/pricing"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            here
+          </a>
+        </p>
+        <p className="card__text">
+          <span className="menu__item__label">Current plan: </span>
+          <span className="menu__item__info">
+            {planCodes[curentSubscription] || curentSubscription}
+          </span>
+        </p>
+        {["free", "deactivated", "deactivating", "warned"].includes(
+          curentSubscription
+        ) ? (
+          renderChangePlan()
+        ) : (
+          <div className="menu__item__label space__bottom-2">
+            To change your plan, please contact our support team at{" "}
+            <a href="mailto:write@lyket.dev">write@lyket.dev</a>
+          </div>
+        )}
+        <p className="card__text">
+          Need more pageviews? Contact{" "}
+          <a href="mailto:write@lyket.dev">our support team</a>
+        </p>
+      </div>
+    </Section>
   );
 }

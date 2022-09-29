@@ -54,14 +54,10 @@ export default function UserSettings() {
   const allowList =
     allow.length > 0 ? allow.join(", ") : "All websites allowed";
 
-  const renderMenu = () => {
+  const renderUserInfo = () => {
     return (
       <ul className="menu">
-        <li className="">
-          <Subscriptions curentSubscription={subscription} email={email} />
-        </li>
-        <p className="card__title">User info</p>
-
+        <p className="window__title">User info</p>
         <li className="menu__item space__bottom-2">
           <Mail />
           <span className="menu__item__label">Email: </span>
@@ -158,11 +154,11 @@ export default function UserSettings() {
 
   return (
     <Page>
+      <Subscriptions curentSubscription={subscription} email={email} />
       <Section>
-        <h1 className="header__title">User settings</h1>
+        <h1 className="section__title">User settings</h1>
         <div className="window space__bottom-6">
-          <div className="window__label">{email}</div>
-          {!editMode && renderMenu()}
+          {!editMode && renderUserInfo()}
           {editMode && (
             <SettingsForm
               onClose={(e) => {
