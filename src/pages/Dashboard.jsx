@@ -58,39 +58,41 @@ export default function Dashboard() {
         </p>
         <h4 className="card__title">Welcome!</h4>
         <p className="card__text">
-          This Lyket's dashboard, where you can see all statistics related to
-          your buttons. However, it seems that you have no buttons at the
-          moment!
+          This is Lyket's dashboard, where you can see all statistics related to
+          your buttons. However, it seems that you haven't created any buttons,
+          yet!
         </p>
-
+        <h4 className="card__title">Getting started</h4>
         <p className="card__text">
-          You can start creating buttons using HTML, our React Library, or our
-          API.
+          Creating buttons with Lyket is super easy and it takes the time to
+          copy and paste a few lines of code!
         </p>
-        <h4 className="card__title">HTML</h4>
         <p className="card__text">
-          <span>
-            You can learn how to create buttons using HTML by reading the{" "}
-          </span>
+          Depending on your tech stack, you can start by using our HTML widget{" "}
           <a
             href="https://lyket.dev/docs/html"
             target="_blank"
             rel="noopener noreferrer"
           >
-            official HTML widget documentation.
+            (docs)
           </a>
-        </p>
-        <h4 className="card__title">React</h4>
-        <p className="card__text">
-          <span>Follow the </span>
+          , the official React Library{" "}
           <a
             href="https://lyket.dev/docs/react"
             target="_blank"
             rel="noopener noreferrer"
           >
-            official React documentation
+            (docs)
           </a>
-          <span> to start creating buttons using React.</span>
+          , or the API{" "}
+          <a
+            href="https://lyket.dev/docs/api"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            (docs)
+          </a>
+          .
         </p>
         <div className="flex--start">
           <span className="card__title">Bulk import</span>
@@ -100,11 +102,25 @@ export default function Dashboard() {
           />
         </div>
         <p className="card__text">
-          If you want to import buttons in bulk, upload a CSV file! The CSV must
-          have a <code>path</code> and <code>amount</code> header.{" "}
-          <a href="/test-import.csv" download>
-            Download an example csv
+          <code>path: "like-buttons/namespace/id"</code>
+        </p>
+        <p className="card__text">
+          If you want to import buttons in bulk or set a specific number for the
+          counter, you can upload buttons trough a CSV file. The CSV must have a{" "}
+          <code>path</code> and <code>amount</code> header and contain the
+          necessary info to create a button. Read more about creating buttons,{" "}
+          <a
+            href="https://lyket.dev/docs/html"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            here
           </a>
+          , or{" "}
+          <a href="/test-import.csv" download>
+            download an example CSV
+          </a>
+          .
         </p>
         <ButtonsImporter onFinishImporting={fetchData} />
         <div className="space__bottom-1"> </div>
