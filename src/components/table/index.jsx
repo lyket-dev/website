@@ -31,6 +31,7 @@ import {
   fetchAllLikeButtons,
   fetchAllUpdownButtons,
 } from 'ducks/buttons';
+import useAsyncEffect from 'utils/useAsyncEffect';
 
 const icons = {
   clap: <Clap className="card__icon" />,
@@ -125,7 +126,7 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
 };
 
-export default function EnhancedTable() {
+export default function EnhancedTable({ hasButtons }) {
   const dispatch = useDispatch();
   const { namespace, type: selectedButtonType } = useParams();
   const [order, setOrder] = useState('desc');
@@ -153,10 +154,15 @@ export default function EnhancedTable() {
     });
   }
 
-  rows = buttons.filter((b) => b.type === selectedButtonType);
-  const tableButtons = rows.length === 0 ? fake : rows;
+  rows = buttons.filter(
+    (b) =>
+      b.type === selectedButtonType &&
+      (!namespace || namespace === b.namespace),
+  );
 
-  const handlePaginate = useCallback(
+  const tableButtons = hasButtons ? rows : fake;
+
+  const handleFetchButtons = useCallback(
     async ({ page = 0, limit = 10, sort = 'desc' } = {}) => {
       try {
         const result = await dispatch(
@@ -175,12 +181,19 @@ export default function EnhancedTable() {
     [dispatch, selectedButtonType],
   );
 
+  useAsyncEffect(async () => {
+    await handleFetchButtons();
+    setOrder('desc');
+    setCurrentPage(0);
+    setRowsPerPage(10);
+  }, [selectedButtonType]);
+
   const handleRequestSort = useCallback(
     async (_event, property) => {
       const isAsc = orderBy === property && order === 'asc';
       const selectedOrder = isAsc ? 'desc' : 'asc';
 
-      await handlePaginate({
+      await handleFetchButtons({
         page: currentPage,
         limit: rowsPerPage,
         sort: selectedOrder,
@@ -189,28 +202,31 @@ export default function EnhancedTable() {
       setOrder(selectedOrder);
       setOrderBy(property);
     },
-    [handlePaginate, currentPage, order, orderBy, rowsPerPage],
+    [handleFetchButtons, currentPage, order, orderBy, rowsPerPage],
   );
 
   const handleChangePage = useCallback(
     async (_event, newPage) => {
-      await handlePaginate({ page: newPage, limit: rowsPerPage });
+      await handleFetchButtons({
+        page: newPage,
+        limit: rowsPerPage,
+      });
       setCurrentPage(newPage);
       setRowsPerPage(rowsPerPage);
     },
-    [handlePaginate, rowsPerPage],
+    [handleFetchButtons, rowsPerPage],
   );
 
   const handleChangeRowsPerPage = useCallback(
     async (event) => {
       const newPageLimit = parseInt(event.target.value, 10);
 
-      await handlePaginate({ limit: newPageLimit, page: 0 });
+      await handleFetchButtons({ limit: newPageLimit, page: 0 });
 
       setRowsPerPage(newPageLimit);
       setCurrentPage(0);
     },
-    [handlePaginate],
+    [handleFetchButtons],
   );
 
   return (
@@ -247,7 +263,7 @@ export default function EnhancedTable() {
               );
             })}
           </ul>
-          <button className="menu__item" onClick={handlePaginate}>
+          <button className="menu__item" onClick={handleFetchButtons}>
             <Refresh />
             <span className="menu__item__label">Refresh buttons!</span>
           </button>
@@ -259,7 +275,7 @@ export default function EnhancedTable() {
               message="Import multiple buttons at once by uploading a CSV file. The CSV must have the following headers: path and amount. It will accept only valid Lyket urls, ie. [button_type]-buttons/[namespace]/[id]"
             />
           </div>
-          <ButtonsImporter onFinishImporting={handlePaginate} />
+          <ButtonsImporter onFinishImporting={handleFetchButtons} />
           <div className="space__bottom-2 smallprint">
             <a href="/test-import.csv" download>
               Download test CSV file

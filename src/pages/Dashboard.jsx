@@ -169,7 +169,7 @@ export default function Dashboard() {
         </div>
       )}
       <Section className={(!hasButtons || deactivated) && 'blurred'}>
-        {!loading && <Table />}
+        {!loading && <Table hasButtons={hasButtons} />}
       </Section>
       {!hasButtons && !loading && !deactivated && renderBlankSlate()}
       {deactivated && renderDeactivated()}
