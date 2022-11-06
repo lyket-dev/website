@@ -1,20 +1,20 @@
-import React from "react";
-import { hot } from "react-hot-loader";
-import { BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
-import { PrivateRoute, PublicRoute } from "components/Routes";
-import Dashboard from "pages/Dashboard";
-import Login from "pages/Login";
-import Privacy from "pages/Privacy";
-import Signup from "pages/Signup";
-import UserSettings from "pages/UserSettings";
-import MagicLink from "pages/MagicLink";
-import "styles/main.sass";
-import { useDispatch } from "react-redux";
-import useAsyncEffect from "utils/useAsyncEffect";
-import { fetchCurrentSession } from "ducks/session";
-import ReactNotification from "react-notifications-component";
+import React from 'react';
+import { hot } from 'react-hot-loader';
+import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
+import { PrivateRoute, PublicRoute } from 'components/Routes';
+import Dashboard from 'pages/Dashboard';
+import Login from 'pages/Login';
+import Privacy from 'pages/Privacy';
+import Signup from 'pages/Signup';
+import UserSettings from 'pages/UserSettings';
+import MagicLink from 'pages/MagicLink';
+import 'styles/main.sass';
+import { useDispatch } from 'react-redux';
+import useAsyncEffect from 'utils/useAsyncEffect';
+import { fetchCurrentSession } from 'ducks/session';
+import ReactNotification from 'react-notifications-component';
 
-window.Buffer = window.Buffer || require("buffer").Buffer;
+window.Buffer = window.Buffer || require('buffer').Buffer;
 
 const App = () => {
   const dispatch = useDispatch();
@@ -24,7 +24,11 @@ const App = () => {
       await dispatch(fetchCurrentSession());
     } catch (error) {
       console.log(error);
-      if (error.errors[0].code === "DEACTIVATED_ACCOUNT") {
+      if (
+        error &&
+        error.errors &&
+        error.errors[0].code === 'DEACTIVATED_ACCOUNT'
+      ) {
         console.log(error);
       } else {
         throw error;

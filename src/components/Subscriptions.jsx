@@ -1,21 +1,21 @@
-import React from "react";
-import { Section } from "./Page";
+import React from 'react';
+import { Section } from './Page';
 
 const planCodes = {
-  free: "Free - up to 500 pageviews",
+  free: 'Free - up to 500 pageviews',
   deactivating:
-    "Free - you reached the free plan limit of 500 pageviews/month, your account will be deactivated by the end of the month",
+    'Free - you reached the free plan limit of 500 pageviews/month, your account will be deactivated by the end of the month',
   warned:
-    "Free - you reached the free plan limitof 500 pageviews/month, your account will be deactivated by the end of the month",
+    'Free - you reached the free plan limitof 500 pageviews/month, your account will be deactivated by the end of the month',
   deactivated:
-    "Your account is currently deactivated, please upgrade to another plan or contact support",
-  basic_plan_v2_yearly: "Basic plan yearly",
-  business_plan_v1_yearly: "Business plan yearly",
-  business_plan_v1_monthly: "Business plan monthly",
+    'Your account is currently deactivated, please upgrade to another plan or contact support',
+  basic_plan_v2_yearly: 'Basic plan yearly',
+  business_plan_v1_yearly: 'Business plan yearly',
+  business_plan_v1_monthly: 'Business plan monthly',
 };
 
-export function Subscriptions({ curentSubscription, email }) {
-  const isSubscribedTo = (s) => s === curentSubscription;
+export function Subscriptions({ currentSubscription, email }) {
+  const isSubscribedTo = (s) => s === currentSubscription;
 
   const renderChangePlan = () => {
     return (
@@ -28,16 +28,16 @@ export function Subscriptions({ curentSubscription, email }) {
               target="_blank"
               rel="noopener noreferrer"
               className={`outline ${
-                isSubscribedTo("basic_plan_v2_yearly") && "is-active"
+                isSubscribedTo('basic_plan_v2_yearly') && 'is-active'
               }`}
             >
               <p className="ternary__title">Basic</p>
               <p className="ternary__text">5k pageviews</p>
               <p className="ternary__text">€48/year</p>
               <button className="outline__button">
-                {!isSubscribedTo("basic_plan_v2_yearly")
-                  ? "Subscribe"
-                  : "Current plan"}
+                {!isSubscribedTo('basic_plan_v2_yearly')
+                  ? 'Subscribe'
+                  : 'Current plan'}
               </button>
             </a>
           </li>
@@ -47,16 +47,16 @@ export function Subscriptions({ curentSubscription, email }) {
               target="_blank"
               rel="noopener noreferrer"
               className={`outline ${
-                isSubscribedTo("business_plan_v1_monthly") && "is-active"
+                isSubscribedTo('business_plan_v1_monthly') && 'is-active'
               }`}
             >
               <p className="ternary__title">Business monthly</p>
               <p className="ternary__text">50k pageviews</p>
               <p className="ternary__text">€10/month</p>
               <button className="outline__button">
-                {!isSubscribedTo("business_plan_v1_monthly")
-                  ? "Subscribe"
-                  : "Current plan"}
+                {!isSubscribedTo('business_plan_v1_monthly')
+                  ? 'Subscribe'
+                  : 'Current plan'}
               </button>
             </a>
           </li>
@@ -66,16 +66,16 @@ export function Subscriptions({ curentSubscription, email }) {
               target="_blank"
               rel="noopener noreferrer"
               className={`outline ${
-                isSubscribedTo("business_plan_v1_yearly") && "is-active"
+                isSubscribedTo('business_plan_v1_yearly') && 'is-active'
               }`}
             >
               <p className="ternary__title">Business yearly</p>
               <p className="ternary__text">50k pageviews</p>
               <p className="ternary__text">€100/year</p>
               <button className="outline__button">
-                {!isSubscribedTo("business_plan_v1_yearly")
-                  ? "Subscribe"
-                  : "Current plan"}
+                {!isSubscribedTo('business_plan_v1_yearly')
+                  ? 'Subscribe'
+                  : 'Current plan'}
               </button>
             </a>
           </li>
@@ -92,7 +92,7 @@ export function Subscriptions({ curentSubscription, email }) {
         <p className="window__title"></p>
         <p className="card__text">
           Here you can upgrade your subscription to get more pageviews. Read
-          more about our pricing options,{" "}
+          more about our pricing options,{' '}
           <a
             href="https://lyket.dev/pricing"
             target="_blank"
@@ -104,21 +104,21 @@ export function Subscriptions({ curentSubscription, email }) {
         <p className="card__text">
           <span className="menu__item__label">Current plan: </span>
           <span className="menu__item__info">
-            {planCodes[curentSubscription] || curentSubscription}
+            {planCodes[currentSubscription] || currentSubscription}
           </span>
         </p>
-        {["free", "deactivated", "deactivating", "warned"].includes(
-          curentSubscription
+        {['free', 'deactivated', 'deactivating', 'warned'].includes(
+          currentSubscription,
         ) ? (
           renderChangePlan()
         ) : (
           <div className="menu__item__label space__bottom-2">
-            To change your plan, please contact our support team at{" "}
+            To change your plan, please contact our support team at{' '}
             <a href="mailto:write@lyket.dev">write@lyket.dev</a>
           </div>
         )}
         <p className="card__text">
-          Need more pageviews? Contact{" "}
+          Need more pageviews? Contact{' '}
           <a href="mailto:write@lyket.dev">our support team</a>
         </p>
       </div>
