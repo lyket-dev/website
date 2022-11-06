@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import useAsyncEffect from "utils/useAsyncEffect";
-import { useDispatch, useSelector } from "react-redux";
-import { fetch as fetchCurrentUser } from "ducks/currentUser";
-import SettingsForm from "components/SettingsForm";
-import Tooltip from "components/Tooltip";
-import { Page, Section } from "components/Page";
-import { ReactComponent as Key } from "assets/icons/outline/key.svg";
-import { ReactComponent as Mail } from "assets/icons/outline/mail.svg";
-import { ReactComponent as Shield } from "assets/icons/outline/shield-check.svg";
-import { ReactComponent as Check } from "assets/icons/outline/badge-check.svg";
-import { ReactComponent as Copy } from "assets/icons/outline/duplicate.svg";
-import { ReactComponent as User } from "assets/icons/outline/identification.svg";
-import { ReactComponent as Building } from "assets/icons/outline/office-building.svg";
-import { ReactComponent as Finger } from "assets/icons/outline/finger-print.svg";
-import { ReactComponent as Eye } from "assets/icons/outline/eye.svg";
-import { ReactComponent as EyeClosed } from "assets/icons/outline/eye-off.svg";
-import { ReactComponent as Users } from "assets/icons/outline/users.svg";
-import { Subscriptions } from "components/Subscriptions";
+import React, { useState } from 'react';
+import useAsyncEffect from 'utils/useAsyncEffect';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetch as fetchCurrentUser } from 'ducks/currentUser';
+import SettingsForm from 'components/SettingsForm';
+import Tooltip from 'components/Tooltip';
+import { Page, Section } from 'components/Page';
+import { ReactComponent as Key } from 'assets/icons/outline/key.svg';
+import { ReactComponent as Mail } from 'assets/icons/outline/mail.svg';
+import { ReactComponent as Shield } from 'assets/icons/outline/shield-check.svg';
+import { ReactComponent as Check } from 'assets/icons/outline/badge-check.svg';
+import { ReactComponent as Copy } from 'assets/icons/outline/duplicate.svg';
+import { ReactComponent as User } from 'assets/icons/outline/identification.svg';
+import { ReactComponent as Building } from 'assets/icons/outline/office-building.svg';
+import { ReactComponent as Finger } from 'assets/icons/outline/finger-print.svg';
+import { ReactComponent as Eye } from 'assets/icons/outline/eye.svg';
+import { ReactComponent as EyeClosed } from 'assets/icons/outline/eye-off.svg';
+import { ReactComponent as Users } from 'assets/icons/outline/users.svg';
+import { Subscriptions } from 'components/Subscriptions';
 
 export default function UserSettings() {
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ export default function UserSettings() {
   } = currentUser.attributes;
 
   const allowList =
-    allow.length > 0 ? allow.join(", ") : "All websites allowed";
+    allow.length > 0 ? allow.join(', ') : 'All websites allowed';
 
   const renderUserInfo = () => {
     return (
@@ -96,7 +96,7 @@ export default function UserSettings() {
           <Finger />
           <span className="menu__item__label">Secret API token: </span>
           <span className="menu__item__info">
-            {showSecret ? secretToken : "*".repeat(secretToken.length)}
+            {showSecret ? secretToken : '*'.repeat(secretToken.length)}
           </span>
           <button
             className="menu__item__icon"
@@ -122,7 +122,7 @@ export default function UserSettings() {
           <Shield />
           <span className="menu__item__label">ReCAPTCHA active: </span>
           <span className="menu__item__info">
-            {recaptcha ? "true" : "false"}
+            {recaptcha ? 'true' : 'false'}
           </span>
           <Tooltip
             id="recaptcha"
@@ -132,11 +132,11 @@ export default function UserSettings() {
         <li className="menu__item space__bottom-2">
           <Users />
           <span className="menu__item__label">
-            Max number of sessions per IP:{" "}
+            Max number of sessions per IP:{' '}
           </span>
           <span className="menu__item__info">
             {max_sessions_per_ip ||
-              "None, accept an infinite number of sessions per IP"}
+              'None, accept an infinite number of sessions per IP'}
           </span>
           <Tooltip
             id="max-sessions"
@@ -154,7 +154,7 @@ export default function UserSettings() {
 
   return (
     <Page>
-      <Subscriptions curentSubscription={subscription} email={email} />
+      <Subscriptions currentSubscription={subscription} email={email} />
       <Section>
         <h1 className="section__title">User settings</h1>
         <div className="window space__bottom-6">
@@ -177,16 +177,16 @@ export default function UserSettings() {
             <p className="card__text">
               If you use React you can install our library
             </p>
-            <code>
+            <code className="card__code">
               <pre>npm install @lyket/react</pre>
             </code>
-            <code>
+            <code className="card__code">
               <pre>yarn add @lyket/react</pre>
             </code>
             <p className="card__text">
               Copy your API key to configure the Provider top-level
             </p>
-            <code>
+            <code className="card__code">
               <pre>{`import { Provider } from '@lyket/react';
 
 ReactDOM.render(
@@ -212,7 +212,7 @@ ReactDOM.render(
               If you want to use our HTML embeddable widget you can do it by
               importing Lyket top-level providing your API key
             </p>
-            <code>
+            <code className="card__code">
               <pre>{`<script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=${publicToken}"></script>
 `}</pre>
             </code>
@@ -226,7 +226,7 @@ ReactDOM.render(
                 official Widget documentation
               </a>
               <span className="menu__item__info">
-                {" "}
+                {' '}
                 to start creating buttons
               </span>
             </div>

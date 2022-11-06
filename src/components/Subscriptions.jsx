@@ -8,7 +8,7 @@ const planCodes = {
   warned:
     'Free - you reached the free plan limitof 500 pageviews/month, your account will be deactivated by the end of the month',
   deactivated:
-    'Your account is currently deactivated, please upgrade to another plan or contact support',
+    'Sorry, your account is currently deactivated. To keep using Lyket please upgrade to one of our paid plans',
   basic_plan_v2_yearly: 'Basic plan yearly',
   business_plan_v1_yearly: 'Business plan yearly',
   business_plan_v1_monthly: 'Business plan monthly',
@@ -20,7 +20,7 @@ export function Subscriptions({ currentSubscription, email }) {
   const renderChangePlan = () => {
     return (
       <>
-        <div className="menu__item__label space__bottom-1">Change plan:</div>
+        <p className="window__title">Change plan</p>
         <ul className="ternary">
           <li className="ternary__item">
             <a
@@ -101,8 +101,8 @@ export function Subscriptions({ currentSubscription, email }) {
             here
           </a>
         </p>
+        <p className="window__title">Current plan</p>
         <p className="card__text">
-          <span className="menu__item__label">Current plan: </span>
           <span className="menu__item__info">
             {planCodes[currentSubscription] || currentSubscription}
           </span>
@@ -112,7 +112,7 @@ export function Subscriptions({ currentSubscription, email }) {
         ) ? (
           renderChangePlan()
         ) : (
-          <div className="menu__item__label space__bottom-2">
+          <div className="window__title space__bottom-2">
             To change your plan, please contact our support team at{' '}
             <a href="mailto:write@lyket.dev">write@lyket.dev</a>
           </div>
