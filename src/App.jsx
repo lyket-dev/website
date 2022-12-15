@@ -43,7 +43,7 @@ const App = () => {
 			<Router>
 				<Routes>
 					<Route exact path="/" element={<PublicRoute />}>
-						<Route element={<Login />} />
+						<Route exact path="/" element={<Signup />} />
 					</Route>
 					<Route path="/login" element={<PublicRoute />}>
 						<Route path="/login" element={<Login />} />
