@@ -1,40 +1,26 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Route, Redirect } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
-export function PrivateRoute({ children, ...rest }) {
-  const session = useSelector((state) => state.session);
+export function PrivateRoute() {
+	const session = useSelector((state) => state.session);
 
-  return (
-    <Route
-      {...rest}
-      render={({ location }) =>
-        session ? (
-          <>
-            <Navbar loggedIn />
-            {children}
-          </>
-        ) : (
-          <Redirect
-            to={{
-              pathname: "/login",
-              state: { from: location },
-            }}
-          />
-        )
-      }
-    />
-  );
+	return (
+		<>
+			<Navbar loggedIn={!!session} />
+			{session ? <Outlet /> : <Navigate to="/login" />}
+		</>
+	);
 }
 
-export function PublicRoute({ children, ...rest }) {
-  return (
-    <Route {...rest}>
-      <Navbar />
-      {children}
-      <Footer />
-    </Route>
-  );
+export function PublicRoute() {
+	return (
+		<>
+			<Navbar loggedIn={false} />
+			<Outlet />
+			<Footer />
+		</>
+	);
 }

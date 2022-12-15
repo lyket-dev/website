@@ -1,27 +1,27 @@
 import React from "react";
-import ReactTooltip from "react-tooltip";
+import { Tooltip as ReactTooltip } from "react-tooltip";
 import { ReactComponent as Info } from "assets/icons/outline/information-circle.svg";
+import "react-tooltip/dist/react-tooltip.css";
 
 export default function Tooltip({ message, id, children }) {
-  return (
-    <>
-      <span data-tip="React-tooltip" data-for={id} className="tooltip__icon">
-        {children || (
-          <span className="tooltip__link">
-            <Info />
-          </span>
-        )}
-      </span>
-      <ReactTooltip
-        id={id}
-        place="top"
-        effect="float"
-        multiline={true}
-        backgroundColor="#1f1630"
-        textColor="#ffffff"
-      >
-        <span className="tooltip">{message}</span>
-      </ReactTooltip>
-    </>
-  );
+	return (
+		<>
+			<span id={id} className="tooltip__icon">
+				{children || (
+					<span className="tooltip__link">
+						<Info />
+					</span>
+				)}
+			</span>
+			<ReactTooltip
+				anchorId={id}
+				place="top"
+				effect="float"
+				multiline={true}
+				textColor="#ffffff"
+				content={message}
+				className="tooltip"
+			/>
+		</>
+	);
 }
