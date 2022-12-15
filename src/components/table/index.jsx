@@ -181,6 +181,34 @@ export default function EnhancedTable({ hasButtons }) {
 		[dispatch, selectedButtonType],
 	);
 
+	const handleFetchAllButtons = useCallback(
+		async ({ page = 0, limit = 10, sort = "desc" } = {}) => {
+			try {
+				const result = await Promise.all([
+					dispatch(fetchMap["like"]({ page, limit, sort })),
+					dispatch(fetchMap["clap"]({ page, limit, sort })),
+					dispatch(fetchMap["updown"]({ page, limit, sort })),
+				]);
+
+				setTotalCount(result[0].meta.total);
+			} catch (error) {
+				if (error?.errors[0]?.code === "DEACTIVATED_ACCOUNT") {
+					console.log(error);
+				} else {
+					throw error;
+				}
+			}
+		},
+		[dispatch],
+	);
+
+	useAsyncEffect(async () => {
+		await handleFetchAllButtons();
+		setOrder("desc");
+		setCurrentPage(0);
+		setRowsPerPage(10);
+	}, []);
+
 	useAsyncEffect(async () => {
 		await handleFetchButtons();
 		setOrder("desc");
