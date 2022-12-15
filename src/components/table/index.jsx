@@ -144,20 +144,12 @@ export default function EnhancedTable({ hasButtons }) {
 
 	let rows;
 
-	if (namespace) {
-		rows = buttons.filter((b) => {
-			if (namespace === "no-namespace") {
-				return b.namespace === null;
-			} else {
-				return b.namespace === namespace;
-			}
-		});
-	}
-
 	rows = buttons.filter(
 		(b) =>
 			b.type === selectedButtonType &&
-			(!namespace || namespace === b.namespace),
+			(!namespace ||
+				namespace === b.namespace ||
+				(namespace === "no-namespace" && !b.namespace)),
 	);
 
 	const tableButtons = hasButtons ? rows : fake;
@@ -338,8 +330,8 @@ export default function EnhancedTable({ hasButtons }) {
 														{icons[row.type]}
 													</TableCell>
 													<TableCell className="table__cell">
-														{!namespace && row.namespace
-															? `${row.namespace}/`
+														{!namespace
+															? `${row.namespace || "no-namespace"}/`
 															: ""}
 														{row.name}
 													</TableCell>
