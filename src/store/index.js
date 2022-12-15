@@ -5,9 +5,9 @@ import { composeWithDevTools } from "redux-devtools-extension";
 // import logoutOnInvalidAuthHeader from "./middlewares/logoutOnInvalidAuthHeader";
 
 export default createStore(
-  rootReducer,
-  composeWithDevTools(
-    applyMiddleware(thunkMiddleware)
-    // applyMiddleware(logoutOnInvalidAuthHeader)
-  )
+	rootReducer,
+	composeWithDevTools(
+		applyMiddleware(thunkMiddleware),
+		// applyMiddleware(logoutOnInvalidAuthHeader)
+	),
 );
