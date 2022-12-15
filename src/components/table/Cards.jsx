@@ -28,10 +28,9 @@ const Top = ({ three, currentNamespace }) => {
 			<div className="card__label">Top 3</div>
 			<div className="card__bullet__container">
 				{three.map((button, index) => {
-					const name =
-						currentNamespace || !button.namespace
-							? `${button.name}`
-							: `${button.namespace}/${button.name}`;
+					const name = currentNamespace
+						? `${button.name}`
+						: `${button.namespace || "no-namespace"}/${button.name}`;
 
 					return (
 						<div
