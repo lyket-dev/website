@@ -60,7 +60,7 @@ export default function Signup() {
 	const validationSchema = Yup.object({
 		email: Yup.string().email("Invalid email address").required("Required"),
 		name: Yup.string().required("Required"),
-		company: Yup.string().max(20, "Must be 20 characters or less"),
+		company: Yup.string().max(30, "Must be 20 characters or less"),
 		allow_list: Yup.string(),
 		tech: Yup.string().required("Required"),
 	});
