@@ -22,11 +22,11 @@ const MagicLink = () => {
 			await dispatch(createSession({ token }));
 			await sleep(1200);
 			notice({ message: "You are now logged in!" });
-			navigate("user-settings");
+			navigate("/user-settings");
 		} catch (e) {
-			alert({ message: e.errors[0] && e.errors[0].message });
+			alert({ message: e.errors[0]?.message });
 			await sleep(1200);
-			navigate("login");
+			navigate("/login");
 		}
 	}, []);
 
