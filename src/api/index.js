@@ -3,34 +3,34 @@ import {
   get as getRequest,
   put as putRequest,
   destroy as destroyRequest,
-} from "utils/request";
-import config from "config";
+} from 'utils/request';
+import config from 'config';
 
 function siteDomain() {
   return (
-    localStorage.getItem("domain") ||
-    window.location.host.replace(/:[0-9]+$/, "")
+    localStorage.getItem('domain') ||
+    window.location.host.replace(/:[0-9]+$/, '')
   );
 }
 
 const wrapRequest = (fn) => {
   return (path, ...args) => {
     const lastArg = args.length >= 1 && args[args.length - 1];
-    const sessionId = lastArg && lastArg.sessionId;
+    const sessionId = lastArg?.sessionId;
     const requestArgs = sessionId ? args.slice(0, -1) : args;
 
     const options = {
-      credentials: "include",
+      credentials: 'include',
       headers: {
-        "X-Site-Domain": siteDomain(),
-        "Content-Type": "application/json",
-        Accept: "application/vnd.api+json",
-        "X-Api-Version": "1",
+        'X-Site-Domain': siteDomain(),
+        'Content-Type': 'application/json',
+        Accept: 'application/vnd.api+json',
+        'X-Api-Version': '1',
       },
     };
 
     if (sessionId) {
-      options.headers["X-Session-Id"] = sessionId;
+      options.headers['X-Session-Id'] = sessionId;
     }
 
     const baseUrl = config.apiBaseUrl;
@@ -45,57 +45,61 @@ export const put = wrapRequest(putRequest);
 export const destroy = wrapRequest(destroyRequest);
 
 export function fetchCurrentUser() {
-  return get("/current-user");
+  return get('/current-user');
 }
 
 export function updateCurrentUser(payload) {
-  return put("/current-user", payload);
+  return put('/current-user', payload);
 }
 
 export function loginRequest(payload) {
-  return post("/request-login", payload);
+  return post('/request-login', payload);
 }
 
 export function signupRequest(payload) {
-  return post("/sign-up", payload);
+  return post('/sign-up', payload);
 }
 
 export function createSession(payload) {
-  return post("/create-session", payload);
+  return post('/create-session', payload);
 }
 
 export function fetchSession() {
-  return get("/current-session");
+  return get('/current-session');
 }
 
 export function destroySession() {
-  return destroy("/logout");
+  return destroy('/logout');
 }
 
 export function getButton(id) {
   return get(`/buttons/${id}`);
 }
 
+export function getButtonsMeta() {
+  return get('/buttons/meta');
+}
+
 export function getButtonsTotal() {
-  return get("/buttons/total");
+  return get('/buttons/total');
 }
 
 export function getButtons() {
-  return get("/buttons/all");
+  return get('/buttons/all');
 }
 
 export function getLikeButtons(query) {
-  let searchParams = new URLSearchParams(query);
+  const searchParams = new URLSearchParams(query);
   return get(`/buttons/all-like-buttons?${searchParams.toString()}`);
 }
 
 export function getClapButtons(query) {
-  let searchParams = new URLSearchParams(query);
+  const searchParams = new URLSearchParams(query);
   return get(`/buttons/all-clap-buttons?${searchParams.toString()}`);
 }
 
 export function getUpdownButtons(query) {
-  let searchParams = new URLSearchParams(query);
+  const searchParams = new URLSearchParams(query);
   return get(`/buttons/all-updown-buttons?${searchParams.toString()}`);
 }
 
@@ -112,11 +116,11 @@ export function resetButton(id) {
 }
 
 export function createButton(data) {
-  return post("/buttons", { data });
+  return post('/buttons', { data });
 }
 
 export function bulkUploadButtons(data) {
-  return post("/buttons/bulk-import", { data });
+  return post('/buttons/bulk-import', { data });
 }
 
 export function tagButton(id, data) {

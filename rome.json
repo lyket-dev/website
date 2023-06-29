@@ -1,0 +1,42 @@
+{
+  "organizeImports": {
+    "enabled": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "a11y": {
+        "recommended": false,
+        "useValidAnchor": "off",
+        "useKeyWithClickEvents": "off",
+        "useAnchorContent": "off",
+        "useAltText": "off"
+      },
+      "correctness": {
+        "noUnusedVariables": "warn"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "warn"
+      },
+      "suspicious": {
+        "noExplicitAny": "off",
+        "noArrayIndexKey": "warn"
+      },
+      "style": {
+        "noNonNullAssertion": "off",
+        "useDefaultParameterLast": "off"
+      }
+    },
+    "ignore": ["src/vendor/**/*", "bower_components/**/*"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space"
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single"
+    }
+  }
+}
