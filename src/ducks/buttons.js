@@ -1,5 +1,5 @@
-import createAsyncAction from "utils/createAsyncAction";
-import createEntityReducer from "utils/createEntityReducer";
+import createAsyncAction from 'utils/createAsyncAction';
+import createEntityReducer from 'utils/createEntityReducer';
 
 import {
   getButtons,
@@ -13,38 +13,43 @@ import {
   getLikeButtons,
   getClapButtons,
   getUpdownButtons,
-} from "../api";
+  getRateButtons,
+} from '../api';
 
-export const fetchAll = createAsyncAction("button/fetchAll", getButtons);
+export const fetchAll = createAsyncAction('button/fetchAll', getButtons);
 
 export const fetchAllLikeButtons = createAsyncAction(
-  "button/fetchAllLikeButtons",
-  getLikeButtons
+  'button/fetchAllLikeButtons',
+  getLikeButtons,
 );
 export const fetchAllClapButtons = createAsyncAction(
-  "button/fetchAllClapButtons",
-  getClapButtons
+  'button/fetchAllClapButtons',
+  getClapButtons,
 );
 export const fetchAllUpdownButtons = createAsyncAction(
-  "button/fetchAllUpdownButtons",
-  getUpdownButtons
+  'button/fetchAllUpdownButtons',
+  getUpdownButtons,
+);
+export const fetchAllRateButtons = createAsyncAction(
+  'button/fetchAllRateButtons',
+  getRateButtons,
 );
 
-export const fetch = createAsyncAction("button/fetch", getButton);
+export const fetch = createAsyncAction('button/fetch', getButton);
 
-export const update = createAsyncAction("button/update", updateButton);
+export const update = createAsyncAction('button/update', updateButton);
 
-export const create = createAsyncAction("button/create", createButton);
+export const create = createAsyncAction('button/create', createButton);
 
-export const reset = createAsyncAction("button/reset", resetButton);
+export const reset = createAsyncAction('button/reset', resetButton);
 
-export const tag = createAsyncAction("button/tag", tagButton);
+export const tag = createAsyncAction('button/tag', tagButton);
 
 export const bulkUpload = createAsyncAction(
-  "button/bulkUpload",
-  bulkUploadButtons
+  'button/bulkUpload',
+  bulkUploadButtons,
 );
 
-export const destroy = createAsyncAction("button/destroy", destroyButton);
+export const destroy = createAsyncAction('button/destroy', destroyButton);
 
-export default createEntityReducer("button", destroy.receive);
+export default createEntityReducer('button', destroy.receive);

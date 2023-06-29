@@ -23,6 +23,7 @@ import TagsCell from './TagsCell';
 import { ReactComponent as Clap } from 'assets/icons/outline/hand.svg';
 import { ReactComponent as Heart } from 'assets/icons/outline/heart.svg';
 import { ReactComponent as Thumb } from 'assets/icons/outline/thumb-up.svg';
+import { ReactComponent as Star } from 'assets/icons/outline/star.svg';
 import { ReactComponent as Folder } from 'assets/icons/outline/folder-open.svg';
 import { ReactComponent as Refresh } from 'assets/icons/outline/refresh.svg';
 import { ReactComponent as Upload } from 'assets/icons/outline/cloud-upload.svg';
@@ -30,6 +31,7 @@ import {
   fetchAllClapButtons,
   fetchAllLikeButtons,
   fetchAllUpdownButtons,
+  fetchAllRateButtons,
 } from 'ducks/buttons';
 import useAsyncEffect from 'utils/useAsyncEffect';
 import { getButtonsMeta } from 'api';
@@ -38,12 +40,14 @@ const icons = {
   clap: <Clap className="card__icon" />,
   like: <Heart className="card__icon" />,
   updown: <Thumb className="card__icon" />,
+  rate: <Star className="card__icon" />,
 };
 
 const fetchMap = {
   like: fetchAllLikeButtons,
   clap: fetchAllClapButtons,
   updown: fetchAllUpdownButtons,
+  rate: fetchAllRateButtons,
 };
 
 const headCells = [
@@ -190,6 +194,7 @@ export default function EnhancedTable({ hasButtons }) {
           dispatch(fetchMap['like']({ page, limit, sort })),
           dispatch(fetchMap['clap']({ page, limit, sort })),
           dispatch(fetchMap['updown']({ page, limit, sort })),
+          dispatch(fetchMap['rate']({ page, limit, sort })),
         ]);
 
         setTotalCount(total_likes);

@@ -103,6 +103,11 @@ export function getUpdownButtons(query) {
   return get(`/buttons/all-updown-buttons?${searchParams.toString()}`);
 }
 
+export function getRateButtons(query) {
+  const searchParams = new URLSearchParams(query);
+  return get(`/buttons/all-rate-buttons?${searchParams.toString()}`);
+}
+
 export function updateButton(id, data) {
   return put(`/buttons/${id}`, { data });
 }

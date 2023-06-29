@@ -13,6 +13,7 @@ import {
   getLikeButtons,
   getClapButtons,
   getUpdownButtons,
+  getRateButtons,
 } from '../api';
 
 export const fetchAll = createAsyncAction('button/fetchAll', getButtons);
@@ -28,6 +29,10 @@ export const fetchAllClapButtons = createAsyncAction(
 export const fetchAllUpdownButtons = createAsyncAction(
   'button/fetchAllUpdownButtons',
   getUpdownButtons,
+);
+export const fetchAllRateButtons = createAsyncAction(
+  'button/fetchAllRateButtons',
+  getRateButtons,
 );
 
 export const fetch = createAsyncAction('button/fetch', getButton);
