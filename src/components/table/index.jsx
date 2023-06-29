@@ -167,8 +167,6 @@ export default function EnhancedTable({ hasButtons }) {
           ),
         );
 
-        console.log(result);
-
         setTotalCount(result.meta.total);
       } catch (error) {
         if (error.errors[0].code === 'DEACTIVATED_ACCOUNT') {
