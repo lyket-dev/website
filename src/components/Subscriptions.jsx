@@ -1,7 +1,10 @@
 import React from 'react';
-import { Section } from './Page';
+import { Page, Section } from './Page';
+import { useDispatch, useSelector } from 'react-redux';
+import useAsyncEffect from 'utils/useAsyncEffect';
+import { fetch as fetchCurrentUser } from 'ducks/currentUser';
 
-const planCodes = {
+const availablePlans = {
   free: {
     name: 'Free',
     description: 'Up to 500 pageviews',
@@ -50,12 +53,30 @@ const planCodes = {
   },
 };
 
-export function Subscriptions({ currentSubscription, email }) {
+export default function Subscriptions() {
+  const dispatch = useDispatch();
+
+  const currentUser = useSelector((state) => {
+    return state.currentUser;
+  });
+
+  useAsyncEffect(async () => {
+    if (!currentUser) {
+      await dispatch(fetchCurrentUser());
+    }
+  }, [dispatch, currentUser]);
+
+  if (!currentUser) {
+    return <></>;
+  }
+
+  const { subscription: currentSubscription, email } = currentUser.attributes;
+
   const isSubscribedTo = (s) => s === currentSubscription;
 
   const renderActivePlans = (plan) => {
     return (
-      <li className="ternary__item">
+      <li className="ternary__item" key={plan.name}>
         <a
           href={`https://buy.stripe.com/${plan.stripeCode}?prefilled_email=${email}`}
           target="_blank"
@@ -78,7 +99,7 @@ export function Subscriptions({ currentSubscription, email }) {
       <>
         <p className="window__title">Change plan</p>
         <ul className="ternary">
-          {Object.values(planCodes)
+          {Object.values(availablePlans)
             .filter((p) => p.active)
             .map(renderActivePlans)}
         </ul>
@@ -99,58 +120,65 @@ export function Subscriptions({ currentSubscription, email }) {
     );
   };
 
+  if (!currentUser) {
+    return <></>;
+  }
+
   return (
-    <Section>
-      <h1 className="section__title">Subscription</h1>
-      <div className="window space__bottom-6">
-        <div className="window__label">{email}</div>
-        <p className="window__title" />
-        <p className="card__text">
-          Here you can upgrade your subscription. Read more about our pricing
-          options,{' '}
-          <a
-            href="https://lyket.dev/pricing"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            on our pricing page
-          </a>
-        </p>
-        <p className="window__title">Your current plan</p>
-        <p className="card__text">
-          <span className="menu__item__info">
-            <li className="ternary__item outline">
-              <p className="ternary__title">
-                {planCodes[currentSubscription]?.name || currentSubscription}
-              </p>
-              {planCodes[currentSubscription] && (
-                <>
-                  <p className="ternary__text">
-                    {planCodes[currentSubscription].description}
-                  </p>
-                  <p className="ternary__text">
-                    {planCodes[currentSubscription].price}
-                  </p>
-                </>
-              )}
-            </li>
-          </span>
-        </p>
-        {[
-          'free',
-          'deactivated',
-          'deactivating',
-          'warned',
-          'to_delete',
-        ].includes(currentSubscription) ? (
-          renderChangePlan()
-        ) : (
-          <div className="window__title space__bottom-2">
-            To change your plan, please{' '}
-            <a href={'https://lyket.dev/contact'}>contact our support team</a>
+    <Page>
+      <Section>
+        <h1 className="section__title">Subscription</h1>
+        <div className="window space__bottom-6">
+          <div className="window__label">{email}</div>
+          <p className="window__title" />
+          <p className="card__text">
+            Here you can upgrade your subscription. Read more about our pricing
+            options,{' '}
+            <a
+              href="https://lyket.dev/pricing"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              on our pricing page
+            </a>
+          </p>
+          <p className="window__title">Your current plan</p>
+          <div className="card__text">
+            <span className="menu__item__info">
+              <li className="ternary__item outline">
+                <p className="ternary__title">
+                  {availablePlans[currentSubscription]?.name ||
+                    currentSubscription}
+                </p>
+                {availablePlans[currentSubscription] && (
+                  <>
+                    <p className="ternary__text">
+                      {availablePlans[currentSubscription].description}
+                    </p>
+                    <p className="ternary__text">
+                      {availablePlans[currentSubscription].price}
+                    </p>
+                  </>
+                )}
+              </li>
+            </span>
           </div>
-        )}
-      </div>
-    </Section>
+          {[
+            'free',
+            'deactivated',
+            'deactivating',
+            'warned',
+            'to_delete',
+          ].includes(currentSubscription) ? (
+            renderChangePlan()
+          ) : (
+            <div className="window__title space__bottom-2">
+              To change your plan, please{' '}
+              <a href={'https://lyket.dev/contact'}>contact our support team</a>
+            </div>
+          )}
+        </div>
+      </Section>
+    </Page>
   );
 }

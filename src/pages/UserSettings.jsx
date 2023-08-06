@@ -16,7 +16,6 @@ import { ReactComponent as Finger } from 'assets/icons/outline/finger-print.svg'
 import { ReactComponent as Eye } from 'assets/icons/outline/eye.svg';
 import { ReactComponent as EyeClosed } from 'assets/icons/outline/eye-off.svg';
 import { ReactComponent as Users } from 'assets/icons/outline/users.svg';
-import { Subscriptions } from 'components/Subscriptions';
 
 export default function UserSettings() {
   const dispatch = useDispatch();
@@ -28,11 +27,9 @@ export default function UserSettings() {
   });
 
   useAsyncEffect(async () => {
-    if (currentUser) {
-      return;
+    if (!currentUser) {
+      await dispatch(fetchCurrentUser());
     }
-
-    await dispatch(fetchCurrentUser());
   }, []);
 
   if (!currentUser) {
@@ -43,7 +40,6 @@ export default function UserSettings() {
     email,
     name,
     company,
-    subscription,
     public_token: publicToken,
     secret_token: secretToken,
     recaptcha_active: recaptcha,
@@ -154,7 +150,6 @@ export default function UserSettings() {
 
   return (
     <Page>
-      <Subscriptions currentSubscription={subscription} email={email} />
       <Section>
         <h1 className="section__title">User settings</h1>
         <div className="window space__bottom-6">
@@ -162,7 +157,7 @@ export default function UserSettings() {
           {editMode && (
             <SettingsForm
               onClose={(e) => {
-                e && e.preventDefault();
+                e?.preventDefault();
                 setEditMode(false);
               }}
             />
