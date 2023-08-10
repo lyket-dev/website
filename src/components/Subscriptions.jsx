@@ -3,12 +3,14 @@ import { Page, Section } from './Page';
 import { useDispatch, useSelector } from 'react-redux';
 import useAsyncEffect from 'utils/useAsyncEffect';
 import { fetch as fetchCurrentUser } from 'ducks/currentUser';
+import UsageChart from './UsageChart';
 
 const availablePlans = {
   free: {
     name: 'Free',
     description: 'Up to 500 pageviews',
     price: 'Free',
+    threshold: 500,
   },
   deactivating: {
     name: 'Free',
@@ -36,6 +38,7 @@ const availablePlans = {
     price: '€48/year',
     stripeCode: '3cs9Es0ro3sR60obIJ',
     active: true,
+    threshold: 5000,
   },
   business_plan_v1_monthly: {
     name: 'Business (monthly)',
@@ -43,6 +46,7 @@ const availablePlans = {
     price: '€10/month',
     stripeCode: 'fZedUI6PMbZn60o5km',
     active: true,
+    threshold: 50000,
   },
   business_plan_v1_yearly: {
     name: 'Business (yearly)',
@@ -50,6 +54,7 @@ const availablePlans = {
     price: '€100/year',
     stripeCode: '00g5ocfmi8Nb2OccMM',
     active: true,
+    threshold: 50000,
   },
 };
 
@@ -93,7 +98,6 @@ export default function Subscriptions() {
       </li>
     );
   };
-
   const renderChangePlan = () => {
     return (
       <>
@@ -177,6 +181,18 @@ export default function Subscriptions() {
               <a href={'https://lyket.dev/contact'}>contact our support team</a>
             </div>
           )}
+        </div>
+      </Section>
+      <Section>
+        <div className="window space__bottom-6">
+          <div className="window__label">Pageviews</div>
+          <UsageChart
+            name="Pageviews"
+            metrics={['pageviews']}
+            unit="pageviews"
+            data={currentUser.attributes.pageviews}
+            threshold={availablePlans[currentSubscription]?.threshold}
+          />
         </div>
       </Section>
     </Page>
