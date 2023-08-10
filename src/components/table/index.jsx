@@ -366,7 +366,7 @@ export default function EnhancedTable({ hasButtons }) {
                             {row.total_votes}
                           </TableCell>
                           <TableCell className="table__cell" align="right">
-                            {row.type === 'rate'
+                            {row.type === 'rate' && row.score > 0
                               ? parseFloat(
                                   (row.score / row.total_votes).toFixed(1),
                                 )
