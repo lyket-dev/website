@@ -1,10 +1,17 @@
 .menu
 
+.menu__folders
+  max-height: 450px
+  overflow-x: hidden
+  overflow-y: scroll
+
 .menu__item
   display: flex
   align-items: center
   +margin-bottom(.5)
   +font-size(regular)
+  overflow: auto
+  max-height: 500px
 
   svg
     width: 24px

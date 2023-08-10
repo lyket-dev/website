@@ -285,20 +285,22 @@ export default function EnhancedTable({ hasButtons }) {
                 All
               </Link>
             </li>
-            {allNamespaces.map((n) => {
-              const namespace = n ? n : 'no-namespace';
-              return (
-                <li key={namespace} className="menu__item">
-                  <Folder />
-                  <Link
-                    className="menu__item__label"
-                    to={`/dashboard/${selectedButtonType}/${namespace}`}
-                  >
-                    {namespace}
-                  </Link>
-                </li>
-              );
-            })}
+            <div className="menu__folders">
+              {allNamespaces.map((n) => {
+                const namespace = n ? n : 'no-namespace';
+                return (
+                  <li key={namespace} className="menu__item">
+                    <Folder />
+                    <Link
+                      className="menu__item__label"
+                      to={`/dashboard/${selectedButtonType}/${namespace}`}
+                    >
+                      {namespace}
+                    </Link>
+                  </li>
+                );
+              })}
+            </div>
           </ul>
           <button className="menu__item" onClick={handleFetchButtons}>
             <Refresh />
