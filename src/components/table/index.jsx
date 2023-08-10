@@ -191,10 +191,10 @@ export default function EnhancedTable({ hasButtons }) {
         } = await getButtonsMeta();
 
         await Promise.all([
-          dispatch(fetchMap['like']({ page, limit, sort })),
-          dispatch(fetchMap['clap']({ page, limit, sort })),
-          dispatch(fetchMap['updown']({ page, limit, sort })),
-          dispatch(fetchMap['rate']({ page, limit, sort })),
+          dispatch(fetchMap.like({ page, limit, sort })),
+          dispatch(fetchMap.clap({ page, limit, sort })),
+          dispatch(fetchMap.updown({ page, limit, sort })),
+          dispatch(fetchMap.rate({ page, limit, sort })),
         ]);
 
         setTotalCount(total_likes);
@@ -366,7 +366,11 @@ export default function EnhancedTable({ hasButtons }) {
                             {row.total_votes}
                           </TableCell>
                           <TableCell className="table__cell" align="right">
-                            {row.score}
+                            {row.type === 'rate'
+                              ? parseFloat(
+                                  (row.score / row.total_votes).toFixed(1),
+                                )
+                              : row.score}
                           </TableCell>
                           <ActionsCell buttonId={row.id} />
                         </TableRow>
