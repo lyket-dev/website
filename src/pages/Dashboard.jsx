@@ -66,7 +66,7 @@ export default function Dashboard() {
             Please navigate to the{' '}
             <Link to="/user-settings">user settings page</Link> to upgrade to
             another plan or{' '}
-            <a href="mailto:write@lyket.dev">contact our support team!</a>
+            <a href="mailto:lyket.dev@gmail.com">contact our support team!</a>
           </p>
         </div>
       </div>
