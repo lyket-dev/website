@@ -19,34 +19,22 @@ export default function Header({ namespace, currentType, icons }) {
           : `All ${currentType} buttons`}
       </h2>
       <div className="type-menu">
-        <Link
-          to={`/dashboard/like${namespace ? `/${namespace}` : ''}`}
-          className="type-menu__link"
-        >
+        <Link to="/dashboard/like" className="type-menu__link">
           {icons['like']}
           Like Buttons
         </Link>
         <span>|</span>
-        <Link
-          to={`/dashboard/updown${namespace ? `/${namespace}` : ''}`}
-          className="type-menu__link"
-        >
+        <Link to="/dashboard/updown" className="type-menu__link">
           {icons['updown']}
           Like/Dislike Buttons
         </Link>
         <span>|</span>
-        <Link
-          to={`/dashboard/clap${namespace ? `/${namespace}` : ''}`}
-          className="type-menu__link"
-        >
+        <Link to="/dashboard/clap" className="type-menu__link">
           {icons['clap']}
           Clap Buttons
         </Link>
         <span>|</span>
-        <Link
-          to={`/dashboard/rate${namespace ? `/${namespace}` : ''}`}
-          className="type-menu__link"
-        >
+        <Link to="/dashboard/rate" className="type-menu__link">
           {icons['rate']}
           Rate Buttons
         </Link>

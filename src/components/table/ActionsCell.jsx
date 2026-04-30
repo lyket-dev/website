@@ -13,7 +13,7 @@ import { notice, alert } from "utils/notifications";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 
-export default function ActionsCell({ buttonId }) {
+export default function ActionsCell({ buttonId, variant }) {
   const dispatch = useDispatch();
 
   const confirmPromise = async ({ title, message }) =>
@@ -22,32 +22,19 @@ export default function ActionsCell({ buttonId }) {
         title: title || "Are you sure you want to proceed?",
         message: message || "Click yes to proceed",
         buttons: [
-          {
-            label: "Yes",
-            onClick: resolve,
-          },
-          {
-            label: "No",
-            onClick: () => {},
-          },
+          { label: "Yes", onClick: resolve },
+          { label: "No", onClick: () => {} },
         ],
       });
     });
 
   const handleDestroyButton = async () => {
     try {
-      await confirmPromise({
-        title: "Are you sure you want to destroy this button?",
-      });
-
+      await confirmPromise({ title: "Are you sure you want to destroy this button?" });
       await dispatch(destroyButton(buttonId));
       notice({ message: "Button destroyed successfully" });
     } catch (error) {
-      alert({
-        message: `Could not destroy button ${
-          error.errors[0] && error.errors[0].message
-        }`,
-      });
+      alert({ message: `Could not destroy button ${error.errors[0] && error.errors[0].message}` });
     }
   };
 
@@ -60,13 +47,30 @@ export default function ActionsCell({ buttonId }) {
       await dispatch(resetButton(buttonId)).then(() => dispatch(fetchAll()));
       notice({ message: "Button reset successfully" });
     } catch (error) {
-      alert({
-        message: `Could not reset button ${
-          error.errors[0] && error.errors[0].message
-        }`,
-      });
+      alert({ message: `Could not reset button ${error.errors[0] && error.errors[0].message}` });
     }
   };
+
+  if (variant === "panel") {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+        <button
+          onClick={handleResetButton}
+          style={{ display: "flex", alignItems: "center", gap: "8px", background: "none", border: "1px solid #ddd", borderRadius: "6px", padding: "6px 12px", cursor: "pointer", fontSize: "13px", color: "#555", whiteSpace: "nowrap" }}
+        >
+          <Reset style={{ width: 16, height: 16, flexShrink: 0 }} />
+          Reset counter
+        </button>
+        <button
+          onClick={handleDestroyButton}
+          style={{ display: "flex", alignItems: "center", gap: "8px", background: "none", border: "1px solid #fca5a5", borderRadius: "6px", padding: "6px 12px", cursor: "pointer", fontSize: "13px", color: "#dc2626", whiteSpace: "nowrap" }}
+        >
+          <Destroy style={{ width: 16, height: 16, flexShrink: 0 }} />
+          Destroy button
+        </button>
+      </div>
+    );
+  }
 
   return (
     <TableCell align="right" className="table__cell">
