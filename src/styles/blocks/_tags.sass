@@ -23,61 +23,88 @@
  *   </div>
 
 .ReactTags__container
-  display: flex
-  max-width: 300px
-  min-height: 2em
+  display: inline-flex
+  align-items: center
   flex-wrap: wrap
+  gap: 4px
+  min-width: 60px
+  max-width: 300px
+
+  &--editable
+    cursor: pointer
+
+.react-tags__placeholder
+  font-size: 11px
+  color: $placeholder-body-color
+  font-style: italic
+  user-select: none
 
 .react-tags
   position: relative
-  border-radius: 4px
-
-  /* shared font styles
+  display: inline-flex
+  align-items: center
+  flex-wrap: wrap
+  gap: 4px
   font-size: 1em
   line-height: 1
-
-  /* clicking anywhere will focus the input
   cursor: text
 
   &.is-focused
-    border-color: #B1B1B1
+    outline: none
 
 .react-tags__selected
-  display: inline
+  display: inline-flex
+  align-items: center
+  flex-wrap: wrap
+  gap: 4px
 
-.react-tags__tag
-  display: inline-block
+// shared pill style for both view mode and edit mode tags
+.react-tags__tag,
+.react-tags__selected-tag
+  display: inline-flex
+  align-items: center
   box-sizing: border-box
-  margin: 0 6px 6px 0
-  padding: 3px 5px
-  border: 1px solid #D1D1D1
-  border-radius: 4px
-  /* match the font styles
-  font-size: .9em
+  padding: 2px 8px
+  background-color: $light-bg-color
+  border: 1px solid $disabled-color
+  border-radius: 10px
+  font-size: 11px
   line-height: inherit
+  color: $light-body-color
+  white-space: nowrap
 
 .react-tags__selected-tag
-  @extend .react-tags__tag
   &:after
-    content: '\2715'
-    color: #AAA
-    margin-left: 8px
+    content: '×'
+    color: $placeholder-body-color
+    margin-left: 6px
+    font-size: 13px
+    line-height: 1
 
   &:hover, &:focus
-    border-color: #B1B1B1
+    border-color: $light-body-color
+    color: $base-body-color
 
 .react-tags__close
-  font-weight: bold
-  margin-left: 6px
+  +reset-button
+  display: inline-flex
+  align-items: center
+  padding: 2px 6px
+  border-radius: 10px
+  background-color: $light-bg-color
+  border: 1px solid $disabled-color
+  font-size: 11px
+  color: $placeholder-body-color
   cursor: pointer
+  line-height: 1
+
+  &:hover
+    color: $base-body-color
 
 .react-tags__search
-  display: inline-block
-
-  /* match tag layout
-  padding: 7px 2px
-
-  /* prevent autoresize overflowing the container
+  display: inline-flex
+  align-items: center
+  padding: 0
   max-width: 100%
 
 .ReactTags__icon
@@ -92,9 +119,9 @@
     position: relative
 
 .react-tags__search-input
-  /* prevent autoresize overflowing the container
   max-width: 100%
   background: transparent
+  padding: 2px 4px
   /* remove styles and layout from this element
   margin: 0
   padding: 0

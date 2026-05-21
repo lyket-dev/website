@@ -7,11 +7,7 @@ export default function Tooltip({ message, id, children }) {
 	return (
 		<>
 			<span id={id} className="tooltip__icon">
-				{children || (
-					<span className="tooltip__link">
-						<Info />
-					</span>
-				)}
+				{children || <Info />}
 			</span>
 			<ReactTooltip
 				anchorId={id}

@@ -68,24 +68,23 @@ export default function TagsCell({ buttonId }) {
           setEditTags(false);
         }}
       >
-        x
+        done
       </button>
     </div>
   ) : (
     <div
-      className="ReactTags__container"
+      className="ReactTags__container ReactTags__container--editable"
       onClick={(e) => {
         e.preventDefault();
         setEditTags(true);
       }}
       title="Click to add or edit tags"
-      style={{ cursor: 'pointer', minWidth: '60px' }}
     >
       {tags.map((tag) => (
         <button key={tag} className="react-tags__tag">{tag}</button>
       ))}
       {tags.length === 0 && (
-        <span style={{ fontSize: '11px', color: '#bbb', fontStyle: 'italic', userSelect: 'none' }}>
+        <span className="react-tags__placeholder">
           + add tag
         </span>
       )}

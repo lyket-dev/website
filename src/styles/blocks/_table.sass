@@ -22,15 +22,19 @@
 .table__head
   background-color: $light-bg-color
 
-.table__cell span
-  font-family: $body-font-family
-  +font-size(regular)
-  border-color: $border-color
+.table__head-cell
+  display: inline-flex
+  align-items: center
+  gap: 4px
+  +font-size(smallprint)
+  color: $light-body-color
 
 td.table__cell
+  font-family: $body-font-family
   border-color: $border-color
   color: $base-body-color
   font-family: $body-font-family
+  font-weight: 300
   +font-size(regular)
 
 .MuiTablePagination-toolbar p,
@@ -39,7 +43,314 @@ td.table__cell
   +font-size(regular)
   border-color: $border-color
 
+.MuiTableSortLabel-root
+  display: inline-flex
+  align-items: center
+
+  .MuiTableSortLabel-icon
+    opacity: 0.2
+    transition: opacity 0.2s ease
+
+  &:hover .MuiTableSortLabel-icon
+    opacity: 0.5
+
+  &.MuiTableSortLabel-active .MuiTableSortLabel-icon
+    opacity: 1
+
 .table__cell__actions
   display: flex
   align-items: center
   justify-content: flex-end
+
+.table__row--clickable
+  cursor: pointer
+
+.table__cell--expand
+  width: 32px
+  padding: 0 4px !important
+
+.table__cell--collapse
+  padding-bottom: 0 !important
+  padding-top: 0 !important
+
+.table__cell--collapse-hidden
+  border-bottom: none !important
+
+// ─── Table cell enhancements
+.table__type-cell
+  display: flex
+  align-items: center
+  gap: 6px
+
+  &__label
+    font-size: 12px
+    color: $light-body-color
+
+.table__id-cell
+  display: flex
+  align-items: center
+  gap: 4px
+  flex-wrap: wrap
+
+.table__namespace-badge
+  font-size: 12px
+  background-color: $light-color
+  color: $blue
+  border-radius: 4px
+  padding: 2px 8px
+  font-weight: 500
+
+.table__id-badge
+  font-size: 12px
+  background-color: $light-bg-color
+  color: $base-body-color
+  border-radius: 4px
+  padding: 2px 8px
+
+.table__cell .table__id-badge,
+.btn-detail .table__id-badge
+  font-family: monospace
+
+.table__separator
+  color: $disabled-color
+
+.table__no-namespace
+  font-size: 11px
+  color: $placeholder-body-color
+  font-style: italic
+
+.table__expand-btn
+  +reset-button
+  padding: 4px
+  display: flex
+  align-items: center
+  color: $light-body-color
+  cursor: pointer
+
+  svg
+    width: 16px
+    height: 16px
+
+// ─── Button detail panel
+.btn-detail
+  padding: 12px 24px 16px
+
+  &__meta
+    display: flex
+    align-items: center
+    gap: 16px
+    margin-bottom: 10px
+    flex-wrap: wrap
+
+  &__meta-item
+    display: flex
+    align-items: center
+    gap: 6px
+
+  &__meta-label
+    font-size: 10px
+    font-weight: 700
+    color: $light-body-color
+    text-transform: uppercase
+    letter-spacing: 0.08em
+
+  &__tags
+    display: flex
+    align-items: center
+    gap: 8px
+    margin-bottom: 14px
+
+  &__tags-hint
+    font-size: 11px
+    color: $disabled-color
+    font-style: italic
+
+  &__body
+    display: flex
+    gap: 48px
+    align-items: flex-start
+
+  &__stats
+    flex: 1
+
+  &__actions
+    display: flex
+    align-items: center
+    padding-top: 28px
+
+// ─── Detail sections
+.detail-section
+  &__title
+    font-size: 11px
+    font-weight: 600
+    color: $light-body-color
+    margin-bottom: 10px
+    text-transform: uppercase
+    letter-spacing: 0.05em
+
+.detail-sections
+  display: flex
+  gap: 48px
+  align-items: flex-start
+
+// ─── Stat row
+.detail-stat
+  display: flex
+  align-items: center
+  gap: 4px
+  margin-bottom: 6px
+  font-size: 13px
+  color: $base-body-color
+
+  strong
+    margin-left: 2px
+
+// ─── Distribution bars
+.detail-bar
+  display: flex
+  align-items: center
+  gap: 8px
+  margin-bottom: 5px
+
+  &__label
+    font-size: 12px
+    flex-shrink: 0
+
+    &--stars
+      color: $warning-color
+      width: 36px
+
+    &--vote
+      color: $light-body-color
+      width: 80px
+
+  &__track
+    width: 160px
+    height: 8px
+    background-color: $border-color
+    border-radius: 4px
+    flex-shrink: 0
+
+  &__fill
+    height: 100%
+    border-radius: 4px
+    transition: width 0.3s ease
+
+    &--stars
+      background-color: $warning-color
+
+    &--vote
+      background-color: $blue
+
+  &__count
+    font-size: 12px
+    color: $light-body-color
+    width: 24px
+
+  &__pct
+    font-size: 11px
+    color: $placeholder-body-color
+
+// ─── Action buttons (panel variant)
+.action-btn
+  display: flex
+  align-items: center
+  gap: 8px
+  background: none
+  border: 1px solid $disabled-color
+  border-radius: 6px
+  padding: 6px 12px
+  cursor: pointer
+  font-size: 13px
+  color: $light-body-color
+  white-space: nowrap
+
+  & + &
+    margin-top: 8px
+
+  svg
+    width: 16px
+    height: 16px
+    flex-shrink: 0
+
+  &--danger
+    border-color: lighten($alert-color, 20%)
+    color: $alert-color
+
+// ─── Bottom toolbar
+.table-toolbar
+  display: flex
+  align-items: flex-start
+  gap: 12px
+  padding: 16px 0
+  border-top: 1px solid $border-color
+
+.table-toolbar__section
+  border: 1px solid $disabled-color
+  border-radius: 8px
+  padding: 12px 14px
+  font-size: 12px
+  color: $light-body-color
+
+.table-toolbar__title
+  display: flex
+  align-items: center
+  gap: 6px
+  font-weight: 600
+  margin-bottom: 4px
+
+  svg
+    width: 14px
+    height: 14px
+
+.table-toolbar__desc
+  margin: 0 0 10px
+  color: $light-body-color
+  line-height: 1.4
+
+.table-toolbar__btn
+  +reset-button
+  display: flex
+  align-items: center
+  gap: 6px
+  border: 1px solid $disabled-color
+  border-radius: 6px
+  padding: 5px 10px
+  cursor: pointer
+  font-size: 12px
+  color: $light-body-color
+  margin-top: 10px
+
+  svg
+    width: 12px
+    height: 12px
+
+.table-toolbar__import-row
+  display: flex
+  align-items: center
+  gap: 8px
+
+.table-toolbar__download
+  color: $light-body-color
+  font-size: 12px
+  text-decoration: underline
+
+// ─── Summary toggle
+.summary-toggle
+  border-top: 1px solid $border-color
+  margin-top: 8px
+  padding-top: 8px
+
+.summary-toggle__btn
+  +reset-button
+  display: flex
+  align-items: center
+  gap: 6px
+  font-size: 12px
+  color: $light-body-color
+  padding: 4px 0
+  cursor: pointer
+
+  svg
+    width: 14px
+    height: 14px

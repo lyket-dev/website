@@ -17,9 +17,9 @@ import Collapse from "@material-ui/core/Collapse";
 import { Link } from "react-router-dom";
 import Header from "./Header";
 import Cards from "./Cards";
+import ButtonDetailsPanel from "./ButtonDetailsPanel";
 import { sort } from "utils/sort";
 import fake from "utils/fake";
-import ActionsCell from "./ActionsCell";
 import TagsCell from "./TagsCell";
 import { ReactComponent as Clap } from "assets/icons/outline/hand.svg";
 import { ReactComponent as Heart } from "assets/icons/outline/heart.svg";
@@ -37,7 +37,7 @@ import {
 	fetchAllRateButtons,
 } from "ducks/buttons";
 import useAsyncEffect from "utils/useAsyncEffect";
-import { getButtonsMeta } from "api";
+import { getButtonsMeta, getLikeButtons, getClapButtons, getUpdownButtons, getRateButtons } from "api";
 
 const icons = {
 	clap: <Clap className="card__icon" />,
@@ -53,6 +53,13 @@ const typeLabels = {
 	rate: "Rate",
 };
 
+export const typeDescriptions = {
+	like: "A classic Twitter-like button. Visitors can only like once",
+	clap: "A Medium-like button. Visitors can clap as many times as they want",
+	updown: "A Reddit-like button. Visitors can only upvote or downvote once",
+	rate: "A star rating button. Visitors can rate from 1 to 5 stars",
+};
+
 const fetchMap = {
 	like: fetchAllLikeButtons,
 	clap: fetchAllClapButtons,
@@ -60,445 +67,58 @@ const fetchMap = {
 	rate: fetchAllRateButtons,
 };
 
-const headCells = [
-	{
-		id: "type",
-		alignRight: false,
-		label: "Type",
-		tooltip: "The kind of button: like, clap, up/down, or rate",
-	},
-	{
-		id: "name",
-		alignRight: false,
-		label: "ID",
-		sortable: true,
-		tooltip: "The unique identifier of the button within its namespace",
-	},
-	{
-		id: "tags",
-		label: "Tags",
-		alignRight: false,
-		sortable: true,
-		tooltip: "Custom labels you can assign to group or filter buttons",
-	},
-	{
-		id: "total_votes",
-		alignRight: true,
-		label: "Total Votes",
-		sortable: true,
-		tooltip: "How many times this button has been clicked or interacted with",
-	},
-	{
-		id: "score",
-		alignRight: true,
-		label: "Score",
-		sortable: true,
-		tooltip:
-			"For like/clap/updown: total score. For rate buttons: the average star rating (1–5)",
-	},
-];
-
-function Stat({ label, value, tooltip, tooltipId }) {
-	return (
-		<div
-			style={{
-				marginBottom: "6px",
-				fontSize: "13px",
-				color: "#444",
-				display: "flex",
-				alignItems: "center",
-				gap: "4px",
-			}}
-		>
-			<span>{label}:</span>
-			{tooltip && tooltipId && <Tooltip message={tooltip} id={tooltipId} />}
-			<strong style={{ marginLeft: "2px" }}>{value}</strong>
-		</div>
-	);
-}
-
-function RateDetails({ row }) {
-	const id = row.id;
-	const dist = row.votes_distribution;
-	const avg =
-		row.score > 0 ? parseFloat((row.score / row.total_votes).toFixed(2)) : 0;
-	const total = row.total_votes || 0;
-	const max = dist ? Math.max(...[1, 2, 3, 4, 5].map((s) => dist[s] || 0)) : 0;
-
-	return (
-		<div style={{ display: "flex", gap: "48px", alignItems: "flex-start" }}>
-			<div>
-				<div style={sectionTitle}>Rating Distribution</div>
-				{dist &&
-					[5, 4, 3, 2, 1].map((star) => {
-						const count = dist[star] || 0;
-						const pct = total > 0 ? Math.round((count / total) * 100) : 0;
-						const barWidth = max > 0 ? Math.round((count / max) * 160) : 0;
-						return (
-							<div
-								key={star}
-								style={{
-									display: "flex",
-									alignItems: "center",
-									gap: "8px",
-									marginBottom: "5px",
-								}}
-							>
-								<span
-									style={{
-										fontSize: "12px",
-										color: "#f5a623",
-										width: "36px",
-										flexShrink: 0,
-									}}
-								>
-									{"★".repeat(star)}
-								</span>
-								<div
-									style={{
-										width: "160px",
-										height: "8px",
-										backgroundColor: "#f0f0f0",
-										borderRadius: "4px",
-										flexShrink: 0,
-									}}
-								>
-									<div
-										style={{
-											width: `${barWidth}px`,
-											height: "100%",
-											backgroundColor: "#f5a623",
-											borderRadius: "4px",
-											transition: "width 0.3s ease",
-										}}
-									/>
-								</div>
-								<span
-									style={{ fontSize: "12px", color: "#888", width: "24px" }}
-								>
-									{count}
-								</span>
-								<span style={{ fontSize: "11px", color: "#bbb" }}>
-									({pct}%)
-								</span>
-							</div>
-						);
-					})}
-			</div>
-			<div>
-				<div style={sectionTitle}>Summary</div>
-				<Stat
-					label="Average rating"
-					value={`${avg} / 5`}
-					tooltip="Average star rating with decimal precision (sum of all ratings ÷ total voters)"
-					tooltipId={`${id}-avg-rating`}
-				/>
-				<Stat
-					label="Total voters"
-					value={total}
-					tooltip="How many times this button was rated (each user can rate once)"
-					tooltipId={`${id}-total-voters`}
-				/>
-			</div>
-			<Rankings row={row} />
-		</div>
-	);
-}
-
-function UpdownDetails({ row }) {
-	const id = row.id;
-	const total = row.total_votes || 0;
-	const upvotes = Math.round((total + row.score) / 2);
-	const downvotes = Math.round((total - row.score) / 2);
-	const upPct = total > 0 ? Math.round((upvotes / total) * 100) : 0;
-
-	return (
-		<div style={{ display: "flex", gap: "48px", alignItems: "flex-start" }}>
-			<div>
-				<div style={sectionTitle}>Vote Breakdown</div>
-				{[
-					["👍 Upvotes", upvotes],
-					["👎 Downvotes", downvotes],
-				].map(([label, count]) => {
-					const barWidth = total > 0 ? Math.round((count / total) * 160) : 0;
-					const pct = total > 0 ? Math.round((count / total) * 100) : 0;
-					return (
-						<div
-							key={label}
-							style={{
-								display: "flex",
-								alignItems: "center",
-								gap: "8px",
-								marginBottom: "5px",
-							}}
-						>
-							<span
-								style={{
-									fontSize: "12px",
-									color: "#555",
-									width: "80px",
-									flexShrink: 0,
-								}}
-							>
-								{label}
-							</span>
-							<div
-								style={{
-									width: "160px",
-									height: "8px",
-									backgroundColor: "#f0f0f0",
-									borderRadius: "4px",
-									flexShrink: 0,
-								}}
-							>
-								<div
-									style={{
-										width: `${barWidth}px`,
-										height: "100%",
-										backgroundColor: "#4a90e2",
-										borderRadius: "4px",
-										transition: "width 0.3s ease",
-									}}
-								/>
-							</div>
-							<span style={{ fontSize: "12px", color: "#888", width: "24px" }}>
-								{count}
-							</span>
-							<span style={{ fontSize: "11px", color: "#bbb" }}>({pct}%)</span>
-						</div>
-					);
-				})}
-			</div>
-			<div>
-				<div style={sectionTitle}>Summary</div>
-				<Stat
-					label="Total votes"
-					value={total}
-					tooltip="Total number of votes cast (upvotes + downvotes)"
-					tooltipId={`${id}-total-votes`}
-				/>
-				<Stat
-					label="Net score"
-					value={row.score}
-					tooltip="Upvotes minus downvotes"
-					tooltipId={`${id}-net-score`}
-				/>
-				<Stat
-					label="Approval"
-					value={`${upPct}%`}
-					tooltip="Percentage of votes that were upvotes"
-					tooltipId={`${id}-approval`}
-				/>
-			</div>
-			<Rankings row={row} />
-		</div>
-	);
-}
-
-const sectionTitle = {
-	fontSize: "11px",
-	fontWeight: 600,
-	color: "#555",
-	marginBottom: "10px",
-	textTransform: "uppercase",
-	letterSpacing: "0.05em",
+const scoreLabels = {
+	like: { label: "Likes", tooltip: "Total number of likes" },
+	clap: { label: "Total Claps", tooltip: "Sum of all claps across all users" },
+	updown: { label: "Net Score", tooltip: "Upvotes minus downvotes" },
+	rate: { label: "Avg Rating", tooltip: "Average star rating (1–5)" },
 };
 
-function Rankings({ row }) {
-	const id = row.id;
-	return (
-		<div>
-			<div style={sectionTitle}>Rankings</div>
-			<Stat
-				label="By type"
-				value={`#${row.type_total_ranking}`}
-				tooltip={`Position among all ${row.type} buttons across your account`}
-				tooltipId={`${id}-type-ranking`}
-			/>
-			{row.namespace && (
-				<Stat
-					label="By namespace"
-					value={`#${row.type_namespace_ranking}`}
-					tooltip={`Position among ${row.type} buttons within the "${row.namespace}" namespace`}
-					tooltipId={`${id}-ns-ranking`}
-				/>
-			)}
-		</div>
-	);
+function getHeadCells(buttonType) {
+	const { label: scoreLabel, tooltip: scoreTooltip } = scoreLabels[
+		buttonType
+	] || { label: "Score", tooltip: "" };
+
+	return [
+		{
+			id: "type",
+			alignRight: false,
+			label: "Type",
+			tooltip: "Button type: like, clap, up/down, or rate",
+			sortable: false,
+		},
+		{
+			id: "name",
+			alignRight: false,
+			label: "Button ID",
+			sortable: true,
+			tooltip: "Unique path identifier: [namespace]/[id]",
+		},
+		{
+			id: "tags",
+			label: "Tags",
+			alignRight: false,
+			sortable: true,
+			tooltip: "Custom labels for grouping and filtering",
+		},
+		{
+			id: "total_votes",
+			alignRight: true,
+			label: "Voters",
+			sortable: true,
+			tooltip: "Number of unique users who interacted with this button",
+		},
+		{
+			id: "score",
+			alignRight: true,
+			label: scoreLabel,
+			sortable: true,
+			tooltip: scoreTooltip,
+		},
+	];
 }
 
-function LikeDetails({ row }) {
-	const id = row.id;
-	return (
-		<div style={{ display: "flex", gap: "48px" }}>
-			<div>
-				<div style={sectionTitle}>Summary</div>
-				<Stat
-					label="Total likes"
-					value={row.score || 0}
-					tooltip="How many times this button has been liked. Each user can like only once."
-					tooltipId={`${id}-total-likes`}
-				/>
-			</div>
-			<Rankings row={row} />
-		</div>
-	);
-}
-
-function ClapDetails({ row }) {
-	const id = row.id;
-	const avgClaps =
-		row.total_votes > 0
-			? parseFloat((row.score / row.total_votes).toFixed(1))
-			: 0;
-	return (
-		<div style={{ display: "flex", gap: "48px" }}>
-			<div>
-				<div style={sectionTitle}>Summary</div>
-				<Stat
-					label="Total claps"
-					value={row.score || 0}
-					tooltip="Total number of claps across all users. Users can clap multiple times."
-					tooltipId={`${id}-total-claps`}
-				/>
-				<Stat
-					label="Unique clappers"
-					value={row.total_votes || 0}
-					tooltip="Number of distinct users who clapped at least once"
-					tooltipId={`${id}-unique-clappers`}
-				/>
-				<Stat
-					label="Avg claps per user"
-					value={avgClaps}
-					tooltip="Average number of claps per unique user"
-					tooltipId={`${id}-avg-claps`}
-				/>
-			</div>
-			<Rankings row={row} />
-		</div>
-	);
-}
-
-function ButtonDetailsPanel({ row }) {
-	return (
-		<div
-			style={{
-				padding: "12px 24px 16px",
-				borderTop: "1px solid #f0f0f0",
-				backgroundColor: "#fafafa",
-			}}
-		>
-			<div
-				style={{
-					display: "flex",
-					alignItems: "center",
-					gap: "16px",
-					marginBottom: "10px",
-					flexWrap: "wrap",
-				}}
-			>
-				<div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-					<span
-						style={{
-							fontSize: "10px",
-							fontWeight: 700,
-							color: "#aaa",
-							textTransform: "uppercase",
-							letterSpacing: "0.08em",
-						}}
-					>
-						Namespace
-					</span>
-					{row.namespace ? (
-						<span
-							style={{
-								fontSize: "12px",
-								backgroundColor: "#e8f0fe",
-								color: "#3b5bdb",
-								borderRadius: "4px",
-								padding: "2px 8px",
-								fontWeight: 500,
-							}}
-						>
-							{row.namespace}
-						</span>
-					) : (
-						<span
-							style={{ fontSize: "11px", color: "#bbb", fontStyle: "italic" }}
-						>
-							none
-						</span>
-					)}
-				</div>
-				<div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-					<span
-						style={{
-							fontSize: "10px",
-							fontWeight: 700,
-							color: "#aaa",
-							textTransform: "uppercase",
-							letterSpacing: "0.08em",
-						}}
-					>
-						ID
-					</span>
-					<span
-						style={{
-							fontSize: "12px",
-							backgroundColor: "#f3f4f6",
-							color: "#374151",
-							borderRadius: "4px",
-							padding: "2px 8px",
-							fontFamily: "monospace",
-						}}
-					>
-						{row.name}
-					</span>
-				</div>
-			</div>
-			<div
-				style={{
-					display: "flex",
-					alignItems: "center",
-					gap: "8px",
-					marginBottom: "14px",
-				}}
-			>
-				<span
-					style={{
-						fontSize: "10px",
-						fontWeight: 700,
-						color: "#aaa",
-						textTransform: "uppercase",
-						letterSpacing: "0.08em",
-						flexShrink: 0,
-					}}
-				>
-					Tags
-				</span>
-				<TagsCell buttonId={row.id} />
-				<span style={{ fontSize: "11px", color: "#ccc", fontStyle: "italic" }}>
-					click to edit
-				</span>
-			</div>
-			<div style={{ display: "flex", gap: "48px", alignItems: "flex-start" }}>
-				<div style={{ flex: 1 }}>
-					{row.type === "rate" && <RateDetails row={row} />}
-					{row.type === "updown" && <UpdownDetails row={row} />}
-					{row.type === "like" && <LikeDetails row={row} />}
-					{row.type === "clap" && <ClapDetails row={row} />}
-				</div>
-				<div
-					style={{ display: "flex", alignItems: "center", paddingTop: "28px" }}
-				>
-					<ActionsCell buttonId={row.id} variant="panel" />
-				</div>
-			</div>
-		</div>
-	);
-}
-
-function EnhancedTableHead({ order, orderBy, onRequestSort }) {
+function EnhancedTableHead({ order, orderBy, onRequestSort, buttonType }) {
 	const createSortHandler = (property) => (event) => {
 		onRequestSort(event, property);
 	};
@@ -506,8 +126,8 @@ function EnhancedTableHead({ order, orderBy, onRequestSort }) {
 	return (
 		<TableHead className="table__head">
 			<TableRow>
-				<TableCell className="table__cell" style={{ width: 32 }} />
-				{headCells.map((headCell) => (
+				<TableCell className="table__cell table__cell--expand" />
+				{getHeadCells(buttonType).map((headCell) => (
 					<TableCell
 						className="table__cell"
 						key={headCell.id}
@@ -515,44 +135,29 @@ function EnhancedTableHead({ order, orderBy, onRequestSort }) {
 						padding={headCell.disablePadding ? "none" : "default"}
 						sortDirection={orderBy === headCell.id ? order : false}
 					>
-						{headCell.sortable ? (
-							<TableSortLabel
-								active={orderBy === headCell.id}
-								direction={orderBy === headCell.id ? order : "desc"}
-								onClick={createSortHandler(headCell.id)}
-							>
-								<span
-									style={{ display: "flex", alignItems: "center", gap: "4px" }}
+						<span className="table__head-cell">
+							{headCell.sortable ? (
+								<TableSortLabel
+									active={orderBy === headCell.id}
+									direction={orderBy === headCell.id ? order : "desc"}
+									onClick={createSortHandler(headCell.id)}
 								>
 									{headCell.label}
-									{headCell.tooltip && (
-										<Tooltip
-											message={headCell.tooltip}
-											id={`col-${headCell.id}`}
-										/>
+									{orderBy === headCell.id && (
+										<span className="table__visually-hidden">
+											{order === "desc"
+												? "sorted descending"
+												: "sorted ascending"}
+										</span>
 									)}
-								</span>
-								{orderBy === headCell.id ? (
-									<span className="table__visually-hidden">
-										{order === "desc"
-											? "sorted descending"
-											: "sorted ascending"}
-									</span>
-								) : null}
-							</TableSortLabel>
-						) : (
-							<span
-								style={{ display: "flex", alignItems: "center", gap: "4px" }}
-							>
-								{headCell.label}
-								{headCell.tooltip && (
-									<Tooltip
-										message={headCell.tooltip}
-										id={`col-${headCell.id}`}
-									/>
-								)}
-							</span>
-						)}
+								</TableSortLabel>
+							) : (
+								headCell.label
+							)}
+							{headCell.tooltip && (
+								<Tooltip message={headCell.tooltip} id={`col-${headCell.id}`} />
+							)}
+						</span>
 					</TableCell>
 				))}
 			</TableRow>
@@ -578,6 +183,7 @@ export default function EnhancedTable({ hasButtons }) {
 	const [showCards, setShowCards] = useState(false);
 	const [selectedTag, setSelectedTag] = useState(null);
 
+	const headCells = getHeadCells(selectedButtonType);
 	const colSpan = headCells.length + 1;
 
 	const toggleRow = useCallback((id) => {
@@ -587,17 +193,22 @@ export default function EnhancedTable({ hasButtons }) {
 	const selected = useSelector((state) => state.buttons);
 	const buttons = [...Object.values(selected).map((b) => b.attributes)];
 
-	const typeNamespaces = [
-		...new Set(
-			buttons
-				.filter((b) => b.type === selectedButtonType && b.namespace)
-				.map((b) => b.namespace),
-		),
-	].sort();
+	const [typeNamespaces, setTypeNamespaces] = useState([]);
+	const [hasNoNamespace, setHasNoNamespace] = useState(false);
 
-	const hasNoNamespace = buttons.some(
-		(b) => b.type === selectedButtonType && !b.namespace,
-	);
+	const namespaceFetchMap = {
+		like: getLikeButtons,
+		clap: getClapButtons,
+		updown: getUpdownButtons,
+		rate: getRateButtons,
+	};
+
+	useAsyncEffect(async () => {
+		const response = await namespaceFetchMap[selectedButtonType]({ limit: 1000, page: 0, sort: "desc" });
+		const attrs = (response.data || []).map((b) => b.attributes);
+		setTypeNamespaces([...new Set(attrs.filter((b) => b.namespace).map((b) => b.namespace))].sort());
+		setHasNoNamespace(attrs.some((b) => !b.namespace));
+	}, [selectedButtonType]);
 
 	const typeTags = [
 		...new Set(
@@ -724,10 +335,7 @@ export default function EnhancedTable({ hasButtons }) {
 			/>
 			<Panes>
 				<Menu>
-					<ul
-						className="menu space__bottom-4"
-						style={{ listStyle: "none", padding: 0, margin: 0 }}
-					>
+					<ul className="menu space__bottom-4 menu__nav-list">
 						<li className="menu__item">
 							<Folder />
 							<Link
@@ -739,131 +347,48 @@ export default function EnhancedTable({ hasButtons }) {
 						</li>
 						{(typeNamespaces.length > 0 || hasNoNamespace) && (
 							<>
-								<li
-									style={{
-										fontSize: "10px",
-										fontWeight: 700,
-										color: "#aaa",
-										textTransform: "uppercase",
-										letterSpacing: "0.08em",
-										padding: "12px 0 4px",
-									}}
-								>
-									Namespaces
-								</li>
-								{typeNamespaces.map((namespace) => {
-									const isActive = currentNamespace === namespace;
-									return (
-										<li key={namespace} style={{ marginBottom: "4px" }}>
-											<Link
-												to={`/dashboard/${selectedButtonType}/${namespace}`}
-												style={{
-													display: "flex",
-													alignItems: "center",
-													gap: "6px",
-													padding: "5px 8px",
-													borderRadius: "6px",
-													textDecoration: "none",
-													fontSize: "13px",
-													backgroundColor: isActive ? "#e8f0fe" : "transparent",
-													color: isActive ? "#3b5bdb" : "#444",
-													fontWeight: isActive ? 600 : 400,
-													borderLeft: isActive
-														? "3px solid #3b5bdb"
-														: "3px solid transparent",
-												}}
-											>
-												<Folder
-													style={{ width: 14, height: 14, flexShrink: 0 }}
-												/>
-												{namespace}
-											</Link>
-										</li>
-									);
-								})}
-								{hasNoNamespace &&
-									(() => {
-										const isActive = currentNamespace === "no-namespace";
-										return (
-											<li style={{ marginBottom: "4px" }}>
-												<Link
-													to={`/dashboard/${selectedButtonType}/no-namespace`}
-													style={{
-														display: "flex",
-														alignItems: "center",
-														gap: "6px",
-														padding: "5px 8px",
-														borderRadius: "6px",
-														textDecoration: "none",
-														fontSize: "13px",
-														backgroundColor: isActive
-															? "#e8f0fe"
-															: "transparent",
-														color: isActive ? "#3b5bdb" : "#999",
-														fontWeight: isActive ? 600 : 400,
-														fontStyle: "italic",
-														borderLeft: isActive
-															? "3px solid #3b5bdb"
-															: "3px solid transparent",
-													}}
-												>
-													<Folder
-														style={{ width: 14, height: 14, flexShrink: 0 }}
-													/>
-													no namespace
-												</Link>
-											</li>
-										);
-									})()}
+								<li className="menu__section-title">Namespaces</li>
+								{typeNamespaces.map((namespace) => (
+									<li key={namespace} className="menu__nav-item">
+										<Link
+											to={`/dashboard/${selectedButtonType}/${namespace}`}
+											className={`menu__nav-link${currentNamespace === namespace ? " menu__nav-link--active" : ""}`}
+										>
+											<Folder />
+											{namespace}
+										</Link>
+									</li>
+								))}
+								{hasNoNamespace && (
+									<li className="menu__nav-item">
+										<Link
+											to={`/dashboard/${selectedButtonType}/no-namespace`}
+											className={`menu__nav-link menu__nav-link--no-namespace${currentNamespace === "no-namespace" ? " menu__nav-link--active" : ""}`}
+										>
+											<Folder />
+											no namespace
+										</Link>
+									</li>
+								)}
 							</>
 						)}
 					</ul>
 					{typeTags.length > 0 && (
-						<ul style={{ listStyle: "none", padding: 0, margin: "8px 0 0" }}>
-							<li
-								style={{
-									fontSize: "10px",
-									fontWeight: 700,
-									color: "#aaa",
-									textTransform: "uppercase",
-									letterSpacing: "0.08em",
-									padding: "12px 0 4px",
-								}}
-							>
-								Tags
-							</li>
-							{typeTags.map((tag) => {
-								const isActive = selectedTag === tag;
-								return (
-									<li key={tag} style={{ marginBottom: "4px" }}>
-										<button
-											onClick={() => setSelectedTag(isActive ? null : tag)}
-											style={{
-												display: "flex",
-												alignItems: "center",
-												gap: "6px",
-												width: "100%",
-												textAlign: "left",
-												background: "none",
-												border: "none",
-												cursor: "pointer",
-												padding: "5px 8px",
-												borderRadius: "6px",
-												fontSize: "13px",
-												backgroundColor: isActive ? "#f0fdf4" : "transparent",
-												color: isActive ? "#16a34a" : "#444",
-												fontWeight: isActive ? 600 : 400,
-												borderLeft: isActive
-													? "3px solid #16a34a"
-													: "3px solid transparent",
-											}}
-										>
-											<span style={{ fontSize: "11px" }}>#</span>
-											{tag}
-										</button>
-									</li>
-								);
-							})}
+						<ul className="menu__tag-list">
+							<li className="menu__section-title">Tags</li>
+							{typeTags.map((tag) => (
+								<li key={tag} className="menu__nav-item">
+									<button
+										className={`menu__tag-btn${selectedTag === tag ? " menu__tag-btn--active" : ""}`}
+										onClick={() =>
+											setSelectedTag(selectedTag === tag ? null : tag)
+										}
+									>
+										<span className="menu__tag-btn__hash">#</span>
+										{tag}
+									</button>
+								</li>
+							))}
 						</ul>
 					)}
 				</Menu>
@@ -880,6 +405,7 @@ export default function EnhancedTable({ hasButtons }) {
 									order={order}
 									orderBy={orderBy}
 									onRequestSort={handleRequestSort}
+									buttonType={selectedButtonType}
 								/>
 								<TableBody>
 									{sort(tableButtons, order, orderBy)
@@ -894,94 +420,37 @@ export default function EnhancedTable({ hasButtons }) {
 													<TableRow
 														hover
 														onClick={() => toggleRow(row.id)}
-														style={{ cursor: "pointer" }}
+														className="table__row--clickable"
 													>
-														<TableCell
-															className="table__cell"
-															style={{ width: 32, padding: "0 4px" }}
-														>
-															<div
-																style={{
-																	padding: "4px",
-																	display: "flex",
-																	alignItems: "center",
-																	color: "#999",
-																}}
-															>
-																{isExpanded ? (
-																	<ChevronUp
-																		style={{ width: 16, height: 16 }}
-																	/>
-																) : (
-																	<ChevronDown
-																		style={{ width: 16, height: 16 }}
-																	/>
-																)}
+														<TableCell className="table__cell--expand">
+															<div className="table__expand-btn">
+																{isExpanded ? <ChevronUp /> : <ChevronDown />}
 															</div>
 														</TableCell>
 														<TableCell className="table__cell">
-															<div
-																style={{
-																	display: "flex",
-																	alignItems: "center",
-																	gap: "6px",
-																}}
-															>
+															<div className="table__type-cell">
 																{icons[row.type]}
-																<span
-																	style={{ fontSize: "12px", color: "#666" }}
-																>
+																<span className="table__type-cell__label">
 																	{typeLabels[row.type]}
 																</span>
 															</div>
 														</TableCell>
 														<TableCell className="table__cell">
-															<div
-																style={{
-																	display: "flex",
-																	alignItems: "center",
-																	gap: "4px",
-																	flexWrap: "wrap",
-																}}
-															>
+															<div className="table__id-cell">
 																{!currentNamespace &&
 																	(row.namespace ? (
-																		<span
-																			style={{
-																				fontSize: "12px",
-																				backgroundColor: "#e8f0fe",
-																				color: "#3b5bdb",
-																				borderRadius: "4px",
-																				padding: "2px 8px",
-																				fontWeight: 500,
-																			}}
-																		>
+																		<span className="table__namespace-badge">
 																			{row.namespace}
 																		</span>
 																	) : (
-																		<span
-																			style={{
-																				fontSize: "11px",
-																				color: "#bbb",
-																				fontStyle: "italic",
-																			}}
-																		>
+																		<span className="table__no-namespace">
 																			no namespace
 																		</span>
 																	))}
 																{!currentNamespace && row.namespace && (
-																	<span style={{ color: "#ccc" }}>/</span>
+																	<span className="table__separator">/</span>
 																)}
-																<span
-																	style={{
-																		fontSize: "12px",
-																		backgroundColor: "#f3f4f6",
-																		color: "#374151",
-																		borderRadius: "4px",
-																		padding: "2px 8px",
-																		fontFamily: "monospace",
-																	}}
-																>
+																<span className="table__id-badge">
 																	{row.name}
 																</span>
 															</div>
@@ -1009,11 +478,7 @@ export default function EnhancedTable({ hasButtons }) {
 													<TableRow>
 														<TableCell
 															colSpan={colSpan}
-															style={{
-																paddingBottom: 0,
-																paddingTop: 0,
-																borderBottom: isExpanded ? undefined : "none",
-															}}
+															className={`table__cell--collapse${isExpanded ? "" : " table__cell--collapse-hidden"}`}
 														>
 															<Collapse
 																in={isExpanded}
@@ -1040,32 +505,12 @@ export default function EnhancedTable({ hasButtons }) {
 							onChangePage={handleChangePage}
 							onChangeRowsPerPage={handleChangeRowsPerPage}
 						/>
-						<div
-							style={{
-								borderTop: "1px solid #f0f0f0",
-								marginTop: "8px",
-								paddingTop: "8px",
-							}}
-						>
+						<div className="summary-toggle">
 							<button
+								className="summary-toggle__btn"
 								onClick={() => setShowCards((v) => !v)}
-								style={{
-									display: "flex",
-									alignItems: "center",
-									gap: "6px",
-									background: "none",
-									border: "none",
-									cursor: "pointer",
-									fontSize: "12px",
-									color: "#999",
-									padding: "4px 0",
-								}}
 							>
-								{showCards ? (
-									<ChevronUp style={{ width: 14, height: 14 }} />
-								) : (
-									<ChevronDown style={{ width: 14, height: 14 }} />
-								)}
+								{showCards ? <ChevronUp /> : <ChevronDown />}
 								{showCards ? "Hide summary" : "Show summary"}
 							</button>
 							<Collapse in={showCards} timeout="auto">
@@ -1076,114 +521,46 @@ export default function EnhancedTable({ hasButtons }) {
 								/>
 							</Collapse>
 						</div>
-						<div
-							style={{
-								display: "flex",
-								alignItems: "flex-start",
-								gap: "12px",
-								padding: "16px 0",
-								borderTop: "1px solid #f0f0f0",
-							}}
-						>
-							<div
-								style={{
-									border: "1px solid #e0e0e0",
-									borderRadius: "8px",
-									padding: "12px 14px",
-									fontSize: "12px",
-									color: "#555",
-								}}
-							>
-								<div
-									style={{
-										display: "flex",
-										alignItems: "center",
-										gap: "6px",
-										fontWeight: 600,
-										marginBottom: "4px",
-									}}
-								>
-									<Refresh style={{ width: 14, height: 14 }} />
+						<div className="table-toolbar">
+							<div className="table-toolbar__section">
+								<div className="table-toolbar__title">
+									<Refresh />
 									Refresh buttons
 									<Tooltip
 										id="refresh"
 										message="Reloads the current list from the server. Useful if you just imported data or made changes elsewhere."
 									/>
 								</div>
-								<p style={{ margin: 0, color: "#999", lineHeight: 1.4 }}>
+								<p className="table-toolbar__desc">
 									Reload the list to see the latest data.
 								</p>
 								<button
+									className="table-toolbar__btn"
 									onClick={handleFetchButtons}
-									style={{
-										marginTop: "10px",
-										display: "flex",
-										alignItems: "center",
-										gap: "6px",
-										background: "none",
-										border: "1px solid #e0e0e0",
-										borderRadius: "6px",
-										padding: "5px 10px",
-										cursor: "pointer",
-										fontSize: "12px",
-										color: "#555",
-									}}
 								>
-									<Refresh style={{ width: 12, height: 12 }} />
+									<Refresh />
 									Refresh now
 								</button>
 							</div>
-							<div
-								style={{
-									border: "1px solid #e0e0e0",
-									borderRadius: "8px",
-									padding: "12px 14px",
-									fontSize: "12px",
-									color: "#555",
-								}}
-							>
-								<div
-									style={{
-										display: "flex",
-										alignItems: "center",
-										gap: "6px",
-										fontWeight: 600,
-										marginBottom: "4px",
-									}}
-								>
-									<Upload style={{ width: 14, height: 14 }} />
+							<div className="table-toolbar__section">
+								<div className="table-toolbar__title">
+									<Upload />
 									Import buttons &amp; votes
 									<Tooltip
 										id="csv"
 										message="Columns: path (required), amount (required), session_id (optional). Without session_id, each row creates `amount` unique voters. With session_id, creates one vote from that specific session. Valid paths: [button_type]-buttons/[namespace]/[id]"
 									/>
 								</div>
-								<p
-									style={{
-										margin: "0 0 10px",
-										color: "#999",
-										lineHeight: 1.4,
-									}}
-								>
+								<p className="table-toolbar__desc">
 									Upload a CSV to bulk-import buttons and vote counts. Download
 									the sample file to see the expected format.
 								</p>
-								<div
-									style={{
-										display: "flex",
-										alignItems: "center",
-										gap: "8px",
-									}}
-								>
+								<div className="table-toolbar__import-row">
 									<ButtonsImporter onFinishImporting={handleFetchButtons} />
 									<a
 										href="/test-import.csv"
 										download
-										style={{
-											color: "#888",
-											fontSize: "12px",
-											textDecoration: "underline",
-										}}
+										className="table-toolbar__download"
 									>
 										Download sample CSV
 									</a>

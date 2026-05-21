@@ -53,19 +53,13 @@ export default function ActionsCell({ buttonId, variant }) {
 
   if (variant === "panel") {
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-        <button
-          onClick={handleResetButton}
-          style={{ display: "flex", alignItems: "center", gap: "8px", background: "none", border: "1px solid #ddd", borderRadius: "6px", padding: "6px 12px", cursor: "pointer", fontSize: "13px", color: "#555", whiteSpace: "nowrap" }}
-        >
-          <Reset style={{ width: 16, height: 16, flexShrink: 0 }} />
+      <div>
+        <button className="action-btn" onClick={handleResetButton}>
+          <Reset />
           Reset counter
         </button>
-        <button
-          onClick={handleDestroyButton}
-          style={{ display: "flex", alignItems: "center", gap: "8px", background: "none", border: "1px solid #fca5a5", borderRadius: "6px", padding: "6px 12px", cursor: "pointer", fontSize: "13px", color: "#dc2626", whiteSpace: "nowrap" }}
-        >
-          <Destroy style={{ width: 16, height: 16, flexShrink: 0 }} />
+        <button className="action-btn action-btn--danger" onClick={handleDestroyButton}>
+          <Destroy />
           Destroy button
         </button>
       </div>

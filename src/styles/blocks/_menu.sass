@@ -42,3 +42,76 @@
   +font-size(smallprint)
   font-weight: normal
   +body-font-family
+
+// ─── Dashboard nav (namespace + tag sidebar)
+.menu__nav-list
+  list-style: none
+  padding: 0
+  margin: 0
+
+.menu__tag-list
+  list-style: none
+  padding: 0
+  margin: 8px 0 0
+
+.menu__section-title
+  font-size: 10px
+  font-weight: 700
+  color: $light-body-color
+  text-transform: uppercase
+  letter-spacing: 0.08em
+  padding: 12px 0 4px
+  list-style: none
+
+.menu__nav-item
+  margin-bottom: 4px
+  list-style: none
+
+.menu__nav-link
+  display: flex
+  align-items: center
+  gap: 6px
+  padding: 5px 8px
+  border-radius: 6px
+  text-decoration: none
+  font-size: 13px
+  border-left: 3px solid transparent
+  color: $base-body-color
+
+  svg
+    width: 14px
+    height: 14px
+    flex-shrink: 0
+
+  &--active
+    background-color: $light-color
+    color: $blue
+    font-weight: 600
+    border-left-color: $blue
+
+  &--no-namespace
+    color: $light-body-color
+    font-style: italic
+
+.menu__tag-btn
+  +reset-button
+  display: flex
+  align-items: center
+  gap: 6px
+  width: 100%
+  text-align: left
+  padding: 5px 8px
+  border-radius: 6px
+  font-size: 13px
+  border-left: 3px solid transparent
+  color: $base-body-color
+  cursor: pointer
+
+  &--active
+    background-color: rgba($add-color, 0.12)
+    color: $add-color
+    font-weight: 600
+    border-left-color: $add-color
+
+  &__hash
+    font-size: 11px
